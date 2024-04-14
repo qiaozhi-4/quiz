@@ -1,7 +1,10 @@
 package com.quiz.service;
 
+import com.quiz.dto.PathDTO;
 import com.quiz.entity.TPath;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,21 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2024-04-14  0924:57:20
  */
 public interface ITPathService extends IService<TPath> {
-
+    /**
+     * <p>
+     * 获取所有权限信息,这个dto把权限id替换为权限名称
+     * </p>
+     *
+     * @return 所有权限信息
+     */
+    List<PathDTO> getPathDTOs();
+    /**
+     * <p>
+     * 通过请求路径返回该路径所需权限名称
+     * </p>
+     *
+     * @param requestPath 请求路径
+     * @return 路径所需权限名称
+     */
+    String getPermissionNameByPath(String requestPath);
 }
