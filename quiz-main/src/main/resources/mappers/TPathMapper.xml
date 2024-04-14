@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.quiz.mapper.TPathMapper">
 
-    <select id="getPathDTOs" resultType="com.quiz.dto.PathDTO">
+    <select id="getPathDtoList" resultType="com.quiz.dto.pathDto">
         select *
         from t_path
                  left join t_permission on t_path.permission_id = t_permission.permission_id

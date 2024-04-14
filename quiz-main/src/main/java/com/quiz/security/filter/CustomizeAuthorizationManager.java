@@ -1,11 +1,7 @@
 package com.quiz.security.filter;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.quiz.dto.PathDTO;
-import com.quiz.entity.TPath;
-import com.quiz.entity.TPermission;
 import com.quiz.service.ITPathService;
-import com.quiz.service.ITPermissionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authorization.AuthorizationDecision;
@@ -14,9 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
 import org.springframework.stereotype.Component;
-import org.springframework.util.AntPathMatcher;
 
-import java.util.Optional;
 import java.util.function.Supplier;
 
 /**
