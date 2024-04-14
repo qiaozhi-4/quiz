@@ -1,6 +1,6 @@
 package com.quiz.mapper;
 
-import com.quiz.dto.pathDto;
+import com.quiz.dto.PathDto;
 import com.quiz.entity.TPath;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -22,5 +22,5 @@ public interface TPathMapper extends BaseMapper<TPath> {
      *
      * @return 所有权限信息
      */
-    List<pathDto> getPathDtoList();
+    List<PathDto> getPathDtoList();
 }
