@@ -1,6 +1,7 @@
 package com.quiz.security.filter;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.quiz.dto.PathDTO;
 import com.quiz.entity.TPath;
 import com.quiz.entity.TPermission;
 import com.quiz.service.ITPathService;
@@ -30,26 +31,19 @@ import java.util.function.Supplier;
 @RequiredArgsConstructor
 @Log4j2
 public class CustomizeAuthorizationManager implements AuthorizationManager<RequestAuthorizationContext> {
-    // 路径匹配器
-    private final AntPathMatcher antPathMatcher;
     private final ITPathService pathService;
-    private final ITPermissionService permissionService;
 
     @Override
     public AuthorizationDecision check(Supplier<Authentication> authentication, RequestAuthorizationContext context) {
         String requestPath = context.getRequest().getRequestURI();
-        final Optional<TPath> pathOptional = pathService.list().stream()
-                .filter(path -> antPathMatcher.match(path.getPattern(), requestPath))
-                .findFirst();
-        if (!pathOptional.isPresent() || StringUtils.isBlank(pathOptional.get().getPermissionId())) {
+        final String permissionName= pathService.getPermissionNameByPath(requestPath);
+        if (StringUtils.isBlank(permissionName)) {
             log.debug("[" + requestPath + "]:不存在数据库,或者所需权限为空!");
             return new AuthorizationDecision(true);
         }
-        final TPermission permission = permissionService.getById(pathOptional.get().getPermissionId());
-
         return new AuthorizationDecision(authentication.get().getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .anyMatch(authenticationPermission ->
-                        authenticationPermission.equals(permission.getPermissionName())));
+                        authenticationPermission.equals(permissionName)));
     }
 }
