@@ -22,9 +22,14 @@ spring:
   # redis配置
   redis:
     host: redis-10455.c9.us-east-1-4.ec2.cloud.redislabs.com
-    port: 10455
-    password: iMr1NbXlD8HjKWVjJtbDNsXiKT1BaKW8
     username: default
+    password: iMr1NbXlD8HjKWVjJtbDNsXiKT1BaKW8
+    port: 10455
+    connect-timeout: 10000
+    lettuce:
+      pool:
+        # 开启连接池
+        enabled: true
   # security 安全验证 默认的账号密码(重新实现 UserDetailsService 会让配置失效)
   security:
     user:
