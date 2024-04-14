@@ -1,0 +1,50 @@
+# 开发环境配置
+server:
+  # 服务器的HTTP端口，默认为8080
+  port: 1888
+  servlet:
+    # 应用的访问路径
+    context-path: /
+
+# spring配置
+spring:
+  application:
+    name: quiz
+  # 数据源配置
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/quiz
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    #    password: U2FsdGVkX1/w
+    hikari:
+      max-lifetime: 30000
+  # redis配置
+  redis:
+    host: redis-10455.c9.us-east-1-4.ec2.cloud.redislabs.com
+    port: 10455
+    password: iMr1NbXlD8HjKWVjJtbDNsXiKT1BaKW8
+    username: default
+  # security 安全验证 默认的账号密码(重新实现 UserDetailsService 会让配置失效)
+  security:
+    user:
+      name: admin
+      password: 123
+
+# Mybatis-plus的配置
+mybatis-plus:
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapper-locations: classpath:mappers/**/*.xml
+
+# 自动生成文档配置
+knife4j:
+  enable: true # 启用knife4j
+  production: false # 是否在生成环境(生产环境无法访问)
+
+# 配置日志
+logging:
+  level:
+    root: INFO #日志级别
+    sql: INFO
+    com.quiz: DEBUG
+
