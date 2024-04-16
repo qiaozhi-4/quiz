@@ -36,7 +36,8 @@ public enum ResultEnum {
     FAILED_NO_PERMISSION(3001, "用户权限不足"),
 
     /*未知异常*/
-    FAILED_BACK_END_ERROR(5001, "后端错误");
+    FAILED_BACK_END_ERROR(5001, "后端错误"),
+    FAILED_BACK_END_ERROR_UN(5002, "后端错误(未捕获)");
 
     ResultEnum(int code, String message) {
         this.code = code;
