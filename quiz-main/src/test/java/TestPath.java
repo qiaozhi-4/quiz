@@ -1,12 +1,12 @@
 import com.quiz.Main;
+import com.quiz.dto.PathDto;
 import com.quiz.service.ITPathService;
-import com.quiz.service.impl.TPathServiceImpl;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 /**
  * <p>
@@ -21,9 +21,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class TestPath {
     @Autowired
     private ITPathService pathService;
+
     @Test
-    public void getPermissionNameByPath(){
-        final String permissionNameByPath = pathService.getPermissionNameByPath("/t-permission/test1");
-        log.info(permissionNameByPath);
+    public void getPathDtoList() {
+        final List<PathDto> pathDtoList = pathService.getPathDtoList();
+        log.info(pathDtoList);
     }
 }

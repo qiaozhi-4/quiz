@@ -23,13 +23,4 @@ public interface ITPathService extends IService<TPath> {
      * @return 所有权限信息
      */
     List<PathDto> getPathDtoList();
-    /**
-     * <p>
-     * 通过请求路径返回该路径所需权限名称
-     * </p>
-     *
-     * @param requestPath 请求路径
-     * @return 路径所需权限名称
-     */
-    String getPermissionNameByPath(String requestPath);
 }
