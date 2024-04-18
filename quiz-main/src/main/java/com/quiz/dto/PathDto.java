@@ -1,8 +1,7 @@
 package com.quiz.dto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.quiz.entity.TPath;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -23,18 +22,7 @@ import java.io.Serializable;
 @Setter
 @Accessors(chain = true)
 @ApiModel(value = "PathDTO对象", description = "请求路径信息以及把权限id替换为权限名称")
-public class PathDto implements Serializable {
-    @ApiModelProperty("主键，路径ID。")
-    @TableId(value = "path_id", type = IdType.AUTO)
-    private Integer pathId;
-
-    @ApiModelProperty("路径模式，如/api/users/**，/device/list/{current:d+}/{size:d+}。")
-    @TableField("pattern")
-    private String pattern;
-
-    @ApiModelProperty("请求方式")
-    @TableField("http_method")
-    private String httpMethod;
+public class PathDto extends TPath implements Serializable {
 
     @ApiModelProperty("权限名称，如read、write。")
     @TableField("permission_name")
