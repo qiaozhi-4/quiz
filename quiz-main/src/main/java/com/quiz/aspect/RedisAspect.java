@@ -1,6 +1,5 @@
 package com.quiz.aspect;
 
-import com.quiz.dto.PathDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.JoinPoint;
@@ -8,8 +7,10 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class RedisAspect {
-    private final RedisTemplate redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     @Pointcut("execution(*  com.quiz.service.impl.TPathServiceImpl.getPathDtoList(..))")
     public void getPathDtoList() {
@@ -61,12 +62,13 @@ public class RedisAspect {
      * @return 原方法的返回值
      * @throws Throwable 执行原方法可能抛出的异常
      */
-    @Around("getPathDtoList()")
+    @Around("execution(*  com.quiz.service.impl.TPathServiceImpl.getPathDtoList(..))")
     public Object around(ProceedingJoinPoint pjp) throws Throwable {
         log.debug("环绕通知: " + pjp.getSignature().getName() + "方法执行之前");
 
+        // 如果redis存在该key则直接返回
         final String key = "quiz::t-path::path-dto-list";
-        final ListOperations opsForList = redisTemplate.opsForList();
+        final ListOperations<String, Object> opsForList = redisTemplate.opsForList();
         if (Boolean.TRUE.equals(redisTemplate.hasKey(key))) {
             return opsForList.range(key, 0, -1);
         }
@@ -74,9 +76,26 @@ public class RedisAspect {
         // 执行原方法
         Object result = pjp.proceed();
 
-        // 必须指定泛型[就算是Object],不然存储的是一个元素
-        opsForList.leftPushAll(key, (List<PathDto>) result);
+        // 存储进redis(必须指定泛型[就算是Object],不然存储的是一个元素)
+        opsForList.leftPushAll(key, (List) result);
         log.debug("环绕通知: " + pjp.getSignature().getName() + "方法执行之后");
+        return result;
+    }
+
+    @Around("execution(*  com.quiz.service.impl.TUserServiceImpl.getUserByAccount(..))")
+    public Object loadUserByUsername(ProceedingJoinPoint pjp) throws Throwable {
+        // 如果redis存在该key则直接返回
+        final String key = "quiz::t-user::" + pjp.getArgs()[0];
+        final ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
+        if (Boolean.TRUE.equals(redisTemplate.hasKey(key))) {
+            return valueOperations.getAndExpire(key, Duration.ofMinutes(10));
+        }
+
+        // 执行原方法
+        Object result = pjp.proceed();
+
+        // 存储进redis
+        valueOperations.set(key, result, Duration.ofMinutes(10));
         return result;
     }
 }
