@@ -15,6 +15,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 /**
  * <p>
@@ -80,5 +81,26 @@ public class TUser implements Serializable {
     @TableField("enabled")
     private Long enabled;
 
+    /**
+     * <p>
+     * 生成随机 username
+     * </p>
+     *
+     * @return username 字符串
+     */
+    public static String generateRandomUsername() {
+        return "user_" + UUID.randomUUID().toString().replace("-", "").substring(0, 8);
+    }
+
+    /**
+     * <p>
+     * 生成随机 username 的用户
+     * </p>
+     *
+     * @return 用户
+     */
+    public static TUser defUser() {
+        return TUser.builder().username(generateRandomUsername()).createdAt(LocalDateTime.now()).build();
+    }
 
 }
