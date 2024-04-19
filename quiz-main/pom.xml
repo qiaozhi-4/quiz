@@ -86,6 +86,12 @@
             <artifactId>weixin-java-miniapp</artifactId>
             <version>4.6.0</version>
         </dependency>
+        <!--自动生成和收集配置属性的元数据,以便在 application.yml 文件中输入配置键时，IDE可以显示可用的属性列表和每个属性的描述。-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
 </project>
