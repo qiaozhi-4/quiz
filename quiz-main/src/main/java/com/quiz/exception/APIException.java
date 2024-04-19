@@ -1,8 +1,7 @@
 package com.quiz.exception;
 
 import com.quiz.enumerate.ResultEnum;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * <p>
@@ -14,21 +13,15 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class APIException extends RuntimeException {
     private int code;
     private String message;
 
-    public APIException() {
-        this.code = ResultEnum.FAILED.getCode();
-        this.message = ResultEnum.FAILED.getMessage();
-    }
     public APIException(String message) {
         this.code = ResultEnum.FAILED.getCode();
-        this.message = message;
-    }
-
-    public APIException(int code, String message) {
-        this.code = code;
         this.message = message;
     }
 
