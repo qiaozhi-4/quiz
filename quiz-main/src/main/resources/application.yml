@@ -53,3 +53,11 @@ logging:
     sql: INFO
     com.quiz: DEBUG
 
+# 微信小程序
+wx:
+  min-app:
+    configs:
+      - appid: wx0f4e873ad758a586
+        secret: cf5c68b3ff0d85251cfb178d0f9c0025
+        msg-data-format: JSON
+
