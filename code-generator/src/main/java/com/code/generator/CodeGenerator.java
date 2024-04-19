@@ -127,7 +127,7 @@ public class CodeGenerator {
                 // 策略配置
                 .strategyConfig(builder ->
                         builder
-                                //.addInclude("t_path")
+//                                .addInclude("t_path")
                                 .likeTable(new LikeTable("t_", SqlLike.RIGHT))
                                 //配置 Entity
                                 .entityBuilder()
@@ -142,11 +142,11 @@ public class CodeGenerator {
                         builder
                                 .disable()//禁用全部
                                 .entity("\\templates\\entity.java")
-                                .service("\\templates\\service.java")
-                                .serviceImpl("\\templates\\serviceImpl.java")
-                                .mapper("\\templates\\mapper.java")
-                                .mapperXml("\\templates\\mapper.xml")
-                                .controller("\\templates\\controller.java")
+//                                .service("\\templates\\service.java")
+//                                .serviceImpl("\\templates\\serviceImpl.java")
+//                                .mapper("\\templates\\mapper.java")
+//                                .mapperXml("\\templates\\mapper.xml")
+//                                .controller("\\templates\\controller.java")
                 )
                 //模板引擎配置，默认 Velocity 可选模板引擎 Beetl 或 Freemarker (需要导入相应包)
                 .templateEngine(new FreemarkerTemplateEngine())
