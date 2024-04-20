@@ -16,7 +16,7 @@ import lombok.extern.log4j.Log4j2;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -38,13 +38,15 @@ public class WxUserServiceImpl implements IWxUserService {
     private final ITUserService userService;
 
     @Override
-    public Result<Map<String, String>> login(String code) throws WxErrorException {
+    public Result<Object> login(String code) throws WxErrorException {
         final WxMaJscode2SessionResult sessionInfo = wxMaService.getUserService().getSessionInfo(code);
         TUserAuth userAuth = userAuthService
                 .getOne(new LambdaQueryWrapper<TUserAuth>().eq(TUserAuth::getProviderId, sessionInfo.getOpenid()));
         TUser user;
+        Map<Object, Object> map = new HashMap<>();
         if (Objects.isNull(userAuth)) {
             log.info("当前用户第一次登录,openID:" + sessionInfo.getOpenid());
+            map.put("isFirst", true);
             user = TUser.defUser();
             userService.save(user);
             userAuth = TUserAuth.builder()
@@ -56,6 +58,8 @@ public class WxUserServiceImpl implements IWxUserService {
         }
         user = userService.getById(userAuth.getUserId());
         final String jwtToken = JWTUtils.getJwtToken(user.getUserId().toString(), user.getUsername());
-        return Result.success(Collections.singletonMap(JWTUtils.TOKEN_KEY, jwtToken));
+        map.put(JWTUtils.TOKEN_KEY, jwtToken);
+        map.put("userInfo", user);
+        return Result.success(map);
     }
 }
