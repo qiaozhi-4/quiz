@@ -2,6 +2,7 @@ package com.quiz.service.impl;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
+import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.quiz.constant.Constants;
 import com.quiz.entity.TUser;
@@ -61,5 +62,16 @@ public class WxUserServiceImpl implements IWxUserService {
         map.put(JWTUtils.TOKEN_KEY, jwtToken);
         map.put("userInfo", user);
         return Result.success(map);
+    }
+
+    @Override
+    public Result<Object> saveUserInfo(Integer userId, String sessionKey, String encryptedData, String ivStr) {
+        final WxMaUserInfo userInfo = wxMaService.getUserService().getUserInfo(sessionKey, encryptedData, ivStr);
+        final TUser user = TUser.builder()
+                .userId(userId)
+                .nickname(userInfo.getNickName())
+                .avatarUrl(userInfo.getAvatarUrl())
+                .build();
+        return userService.updateById(user) ? Result.success() : Result.failed();
     }
 }

@@ -21,4 +21,17 @@ public interface IWxUserService {
      * @return 登录成功返回token信息
      */
     Result<Object> login(String code) throws WxErrorException;
+
+    /**
+     * <p>
+     * 保存用户信息
+     * </p>
+     *
+     * @param userId        用户id
+     * @param sessionKey    会话密钥
+     * @param encryptedData 消息密文
+     * @param ivStr         加密算法的初始向量
+     * @return Result
+     */
+    Result<Object> saveUserInfo(Integer userId, String sessionKey, String encryptedData, String ivStr);
 }

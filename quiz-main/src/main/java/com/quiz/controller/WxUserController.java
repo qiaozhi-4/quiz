@@ -5,12 +5,7 @@ import com.quiz.utils.Result;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.error.WxErrorException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -28,9 +23,13 @@ public class WxUserController {
     private final IWxUserService wxUserService;
 
     @PostMapping("login")
-    public Result<Map<String, String>> login(@RequestParam String code) throws WxErrorException {
+    public Result<Object> login(@RequestParam String code) throws WxErrorException {
         return wxUserService.login(code);
+    }
 
+    @PostMapping("save")
+    public Result<Object> save(@RequestBody Integer userId, String sessionKey, String encryptedData, String ivStr) {
+        return wxUserService.saveUserInfo(userId, sessionKey, encryptedData, ivStr);
     }
 
 }
