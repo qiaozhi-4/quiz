@@ -17,6 +17,7 @@ import lombok.extern.log4j.Log4j2;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -56,8 +57,12 @@ public class WxUserServiceImpl implements IWxUserService {
                     .providerId(sessionInfo.getOpenid())
                     .build();
             userAuthService.save(userAuth);
+        } else {
+            map.put("isFirst", false);
+            user = userService.getById(userAuth.getUserId());
+            user.setLastLoginAt(LocalDateTime.now());
+            userService.updateById(user);
         }
-        user = userService.getById(userAuth.getUserId());
         final String jwtToken = JWTUtils.getJwtToken(user.getUserId().toString(), user.getUsername());
         map.put(JWTUtils.TOKEN_KEY, jwtToken);
         map.put("userInfo", user);
