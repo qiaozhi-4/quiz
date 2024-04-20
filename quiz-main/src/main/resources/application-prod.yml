@@ -43,7 +43,7 @@ mybatis-plus:
 # 自动生成文档配置
 knife4j:
   enable: true # 启用knife4j
-  production: false # 是否在生成环境(生产环境无法访问)
+  production: true # 是否在生成环境(生产环境无法访问)
 
 # 配置日志
 logging:
