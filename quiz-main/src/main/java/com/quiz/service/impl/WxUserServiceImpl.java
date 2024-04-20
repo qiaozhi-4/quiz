@@ -15,8 +15,10 @@ import com.quiz.utils.Result;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import me.chanjar.weixin.common.error.WxErrorException;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +40,7 @@ public class WxUserServiceImpl implements IWxUserService {
     private final WxMaService wxMaService;
     private final ITUserAuthService userAuthService;
     private final ITUserService userService;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public Result<Object> login(String code) throws WxErrorException {
@@ -57,6 +60,8 @@ public class WxUserServiceImpl implements IWxUserService {
                     .providerId(sessionInfo.getOpenid())
                     .build();
             userAuthService.save(userAuth);
+            redisTemplate.opsForValue().set(Constants.REDIS_WX_SESSION + user.getUserId(),
+                    sessionInfo.getSessionKey(), Duration.ofMinutes(10));
         } else {
             map.put("isFirst", false);
             user = userService.getById(userAuth.getUserId());
@@ -70,7 +75,9 @@ public class WxUserServiceImpl implements IWxUserService {
     }
 
     @Override
-    public Result<Object> saveUserInfo(Integer userId, String sessionKey, String encryptedData, String ivStr) {
+    public Result<Object> saveUserInfo(Integer userId, String encryptedData, String ivStr) {
+        final String sessionKey = (String) redisTemplate.opsForValue()
+                .getAndDelete(Constants.REDIS_WX_SESSION + userId);
         final WxMaUserInfo userInfo = wxMaService.getUserService().getUserInfo(sessionKey, encryptedData, ivStr);
         final TUser user = TUser.builder()
                 .userId(userId)

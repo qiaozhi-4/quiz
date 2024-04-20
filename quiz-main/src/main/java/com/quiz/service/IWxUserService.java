@@ -28,10 +28,9 @@ public interface IWxUserService {
      * </p>
      *
      * @param userId        用户id
-     * @param sessionKey    会话密钥
      * @param encryptedData 消息密文
      * @param ivStr         加密算法的初始向量
      * @return Result
      */
-    Result<Object> saveUserInfo(Integer userId, String sessionKey, String encryptedData, String ivStr);
+    Result<Object> saveUserInfo(Integer userId, String encryptedData, String ivStr);
 }

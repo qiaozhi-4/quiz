@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * <p>
  * WxUserController
@@ -28,8 +30,9 @@ public class WxUserController {
     }
 
     @PostMapping("save")
-    public Result<Object> save(@RequestBody Integer userId, String sessionKey, String encryptedData, String ivStr) {
-        return wxUserService.saveUserInfo(userId, sessionKey, encryptedData, ivStr);
+    public Result<Object> save(@RequestBody Map<String, String> userInfo) {
+        return wxUserService.saveUserInfo(Integer.parseInt(userInfo.get("userId")),
+                userInfo.get("encryptedData"), userInfo.get("ivStr"));
     }
 
 }
