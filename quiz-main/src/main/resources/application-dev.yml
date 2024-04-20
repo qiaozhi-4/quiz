@@ -8,8 +8,6 @@ server:
 
 # spring配置
 spring:
-  profiles:
-    active: @activated.profile@
   application:
     name: quiz
   # 数据源配置

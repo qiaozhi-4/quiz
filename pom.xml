@@ -19,6 +19,8 @@
         <maven.compiler.target>8</maven.compiler.target><!-- 设置目标字节码的Java版本 -->
         <spring.boot.version>2.7.0</spring.boot.version><!-- 定义spring.boot的版本 -->
         <quiz.version>1.0.0</quiz.version><!-- 定义quiz的版本 -->
+        <activated.profile>prod</activated.profile>
+        <activated.profile>dev</activated.profile>
     </properties>
 
     <!--用于集中管理依赖的版本号，使得在项目中引用这些依赖时可以省略版本号。-->
@@ -51,5 +53,34 @@
                 </executions>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
+    <profiles>
+        <profile>
+            <id>development</id>
+            <properties>
+                <activated.profile>dev</activated.profile>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <!-- 配置针对开发环境的特定插件或任务 -->
+            </build>
+        </profile>
+        <profile>
+            <id>production</id>
+            <properties>
+                <activated.profile>prod</activated.profile>
+            </properties>
+            <build>
+                <!-- 配置针对生产环境的特定插件或任务 -->
+            </build>
+        </profile>
+    </profiles>
 </project>
