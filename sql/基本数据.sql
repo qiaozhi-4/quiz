@@ -1,8 +1,8 @@
-INSERT INTO quiz.role (role_name)
+INSERT INTO quiz.m_role (role_name)
 VALUES ('ADMIN'),
        ('USER');
 
-INSERT INTO quiz.t_permission (permission_name)
+INSERT INTO quiz.m_permission (permission_name)
 VALUES ('CREATE'),
        ('READ'),
        ('UPDATE'),
@@ -16,7 +16,7 @@ VALUES (1, 1),
        (1, 4);
 
 -- USER 角色权限
-INSERT INTO role_permissions (role_id, permission_id)
+INSERT INTO quiz.role_permissions (role_id, permission_id)
 VALUES (2, 2);
 
 -- 添加测试用户
