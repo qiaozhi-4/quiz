@@ -2,7 +2,7 @@ package ${package.Controller};
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import io.swagger.annotations.Api;
 <#if restControllerStyle>
 import org.springframework.web.bind.annotation.RestController;
 <#else>
