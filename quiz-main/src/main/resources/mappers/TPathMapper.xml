@@ -5,7 +5,7 @@
     <select id="getPathDtoList" resultType="com.quiz.dto.PathDto">
         select *
         from t_path
-                 left join t_permission on t_path.permission_id = t_permission.permission_id
+                 left join m_permission on t_path.permission_id = m_permission.permission_id
     </select>
 
 </mapper>

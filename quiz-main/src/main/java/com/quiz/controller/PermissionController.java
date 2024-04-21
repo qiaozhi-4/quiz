@@ -20,7 +20,7 @@ import java.util.Map;
  * @since 2024-04-14  0924:57:20
  */
 @RestController
-@RequestMapping("/t-permission")
+@RequestMapping("/permission")
 @Api(tags = "权限表 前端控制器")
 @RequiredArgsConstructor
 public class PermissionController {

@@ -26,7 +26,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-@TableName("t_permission")
+@TableName("m_permission")
 @ApiModel(value = "Permission对象", description = "权限表")
 public class Permission extends Model<Permission> {
 

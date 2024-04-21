@@ -26,7 +26,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-@TableName("t_user_auth")
+@TableName("m_user_auth")
 @ApiModel(value = "UserAuth对象", description = "第三方登录表")
 public class UserAuth extends Model<UserAuth> {
 
