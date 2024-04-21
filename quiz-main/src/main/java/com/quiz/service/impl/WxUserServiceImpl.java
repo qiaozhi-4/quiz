@@ -7,8 +7,6 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.quiz.constant.Constants;
 import com.quiz.entity.User;
 import com.quiz.entity.UserAuth;
-import com.quiz.service.IUserAuthService;
-import com.quiz.service.IUserService;
 import com.quiz.service.IWxUserService;
 import com.quiz.utils.JWTUtils;
 import com.quiz.utils.Result;
@@ -38,33 +36,31 @@ import java.util.Objects;
 public class WxUserServiceImpl implements IWxUserService {
 
     private final WxMaService wxMaService;
-    private final IUserAuthService userAuthService;
-    private final IUserService userService;
     private final RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public Result<Object> login(String code) throws WxErrorException {
         final WxMaJscode2SessionResult sessionInfo = wxMaService.getUserService().getSessionInfo(code);
-        UserAuth userAuth = userAuthService
-                .getOne(new LambdaQueryWrapper<UserAuth>().eq(UserAuth::getProviderId, sessionInfo.getOpenid()));
+        UserAuth userAuth = UserAuth.builder().build()
+                .selectOne(new LambdaQueryWrapper<UserAuth>().eq(UserAuth::getProviderId, sessionInfo.getOpenid()));
         User user;
         Map<Object, Object> map = new HashMap<>();
         if (Objects.isNull(userAuth)) {
             log.info("当前用户第一次登录,openID:" + sessionInfo.getOpenid());
             map.put("isFirst", true);
             user = User.defUser();
-            userService.save(user);
+            user.insert();
             userAuth = UserAuth.builder()
                     .userId(user.getUserId())
                     .provider(Constants.WX_NAME)
                     .providerId(sessionInfo.getOpenid())
                     .build();
-            userAuthService.save(userAuth);
+            userAuth.insert();
         } else {
             map.put("isFirst", false);
-            user = userService.getById(userAuth.getUserId());
+            user = User.builder().userId(userAuth.getUserId()).build().selectById();
             user.setLastLoginAt(LocalDateTime.now());
-            userService.updateById(user);
+            user.updateById();
         }
         redisTemplate.opsForValue().set(Constants.REDIS_WX_SESSION + user.getUserId(),
                 sessionInfo.getSessionKey(), Duration.ofMinutes(10));
@@ -84,6 +80,6 @@ public class WxUserServiceImpl implements IWxUserService {
                 .nickname(userInfo.getNickName())
                 .avatarUrl(userInfo.getAvatarUrl())
                 .build();
-        return userService.updateById(user) ? Result.success() : Result.failed();
+        return user.updateById() ? Result.success() : Result.failed();
     }
 }
