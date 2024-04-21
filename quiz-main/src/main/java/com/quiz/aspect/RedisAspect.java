@@ -55,15 +55,11 @@ public class RedisAspect {
 
     /**
      * <p>
-     * 可以理解为hook
+     * 缓存所有路径信息
      * </p>
-     *
-     * @param pjp 用于获取方法
-     * @return 原方法的返回值
-     * @throws Throwable 执行原方法可能抛出的异常
      */
     @Around("execution(*  com.quiz.service.impl.TPathServiceImpl.getPathDtoList(..))")
-    public Object around(ProceedingJoinPoint pjp) throws Throwable {
+    public Object getPathDtoList(ProceedingJoinPoint pjp) throws Throwable {
         log.debug("环绕通知: " + pjp.getSignature().getName() + "方法执行之前");
 
         // 如果redis存在该key则直接返回
@@ -82,8 +78,13 @@ public class RedisAspect {
         return result;
     }
 
+    /**
+     * <p>
+     * 缓存登录的用户信息
+     * </p>
+     */
     @Around("execution(*  com.quiz.service.impl.TUserServiceImpl.getUserByAccount(..))")
-    public Object loadUserByUsername(ProceedingJoinPoint pjp) throws Throwable {
+    public Object getUserByAccount(ProceedingJoinPoint pjp) throws Throwable {
         // 如果redis存在该key则直接返回
         final String key = "quiz::t-user::" + pjp.getArgs()[0];
         final ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
