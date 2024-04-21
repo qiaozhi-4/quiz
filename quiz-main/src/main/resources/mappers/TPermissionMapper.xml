@@ -6,13 +6,13 @@
     <select id="getUserPermissionsByUserId" resultType="com.quiz.entity.TPermission">
         SELECT p.*
         FROM quiz.t_user AS u
-                 LEFT JOIN quiz.user_roles AS ur
+                 INNER JOIN quiz.user_roles AS ur
                            ON u.user_id = ur.user_id
-                 LEFT JOIN quiz.t_role AS r
+                 INNER JOIN quiz.t_role AS r
                            ON r.role_id = ur.role_id
-                 LEFT JOIN quiz.role_permissions AS rp
+                 INNER JOIN quiz.role_permissions AS rp
                            ON r.role_id = rp.role_id
-                 LEFT JOIN quiz.t_permission AS p
+                 INNER JOIN quiz.t_permission AS p
                            ON p.permission_id = rp.permission_id
         WHERE u.user_id = #{userId}
     </select>
