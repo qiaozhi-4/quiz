@@ -1,12 +1,14 @@
 package com.quiz.controller;
 
 import com.quiz.service.IWxUserService;
+import com.quiz.utils.JWTUtils;
 import com.quiz.utils.Result;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -30,9 +32,11 @@ public class WxUserController {
     }
 
     @PostMapping("save")
-    public Result<Object> save(@RequestBody Map<String, String> userInfo) {
-        return wxUserService.saveUserInfo(Integer.parseInt(userInfo.get("userId")),
-                userInfo.get("encryptedData"), userInfo.get("ivStr"));
+    public Result<Object> save(HttpServletRequest request, @RequestBody Map<String, String> userInfo) {
+        return wxUserService.saveUserInfo(
+                Integer.parseInt(JWTUtils.getMemberIdByJwtToken(request)),
+                userInfo.get("encryptedData"),
+                userInfo.get("ivStr"));
     }
 
 }
