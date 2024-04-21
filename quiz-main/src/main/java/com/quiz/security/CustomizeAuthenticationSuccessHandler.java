@@ -1,14 +1,13 @@
 package com.quiz.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.quiz.entity.TUser;
+import com.quiz.entity.User;
 import com.quiz.exception.APIException;
 import com.quiz.utils.JWTUtils;
 import com.quiz.utils.Result;
-import com.quiz.service.ITUserService;
+import com.quiz.service.IUserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -33,13 +32,13 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
     @Resource
     private ObjectMapper objectMapper;
     @Resource
-    private ITUserService userService;
+    private IUserService userService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         // 更新用户表上次登录时间
-        User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        TUser user = userService.getUserByAccount(userDetails.getUsername());
+        org.springframework.security.core.userdetails.User userDetails = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userService.getUserByAccount(userDetails.getUsername());
         user.setLastLoginAt(LocalDateTime.now());
         if (!userService.updateById(user)) {
             throw new APIException("更新登录时间失败!");

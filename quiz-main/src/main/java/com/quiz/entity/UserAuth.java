@@ -16,7 +16,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 路径表
+ * 第三方登录表
  * </p>
  *
  * @author XGeorge
@@ -27,27 +27,27 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-@TableName("t_path")
-@ApiModel(value = "TPath对象", description = "路径表")
-public class TPath implements Serializable {
+@TableName("t_user_auth")
+@ApiModel(value = "TUserAuth对象", description = "第三方登录表")
+public class UserAuth implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("主键，路径ID。")
-    @TableId(value = "path_id", type = IdType.AUTO)
-    private Integer pathId;
+    @ApiModelProperty("主键，ID。")
+    @TableId(value = "auth_id", type = IdType.AUTO)
+    private Integer authId;
 
-    @ApiModelProperty("路径模式，如/api/users/**，/device/list/{current:d+}/{size:d+}。")
-    @TableField("pattern")
-    private String pattern;
+    @ApiModelProperty("用户ID。")
+    @TableField("user_id")
+    private Integer userId;
 
-    @ApiModelProperty("请求方式")
-    @TableField("http_method")
-    private String httpMethod;
+    @ApiModelProperty("第三方服务的名称（如Google、Facebook等）。")
+    @TableField("provider")
+    private String provider;
 
-    @ApiModelProperty("关联权限ID。")
-    @TableField("permission_id")
-    private String permissionId;
+    @ApiModelProperty("第三方提供的唯一标识符。比如微信的openId")
+    @TableField("provider_id")
+    private String providerId;
 
 
 }

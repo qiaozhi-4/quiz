@@ -2,9 +2,9 @@ package com.quiz.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.quiz.dto.PathDto;
-import com.quiz.entity.TPath;
-import com.quiz.mapper.TPathMapper;
-import com.quiz.service.ITPathService;
+import com.quiz.entity.Path;
+import com.quiz.mapper.PathMapper;
+import com.quiz.service.IPathService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +20,8 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-public class TPathServiceImpl extends ServiceImpl<TPathMapper, TPath> implements ITPathService {
-    private final TPathMapper pathMapper;
+public class PathServiceImpl extends ServiceImpl<PathMapper, Path> implements IPathService {
+    private final PathMapper pathMapper;
 
     @Override
     public List<PathDto> getPathDtoList() {

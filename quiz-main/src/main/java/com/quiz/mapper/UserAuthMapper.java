@@ -1,6 +1,6 @@
 package com.quiz.mapper;
 
-import com.quiz.entity.TUserAuth;
+import com.quiz.entity.UserAuth;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author XGeorge
  * @since 2024-04-14  0924:57:20
  */
-public interface TUserAuthMapper extends BaseMapper<TUserAuth> {
+public interface UserAuthMapper extends BaseMapper<UserAuth> {
 
 }

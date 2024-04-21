@@ -28,7 +28,7 @@ import java.util.List;
 public class RedisAspect {
     private final RedisTemplate<String, Object> redisTemplate;
 
-    @Pointcut("execution(*  com.quiz.service.impl.TPathServiceImpl.getPathDtoList(..))")
+    @Pointcut("execution(*  com.quiz.service.impl.PathServiceImpl.getPathDtoList(..))")
     public void getPathDtoList() {
 
     }
@@ -58,7 +58,7 @@ public class RedisAspect {
      * 缓存所有路径信息
      * </p>
      */
-    @Around("execution(*  com.quiz.service.impl.TPathServiceImpl.getPathDtoList(..))")
+    @Around("execution(*  com.quiz.service.impl.PathServiceImpl.getPathDtoList(..))")
     public Object getPathDtoList(ProceedingJoinPoint pjp) throws Throwable {
         log.debug("环绕通知: " + pjp.getSignature().getName() + "方法执行之前");
 
@@ -83,7 +83,7 @@ public class RedisAspect {
      * 缓存登录的用户信息
      * </p>
      */
-    @Around("execution(*  com.quiz.service.impl.TUserServiceImpl.getUserByAccount(..))")
+    @Around("execution(*  com.quiz.service.impl.UserServiceImpl.getUserByAccount(..))")
     public Object getUserByAccount(ProceedingJoinPoint pjp) throws Throwable {
         // 如果redis存在该key则直接返回
         final String key = "quiz::t-user::" + pjp.getArgs()[0];

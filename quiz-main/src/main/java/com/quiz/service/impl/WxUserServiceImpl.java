@@ -5,10 +5,10 @@ import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.quiz.constant.Constants;
-import com.quiz.entity.TUser;
-import com.quiz.entity.TUserAuth;
-import com.quiz.service.ITUserAuthService;
-import com.quiz.service.ITUserService;
+import com.quiz.entity.User;
+import com.quiz.entity.UserAuth;
+import com.quiz.service.IUserAuthService;
+import com.quiz.service.IUserService;
 import com.quiz.service.IWxUserService;
 import com.quiz.utils.JWTUtils;
 import com.quiz.utils.Result;
@@ -38,23 +38,23 @@ import java.util.Objects;
 public class WxUserServiceImpl implements IWxUserService {
 
     private final WxMaService wxMaService;
-    private final ITUserAuthService userAuthService;
-    private final ITUserService userService;
+    private final IUserAuthService userAuthService;
+    private final IUserService userService;
     private final RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public Result<Object> login(String code) throws WxErrorException {
         final WxMaJscode2SessionResult sessionInfo = wxMaService.getUserService().getSessionInfo(code);
-        TUserAuth userAuth = userAuthService
-                .getOne(new LambdaQueryWrapper<TUserAuth>().eq(TUserAuth::getProviderId, sessionInfo.getOpenid()));
-        TUser user;
+        UserAuth userAuth = userAuthService
+                .getOne(new LambdaQueryWrapper<UserAuth>().eq(UserAuth::getProviderId, sessionInfo.getOpenid()));
+        User user;
         Map<Object, Object> map = new HashMap<>();
         if (Objects.isNull(userAuth)) {
             log.info("当前用户第一次登录,openID:" + sessionInfo.getOpenid());
             map.put("isFirst", true);
-            user = TUser.defUser();
+            user = User.defUser();
             userService.save(user);
-            userAuth = TUserAuth.builder()
+            userAuth = UserAuth.builder()
                     .userId(user.getUserId())
                     .provider(Constants.WX_NAME)
                     .providerId(sessionInfo.getOpenid())
@@ -79,7 +79,7 @@ public class WxUserServiceImpl implements IWxUserService {
         final String sessionKey = (String) redisTemplate.opsForValue()
                 .getAndExpire(Constants.REDIS_WX_SESSION + userId, Duration.ofMinutes(10));
         final WxMaUserInfo userInfo = wxMaService.getUserService().getUserInfo(sessionKey, encryptedData, ivStr);
-        final TUser user = TUser.builder()
+        final User user = User.builder()
                 .userId(userId)
                 .nickname(userInfo.getNickName())
                 .avatarUrl(userInfo.getAvatarUrl())

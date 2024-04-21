@@ -3,7 +3,7 @@ package com.quiz.security.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.quiz.dto.UserDto;
 import com.quiz.security.service.ISecurityUserService;
-import com.quiz.service.ITUserService;
+import com.quiz.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SecurityUserServiceImpl implements ISecurityUserService {
 
-    private final ITUserService userService;
+    private final IUserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

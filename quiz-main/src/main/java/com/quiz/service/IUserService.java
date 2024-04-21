@@ -1,7 +1,7 @@
 package com.quiz.service;
 
 import com.quiz.dto.UserDto;
-import com.quiz.entity.TUser;
+import com.quiz.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author XGeorge
  * @since 2024-04-14  0924:57:20
  */
-public interface ITUserService extends IService<TUser> {
+public interface IUserService extends IService<User> {
     /**
      * 根据账户获取用户信息
      *

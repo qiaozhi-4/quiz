@@ -2,7 +2,7 @@ package com.quiz.security.filter;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.quiz.dto.PathDto;
-import com.quiz.service.ITPathService;
+import com.quiz.service.IPathService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authorization.AuthorizationDecision;
@@ -29,7 +29,7 @@ import java.util.function.Supplier;
 @RequiredArgsConstructor
 @Log4j2
 public class CustomizeAuthorizationManager implements AuthorizationManager<RequestAuthorizationContext> {
-    private final ITPathService pathService;
+    private final IPathService pathService;
     private final AntPathMatcher antPathMatcher;
 
     @Override

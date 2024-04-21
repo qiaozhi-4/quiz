@@ -32,7 +32,7 @@ import java.util.UUID;
 @Accessors(chain = true)
 @TableName("t_user")
 @ApiModel(value = "TUser对象", description = "用户信息表")
-public class TUser implements Serializable {
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -99,8 +99,8 @@ public class TUser implements Serializable {
      *
      * @return 用户
      */
-    public static TUser defUser() {
-        return TUser.builder().username(generateRandomUsername()).createdAt(LocalDateTime.now()).build();
+    public static User defUser() {
+        return User.builder().username(generateRandomUsername()).createdAt(LocalDateTime.now()).build();
     }
 
 }

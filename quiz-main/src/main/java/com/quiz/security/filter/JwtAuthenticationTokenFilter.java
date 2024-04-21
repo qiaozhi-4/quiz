@@ -2,7 +2,7 @@ package com.quiz.security.filter;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.quiz.dto.UserDto;
-import com.quiz.service.ITUserService;
+import com.quiz.service.IUserService;
 import com.quiz.utils.JWTUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,7 +31,7 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Resource
-    private ITUserService userService;
+    private IUserService userService;
 
     @Override
     protected void doFilterInternal(@NotNull HttpServletRequest request,

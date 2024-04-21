@@ -1,6 +1,6 @@
 package com.quiz.service;
 
-import com.quiz.entity.TUserAuth;
+import com.quiz.entity.UserAuth;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author XGeorge
  * @since 2024-04-14  0924:57:20
  */
-public interface ITUserAuthService extends IService<TUserAuth> {
+public interface IUserAuthService extends IService<UserAuth> {
 
 }

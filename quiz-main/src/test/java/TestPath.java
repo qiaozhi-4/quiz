@@ -1,6 +1,6 @@
 import com.quiz.Main;
 import com.quiz.dto.PathDto;
-import com.quiz.service.ITPathService;
+import com.quiz.service.IPathService;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import java.util.List;
 @Log4j2
 public class TestPath {
     @Autowired
-    private ITPathService pathService;
+    private IPathService pathService;
 
     @Test
     public void getPathDtoList() {

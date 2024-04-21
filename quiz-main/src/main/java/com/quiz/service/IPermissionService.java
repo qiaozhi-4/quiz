@@ -1,6 +1,6 @@
 package com.quiz.service;
 
-import com.quiz.entity.TPermission;
+import com.quiz.entity.Permission;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.Map;
@@ -13,7 +13,7 @@ import java.util.Map;
  * @author XGeorge
  * @since 2024-04-14  0924:57:20
  */
-public interface ITPermissionService extends IService<TPermission> {
+public interface IPermissionService extends IService<Permission> {
     /**
      * 分页获取
      *

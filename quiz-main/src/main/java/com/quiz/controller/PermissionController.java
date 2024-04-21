@@ -1,9 +1,9 @@
 package com.quiz.controller;
 
 
-import com.quiz.entity.TPermission;
-import com.quiz.entity.TUser;
-import com.quiz.service.ITPermissionService;
+import com.quiz.entity.Permission;
+import com.quiz.entity.User;
+import com.quiz.service.IPermissionService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -23,16 +23,16 @@ import java.util.Map;
 @RequestMapping("/t-permission")
 @Api(tags = "权限表 前端控制器")
 @RequiredArgsConstructor
-public class TPermissionController {
-    private final ITPermissionService permissionService;
+public class PermissionController {
+    private final IPermissionService permissionService;
 
     @GetMapping("/test1")
-    public List<TPermission> test1() {
+    public List<Permission> test1() {
         return permissionService.list();
     }
 
     @GetMapping("/test2")
-    public List<TPermission> tes2() {
+    public List<Permission> tes2() {
         throw new RuntimeException("测试异常");
 //        return permissionService.list();
     }
@@ -44,7 +44,7 @@ public class TPermissionController {
     }
 
     @PostMapping("test4")
-    public List<TPermission> test4(@RequestBody TUser user){
+    public List<Permission> test4(@RequestBody User user){
         return permissionService.list();
     }
 }

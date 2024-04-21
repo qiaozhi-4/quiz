@@ -17,6 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/t-user")
 @Api(tags = "用户信息表 前端控制器")
-public class TUserController {
+public class UserController {
 
 }
