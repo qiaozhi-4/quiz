@@ -4,12 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -20,16 +18,17 @@ import java.io.Serializable;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-19  1224:59:29
+ * @since 2024-04-21  0624:56:28
  */
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
 @TableName("t_path")
-@ApiModel(value = "TPath对象", description = "路径表")
-public class Path implements Serializable {
+@ApiModel(value = "Path对象", description = "路径表")
+public class Path extends Model<Path> {
 
     private static final long serialVersionUID = 1L;
 
@@ -49,5 +48,10 @@ public class Path implements Serializable {
     @TableField("permission_id")
     private String permissionId;
 
+
+    @Override
+    public Serializable pkVal() {
+        return this.pathId;
+    }
 
 }

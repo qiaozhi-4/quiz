@@ -4,14 +4,13 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -19,16 +18,17 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-19  1224:59:29
+ * @since 2024-04-21  0624:56:28
  */
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
 @TableName("t_permission")
-@ApiModel(value = "TPermission对象", description = "权限表")
-public class Permission implements Serializable {
+@ApiModel(value = "Permission对象", description = "权限表")
+public class Permission extends Model<Permission> {
 
     private static final long serialVersionUID = 1L;
 
@@ -40,5 +40,10 @@ public class Permission implements Serializable {
     @TableField("permission_name")
     private String permissionName;
 
+
+    @Override
+    public Serializable pkVal() {
+        return this.permissionId;
+    }
 
 }

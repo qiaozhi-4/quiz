@@ -4,12 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -20,16 +18,17 @@ import java.io.Serializable;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-19  1224:59:29
+ * @since 2024-04-21  0624:56:28
  */
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
 @TableName("t_user_auth")
-@ApiModel(value = "TUserAuth对象", description = "第三方登录表")
-public class UserAuth implements Serializable {
+@ApiModel(value = "UserAuth对象", description = "第三方登录表")
+public class UserAuth extends Model<UserAuth> {
 
     private static final long serialVersionUID = 1L;
 
@@ -49,5 +48,10 @@ public class UserAuth implements Serializable {
     @TableField("provider_id")
     private String providerId;
 
+
+    @Override
+    public Serializable pkVal() {
+        return this.authId;
+    }
 
 }

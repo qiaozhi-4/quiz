@@ -4,13 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -23,16 +20,17 @@ import java.util.UUID;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-19  1224:59:29
+ * @since 2024-04-21  0624:39:52
  */
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
 @TableName("t_user")
-@ApiModel(value = "TUser对象", description = "用户信息表")
-public class User implements Serializable {
+@ApiModel(value = "User对象", description = "用户信息表")
+public class User extends Model<User> {
 
     private static final long serialVersionUID = 1L;
 
@@ -52,7 +50,6 @@ public class User implements Serializable {
     @TableField("username")
     private String username;
 
-    @JsonIgnore
     @ApiModelProperty("密码")
     @TableField("password")
     private String password;
@@ -80,6 +77,12 @@ public class User implements Serializable {
     @ApiModelProperty("账号是否启用:0=正常,-1=禁用")
     @TableField("enabled")
     private Long enabled;
+
+
+    @Override
+    public Serializable pkVal() {
+        return this.userId;
+    }
 
     /**
      * <p>
