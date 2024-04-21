@@ -27,7 +27,7 @@ public class SecurityUserServiceImpl implements ISecurityUserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //根据账号获取用信息
-        UserDto user = userService.getUserByAccount(username);
+        UserDto user = userService.getUserDtoByAccount(username);
 
         // 如果走了缓存,就重新获取密码
         if (StringUtils.isBlank(user.getPassword()))

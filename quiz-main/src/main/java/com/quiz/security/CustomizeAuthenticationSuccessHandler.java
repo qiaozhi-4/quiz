@@ -38,7 +38,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         // 更新用户表上次登录时间
         org.springframework.security.core.userdetails.User userDetails = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userService.getUserByAccount(userDetails.getUsername());
+        User user = userService.getUserDtoByAccount(userDetails.getUsername());
         user.setLastLoginAt(LocalDateTime.now());
         if (!userService.updateById(user)) {
             throw new APIException("更新登录时间失败!");

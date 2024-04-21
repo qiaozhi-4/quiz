@@ -83,8 +83,8 @@ public class RedisAspect {
      * 缓存登录的用户信息
      * </p>
      */
-    @Around("execution(*  com.quiz.service.impl.UserServiceImpl.getUserByAccount(..))")
-    public Object getUserByAccount(ProceedingJoinPoint pjp) throws Throwable {
+    @Around("execution(*  com.quiz.service.impl.UserServiceImpl.getUserDtoByAccount(..))")
+    public Object getUserDtoByAccount(ProceedingJoinPoint pjp) throws Throwable {
         // 如果redis存在该key则直接返回
         final String key = "quiz::t-user::" + pjp.getArgs()[0];
         final ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();

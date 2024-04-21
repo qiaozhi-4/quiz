@@ -42,7 +42,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         // 判断账户是否为空; 判断 SecurityContext 是否有身份
         if (!StringUtils.isEmpty(account) && SecurityContextHolder.getContext().getAuthentication() == null) {
             // 获取用户信息以及权限
-            final UserDto userDto = userService.getUserByAccount(account);
+            final UserDto userDto = userService.getUserDtoByAccount(account);
             final UserDetails user = User.builder()
                     .password(userDto.getUsername())
                     .username(userDto.getUsername())
