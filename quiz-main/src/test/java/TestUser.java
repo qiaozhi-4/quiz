@@ -1,10 +1,9 @@
 import com.quiz.Main;
 import com.quiz.entity.User;
+import com.quiz.entity.UserAuth;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -20,9 +19,13 @@ public class TestUser {
 
     @Test
     public void testModel() {
-        final User user = User.builder().username("测试").createdAt(LocalDateTime.now()).build();
+        final User user = User.defUser().setUsername("测试");
         log.info(user);
-        user.insert();
+//        user.insert();
         log.info(user);
+        final UserAuth userAuth = UserAuth.builder().userId(1).provider("测试").providerId("445454455454").build();
+        log.info(userAuth);
+        userAuth.insert();
+        log.info(userAuth);
     }
 }
