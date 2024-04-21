@@ -99,15 +99,15 @@ public class CodeGenerator {
         FastAutoGenerator.create(URL, USERNAME, PASSWORD)
                 //全局配置
                 .globalConfig(builder ->
-                                builder
-//                                .fileOverride()//覆盖已有文件
-                                        .disableOpenDir()//禁止打开输出目录
-                                        //.outputDir(PROJECT_PATH + "/src/main/java")//指定输出目录
-                                        .author("XGeorge")//作者名
-                                        //.enableKotlin()//开启 kotlin 模式
-                                        .enableSwagger()//开启 swagger 模式
-                                        .dateType(DateType.TIME_PACK)//时间策略
-                                        .commentDate("yyyy-MM-dd  hh24:mm:ss")//注释时间格式
+                        builder
+                                //.fileOverride()//覆盖已有文件
+                                .disableOpenDir()//禁止打开输出目录
+                                //.outputDir(PROJECT_PATH + "/src/main/java")//指定输出目录
+                                .author("XGeorge")//作者名
+                                //.enableKotlin()//开启 kotlin 模式
+                                .enableSwagger()//开启 swagger 模式
+                                .dateType(DateType.TIME_PACK)//时间策略
+                                .commentDate("yyyy-MM-dd  hh24:mm:ss")//注释时间格式
                 )
                 //包配置
                 .packageConfig(builder ->
@@ -125,42 +125,50 @@ public class CodeGenerator {
                 // 策略配置
                 .strategyConfig(builder ->
                         builder
-                                //.addInclude("t_path")
+                                .addInclude("t_user")
+                                .addInclude("t_path")
+                                .addInclude("t_question")
                                 //.likeTable(new LikeTable("t_", SqlLike.RIGHT))
+
                                 //配置 Entity
                                 .entityBuilder()
                                 .enableChainModel()//开启链式模型
                                 .enableLombok()//开启Lombok
                                 .enableTableFieldAnnotation()//开启生成实体时生成字段注解
+                                //开启 ActiveRecord 模型(封装了实体一些简单持久化操作,必须有对应的BaseMapper实现)
+                                .enableActiveRecord()
                                 //配置生成文件的名字
-                                .convertFileName(entityName -> entityName.replaceAll("^T", ""))
+                                .convertFileName(entityName -> entityName.replaceAll("^[TM](?=[A-Z])", ""))
+
                                 //配置 Controller
                                 .controllerBuilder()
                                 .enableRestStyle()//开启生成@RestController 控制器(等同于@Controller + @ResponseBody。)
                                 .convertFileName(entityName ->
-                                        entityName.replaceAll("^T", "") + "Controller")
+                                        entityName.replaceAll("^[TM](?=[A-Z])", "") + "Controller")
+
                                 //配置 Service
                                 .serviceBuilder()
                                 .convertServiceFileName(entityName ->
-                                        "I" + entityName.replaceAll("^T", "") + "Service")
+                                        "I" + entityName.replaceAll("^[TM](?=[A-Z])", "") + "Service")
                                 .convertServiceImplFileName(entityName ->
-                                        entityName.replaceAll("^T", "") + "ServiceImpl")
+                                        entityName.replaceAll("^[TM](?=[A-Z])", "") + "ServiceImpl")
+
                                 //配置 Mapper
                                 .mapperBuilder()
                                 .convertMapperFileName(entityName ->
-                                        entityName.replaceAll("^T", "") + "Mapper")
+                                        entityName.replaceAll("^[TM](?=[A-Z])", "") + "Mapper")
 
 
                 )//模版配置
                 .templateConfig(builder ->
                         builder
                                 .disable()//禁用全部
-                                .entity("\\templates\\entity.java")
-                                .service("\\templates\\service.java")
-                                .serviceImpl("\\templates\\serviceImpl.java")
-                                .mapper("\\templates\\mapper.java")
-                                .mapperXml("\\templates\\mapper.xml")
-                                .controller("\\templates\\controller.java")
+                                .entity("\\templates\\ftl\\entity.java")
+                                .service("\\templates\\ftl\\service.java")
+                                .serviceImpl("\\templates\\ftl\\serviceImpl.java")
+                                .mapper("\\templates\\ftl\\mapper.java")
+                                .mapperXml("\\templates\\ftl\\mapper.xml")
+                                .controller("\\templates\\ftl\\controller.java")
                 )
                 //模板引擎配置，默认 Velocity 可选模板引擎 Beetl 或 Freemarker (需要导入相应包)
                 .templateEngine(new FreemarkerTemplateEngine())
