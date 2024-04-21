@@ -1,4 +1,4 @@
-INSERT INTO quiz.t_role (role_name)
+INSERT INTO quiz.role (role_name)
 VALUES ('ADMIN'),
        ('USER');
 
