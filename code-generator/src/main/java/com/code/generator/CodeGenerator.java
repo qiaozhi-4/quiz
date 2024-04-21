@@ -157,6 +157,8 @@ public class CodeGenerator {
                                 .mapperBuilder()
                                 .convertMapperFileName(entityName ->
                                         entityName.replaceAll("^[TM](?=[A-Z])", "") + "Mapper")
+                                .convertXmlFileName(entityName ->
+                                        entityName.replaceAll("^[TM](?=[A-Z])", "") + "Mapper")
 
 
                 )//模版配置
