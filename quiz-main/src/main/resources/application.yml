@@ -49,6 +49,7 @@ knife4j:
   production: false # 是否在生成环境(生产环境无法访问)
 
 # 配置日志
+# OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL
 logging:
   level:
     root: INFO #日志级别

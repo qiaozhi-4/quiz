@@ -3,7 +3,6 @@ package com.quiz.config;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @author XGeorge
  * @since 2024/4/8 12:51
  */
-@Component
+//@Component
 @Log4j2
 public class BeanLister implements CommandLineRunner {
     private final ApplicationContext ctx;
