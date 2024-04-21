@@ -60,14 +60,14 @@ public class WxUserServiceImpl implements IWxUserService {
                     .providerId(sessionInfo.getOpenid())
                     .build();
             userAuthService.save(userAuth);
-            redisTemplate.opsForValue().set(Constants.REDIS_WX_SESSION + user.getUserId(),
-                    sessionInfo.getSessionKey(), Duration.ofMinutes(10));
         } else {
             map.put("isFirst", false);
             user = userService.getById(userAuth.getUserId());
             user.setLastLoginAt(LocalDateTime.now());
             userService.updateById(user);
         }
+        redisTemplate.opsForValue().set(Constants.REDIS_WX_SESSION + user.getUserId(),
+                sessionInfo.getSessionKey(), Duration.ofMinutes(10));
         final String jwtToken = JWTUtils.getJwtToken(user.getUserId().toString(), user.getUsername());
         map.put(JWTUtils.TOKEN_KEY, jwtToken);
         map.put("userInfo", user);
@@ -77,7 +77,7 @@ public class WxUserServiceImpl implements IWxUserService {
     @Override
     public Result<Object> saveUserInfo(Integer userId, String encryptedData, String ivStr) {
         final String sessionKey = (String) redisTemplate.opsForValue()
-                .getAndDelete(Constants.REDIS_WX_SESSION + userId);
+                .getAndExpire(Constants.REDIS_WX_SESSION + userId, Duration.ofMinutes(10));
         final WxMaUserInfo userInfo = wxMaService.getUserService().getUserInfo(sessionKey, encryptedData, ivStr);
         final TUser user = TUser.builder()
                 .userId(userId)
