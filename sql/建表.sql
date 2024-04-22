@@ -96,7 +96,7 @@ create table quiz.question_paper
 (
     paper_id  int auto_increment comment '唯一主键',
     user_id   int comment '出题用户id',
-    questions varchar(128) not null comment '题目id集合,以","分割',
+    questions varchar(256) not null comment '题目id集合,以","分割',
     answers   varchar(64) comment '答案下标集合,以","分割',
     primary key (paper_id)
 ) comment '题目试卷';
