@@ -1,4 +1,5 @@
 import com.quiz.Main;
+import com.quiz.dto.UserDto;
 import com.quiz.entity.User;
 import com.quiz.entity.UserAuth;
 import lombok.extern.log4j.Log4j2;
@@ -19,7 +20,7 @@ public class TestUser {
 
     @Test
     public void testModel() {
-        final User user = User.defUser().setUsername("测试");
+        final User user = UserDto.defUser().setUsername("测试");
         log.info(user);
 //        user.insert();
         log.info(user);
