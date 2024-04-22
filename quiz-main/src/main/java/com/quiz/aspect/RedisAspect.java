@@ -54,9 +54,7 @@ public class RedisAspect {
     }
 
     /**
-     * <p>
      * 缓存所有路径信息
-     * </p>
      */
     @Around("execution(*  com.quiz.service.impl.PathServiceImpl.getPathDtoList(..))")
     public Object getPathDtoList(ProceedingJoinPoint pjp) throws Throwable {
@@ -79,9 +77,7 @@ public class RedisAspect {
     }
 
     /**
-     * <p>
      * 缓存登录的用户信息
-     * </p>
      */
     @Around("execution(*  com.quiz.service.impl.UserServiceImpl.getUserDtoByAccount(..))")
     public Object getUserDtoByAccount(ProceedingJoinPoint pjp) throws Throwable {

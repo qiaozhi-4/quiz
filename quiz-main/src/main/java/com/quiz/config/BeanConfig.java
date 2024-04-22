@@ -25,11 +25,7 @@ import java.time.format.DateTimeFormatter;
 public class BeanConfig {
 
     /**
-     * <p>
      * 生成自定义序列化 LocalDateTime 类
-     * </p>
-     *
-     * @return ObjectMapper
      */
     @NotNull
     private static ObjectMapper getObjectMapper() {
@@ -53,11 +49,7 @@ public class BeanConfig {
     }
 
     /**
-     * <p>
      * 配置用來处理 JSON 数据的全局 bean
-     * </p>
-     *
-     * @return ObjectMapper
      */
     @Bean
     public ObjectMapper objectMapper() {
@@ -65,11 +57,7 @@ public class BeanConfig {
     }
 
     /**
-     * <p>
      * 配置用来处理 redis 序列化数据时添加类信息
-     * </p>
-     *
-     * @return ObjectMapper
      */
     @Bean
     public ObjectMapper redisObjectMapper() {
@@ -82,11 +70,7 @@ public class BeanConfig {
     }
 
     /**
-     * <p>
      * 用来匹配路径
-     * </p>
-     *
-     * @return AntPathMatcher
      */
     @Bean
     public AntPathMatcher antPathMatcher() {

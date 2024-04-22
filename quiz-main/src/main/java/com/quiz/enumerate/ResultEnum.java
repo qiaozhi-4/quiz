@@ -69,7 +69,6 @@ public enum ResultEnum {
      * 根据code获取message
      *
      * @param code 状态码
-     * @return msg
      */
     public static String getMsgByCode(Integer code) {
         for (ResultEnum ele : values()) {

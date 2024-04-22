@@ -1,8 +1,8 @@
 package com.quiz.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.quiz.dto.PathDto;
 import com.quiz.entity.Path;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
@@ -16,11 +16,7 @@ import java.util.List;
  */
 public interface IPathService extends IService<Path> {
     /**
-     * <p>
      * 获取所有权限信息,这个dto把权限id替换为权限名称
-     * </p>
-     *
-     * @return 所有权限信息
      */
     List<PathDto> getPathDtoList();
 }

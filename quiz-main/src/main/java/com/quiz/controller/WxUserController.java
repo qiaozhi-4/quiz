@@ -32,7 +32,7 @@ public class WxUserController {
     }
 
     @PostMapping("save")
-    public Result<Object> save(HttpServletRequest request, @RequestBody Map<String, String> userInfo) {
+    public Boolean save(HttpServletRequest request, @RequestBody Map<String, String> userInfo) {
         return wxUserService.saveUserInfo(
                 Integer.parseInt(JWTUtils.getMemberIdByJwtToken(request)),
                 userInfo.get("encryptedData"),

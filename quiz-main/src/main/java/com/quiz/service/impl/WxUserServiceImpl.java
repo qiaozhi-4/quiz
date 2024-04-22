@@ -72,7 +72,7 @@ public class WxUserServiceImpl implements IWxUserService {
     }
 
     @Override
-    public Result<Object> saveUserInfo(Integer userId, String encryptedData, String ivStr) {
+    public Boolean saveUserInfo(Integer userId, String encryptedData, String ivStr) {
         final String sessionKey = (String) redisTemplate.opsForValue()
                 .getAndExpire(Constants.REDIS_WX_SESSION + userId, Duration.ofMinutes(10));
         final WxMaUserInfo userInfo = wxMaService.getUserService().getUserInfo(sessionKey, encryptedData, ivStr);
@@ -81,6 +81,6 @@ public class WxUserServiceImpl implements IWxUserService {
                 .nickname(userInfo.getNickName())
                 .avatarUrl(userInfo.getAvatarUrl())
                 .build();
-        return user.updateById() ? Result.success() : Result.failed();
+        return user.updateById();
     }
 }

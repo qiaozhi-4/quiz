@@ -1,8 +1,8 @@
 package com.quiz.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.quiz.dto.UserDto;
 import com.quiz.entity.User;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
@@ -17,7 +17,6 @@ public interface UserMapper extends BaseMapper<User> {
      * 根据账户获取用户信息
      *
      * @param account 用户名 or 邮箱 or 电话号码
-     * @return 用户信息
      */
     UserDto selectUserDtoByAccount(String account);
 }

@@ -1,8 +1,8 @@
 package com.quiz.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.quiz.dto.PathDto;
 import com.quiz.entity.Path;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 
@@ -16,11 +16,7 @@ import java.util.List;
  */
 public interface PathMapper extends BaseMapper<Path> {
     /**
-     * <p>
-     * 获取所有权限信息,这个dto把权限id替换为权限名称
-     * </p>
-     *
-     * @return 所有权限信息
+     * 获取所有权限信息,这个dto添加权限名称
      */
     List<PathDto> getPathDtoList();
 }

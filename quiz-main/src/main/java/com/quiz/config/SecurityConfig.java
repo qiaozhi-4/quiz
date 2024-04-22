@@ -96,8 +96,6 @@ public class SecurityConfig {
     /**
      * 默认开启密码加密，前端传入的密码Security会在加密后和数据库中的密文进行比对，一致的话就登录成功
      * 所以必须提供一个加密对象，供security加密前端明文密码使用
-     *
-     * @return 加密的bean
      */
     @Bean
     PasswordEncoder passwordEncoder() {
