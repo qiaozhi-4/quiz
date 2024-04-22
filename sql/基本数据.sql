@@ -30,6 +30,6 @@ VALUES ('1', '1');
 
 -- 添加路径所需权限
 INSERT INTO quiz.t_path (pattern, permission_id)
-VALUES ('/t-permission/test3/{current:\d+}/{size:\d+}', '1'),
-       ('/t-permission/test2', '2'),
-       ('/t-permission/test1', null);
+VALUES ('/permission/test3/{current:\\d+}/{size:\\d+}', '1'),
+       ('/permission/test2', '2'),
+       ('/permission/test1', null);
