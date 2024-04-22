@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -13,7 +12,6 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * <p>
@@ -21,7 +19,7 @@ import java.util.UUID;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-21  0624:39:52
+ * @since 2024-04-22  1124:00:15
  */
 @Getter
 @Setter
@@ -51,7 +49,6 @@ public class User extends Model<User> {
     @TableField("username")
     private String username;
 
-    @JsonIgnore
     @ApiModelProperty("密码")
     @TableField("password")
     private String password;
@@ -84,28 +81,6 @@ public class User extends Model<User> {
     @Override
     public Serializable pkVal() {
         return this.userId;
-    }
-
-    /**
-     * <p>
-     * 生成随机 username
-     * </p>
-     *
-     * @return username 字符串
-     */
-    public static String generateRandomUsername() {
-        return "user_" + UUID.randomUUID().toString().replace("-", "").substring(0, 8);
-    }
-
-    /**
-     * <p>
-     * 生成随机 username 的用户
-     * </p>
-     *
-     * @return 用户
-     */
-    public static User defUser() {
-        return User.builder().username(generateRandomUsername()).createdAt(LocalDateTime.now()).build();
     }
 
 }

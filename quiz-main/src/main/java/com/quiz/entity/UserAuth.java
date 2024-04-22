@@ -18,7 +18,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-21  0624:56:28
+ * @since 2024-04-22  1124:00:15
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-@TableName("m_user_auth")
+@TableName("t_user_auth")
 @ApiModel(value = "UserAuth对象", description = "第三方登录表")
 public class UserAuth extends Model<UserAuth> {
 

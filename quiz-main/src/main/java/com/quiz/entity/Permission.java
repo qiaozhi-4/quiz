@@ -18,7 +18,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-21  0624:56:28
+ * @since 2024-04-22  1124:00:15
  */
 @Getter
 @Setter
@@ -26,7 +26,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-@TableName("m_permission")
+@TableName("t_permission")
 @ApiModel(value = "Permission对象", description = "权限表")
 public class Permission extends Model<Permission> {
 
