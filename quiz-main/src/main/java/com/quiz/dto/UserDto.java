@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,10 +23,11 @@ import java.util.List;
 @Setter
 @Accessors(chain = true)
 @ApiModel(value = "UserDto对象", description = "用户基本信息,添加权限列表")
-public class UserDto extends User implements Serializable {
+public class UserDto extends User {
     @ApiModelProperty("用户权限集合")
     @TableField("permissions")
     private List<String> permissions;
+
     public void setPermissionsStr(String permissions) {
         this.permissions = Arrays.asList(permissions.split(","));
     }

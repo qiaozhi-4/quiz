@@ -8,8 +8,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-
 /**
  * <p>
  * PathDto
@@ -22,7 +20,7 @@ import java.io.Serializable;
 @Setter
 @Accessors(chain = true)
 @ApiModel(value = "PathDTO对象", description = "请求路径信息以及把权限id替换为权限名称")
-public class PathDto extends Path implements Serializable {
+public class PathDto extends Path {
 
     @ApiModelProperty("权限名称，如read、write。")
     @TableField("permission_name")
