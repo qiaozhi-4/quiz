@@ -5,6 +5,7 @@ import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.quiz.constant.Constants;
+import com.quiz.dto.UserDto;
 import com.quiz.entity.User;
 import com.quiz.entity.UserAuth;
 import com.quiz.service.IWxUserService;
@@ -48,7 +49,7 @@ public class WxUserServiceImpl implements IWxUserService {
         if (Objects.isNull(userAuth)) {
             log.info("当前用户第一次登录,openID:" + sessionInfo.getOpenid());
             map.put("isFirst", true);
-            user = User.defUser();
+            user = UserDto.defUser();
             user.insert();
             userAuth = UserAuth.builder()
                     .userId(user.getUserId())

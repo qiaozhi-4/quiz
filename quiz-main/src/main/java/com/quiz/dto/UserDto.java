@@ -8,8 +8,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * <p>
@@ -28,7 +30,26 @@ public class UserDto extends User {
     @TableField("permissions")
     private List<String> permissions;
 
+    /**
+     * mybatis 返回结果集时,是通过 set 方法设置属性的
+     *
+     * @param permissions 权限集合字符串,以','分隔
+     */
     public void setPermissionsStr(String permissions) {
         this.permissions = Arrays.asList(permissions.split(","));
+    }
+
+    /**
+     * 生成随机 username
+     */
+    public static String generateRandomUsername() {
+        return "user_" + UUID.randomUUID().toString().replace("-", "").substring(0, 8);
+    }
+
+    /**
+     * 生成随机 username 的用户
+     */
+    public static User defUser() {
+        return User.builder().username(generateRandomUsername()).createdAt(LocalDateTime.now()).build();
     }
 }
