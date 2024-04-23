@@ -1,7 +1,6 @@
 import com.quiz.Main;
 import com.quiz.dto.PathDto;
-import com.quiz.service.IPathService;
-import lombok.extern.log4j.Log4j2;
+import com.quiz.mapper.PathMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,14 +16,13 @@ import java.util.List;
  * @since 2024/4/14 11:14
  */
 @SpringBootTest(classes = Main.class)
-@Log4j2
 public class TestPath {
     @Autowired
-    private IPathService pathService;
+    private PathMapper pathMapper;
 
     @Test
-    public void getPathDtoList() {
-        final List<PathDto> pathDtoList = pathService.getPathDtoList();
-        log.info(pathDtoList);
+    public void selectPathDtoList() {
+        final List<PathDto> pathDtoList = pathMapper.selectPathDtoList();
+        System.out.println(pathDtoList.toString());
     }
 }
