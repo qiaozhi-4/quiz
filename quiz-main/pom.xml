@@ -58,7 +58,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.2</version>
+            <version>3.5.6</version>
         </dependency>
         <!--自动生成接口文档，利于管理,整合Knife4j(包含了swagger2)-->
         <dependency>
