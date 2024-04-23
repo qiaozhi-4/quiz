@@ -5,7 +5,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.quiz.entity.Paper">
         <id column="paper_id" property="paperId"/>
-        <result column="user_id" property="creatorUserId"/>
+        <result column="creator_user_id" property="creatorUserId"/>
         <result column="cover_url" property="coverUrl"/>
         <result column="title" property="title"/>
         <result column="describe_" property="describe"/>
@@ -14,7 +14,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        paper_id, user_id, cover_url, title, describe_, answers
+        paper_id, creator_user_id, cover_url, title, describe_, answers
     </sql>
 
 </mapper>
