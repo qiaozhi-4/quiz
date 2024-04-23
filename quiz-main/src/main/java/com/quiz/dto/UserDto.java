@@ -1,6 +1,7 @@
 package com.quiz.dto;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.quiz.entity.User;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -25,6 +26,15 @@ import java.util.UUID;
 @Accessors(chain = true)
 @ApiModel(value = "UserDto对象", description = "用户基本信息,添加权限列表")
 public class UserDto extends User {
+
+    /**
+     * 覆盖父类属性，在序列化时忽略
+     */
+    @JsonIgnore
+    @ApiModelProperty("密码")
+    @TableField("password")
+    private String password;
+
     @ApiModelProperty("用户权限集合")
     @TableField("permissions")
     private List<String> permissions;
