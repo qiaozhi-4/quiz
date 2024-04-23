@@ -10,10 +10,6 @@
         <result column="permission_id" property="permissionId"/>
     </resultMap>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        path_id, pattern, http_method, permission_id
-    </sql>
     <select id="selectPathDtoList" resultType="com.quiz.dto.PathDto">
         select *
         from t_path a

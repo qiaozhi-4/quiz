@@ -12,9 +12,4 @@
         <result column="answers" property="answers"/>
     </resultMap>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        paper_id, creator_user_id, cover_url, title, describe_, answers
-    </sql>
-
 </mapper>

@@ -8,9 +8,5 @@
         <result column="permission_name" property="permissionName"/>
     </resultMap>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        permission_id, permission_name
-    </sql>
 
 </mapper>

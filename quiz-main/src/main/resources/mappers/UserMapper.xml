@@ -35,10 +35,6 @@
         </collection>
     </resultMap>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        user_id, nickname, avatar_url, username, password, phone, mail, created_at, updated_at, last_login_at, enabled
-    </sql>
     <select id="selectUserDtoByAccount" resultMap="UserDtoResultMap">
         SELECT u.*, p.permission_name
         FROM quiz.t_user AS u

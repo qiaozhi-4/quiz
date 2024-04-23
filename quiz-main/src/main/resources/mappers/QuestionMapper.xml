@@ -11,10 +11,6 @@
         <result column="updated_at" property="updatedAt"/>
     </resultMap>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        question_id, title, options_, created_at, updated_at
-    </sql>
     <select id="selectRandomQuestions" resultType="com.quiz.entity.Question">
         SELECT *
         FROM quiz.q_question
