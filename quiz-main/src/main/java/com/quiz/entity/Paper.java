@@ -18,7 +18,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-22  1124:00:15
+ * @since 2024-04-23  0824:36:02
  */
 @Getter
 @Setter
@@ -37,8 +37,8 @@ public class Paper extends Model<Paper> {
     private Integer paperId;
 
     @ApiModelProperty("出题用户id")
-    @TableField("user_id")
-    private Integer userId;
+    @TableField("creator_user_id")
+    private Integer creatorUserId;
 
     @ApiModelProperty("封面url")
     @TableField("cover_url")

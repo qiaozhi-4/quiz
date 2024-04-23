@@ -75,14 +75,14 @@ create table if not exists quiz.t_role_permissions
 
 create table quiz.q_paper
 (
-    paper_id  int auto_increment comment '唯一主键',
-    user_id   int comment '出题用户id',
-    cover_url varchar(255) comment '封面url',
-    title     varchar(255) not null comment '标题',
-    describe_ varchar(511) comment '描述',
-    answers   varchar(63) comment '答案下标集合,以","分割',
+    paper_id        int auto_increment comment '唯一主键',
+    creator_user_id int comment '出题用户id',
+    cover_url       varchar(255) comment '封面url',
+    title           varchar(255) not null comment '标题',
+    describe_       varchar(511) comment '描述',
+    answers         varchar(63) comment '答案下标集合,以","分割',
     primary key (paper_id),
-    INDEX user_id (user_id)
+    INDEX user_id (creator_user_id)
 ) comment '题目试卷';
 
 create table quiz.q_tag
@@ -104,13 +104,13 @@ create table quiz.q_question
 
 create table quiz.q_answers
 (
-    answer_id int auto_increment comment '唯一主键',
-    paper_id  int comment '关联试卷id',
-    user_id   int comment '答题用户id',
-    selects   varchar(63) comment '选择下标集合,以","分割',
+    answer_id         int auto_increment comment '唯一主键',
+    paper_id          int comment '关联试卷id',
+    responder_user_id int comment '答题用户id',
+    selects           varchar(63) comment '选择下标集合,以","分割',
     primary key (answer_id),
     INDEX paper_id (paper_id),
-    INDEX user_id (user_id)
+    INDEX user_id (responder_user_id)
 ) comment '题目答卷';
 
 create table quiz.q_paper_questions

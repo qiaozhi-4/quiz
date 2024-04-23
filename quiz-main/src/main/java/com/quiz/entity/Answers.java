@@ -18,7 +18,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-22  1124:00:15
+ * @since 2024-04-23  0824:36:01
  */
 @Getter
 @Setter
@@ -41,8 +41,8 @@ public class Answers extends Model<Answers> {
     private Integer paperId;
 
     @ApiModelProperty("答题用户id")
-    @TableField("user_id")
-    private Integer userId;
+    @TableField("responder_user_id")
+    private Integer responderUserId;
 
     @ApiModelProperty("选择下标集合,以\",\"分割")
     @TableField("selects")
