@@ -12,7 +12,7 @@ import java.util.List;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-14  0924:57:20
+ * @since 2024-04-23  0224:01:42
  */
 public interface PathMapper extends BaseMapper<Path> {
     /**
