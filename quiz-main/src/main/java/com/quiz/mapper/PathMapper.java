@@ -18,5 +18,5 @@ public interface PathMapper extends BaseMapper<Path> {
     /**
      * 获取所有权限信息,这个dto添加权限名称
      */
-    List<PathDto> getPathDtoList();
+    List<PathDto> selectPathDtoList();
 }

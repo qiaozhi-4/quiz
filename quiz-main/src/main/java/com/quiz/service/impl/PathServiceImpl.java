@@ -25,6 +25,6 @@ public class PathServiceImpl extends ServiceImpl<PathMapper, Path> implements IP
 
     @Override
     public List<PathDto> getPathDtoList() {
-        return pathMapper.getPathDtoList();
+        return pathMapper.selectPathDtoList();
     }
 }
