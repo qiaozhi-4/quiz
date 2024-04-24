@@ -18,19 +18,8 @@
     </resultMap>
 
     <!-- Dto查询映射结果 -->
-    <resultMap id="UserDtoResultMap" type="com.quiz.dto.UserDto">
-        <id column="user_id" property="userId"/>
-        <result column="nickname" property="nickname"/>
-        <result column="avatar_url" property="avatarUrl"/>
-        <result column="username" property="username"/>
-        <result column="password" property="password"/>
-        <result column="phone" property="phone"/>
-        <result column="mail" property="mail"/>
-        <result column="created_at" property="createdAt"/>
-        <result column="updated_at" property="updatedAt"/>
-        <result column="last_login_at" property="lastLoginAt"/>
-        <result column="enabled" property="enabled"/>
-        <collection property="permissions" ofType="String">
+    <resultMap id="UserDtoResultMap" extends="BaseResultMap" type="com.quiz.dto.UserDto">
+        <collection property="permissions" ofType="string">
             <result column="permission_name"/>
         </collection>
     </resultMap>

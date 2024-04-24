@@ -13,10 +13,8 @@
     </resultMap>
     <!-- Dto查询映射结果 -->
     <resultMap id="PaperDtoResultMap" extends="BaseResultMap" type="com.quiz.dto.PaperDto">
-        <collection property="questions" autoMapping="true" ofType="com.quiz.entity.Question">
-        </collection>
-        <collection property="tags" autoMapping="true" ofType="com.quiz.entity.Tag">
-        </collection>
+        <collection property="questions" autoMapping="true" ofType="com.quiz.entity.Question"/>
+        <collection property="tags" autoMapping="true" ofType="com.quiz.entity.Tag"/>
     </resultMap>
 
     <select id="selectPaperById" resultMap="PaperDtoResultMap" parameterType="java.lang.Integer">
