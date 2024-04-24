@@ -84,7 +84,7 @@ public class CodeGenerator {
         pathInfo.put(OutputFile.service, SERVICE_PATH);
         pathInfo.put(OutputFile.serviceImpl, SERVICE_IMPL_PATH);
         pathInfo.put(OutputFile.mapper, MAPPER_PATH);
-        pathInfo.put(OutputFile.mapperXml, XML_PATH);
+        pathInfo.put(OutputFile.xml, XML_PATH);
         pathInfo.put(OutputFile.controller, CONTROLLER_PATH);
         return pathInfo;
     }
@@ -95,84 +95,97 @@ public class CodeGenerator {
      * </p>
      */
     public static void generator() {
-        //基础配置
+        /*基础配置*/
         FastAutoGenerator.create(URL, USERNAME, PASSWORD)
-                //全局配置
+                /*全局配置*/
                 .globalConfig(builder ->
                         builder
-                                //.fileOverride()//覆盖已有文件
-                                .disableOpenDir()//禁止打开输出目录
-                                //.outputDir(PROJECT_PATH + "/src/main/java")//指定输出目录
-                                .author("XGeorge")//作者名
-                                //.enableKotlin()//开启 kotlin 模式
-                                .enableSwagger()//开启 swagger 模式
-                                .dateType(DateType.TIME_PACK)//时间策略
-                                .commentDate("yyyy-MM-dd  hh24:mm:ss")//注释时间格式
+
+                                .disableOpenDir()/*禁止打开输出目录*/
+                                /*.outputDir(PROJECT_PATH + "/src/main/java")*//*指定输出目录*/
+                                .author("XGeorge")/*作者名*/
+                                .enableKotlin()/*开启 kotlin 模式*/
+                                .enableSwagger()/*开启 swagger 模式*/
+                                .dateType(DateType.TIME_PACK)/*时间策略*/
+                                .commentDate("yyyy-MM-dd")/*注释时间格式*/
                 )
-                //包配置
+                /*包配置*/
                 .packageConfig(builder ->
-                        builder.parent("com.quiz")//包名
-                                //.moduleName(moduleName)//模块名
-                                .entity("entity")//Entity 包名
-                                .service("service")//Service 包名
-                                .serviceImpl("service.impl")//Service Impl 包名
-                                .mapper("mapper")//Mapper 包名
-                                .xml("mapper.xml")//Mapper XML 包名
-                                .controller("controller")//Controller 包名
-                                //.other("other")//自定义文件包名--输出自定义文件时所用到的包名
-                                .pathInfo(getPathInfo())//路径配置信息
+                        builder.parent("com.quiz")/*包名*/
+                                /*.moduleName(moduleName)*//*模块名*/
+                                .entity("entity")/*Entity 包名*/
+                                .service("service")/*Service 包名*/
+                                .serviceImpl("service.impl")/*Service Impl 包名*/
+                                .mapper("mapper")/*Mapper 包名*/
+                                .xml("mapper.xml")/*Mapper XML 包名*/
+                                .controller("controller")/*Controller 包名*/
+                                /*.other("other")*//*自定义文件包名--输出自定义文件时所用到的包名*/
+                                .pathInfo(getPathInfo())/*路径配置信息*/
                 )
-                // 策略配置
+                /*策略配置*/
                 .strategyConfig(builder ->
                         builder
                                 .addInclude("t_user")
+                                .addInclude("t_user_auth")
+                                .addInclude("t_role")
+                                .addInclude("t_permission")
                                 .addInclude("t_path")
-                                .addInclude("t_question")
-                                //.likeTable(new LikeTable("t_", SqlLike.RIGHT))
+                                .addInclude("t_user_roles")
+                                .addInclude("t_role_permissions")
+                                .addInclude("q_paper")
+                                .addInclude("q_tag")
+                                .addInclude("q_question")
+                                .addInclude("q_answers")
+                                .addInclude("q_paper_questions")
+                                .addInclude("q_paper_tags")
+                                //.likeTable(new LikeTable("", SqlLike.RIGHT))
 
-                                //配置 Entity
+                                /*配置 Entity*/
                                 .entityBuilder()
+                                .disable()
+                                .javaTemplate("\\templates\\ftl\\entity.java")//设置模版路径
+//                                .enableFileOverride()//开启文件覆盖
                                 .enableChainModel()//开启链式模型
                                 .enableLombok()//开启Lombok
                                 .enableTableFieldAnnotation()//开启生成实体时生成字段注解
                                 //开启 ActiveRecord 模型(封装了实体一些简单持久化操作,必须有对应的BaseMapper实现)
                                 .enableActiveRecord()
                                 //配置生成文件的名字
-                                .convertFileName(entityName -> entityName.replaceAll("^[TM](?=[A-Z])", ""))
+                                .convertFileName(entityName -> entityName.replaceAll("^[TQ](?=[A-Z])", ""))
 
-                                //配置 Controller
+                                /*配置 Service*/
+                                .serviceBuilder()
+                                .disable()
+                                .serviceTemplate("\\templates\\ftl\\service.java")//设置模版路径
+                                .serviceImplTemplate("\\templates\\ftl\\serviceImpl.java")//设置模版路径
+//                                .enableFileOverride()//开启文件覆盖
+                                .convertServiceFileName(entityName ->
+                                        "I" + entityName.replaceAll("^[TQ](?=[A-Z])", "") + "Service")
+                                .convertServiceImplFileName(entityName ->
+                                        entityName.replaceAll("^[TQ](?=[A-Z])", "") + "ServiceImpl")
+
+                                /*配置 Mapper*/
+                                .mapperBuilder()
+                                .disable()
+                                .mapperTemplate("\\templates\\ftl\\mapper.java")
+                                .mapperXmlTemplate("\\templates\\ftl\\mapper.xml")
+//                                .enableFileOverride()//开启文件覆盖
+                                .enableBaseResultMap()
+                                //.enableBaseColumnList()
+                                .convertMapperFileName(entityName ->
+                                        entityName.replaceAll("^[TQ](?=[A-Z])", "") + "Mapper")
+                                .convertXmlFileName(entityName ->
+                                        entityName.replaceAll("^[TQ](?=[A-Z])", "") + "Mapper")
+
+                                /*配置 Controller*/
                                 .controllerBuilder()
+                                .disable()//禁用生成
+                                .template("\\templates\\ftl\\controller.java")//设置模版路径
+//                                .enableFileOverride()//开启文件覆盖
                                 .enableRestStyle()//开启生成@RestController 控制器(等同于@Controller + @ResponseBody。)
                                 .convertFileName(entityName ->
-                                        entityName.replaceAll("^[TM](?=[A-Z])", "") + "Controller")
-
-                                //配置 Service
-                                .serviceBuilder()
-                                .convertServiceFileName(entityName ->
-                                        "I" + entityName.replaceAll("^[TM](?=[A-Z])", "") + "Service")
-                                .convertServiceImplFileName(entityName ->
-                                        entityName.replaceAll("^[TM](?=[A-Z])", "") + "ServiceImpl")
-
-                                //配置 Mapper
-                                .mapperBuilder()
-                                .convertMapperFileName(entityName ->
-                                        entityName.replaceAll("^[TM](?=[A-Z])", "") + "Mapper")
-                                .convertXmlFileName(entityName ->
-                                        entityName.replaceAll("^[TM](?=[A-Z])", "") + "Mapper")
-
-
-                )//模版配置
-                .templateConfig(builder ->
-                        builder
-                                .disable()//禁用全部
-                                .entity("\\templates\\ftl\\entity.java")
-                                .service("\\templates\\ftl\\service.java")
-                                .serviceImpl("\\templates\\ftl\\serviceImpl.java")
-                                .mapper("\\templates\\ftl\\mapper.java")
-                                .mapperXml("\\templates\\ftl\\mapper.xml")
-                                .controller("\\templates\\ftl\\controller.java")
-                )
-                //模板引擎配置，默认 Velocity 可选模板引擎 Beetl 或 Freemarker (需要导入相应包)
+                                        entityName.replaceAll("^[TQ](?=[A-Z])", "") + "Controller"))
+                /*模板引擎配置，默认 Velocity 可选模板引擎 Beetl 或 Freemarker (需要导入相应包)*/
                 .templateEngine(new FreemarkerTemplateEngine())
                 .execute();
     }
