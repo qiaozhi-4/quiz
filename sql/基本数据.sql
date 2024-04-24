@@ -33,3 +33,21 @@ INSERT INTO quiz.t_path (pattern, permission_id)
 VALUES ('/permission/test3/{current:\\d+}/{size:\\d+}', '1'),
        ('/permission/test2', '2'),
        ('/permission/test1', null);
+
+-- 题目数据
+insert into quiz.q_question
+SELECT id      as question_id
+     , title
+     , options as options_
+     , created_at
+     , updated_at
+FROM questions_and_answers.question
+;
+
+-- 添加试卷标签
+INSERT INTO quiz.q_tag (tag_id, tag_name)
+VALUES ('1', '测试标签1'),
+       ('2', '测试标签2'),
+       ('3', '测试标签3'),
+       ('4', '测试标签4'),
+       ('5', '测试标签5');
