@@ -39,5 +39,11 @@
            or u.mail = #{account}
            or u.phone = #{account}
     </select>
+    <select id="selectUserByProviderId" resultType="com.quiz.entity.User" parameterType="java.lang.String">
+        select tu.*
+        from quiz.t_user_auth tua
+                 left join quiz.t_user tu on tua.user_id = tu.user_id
+        where tua.provider_id = #{providerId}
+    </select>
 
 </mapper>

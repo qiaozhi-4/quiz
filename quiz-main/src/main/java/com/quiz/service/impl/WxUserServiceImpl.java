@@ -3,12 +3,13 @@ package com.quiz.service.impl;
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.quiz.constant.Constants;
 import com.quiz.dto.UserDto;
 import com.quiz.entity.User;
 import com.quiz.entity.UserAuth;
+import com.quiz.mapper.UserMapper;
 import com.quiz.service.IWxUserService;
+import com.quiz.utils.Assert;
 import com.quiz.utils.JWTUtils;
 import com.quiz.utils.Result;
 import lombok.RequiredArgsConstructor;
@@ -37,31 +38,33 @@ import java.util.Objects;
 public class WxUserServiceImpl implements IWxUserService {
 
     private final WxMaService wxMaService;
+    private final UserMapper userMapper;
     private final RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public Result<Object> login(String code) throws WxErrorException {
         final WxMaJscode2SessionResult sessionInfo = wxMaService.getUserService().getSessionInfo(code);
-        UserAuth userAuth = UserAuth.builder().build()
-                .selectOne(new LambdaQueryWrapper<UserAuth>().eq(UserAuth::getProviderId, sessionInfo.getOpenid()));
-        User user;
+        User user = userMapper.selectUserByProviderId(sessionInfo.getOpenid());
+
         Map<Object, Object> map = new HashMap<>();
-        if (Objects.isNull(userAuth)) {
+        if (Objects.isNull(user)) {
             log.info("当前用户第一次登录,openID:" + sessionInfo.getOpenid());
             map.put("isFirst", true);
+            /* 创建用户,并插入数据库 */
             user = UserDto.defUser();
-            user.insert();
-            userAuth = UserAuth.builder()
-                    .userId(user.getUserId())
-                    .provider(Constants.WX_NAME)
-                    .providerId(sessionInfo.getOpenid())
-                    .build();
-            userAuth.insert();
+            Assert.isTrue(user.insert(), "插入用户失败");
+            /* 创建用户关联的第三方登录信息,并插入数据库 */
+            Assert.isTrue(UserAuth.builder()
+                            .userId(user.getUserId())
+                            .provider(Constants.WX_NAME)
+                            .providerId(sessionInfo.getOpenid())
+                            .build()
+                            .insert()
+                    , "插入用户第三方登录信息失败");
         } else {
             map.put("isFirst", false);
-            user = User.builder().userId(userAuth.getUserId()).build().selectById();
             user.setLastLoginAt(LocalDateTime.now());
-            user.updateById();
+            Assert.isTrue(user.updateById(), "更新用户上次登录时间失败");
         }
         redisTemplate.opsForValue().set(Constants.REDIS_WX_SESSION + user.getUserId(),
                 sessionInfo.getSessionKey(), Duration.ofMinutes(10));

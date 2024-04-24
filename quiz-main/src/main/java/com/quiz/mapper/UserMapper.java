@@ -19,4 +19,11 @@ public interface UserMapper extends BaseMapper<User> {
      * @param account 用户名 or 邮箱 or 电话号码
      */
     UserDto selectUserDtoByAccount(String account);
+
+    /**
+     * 根据第三方提供的唯一标识符查找对应用户
+     *
+     * @param providerId 第三方提供的唯一标识符。比如微信的openId
+     */
+    User selectUserByProviderId(String providerId);
 }
