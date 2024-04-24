@@ -39,5 +39,7 @@ public class TestUser {
     public void selectUserDtoByAccount() {
         final UserDto admin = userMapper.selectUserDtoByAccount("admin");
         System.out.println(admin.toString());
+        final UserDto user = userMapper.selectUserDtoByAccount("user");
+        System.out.println(user.toString());
     }
 }
