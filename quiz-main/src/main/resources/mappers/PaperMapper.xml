@@ -12,23 +12,10 @@
         <result column="answers" property="answers"/>
     </resultMap>
     <!-- Dto查询映射结果 -->
-    <resultMap id="PaperDtoResultMap" type="com.quiz.dto.PaperDto">
-        <id column="paper_id" property="paperId"/>
-        <result column="creator_user_id" property="creatorUserId"/>
-        <result column="cover_url" property="coverUrl"/>
-        <result column="title" property="title"/>
-        <result column="describe_" property="describe"/>
-        <result column="answers" property="answers"/>
-        <collection property="questions" ofType="com.quiz.entity.Question">
-            <id column="question_id" property="questionId"/>
-            <result column="title" property="title"/>
-            <result column="options_" property="options"/>
-            <result column="created_at" property="createdAt"/>
-            <result column="updated_at" property="updatedAt"/>
+    <resultMap id="PaperDtoResultMap" extends="BaseResultMap" type="com.quiz.dto.PaperDto">
+        <collection property="questions" autoMapping="true" ofType="com.quiz.entity.Question">
         </collection>
-        <collection property="tags" ofType="com.quiz.entity.Tag">
-            <result column="tag_id" property="tagId"/>
-            <result column="tag_name" property="tagName"/>
+        <collection property="tags" autoMapping="true" ofType="com.quiz.entity.Tag">
         </collection>
     </resultMap>
 
