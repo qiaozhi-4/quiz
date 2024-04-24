@@ -80,7 +80,7 @@ create table quiz.q_paper
     cover_url       varchar(255) comment '封面url',
     title           varchar(255) not null comment '标题',
     describe_       varchar(511) comment '描述',
-    answers         varchar(63) comment '答案下标集合,以","分割',
+    answers         varchar(63) comment '答案下标集合,以@@分隔',
     primary key (paper_id),
     INDEX user_id (creator_user_id)
 ) comment '题目试卷';
@@ -96,7 +96,7 @@ create table quiz.q_question
 (
     question_id int auto_increment comment '唯一主键',
     title       varchar(511)                       not null comment '题目',
-    options_    varchar(1023)                      not null comment '选项',
+    options_    varchar(1023)                      not null comment '选项,以@@分隔',
     created_at  datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     updated_at  datetime                           null comment '修改时间',
     primary key (question_id)
@@ -107,7 +107,7 @@ create table quiz.q_answers
     answer_id         int auto_increment comment '唯一主键',
     paper_id          int comment '关联试卷id',
     responder_user_id int comment '答题用户id',
-    selects           varchar(63) comment '选择下标集合,以","分割',
+    selects           varchar(63) comment '选择下标集合,以@@分隔',
     primary key (answer_id),
     INDEX paper_id (paper_id),
     INDEX user_id (responder_user_id)

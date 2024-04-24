@@ -52,7 +52,7 @@ public class Paper extends Model<Paper> {
     @TableField("describe_")
     private String describe;
 
-    @ApiModelProperty("答案下标集合,以\",\"分割")
+    @ApiModelProperty("答案下标集合,以@@分隔")
     @TableField("answers")
     private String answers;
 
