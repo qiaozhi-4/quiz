@@ -6,7 +6,6 @@ import com.quiz.entity.Question;
 import com.quiz.entity.Tag;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -24,7 +23,6 @@ import java.util.List;
  */
 @Getter
 @Setter
-@Builder
 @Accessors(chain = true)
 @ApiModel(value = "PaperDto对象", description = "试卷所有信息")
 public class PaperDto extends Paper {
@@ -50,7 +48,7 @@ public class PaperDto extends Paper {
      * 转换为 dto
      */
     public static PaperDto convertOf(Paper paper) {
-        final PaperDto build = PaperDto.builder().build();
+        final PaperDto build = new PaperDto();
         BeanUtils.copyProperties(paper, build);
         return build;
     }
