@@ -38,15 +38,16 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
 
         /* 批量插入试卷关联题目数据 */
         boolean pq = paperQuestionsService.saveBatch(paperDto.getQuestions().stream().map(question -> PaperQuestions.builder()
-                .paperId(paper.getPaperId())
-                .questionId(question.getQuestionId()).build()
-        ).collect(Collectors.toList()));
+                        .paperId(paper.getPaperId())
+                        .questionId(question.getQuestionId()).build())
+                .collect(Collectors.toList()));
         Assert.isTrue(pq, "试卷插入失败");
 
         /* 批量插入试卷关联标签数据 */
         boolean pt = paperTagsService.saveBatch(paperDto.getTags().stream().map(tag -> PaperTags.builder()
-                .paperId(paper.getPaperId())
-                .tagId(tag.getTagId()).build()).collect(Collectors.toList()));
+                        .paperId(paper.getPaperId())
+                        .tagId(tag.getTagId()).build())
+                .collect(Collectors.toList()));
         Assert.isTrue(pt, "试卷插入失败");
         return true;
     }

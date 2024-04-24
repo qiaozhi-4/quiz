@@ -32,7 +32,7 @@
         </collection>
     </resultMap>
 
-    <select id="selectPaperById" resultType="com.quiz.dto.PaperDto" parameterType="java.lang.Integer">
+    <select id="selectPaperById" resultMap="PaperDtoResultMap" parameterType="java.lang.Integer">
         select a.*, c.*, e.*
         from quiz.q_paper a
                  left join quiz.q_paper_questions b
