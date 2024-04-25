@@ -18,7 +18,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-22  1124:00:15
+ * @since 2024-04-25
  */
 @Getter
 @Setter
@@ -43,6 +43,10 @@ public class Path extends Model<Path> {
     @ApiModelProperty("HTTP 方法,如 POST, GET")
     @TableField("http_method")
     private String httpMethod;
+
+    @ApiModelProperty("路径描述。")
+    @TableField("describe_")
+    private String describe;
 
     @ApiModelProperty("关联权限ID。")
     @TableField("permission_id")

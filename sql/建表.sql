@@ -50,6 +50,7 @@ create table if not exists quiz.t_path
     path_id       int auto_increment comment '主键，路径ID。',
     pattern       varchar(255) not null comment '路径模式，如/api/users/**，/device/list/{current:\d+}/{size:\d+}。',
     http_method   varchar(255) null comment 'HTTP 方法,如 POST, GET',
+    describe_     varchar(255) null comment '路径描述。',
     permission_id varchar(255) null comment '关联权限ID。',
     primary key (path_id),
     INDEX permission_id (permission_id)

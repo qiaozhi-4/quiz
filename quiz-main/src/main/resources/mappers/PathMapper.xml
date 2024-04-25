@@ -7,6 +7,7 @@
         <id column="path_id" property="pathId"/>
         <result column="pattern" property="pattern"/>
         <result column="http_method" property="httpMethod"/>
+        <result column="describe_" property="describe"/>
         <result column="permission_id" property="permissionId"/>
     </resultMap>
 
