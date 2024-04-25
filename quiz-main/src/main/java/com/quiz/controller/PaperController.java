@@ -1,9 +1,13 @@
 package com.quiz.controller;
 
 
+import com.quiz.dto.PaperDto;
+import com.quiz.mapper.PaperMapper;
+import com.quiz.service.IPaperService;
 import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -16,6 +20,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/paper")
 @Api(tags = "题目试卷 前端控制器")
+@RequiredArgsConstructor
 public class PaperController {
 
+    private final PaperMapper paperMapper;
+    private final IPaperService paperService;
+
+    @ApiOperation("通过试卷ID,获取试卷详情")
+    @GetMapping("get/{paperId:\\d+}")
+    public PaperDto get(@PathVariable Integer paperId) {
+        return paperMapper.selectPaperById(paperId);
+    }
+
+    @ApiOperation("保存试卷信息")
+    @PostMapping("save")
+    public Boolean save(@RequestBody PaperDto paperDto) {
+        return paperService.savePaperInfo(paperDto);
+    }
 }
