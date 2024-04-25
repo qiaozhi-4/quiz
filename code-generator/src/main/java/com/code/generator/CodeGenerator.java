@@ -104,7 +104,7 @@ public class CodeGenerator {
                                 .disableOpenDir()/*禁止打开输出目录*/
                                 /*.outputDir(PROJECT_PATH + "/src/main/java")*//*指定输出目录*/
                                 .author("XGeorge")/*作者名*/
-                                .enableKotlin()/*开启 kotlin 模式*/
+                                //.enableKotlin()/*开启 kotlin 模式*/
                                 .enableSwagger()/*开启 swagger 模式*/
                                 .dateType(DateType.TIME_PACK)/*时间策略*/
                                 .commentDate("yyyy-MM-dd")/*注释时间格式*/
@@ -125,26 +125,26 @@ public class CodeGenerator {
                 /*策略配置*/
                 .strategyConfig(builder ->
                         builder
-                                .addInclude("t_user")
+                                /*.addInclude("t_user")
                                 .addInclude("t_user_auth")
                                 .addInclude("t_role")
-                                .addInclude("t_permission")
+                                .addInclude("t_permission")*/
                                 .addInclude("t_path")
-                                .addInclude("t_user_roles")
+                                /*.addInclude("t_user_roles")
                                 .addInclude("t_role_permissions")
                                 .addInclude("q_paper")
                                 .addInclude("q_tag")
                                 .addInclude("q_question")
                                 .addInclude("q_answers")
                                 .addInclude("q_paper_questions")
-                                .addInclude("q_paper_tags")
+                                .addInclude("q_paper_tags")*/
                                 //.likeTable(new LikeTable("", SqlLike.RIGHT))
 
                                 /*配置 Entity*/
                                 .entityBuilder()
-                                .disable()
+                                /*.disable()*/
                                 .javaTemplate("\\templates\\ftl\\entity.java")//设置模版路径
-//                                .enableFileOverride()//开启文件覆盖
+                                .enableFileOverride()//开启文件覆盖
                                 .enableChainModel()//开启链式模型
                                 .enableLombok()//开启Lombok
                                 .enableTableFieldAnnotation()//开启生成实体时生成字段注解
