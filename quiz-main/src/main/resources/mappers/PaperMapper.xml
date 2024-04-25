@@ -13,12 +13,14 @@
     </resultMap>
     <!-- Dto查询映射结果 -->
     <resultMap id="PaperDtoResultMap" extends="BaseResultMap" type="com.quiz.dto.PaperDto">
-        <collection property="questions" autoMapping="true" ofType="com.quiz.entity.Question"/>
+        <collection property="questions" autoMapping="true" ofType="com.quiz.entity.Question">
+            <result column="question_title" property="title"/>
+        </collection>
         <collection property="tags" autoMapping="true" ofType="com.quiz.entity.Tag"/>
     </resultMap>
 
     <select id="selectPaperById" resultMap="PaperDtoResultMap" parameterType="java.lang.Integer">
-        select a.*, c.*, e.*
+        select a.*, c.*, c.title as question_title, e.*
         from quiz.q_paper a
                  left join quiz.q_paper_questions b
                            on a.paper_id = b.paper_id
