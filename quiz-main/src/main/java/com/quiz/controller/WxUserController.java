@@ -4,6 +4,7 @@ import com.quiz.service.IWxUserService;
 import com.quiz.utils.JWTUtils;
 import com.quiz.utils.Result;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.web.bind.annotation.*;
@@ -26,11 +27,13 @@ import java.util.Map;
 public class WxUserController {
     private final IWxUserService wxUserService;
 
+    @ApiOperation(value = "微信小程序登录", tags = {"Public"})
     @PostMapping("login")
     public Result<Object> login(@RequestParam String code) throws WxErrorException {
         return wxUserService.login(code);
     }
 
+    @ApiOperation(value = "保存微信小程序用户信息", tags = {"Public"})
     @PostMapping("save")
     public Boolean save(HttpServletRequest request, @RequestBody Map<String, String> userInfo) {
         return wxUserService.saveUserInfo(
