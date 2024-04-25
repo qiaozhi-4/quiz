@@ -12,4 +12,5 @@ public class Constants {
     public static final String APP_NAME = "quiz";
     public static final String WX_NAME = "WeChat";
     public static final String REDIS_WX_SESSION = "quiz::vx-session-key::";
+    public static final String SPACE_MARK = "@@";
 }
