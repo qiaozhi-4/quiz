@@ -19,4 +19,11 @@ public interface IPathService extends IService<Path> {
      * 获取所有权限信息,这个dto把权限id替换为权限名称
      */
     List<PathDto> getPathDtoList();
+
+    /**
+     * 更新所有接口路径
+     *
+     * @return 是否更新成功
+     */
+    Boolean updateAllPath();
 }

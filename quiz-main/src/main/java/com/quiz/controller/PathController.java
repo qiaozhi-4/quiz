@@ -1,9 +1,12 @@
 package com.quiz.controller;
 
 
+import com.quiz.service.IPathService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -17,6 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/path")
 @Api(tags = "路径表 前端控制器")
+@RequiredArgsConstructor
 public class PathController {
+    private final IPathService pathService;
 
+    @ApiOperation("更新所有接口路径")
+    @GetMapping("update-all-path")
+    public String updateAllPath() {
+        pathService.updateAllPath();
+        return pathService.updateAllPath() ? "请求路径更新成功" : "请求路径更新失败";
+    }
 }
