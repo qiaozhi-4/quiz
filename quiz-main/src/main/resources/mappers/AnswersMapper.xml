@@ -8,6 +8,7 @@
         <result column="paper_id" property="paperId"/>
         <result column="responder_user_id" property="responderUserId"/>
         <result column="selects" property="selects"/>
+        <result column="created_at" property="createdAt"/>
     </resultMap>
 
 </mapper>

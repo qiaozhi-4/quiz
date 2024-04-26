@@ -10,6 +10,7 @@
         <result column="title" property="title"/>
         <result column="describe_" property="describe"/>
         <result column="answers" property="answers"/>
+        <result column="created_at" property="createdAt"/>
     </resultMap>
     <!-- Dto查询映射结果 -->
     <resultMap id="PaperDtoResultMap" extends="BaseResultMap" type="com.quiz.dto.PaperDto">

@@ -11,6 +11,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -18,7 +19,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-23  0924:29:01
+ * @since 2024-04-26
  */
 @Getter
 @Setter
@@ -44,9 +45,13 @@ public class Answers extends Model<Answers> {
     @TableField("responder_user_id")
     private Integer responderUserId;
 
-    @ApiModelProperty("选择下标集合,以\",\"分割")
+    @ApiModelProperty("选择下标集合,以@@分隔")
     @TableField("selects")
     private String selects;
+
+    @ApiModelProperty("创建时间")
+    @TableField("created_at")
+    private LocalDateTime createdAt;
 
 
     @Override
