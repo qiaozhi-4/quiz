@@ -74,26 +74,36 @@ create table if not exists quiz.t_role_permissions
     INDEX role_id_permission_id (role_id, permission_id)
 ) comment '角色权限关联表';
 
-create table quiz.q_paper
+create table if not exists quiz.q_paper
 (
     paper_id        int auto_increment comment '唯一主键',
     creator_user_id int comment '出题用户id',
     cover_url       varchar(255) comment '封面url',
-    title           varchar(255) not null comment '标题',
+    title           varchar(255)                       not null comment '标题',
     describe_       varchar(511) comment '描述',
     answers         varchar(63) comment '答案下标集合,以@@分隔',
+    created_at      datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     primary key (paper_id),
     INDEX user_id (creator_user_id)
 ) comment '题目试卷';
 
-create table quiz.q_tag
+create table if not exists quiz.q_tag
 (
     tag_id   int auto_increment comment '唯一主键',
     tag_name varchar(127) null comment '标签名称',
     primary key (tag_id)
 ) comment '试卷标签';
 
-create table quiz.q_question
+create table if not exists quiz.q_paper_tags
+(
+    paper_id int not null comment '试卷ID。',
+    tag_id   int not null comment '标签ID。',
+    INDEX paper_id (paper_id),
+    INDEX tag_id (tag_id),
+    INDEX paper_id_tag_id (paper_id, tag_id)
+) comment '试卷关联标签';
+
+create table if not exists quiz.q_question
 (
     question_id int auto_increment comment '唯一主键',
     title       varchar(511)                       not null comment '题目',
@@ -103,18 +113,7 @@ create table quiz.q_question
     primary key (question_id)
 ) comment '题目表';
 
-create table quiz.q_answers
-(
-    answer_id         int auto_increment comment '唯一主键',
-    paper_id          int comment '关联试卷id',
-    responder_user_id int comment '答题用户id',
-    selects           varchar(63) comment '选择下标集合,以@@分隔',
-    primary key (answer_id),
-    INDEX paper_id (paper_id),
-    INDEX user_id (responder_user_id)
-) comment '题目答卷';
-
-create table quiz.q_paper_questions
+create table if not exists quiz.q_paper_questions
 (
     paper_id    int not null comment '试卷ID。',
     question_id int not null comment '题目ID。',
@@ -123,11 +122,35 @@ create table quiz.q_paper_questions
     INDEX paper_id_question_id (paper_id, question_id)
 ) comment '试卷关联题目';
 
-create table quiz.q_paper_tags
+create table if not exists quiz.q_answers
+(
+    answer_id         int auto_increment comment '唯一主键',
+    paper_id          int comment '关联试卷id',
+    responder_user_id int comment '答题用户id',
+    selects           varchar(63) comment '选择下标集合,以@@分隔',
+    created_at        datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    primary key (answer_id),
+    INDEX paper_id (paper_id),
+    INDEX user_id (responder_user_id)
+) comment '题目答卷';
+
+create table if not exists quiz.q_classes
+(
+    class_id   int auto_increment comment '唯一主键',
+    user_id    int comment '出题用户id(哪个用户的类别)',
+    class_name varchar(255)                       not null comment '类别名称',
+    sort       int                                not null comment '类别排序',
+    created_at datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    updated_at datetime comment '修改时间',
+    primary key (class_id),
+    INDEX user_id (user_id)
+) comment '试卷分类';
+
+create table if not exists quiz.q_paper_classes
 (
     paper_id int not null comment '试卷ID。',
-    tag_id   int not null comment '标签ID。',
+    class_id int not null comment '分类ID。',
     INDEX paper_id (paper_id),
-    INDEX tag_id (tag_id),
-    INDEX paper_id_tag_id (paper_id, tag_id)
-) comment '试卷关联标签';
+    INDEX question_id (class_id),
+    INDEX paper_id_question_id (paper_id, class_id)
+) comment '试卷关联试卷分类';

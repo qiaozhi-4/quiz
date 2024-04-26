@@ -125,19 +125,21 @@ public class CodeGenerator {
                 /*策略配置*/
                 .strategyConfig(builder ->
                         builder
-                                /*.addInclude("t_user")
-                                .addInclude("t_user_auth")
-                                .addInclude("t_role")
-                                .addInclude("t_permission")*/
-                                .addInclude("t_path")
-                                /*.addInclude("t_user_roles")
-                                .addInclude("t_role_permissions")
-                                .addInclude("q_paper")
-                                .addInclude("q_tag")
-                                .addInclude("q_question")
-                                .addInclude("q_answers")
-                                .addInclude("q_paper_questions")
-                                .addInclude("q_paper_tags")*/
+//                                .addInclude("t_user")
+//                                .addInclude("t_user_auth")
+//                                .addInclude("t_role")
+//                                .addInclude("t_permission")
+//                                .addInclude("t_path")
+//                                .addInclude("t_user_roles")
+//                                .addInclude("t_role_permissions")
+//                                .addInclude("q_paper")
+//                                .addInclude("q_tag")
+//                                .addInclude("q_question")
+//                                .addInclude("q_answers")
+//                                .addInclude("q_paper_questions")
+//                                .addInclude("q_paper_tags")
+                                .addInclude("q_classes")
+                                .addInclude("q_paper_classes")
                                 //.likeTable(new LikeTable("", SqlLike.RIGHT))
 
                                 /*配置 Entity*/
@@ -155,7 +157,7 @@ public class CodeGenerator {
 
                                 /*配置 Service*/
                                 .serviceBuilder()
-                                .disable()
+                                /*.disable()*/
                                 .serviceTemplate("\\templates\\ftl\\service.java")//设置模版路径
                                 .serviceImplTemplate("\\templates\\ftl\\serviceImpl.java")//设置模版路径
 //                                .enableFileOverride()//开启文件覆盖
