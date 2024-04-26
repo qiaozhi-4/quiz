@@ -1,11 +1,3 @@
-# 开发环境配置
-server:
-  # 服务器的HTTP端口，默认为8080
-  port: 1888
-  servlet:
-    # 应用的访问路径
-    context-path: /
-
 # spring配置
 spring:
   application:
@@ -35,11 +27,6 @@ spring:
       name: admin
       password: 123
 
-# Mybatis-plus的配置
-mybatis-plus:
-  # 配置mapper的扫描，找到所有的mapper.xml映射文件
-  mapper-locations: classpath:mappers/**/*.xml
-
 # 自动生成文档配置
 knife4j:
   enable: true # 启用knife4j
@@ -51,12 +38,4 @@ logging:
     root: INFO #日志级别
     sql: INFO
     com.quiz: DEBUG
-
-# 微信小程序
-wx:
-  min-app:
-    configs:
-      - appid: wx0f4e873ad758a586
-        secret: cf5c68b3ff0d85251cfb178d0f9c0025
-        msg-data-format: JSON
 
