@@ -23,11 +23,13 @@ import javax.validation.constraints.NotNull;
  * @author XGeorge
  * @since 2024/4/6 11:40
  */
-@ControllerAdvice
+/* 只处理自己包下的controller */
+@ControllerAdvice("com.quiz.controller")
 @RequiredArgsConstructor
 public class ResponseWrapperAdvice implements ResponseBodyAdvice<Object> {
     private final ObjectMapper objectMapper;
 
+    /* 判断是否要交给 beforeBodyWrite 方法执行，ture：需要；false：不需要 */
     @Override
     public boolean supports(@NotNull MethodParameter returnType,
                             @NotNull Class<? extends HttpMessageConverter<?>> converterType) {
