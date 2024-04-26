@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -75,7 +76,7 @@ public class PathServiceImpl extends ServiceImpl<PathMapper, Path> implements IP
                     if (Arrays.stream(tags).noneMatch(t -> t.equalsIgnoreCase("Public")))
                         path.setPermissionId("2");
                     return path;
-                }).collect(Collectors.toList());
+                }).sorted(Comparator.comparing(Path::getPattern)).collect(Collectors.toList());
         return this.saveBatch(paths);
     }
 }
