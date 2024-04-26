@@ -27,9 +27,15 @@ import java.util.List;
 public class QuestionController {
     private final QuestionMapper questionMapper;
 
-    @GetMapping("get-random-questions")
     @ApiOperation("随机获取10个题目")
+    @GetMapping("get-random-questions")
     public List<Question> getRandomQuestions() {
+        return questionMapper.selectRandomQuestions();
+    }
+
+    @ApiOperation(value = "随机获取10个题目(不要权限)", tags = {"Public"})
+    @GetMapping("get-random-questions-test")
+    public List<Question> getRandomQuestionsTest() {
         return questionMapper.selectRandomQuestions();
     }
 }
