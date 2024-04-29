@@ -1,7 +1,6 @@
 package com.quiz.utils;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.quiz.exception.APIException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -78,7 +77,8 @@ public class JWTUtils {
      * @return claimName对应的值
      */
     public static String getClaimValueByClaimName(String jwtToken, String claimName) {
-        Assert.isTrue(StringUtils.isNotEmpty(jwtToken), "token不能为空");
+        if (StringUtils.isNotEmpty(jwtToken))
+            return "";
         try {
             // 这里解析可能会抛异常，所以try catch来捕捉
             Jws<Claims> claimsJws = Jwts.parser().setSigningKey(APP_SECRET).parseClaimsJws(jwtToken);
@@ -87,7 +87,7 @@ public class JWTUtils {
         } catch (Exception e) {
             e.printStackTrace();
             log.error("JWT字符串格式不符合!");
-            throw new APIException("JWT字符串格式不符合!");
+            return "";
         }
     }
 
