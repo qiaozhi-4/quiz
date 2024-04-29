@@ -2,10 +2,10 @@ package com.quiz.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quiz.entity.User;
-import com.quiz.exception.APIException;
+import com.quiz.service.IUserService;
+import com.quiz.utils.Assert;
 import com.quiz.utils.JWTUtils;
 import com.quiz.utils.Result;
-import com.quiz.service.IUserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -40,9 +40,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         org.springframework.security.core.userdetails.User userDetails = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userService.getUserDtoByAccount(userDetails.getUsername());
         user.setLastLoginAt(LocalDateTime.now());
-        if (!userService.updateById(user)) {
-            throw new APIException("更新登录时间失败!");
-        }
+        Assert.isTrue(userService.updateById(user), "更新登录时间失败!");
 
         // 根据用户的 id 和 username 生成 token 并返回
         String jwtToken = JWTUtils.getJwtToken(user.getUserId().toString(), user.getUsername());
