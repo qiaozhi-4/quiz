@@ -2,7 +2,6 @@ package com.quiz.service.impl;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
-import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import com.quiz.constant.Constants;
 import com.quiz.dto.UserDto;
 import com.quiz.entity.User;
@@ -18,7 +17,6 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,8 +64,6 @@ public class WxUserServiceImpl implements IWxUserService {
             user.setLastLoginAt(LocalDateTime.now());
             Assert.isTrue(user.updateById(), "更新用户上次登录时间失败");
         }
-        redisTemplate.opsForValue().set(Constants.REDIS_WX_SESSION + user.getUserId(),
-                sessionInfo.getSessionKey(), Duration.ofMinutes(10));
         final String jwtToken = JWTUtils.getJwtToken(user.getUserId().toString(), user.getUsername());
         map.put(JWTUtils.TOKEN_KEY, jwtToken);
         map.put("userInfo", user);
@@ -75,15 +71,7 @@ public class WxUserServiceImpl implements IWxUserService {
     }
 
     @Override
-    public Boolean saveUserInfo(Integer userId, String encryptedData, String ivStr) {
-        final String sessionKey = (String) redisTemplate.opsForValue()
-                .getAndExpire(Constants.REDIS_WX_SESSION + userId, Duration.ofMinutes(10));
-        final WxMaUserInfo userInfo = wxMaService.getUserService().getUserInfo(sessionKey, encryptedData, ivStr);
-        final User user = User.builder()
-                .userId(userId)
-                .nickname(userInfo.getNickName())
-                .avatarUrl(userInfo.getAvatarUrl())
-                .build();
+    public Boolean saveUserInfo(User user) {
         return user.updateById();
     }
 }

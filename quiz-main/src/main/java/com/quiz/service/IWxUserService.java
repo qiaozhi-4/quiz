@@ -1,5 +1,6 @@
 package com.quiz.service;
 
+import com.quiz.entity.User;
 import com.quiz.utils.Result;
 import me.chanjar.weixin.common.error.WxErrorException;
 
@@ -23,10 +24,8 @@ public interface IWxUserService {
     /**
      * 保存用户信息
      *
-     * @param userId        用户id
-     * @param encryptedData 消息密文
-     * @param ivStr         加密算法的初始向量
+     * @param user 用户id
      * @return Result
      */
-    Boolean saveUserInfo(Integer userId, String encryptedData, String ivStr);
+    Boolean saveUserInfo(User user);
 }
