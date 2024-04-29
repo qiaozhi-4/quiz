@@ -1,6 +1,7 @@
 package com.quiz.utils;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.quiz.exception.APIException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -72,13 +73,12 @@ public class JWTUtils {
     /**
      * 获取token的claimName对应值 (生成token时的参数对应)
      *
-     * @param request   请求
+     * @param jwtToken  token字符串
      * @param claimName 生产token时的字段名称
      * @return claimName对应的值
      */
-    public static String getClaimValueByClaimName(HttpServletRequest request, String claimName) {
-        String jwtToken = request.getHeader(JWTUtils.TOKEN_KEY);
-        if (StringUtils.isEmpty(jwtToken)) return "";
+    public static String getClaimValueByClaimName(String jwtToken, String claimName) {
+        Assert.isTrue(StringUtils.isNotEmpty(jwtToken), "token不能为空");
         try {
             // 这里解析可能会抛异常，所以try catch来捕捉
             Jws<Claims> claimsJws = Jwts.parser().setSigningKey(APP_SECRET).parseClaimsJws(jwtToken);
@@ -87,8 +87,20 @@ public class JWTUtils {
         } catch (Exception e) {
             e.printStackTrace();
             log.error("JWT字符串格式不符合!");
-            return "";
+            throw new APIException("JWT字符串格式不符合!");
         }
+    }
+
+    /**
+     * 获取token的claimName对应值 (生成token时的参数对应)
+     *
+     * @param request   请求
+     * @param claimName 生产token时的字段名称
+     * @return claimName对应的值
+     */
+    public static String getClaimValueByClaimName(HttpServletRequest request, String claimName) {
+        String jwtToken = request.getHeader(JWTUtils.TOKEN_KEY);
+        return getClaimValueByClaimName(jwtToken, claimName);
     }
 
     /**
@@ -102,6 +114,16 @@ public class JWTUtils {
     }
 
     /**
+     * 获取token的id值 (生成token时的id)
+     *
+     * @param jwtToken token字符串
+     * @return id字符串
+     */
+    public static String getMemberIdByJwtToken(String jwtToken) {
+        return getClaimValueByClaimName(jwtToken, CLAIM_ID);
+    }
+
+    /**
      * 获取token的account值 (生成token时的account)
      *
      * @param request 请求
@@ -109,5 +131,15 @@ public class JWTUtils {
      */
     public static String getMemberAccountByJwtToken(HttpServletRequest request) {
         return getClaimValueByClaimName(request, CLAIM_ACCOUNT);
+    }
+
+    /**
+     * 获取token的account值 (生成token时的account)
+     *
+     * @param jwtToken token字符串
+     * @return account字符串
+     */
+    public static String getMemberAccountByJwtToken(String jwtToken) {
+        return getClaimValueByClaimName(jwtToken, CLAIM_ACCOUNT);
     }
 }
