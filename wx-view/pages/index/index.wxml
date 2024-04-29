@@ -1,6 +1,11 @@
 <wxs module="computed" src="./index.wxs" />
 <view class="page">
-	<image class="log" src="/images/log.svg" mode="heightFix" />
+	<view class="log" hover-class="none" hover-stop-propagation="false">
+		<image class="log-svg" src="/images/log.svg" mode="heightFix" />
+		<view class="log-txt" hover-class="none" hover-stop-propagation="false">
+			Quiz
+		</view>
+	</view>
 	<view class='circle-container'>
 		<view
 		 wx:for="{{[1,2,3,4]}}"
@@ -8,7 +13,13 @@
 		 wx:key="index"
 		 style="bottom:{{computed.offset(index)}}px; width: {{computed.circleSize(index)}}px; height: {{computed.circleSize(index)}}px;"
 		/>
-
+	</view>
+	<view class="footer" hover-class="none" hover-stop-propagation="false">
+		<view class="footer-progress-bar-bg" hover-class="none" hover-stop-propagation="false" />
+		<view class="footer-progress-bar-main" hover-class="none" hover-stop-propagation="false" />
+		<view class="footer-txt" hover-class="none" hover-stop-propagation="false">
+			“我不关心你来自何处，我只关心你要去向何方”——Quiz
+		</view>
 	</view>
 </view>
 

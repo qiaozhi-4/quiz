@@ -1,9 +1,68 @@
-.log {
-  height: 54px;
+.footer {
   position: absolute;
-  top: 50%;
+  bottom: 5vh;
+  width: 80%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.footer-progress-bar-bg,
+.footer-progress-bar-main {
+  box-sizing: border-box;
+  height: 28px;
+  border: 2px solid #FFF;
+  border-radius: 15px;
+}
+
+.footer-progress-bar-bg {
+  background-image: linear-gradient(to right, #b351f9, #9d48ed, #8740e0, #7038d4, #5830c7);
+}
+
+.footer-progress-bar-main {
+  top: 0;
+  position: absolute;
+  background: #FFF;
+  animation: broaden 5s ease-in-out 1 forwards;
+}
+
+@keyframes broaden {
+  0% {
+      width: 30px;
+  }
+
+  100% {
+      width: 100%;
+  }
+}
+
+.footer-txt {
+  color: #FFF;
+  font-size: 10px;
+  text-align: center;
+  margin-top: 10px;
+  opacity: 0.5;
+}
+
+.log {
+  position: absolute;
+  bottom: 61.8%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+
+.log-svg {
+  height: 54px;
+  /* 将图片设置为块级元素 */
+  display: block;
+  /* 上下边距为0，左右自动，实现水平居中 */
+  margin: 0 auto;
+}
+
+.log-txt {
+  color: #FFF;
+  font-size: 36px;
+  font-weight: bolder;
+  text-align: center;
 }
 
 .circle-container {
@@ -18,7 +77,7 @@
       transform: rotate(0deg) scale(1);
   }
 
-  80% {
+  70% {
       transform: rotate(180deg) scale(2);
   }
 
