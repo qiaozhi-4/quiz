@@ -1,17 +1,20 @@
 var computed = {
     // 计算圆的大小
     circleSize: function (num) {
-        var val = 691 ;
+        var val = 691;
         for (var index = 0; index < num; index++) {
             val *= 0.729;
         }
         return val;
     },
     // 计算圆居中的偏移
+    // offset: function (index) {
+    //     if (index == 0)
+    //         return 0;
+    //     return (computed.circleSize(index - 1) - computed.circleSize(index)) / 2 + computed.offset(index - 1);
+    // }
     offset: function (index) {
-        if (index == 0)
-            return 0;
-        return (computed.circleSize(index - 1) - computed.circleSize(index)) / 2 + computed.offset(index - 1);
+        return Math.random() > 0.5 ? Math.random() * 200 : Math.random() * -200;
     }
 };
 // 导出对外暴露的属性

@@ -7,11 +7,12 @@
 		</view>
 	</view>
 	<view class='circle-container'>
+		<!-- style="bottom:{{computed.offset(index)}}px; width: {{computed.circleSize(index)}}px; height: {{computed.circleSize(index)}}px;" -->
 		<view
 		 wx:for="{{[1,2,3,4]}}"
 		 class="circle"
 		 wx:key="index"
-		 style="bottom:{{computed.offset(index)}}px; width: {{computed.circleSize(index)}}px; height: {{computed.circleSize(index)}}px;"
+		 style="bottom:{{computed.offset(index)}}px; left:{{computed.offset(index)}}px;   width: {{computed.circleSize(index)}}px; height: {{computed.circleSize(index)}}px;"
 		/>
 	</view>
 	<view class="footer" hover-class="none" hover-stop-propagation="false">
