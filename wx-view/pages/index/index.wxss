@@ -61,7 +61,7 @@
 .log-txt {
   color: #FFF;
   font-size: 36px;
-  font-weight: bolder;
+  font-weight: 900;
   text-align: center;
 }
 
