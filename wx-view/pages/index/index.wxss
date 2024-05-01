@@ -48,23 +48,8 @@
   bottom: 61.8%;
   left: 50%;
   transform: translate(-50%, 50%);
+  height: 104px;
 }
-
-.log-svg {
-  height: 54px;
-  /* 将图片设置为块级元素 */
-  display: block;
-  /* 上下边距为0，左右自动，实现水平居中 */
-  margin: 0 auto;
-}
-
-.log-txt {
-  color: #FFF;
-  font-size: 36px;
-  font-weight: 900;
-  text-align: center;
-}
-
 .circle-container {
   position: absolute;
   width: 100vw;

@@ -1,11 +1,6 @@
 <wxs module="computed" src="./index.wxs" />
 <view class="page">
-	<view class="log" hover-class="none" hover-stop-propagation="false">
-		<image class="log-svg" src="/images/log.svg" mode="heightFix" />
-		<view class="log-txt" hover-class="none" hover-stop-propagation="false">
-			Quiz
-		</view>
-	</view>
+	<image class="log" src="/images/log.svg" mode="heightFix" />
 	<view class='circle-container'>
 		<!-- style="bottom:{{computed.offset(index)}}px; width: {{computed.circleSize(index)}}px; height: {{computed.circleSize(index)}}px;" -->
 		<view
