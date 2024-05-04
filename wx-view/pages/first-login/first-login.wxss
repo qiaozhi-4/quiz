@@ -1,0 +1,56 @@
+.container {
+  display: grid;
+  /* 每个元素自动占用新行 */
+  grid-auto-flow: row;
+  /* 水平和垂直居中 */
+  place-items: center;
+  /* 设置行间距 */
+  gap: 30px;
+
+}
+
+.avatar-wrapper {
+  border-radius: 50%;
+  padding: 0;
+  margin-top: 26.97%;
+  /* !important 禁止样式覆盖 */
+  width: 130px !important;
+  height: 130px;
+
+  display: grid;
+  /* 水平和垂直居中 */
+  place-items: center;
+
+  position: relative;
+}
+
+.avatar-wrapper,
+.avatar,
+.avatar-small-log {
+  border-radius: 50%;
+}
+
+.row {
+  width: 80vw;
+}
+
+.text,
+.input {
+
+  padding-left: 20px;
+}
+
+.text {
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.input {
+  height: 54px;
+  background-color: rgba(255, 255, 255, 0.19);
+  border-radius: 30px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+}

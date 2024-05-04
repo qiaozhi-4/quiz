@@ -1,0 +1,27 @@
+<!-- 用户第一次登录跳转页面(用户还没有设置完成头像和昵称) -->
+<view class="container " hover-class="none" hover-stop-propagation="false">
+	<button
+	 class="avatar-wrapper"
+	 open-type="chooseAvatar"
+	 bindchooseavatar="onChooseAvatar"
+	 style=" background-color: {{avatarWrapperBgColoc}};"
+	>
+		<image
+		 class="avatar"
+		 src="{{avatarUrl}}"
+		 mode="heightFix"
+		 style="height: {{avatarHeight}}px;"
+		/>
+	</button>
+	<view class="row">
+		<view class="text">昵称</view>
+		<input
+		 type="nickname"
+		 class="input"
+		 name="nickname"
+		 placeholder="请输入昵称"
+		/>
+	</view>
+	<button type="primary">提交</button>
+</view>
+
