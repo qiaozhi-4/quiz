@@ -6,13 +6,27 @@
   place-items: center;
   /* 设置行间距 */
   gap: 30px;
+}
 
+.row {
+  width: 80vw;
 }
 
 .avatar-wrapper {
-  border-radius: 50%;
-  padding: 0;
   margin-top: 26.97%;
+  position: relative;
+}
+
+.avatar,
+.avatar-img,
+.avatar-small-img {
+  border-radius: 50%;
+}
+
+
+.avatar {
+  padding: 0;
+  border-radius: 50%;
   /* !important 禁止样式覆盖 */
   width: 130px !important;
   height: 130px;
@@ -20,23 +34,17 @@
   display: grid;
   /* 水平和垂直居中 */
   place-items: center;
-
-  position: relative;
 }
 
-.avatar-wrapper,
-.avatar,
-.avatar-small-log {
-  border-radius: 50%;
-}
-
-.row {
-  width: 80vw;
+.avatar-small-img {
+  position: absolute;
+  height: 37px;
+  bottom: 0px;
+  right: 0px;
 }
 
 .text,
 .input {
-
   padding-left: 20px;
 }
 

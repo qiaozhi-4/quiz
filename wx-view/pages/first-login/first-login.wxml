@@ -1,18 +1,27 @@
 <!-- 用户第一次登录跳转页面(用户还没有设置完成头像和昵称) -->
 <view class="container " hover-class="none" hover-stop-propagation="false">
-	<button
-	 class="avatar-wrapper"
-	 open-type="chooseAvatar"
-	 bindchooseavatar="onChooseAvatar"
-	 style=" background-color: {{avatarWrapperBgColoc}};"
-	>
-		<image
+	<view class="avatar-wrapper" hover-class="none" hover-stop-propagation="false">
+		<button
 		 class="avatar"
-		 src="{{avatarUrl}}"
+		 open-type="chooseAvatar"
+		 bindchooseavatar="onChooseAvatar"
+		 style=" background-color: {{avatarBgColoc}};"
+		>
+			<image
+			 class="avatar-img"
+			 src="{{avatarUrl}}"
+			 mode="heightFix"
+			 style="height: {{avatarHeight}}px;"
+			/>
+
+		</button>
+		<image
+		 hidden="{{select}}"
+		 class="avatar-small-img"
+		 src="/images/avatar-small.svg"
 		 mode="heightFix"
-		 style="height: {{avatarHeight}}px;"
 		/>
-	</button>
+	</view>
 	<view class="row">
 		<view class="text">昵称</view>
 		<input
