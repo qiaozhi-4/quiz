@@ -15,5 +15,21 @@ App({
   },
   globalData: {
     userInfo: {}
+  },
+  
+  onLoad() {
+    console.log('生命周期:onLoad-加载');
+  },
+  onShow() {
+    console.log('生命周期:onShow-显示');
+  },
+  onReady() {
+    console.log('生命周期:onReady');
+  },
+  onHide() {
+    console.log('生命周期:onHide-隐藏');
+  },
+  onUnload() {
+    console.log('生命周期:onUnload-卸载');
   }
 })
