@@ -15,7 +15,8 @@ Page({
       avatarUrl,
       avatarHeight: 125,
       avatarBgColoc: '#fff',
-      isSetAvatar: true
+      isSetAvatar: true,
+      animationShake: null
     });
     app.globalData.userInfo.avatarUrl = avatarUrl;
   },
@@ -26,11 +27,22 @@ Page({
     });
   },
   handleSubmitClick: function () {
-    this.setData({
-      shakeClass: 'shake-element'
+    // 创建动画实例
+    const animation = wx.createAnimation({
+      duration: 60, // 抖动持续时间为 0.6 秒
+      timingFunction: 'linear'
     });
+
+    // 应用抖动关键帧
+    animation.translateX(-10).step()
+      .translateX(10).step()
+      .translateX(-10).step()
+      .translateX(10).step()
+      .translateX(0).step();
+
+    // 更新数据，将动画传递到页面
     this.setData({
-      shakeClass: ''
+      animationShake: animation.export()
     });
   }
 });

@@ -1,6 +1,11 @@
 <!-- 用户第一次登录跳转页面(用户还没有设置完成头像和昵称) -->
 <view class="container " hover-class="none" hover-stop-propagation="false">
-	<view class="avatar-wrapper {{isSetAvatar ? '' :shakeClass}}" hover-class="none" hover-stop-propagation="false">
+	<view
+	 class="avatar-wrapper"
+	 animation="{{isSetAvatar  ? null :animationShake}}"
+	 hover-class="none"
+	 hover-stop-propagation="false"
+	>
 		<button
 		 class="avatar"
 		 open-type="chooseAvatar"
@@ -22,7 +27,7 @@
 		 mode="heightFix"
 		/>
 	</view>
-	<view class="row  {{nicknameValue != '' ? '' :shakeClass}}">
+	<view class="row" animation="{{nicknameValue != '' ? null :animationShake}}">
 		<view class="text">昵称</view>
 		<input
 		 type="nickname"
@@ -30,7 +35,7 @@
 		 name="nickname"
 		 placeholder="请输入昵称"
 		 value="{{nicknameValue}}"
-		  bindinput="onChangeNickname"
+		 bindinput="onChangeNickname"
 		/>
 	</view>
 	<view class="row">
