@@ -62,3 +62,43 @@
   font-size: 20px;
   font-weight: bold;
 }
+
+.submit {
+  float: right;
+  margin: 0px !important;
+  padding: 0px !important;
+  width: 105px !important;
+  height: 40px !important;
+  border-radius: 30px;
+  background-color: #fff !important;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit-text {
+  /* 文字渐变色 */
+  background: linear-gradient(to right, #be53ff, #ad5cff, #9c63ff, #8b68ff, #796dff);
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+/* 按钮点击样式 */
+.submit-hover{
+  transform: scale(0.9);
+}
+.shake-element {
+  animation: shake 0.6s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  10%, 90% { transform: translateX(-10px); }
+  20%, 80% { transform: translateX(10px); }
+  30%, 70% { transform: translateX(-10px); }
+  40%, 60% { transform: translateX(10px); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(0); }
+}
+

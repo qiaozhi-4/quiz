@@ -1,6 +1,6 @@
 <!-- 用户第一次登录跳转页面(用户还没有设置完成头像和昵称) -->
 <view class="container " hover-class="none" hover-stop-propagation="false">
-	<view class="avatar-wrapper" hover-class="none" hover-stop-propagation="false">
+	<view class="avatar-wrapper {{isSetAvatar ? '' :shakeClass}}" hover-class="none" hover-stop-propagation="false">
 		<button
 		 class="avatar"
 		 open-type="chooseAvatar"
@@ -16,21 +16,34 @@
 
 		</button>
 		<image
-		 hidden="{{select}}"
+		 hidden="{{!isSetAvatar}}"
 		 class="avatar-small-img"
 		 src="/images/avatar-small.svg"
 		 mode="heightFix"
 		/>
 	</view>
-	<view class="row">
+	<view class="row  {{nicknameValue != '' ? '' :shakeClass}}">
 		<view class="text">昵称</view>
 		<input
 		 type="nickname"
 		 class="input"
 		 name="nickname"
 		 placeholder="请输入昵称"
+		 value="{{nicknameValue}}"
+		  bindinput="onChangeNickname"
 		/>
 	</view>
-	<button type="primary">提交</button>
+	<view class="row">
+		<button
+		 class="submit"
+		 type="primary"
+		 hover-class="submit-hover"
+		 bindtap="handleSubmitClick"
+		>
+			<view class="submit-text">
+				完成
+			</view>
+		</button>
+	</view>
 </view>
 

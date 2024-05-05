@@ -4,19 +4,33 @@ Page({
     avatarUrl: '/images/avatar-small.svg',
     avatarHeight: 130,
     avatarBgColoc: '#7857D2',
-    select: true
+    isSetAvatar: false,
+    nicknameValue: '',
+    shakeClass: ''
   },
+  /* 设置头像 */
   onChooseAvatar(e) {
-    console.log('修改头像');
-    console.log(e);
-    console.log(e.detail);
     const { avatarUrl } = e.detail;
     this.setData({
       avatarUrl,
       avatarHeight: 125,
       avatarBgColoc: '#fff',
-      select: false
+      isSetAvatar: true
     });
     app.globalData.userInfo.avatarUrl = avatarUrl;
   },
+  /* 设置昵称 */
+  onChangeNickname(e) {
+    this.setData({
+      nicknameValue: e.detail.value
+    });
+  },
+  handleSubmitClick: function () {
+    this.setData({
+      shakeClass: 'shake-element'
+    });
+    this.setData({
+      shakeClass: ''
+    });
+  }
 });
