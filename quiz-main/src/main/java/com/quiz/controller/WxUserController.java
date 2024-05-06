@@ -2,15 +2,12 @@ package com.quiz.controller;
 
 import com.quiz.entity.User;
 import com.quiz.service.IWxUserService;
-import com.quiz.utils.JWTUtils;
 import com.quiz.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -35,9 +32,8 @@ public class WxUserController {
 
     @ApiOperation(value = "保存微信小程序用户信息", tags = {"Public"})
     @PostMapping("save")
-    public Boolean save(HttpServletRequest request, @RequestBody User user) {
-        final int userId = Integer.parseInt(JWTUtils.getMemberIdByJwtToken(request));
-        return wxUserService.saveUserInfo(user.setUserId(userId));
+    public Boolean save(@RequestBody User user) {
+        return wxUserService.saveUserInfo(user);
     }
 
 }
