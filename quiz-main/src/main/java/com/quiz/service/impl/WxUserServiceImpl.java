@@ -6,6 +6,7 @@ import com.quiz.constant.Constants;
 import com.quiz.dto.UserDto;
 import com.quiz.entity.User;
 import com.quiz.entity.UserAuth;
+import com.quiz.entity.UserRoles;
 import com.quiz.mapper.UserMapper;
 import com.quiz.service.IWxUserService;
 import com.quiz.utils.Assert;
@@ -47,7 +48,6 @@ public class WxUserServiceImpl implements IWxUserService {
         Map<Object, Object> map = new HashMap<>();
         if (Objects.isNull(user)) {
             log.info("当前用户第一次登录,openID:" + sessionInfo.getOpenid());
-            map.put("isFirst", true);
             /* 创建用户,并插入数据库 */
             user = UserDto.defUser();
             Assert.isTrue(user.insert(), "插入用户失败");
@@ -59,8 +59,10 @@ public class WxUserServiceImpl implements IWxUserService {
                             .build()
                             .insert()
                     , "插入用户第三方登录信息失败");
+            Assert.isTrue(UserRoles.builder()
+                    .roleId(2).userId(user.getUserId())
+                    .build().insert(), "插入用户角色信息失败");
         } else {
-            map.put("isFirst", false);
             user.setLastLoginAt(LocalDateTime.now());
             Assert.isTrue(user.updateById(), "更新用户上次登录时间失败");
         }
