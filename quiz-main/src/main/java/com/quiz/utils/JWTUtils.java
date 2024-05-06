@@ -77,7 +77,7 @@ public class JWTUtils {
      * @return claimName对应的值
      */
     public static String getClaimValueByClaimName(String jwtToken, String claimName) {
-        if (StringUtils.isNotEmpty(jwtToken))
+        if (StringUtils.isEmpty(jwtToken))
             return "";
         try {
             // 这里解析可能会抛异常，所以try catch来捕捉
