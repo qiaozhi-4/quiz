@@ -34,6 +34,7 @@
 		 class="input"
 		 name="nickname"
 		 placeholder="请输入昵称"
+		 placeholder-class="placeholderStyle"
 		 value="{{nicknameValue}}"
 		 bindinput="onChangeNickname"
 		/>

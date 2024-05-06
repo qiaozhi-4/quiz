@@ -63,6 +63,12 @@
   font-weight: bold;
 }
 
+.placeholderStyle {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400
+}
+
 .submit {
   float: right;
   margin: 0px !important;
@@ -84,8 +90,8 @@
   background-clip: text !important;
   color: transparent !important;
 }
+
 /* 按钮点击样式 */
-.submit-hover{
+.submit-hover {
   transform: scale(0.9);
 }
-
