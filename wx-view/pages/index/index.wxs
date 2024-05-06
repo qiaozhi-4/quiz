@@ -8,13 +8,10 @@ var computed = {
         return val;
     },
     // 计算圆居中的偏移
-    // offset: function (index) {
-    //     if (index == 0)
-    //         return 0;
-    //     return (computed.circleSize(index - 1) - computed.circleSize(index)) / 2 + computed.offset(index - 1);
-    // }
     offset: function (index) {
-        return Math.random() > 0.5 ? Math.random() * 200 : Math.random() * -200;
+        if (index == 0)
+            return 0;
+        return (computed.circleSize(index - 1) - computed.circleSize(index)) / 2 + computed.offset(index - 1);
     }
 };
 // 导出对外暴露的属性
