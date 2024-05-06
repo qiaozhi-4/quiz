@@ -45,20 +45,12 @@ public class Result<T> {
         return new Result<T>(ResultEnum.SUCCESS).setData(data);
     }
 
-    public static <T> Result<T> success(ResultEnum resultEnum) {
-        return new Result<>(resultEnum);
-    }
-
-    public static <T> Result<T> success(ResultEnum resultEnum, T data) {
-        return new Result<T>(resultEnum).setData(data);
-    }
-
     public static <T> Result<T> failed() {
         return new Result<>(ResultEnum.FAILED);
     }
 
-    public static <T> Result<T> failed(T data) {
-        return new Result<T>(ResultEnum.FAILED).setData(data);
+    public static <T> Result<T> failed(String message) {
+        return new Result<T>(ResultEnum.FAILED).setMessage(message);
     }
 
     public static <T> Result<T> failed(ResultEnum resultEnum) {
