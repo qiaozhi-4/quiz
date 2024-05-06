@@ -1,5 +1,12 @@
 <!-- 答题开始页面 -->
 <view class="" hover-class="none" hover-stop-propagation="false">
-	答题开始页面
+	
+	<image
+	 class="avatar-img"
+	 src="{{avatarUrl}}"
+	 mode="heightFix"
+	 style="height: {{avatarHeight}}px;"
+	/>
+	{{nickname}} 你好
 </view>
 
