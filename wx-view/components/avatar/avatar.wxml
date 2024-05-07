@@ -1,0 +1,9 @@
+<view class="avatar-wrapper {{shape}}" hover-class="none" hover-stop-propagation="false">
+	<image
+	 class="avatar {{shape}}"
+	 src="{{src}}"
+	 mode="heightFix"
+	 style="height: {{size}}px;  "
+	/>
+</view>
+

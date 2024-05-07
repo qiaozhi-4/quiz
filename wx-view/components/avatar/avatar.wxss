@@ -1,0 +1,17 @@
+.circle {
+    border-radius: 50%;
+}
+
+.square {
+    border-radius: 8px;
+}
+
+.avatar-wrapper {
+    background: #fff;
+    display: inline-flex;
+    padding: 5px;
+}
+
+.avatar {
+    height: 50%;
+}
