@@ -7,9 +7,7 @@
 }
 
 .avatar-wrapper {
-    background: #fff;
     display: inline-flex;
-    padding: 5px;
 }
 
 .avatar {

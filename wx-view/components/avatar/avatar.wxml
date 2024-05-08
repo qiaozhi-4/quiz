@@ -1,9 +1,14 @@
-<view class="avatar-wrapper {{shape}}" hover-class="none" hover-stop-propagation="false">
+<view
+ class="avatar-wrapper {{shape}}"
+ hover-class="none"
+ hover-stop-propagation="false"
+ style="padding: {{wrapperSize}};   background: {{wrapperColor}};"
+>
 	<image
 	 class="avatar {{shape}}"
 	 src="{{src}}"
 	 mode="heightFix"
-	 style="height: {{size}}px;  "
+	 style="height: {{size}};  "
 	/>
 </view>
 

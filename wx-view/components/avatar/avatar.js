@@ -11,13 +11,23 @@ Component({
         //Avatar 的大小
         size: {
             type: String,
-            value: '100',
+            value: '100px',
         },
         //Avatar 图片的形状 'circle' | 'square'
         shape: {
             type: String,
             value: 'circle',
         },
+        //Avatar 图片的边框颜色
+        wrapperColor: {
+            type: String,
+            value: '',
+        },
+        //Avatar 图片的边框大小
+        wrapperSize: {
+            type: String,
+            value: '0px',
+        }
     },
     data: {
         // 这里是一些组件内部数据
