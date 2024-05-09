@@ -1,6 +1,67 @@
 page {
+  --color-white: white;
+  /* 主色 */
+  --color-main: #5830C7;
+  --color-main1: #7756EC;
+  --color-main2: #4B29A9;
+  --color-main3: #3E228B;
+  --color-main4: #2F1969;
+  --color-main5: #1F1146;
+  /* 辅助色 */
+  --color--success: #A4FF48;
+  --color--danger: #FF4848;
   width: 100vw;
   height: 100vh;
-  background-color: #5830C7;
+  background-color: var(--color-main);
   position: relative;
+}
+
+/* -------------------------------------------------------渐变------------------------------------------------------- */
+
+.color-gradient1 {
+  background: linear-gradient(to bottom, #bc5cf8 0%, #6F3ED3 30%, #2F2460 100%);
+}
+
+.color-gradient2 {
+  background: linear-gradient(to right, #7756EC 0%, #B351F9 39%, #A627E1 100%);
+}
+
+/* -------------------------------------------------------字体------------------------------------------------------- */
+
+/* 重置文本样式 */
+view,
+text,
+textarea {
+  color: var(--color-white);
+  font-size: 20px;
+}
+
+/* 标题 */
+.text-title {
+  font-size: 34px;
+  font-weight: 900;
+}
+
+/* 小标 */
+.text-title-min {
+  font-size: 32px;
+  font-weight: 900;
+}
+
+/* 正文 */
+.text-main {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+/* 小字 */
+.text-min1 {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* 小字 */
+.text-min2 {
+  font-size: 12px;
+  font-weight: 500;
 }
