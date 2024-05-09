@@ -1,7 +1,7 @@
 const app = getApp();
 Page({
   data: {
-    avatarUrl: '/images/avatar-small.svg',
+    avatarUrl: '/images/avatar.svg',
     avatarHeight: 130,
     avatarBgColoc: '#7857D2',
     isSetAvatar: false,

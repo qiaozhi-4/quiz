@@ -1,7 +1,12 @@
 <!-- 用户第一次登录跳转页面(用户还没有设置完成头像和昵称) -->
 <view class="container " hover-class="none" hover-stop-propagation="false">
 	<!-- 头像 -->
-	<button class="avatar-button" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+	<button
+	 animation="{{isSetAvatar ? null :animationShake}}"
+	 class="avatar-button"
+	 open-type="chooseAvatar"
+	 bindchooseavatar="onChooseAvatar"
+	>
 		<avatar
 		 wx:if="{{isSetAvatar}}"
 		 src="{{avatarUrl}}"
@@ -12,8 +17,8 @@
 		<avatar wx:else src="{{avatarUrl}}" size="130px" />
 		<image
 		 hidden="{{!isSetAvatar}}"
-		 class="avatar-small-img"
-		 src="/images/avatar-small.svg"
+		 class="avatar-switch-img"
+		 src="/images/avatar-switch.svg"
 		 mode="heightFix"
 		/>
 	</button>
@@ -29,14 +34,9 @@
 		 bindinput="onChangeNickname"
 		/>
 	</view>
-	<view class="row">
-		<button
-		 class="submit"
-		 type="primary"
-		 hover-class="submit-hover"
-		 bindtap="handleSubmitClick"
-		>
-			<view class="submit-text">
+	<view class="row" hover-class="none" hover-stop-propagation="false">
+		<button class="submit" hover-class="submit-hover" bindtap="handleSubmitClick">
+			<view class="color-text-gradient1 text-main">
 				完成
 			</view>
 		</button>
