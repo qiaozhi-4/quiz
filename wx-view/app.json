@@ -1,12 +1,15 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/first-login/first-login",
     "pages/start-game/start-game",
+    "pages/index/index",
     "pages/logs/logs"
   ],
   "window": {
     "navigationStyle": "custom"
+  },
+  "usingComponents": {
+    "avatar": "/components/avatar/avatar"
   },
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
