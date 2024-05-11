@@ -1,0 +1,21 @@
+.header-bar {
+    width: 100vw;
+}
+
+.header-content {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.icon {
+    position: absolute;
+    height: 27px;
+}
+
+.title {
+    position: absolute;
+    /* width: 100%; */
+}

@@ -1,0 +1,14 @@
+<view class="header-bar" style="height:{{navHeight}}px;">
+	<view class="header-content" style="height:{{nav}}px; top: {{navBotHeight}}px;">
+		<image
+		 class="icon"
+		 src="/images/return.svg"
+		 mode="heightFix"
+		 style="left: {{menuBotRight}}px;"
+		/>
+		<view class="text-title-min title" hover-class="none" hover-stop-propagation="false">
+			Quiz
+		</view>
+	</view>
+</view>
+
