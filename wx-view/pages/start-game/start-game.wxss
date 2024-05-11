@@ -7,7 +7,6 @@ page {
 }
 
 .row {
-    top: 180px;
     width: 74.133vw;
 }
 
