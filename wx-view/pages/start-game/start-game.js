@@ -7,4 +7,10 @@ Page({
         // avatarUrl: 'https://img2.imgtp.com/2023/10/26/rQkEoyFQ.jpg',
         // nickname:'乔治'
     },
+    /* 点击开始路由到答题页 */
+    handleStartClick(){
+        wx.redirectTo({
+            url: '/pages/answer/answer',
+          });
+    },
 });
