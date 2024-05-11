@@ -19,7 +19,7 @@
 		{{date}} Question 10/10
 	</view>
 	<view class="row" hover-class="none" hover-stop-propagation="false">
-		<button class="start-but" hover-class="start-but-hover"  bindtap="handleStartClick">
+		<button class="start-but" hover-class="start-but-hover" bindtap="handleStartClick">
 			<view class="color-text-gradient1 text-title-min">
 				开始测试
 			</view>
