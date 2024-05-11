@@ -1,4 +1,5 @@
 const app = getApp();
+const { request } = require('../../utils/service.js');
 Page({
   data: {
     avatarUrl: '/images/avatar.svg',
@@ -53,22 +54,16 @@ Page({
     const { nicknameValue, isSetAvatar } = this.data;
     if (nicknameValue == '' || !isSetAvatar) return;
     console.log('头像和昵称都设置了,保存个人信息');
-    wx.request({
-      url: 'https://qzwdyz.top/quiz/wx-user/save',
-      data: app.globalData.userInfo,
-      header: { token: app.globalData.token },
+    request({
+      url: '/wx-user/save',
       method: 'POST',
-      success(res) {
-        console.log(res.data);
-        if (res.data.code != 200) {
-          console.log('保存个人信息失败!' + res.data.message);
-          return;
-        }
-        wx.redirectTo({
-          url: '/pages/start-game/start-game',
-        });
-      }
+      data: app.globalData.userInfo,
+    }).then((res) => {
+      wx.redirectTo({
+        url: '/pages/start-game/start-game',
+      });
+    }).catch((err) => {
+      console.log('保存个人信息失败!' + res.data.message);
     });
-
   }
 });
