@@ -16,10 +16,10 @@
 		点击答题！ 开启您的自我探索之旅吧！
 	</view>
 	<view class="row text-min1 text3" hover-class="none" hover-stop-propagation="false">
-		2024/04/20 Question 10/10
+		{{date}} Question 10/10
 	</view>
 	<view class="row" hover-class="none" hover-stop-propagation="false">
-		<button class="start-but">
+		<button class="start-but" hover-class="start-but-hover">
 			<view class="color-text-gradient1 text-title-min">
 				开始测试
 			</view>

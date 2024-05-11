@@ -11,12 +11,18 @@ page {
     width: 74.133vw;
 }
 
-.row-avatar{
+.row-avatar {
     padding-top: 89px;
 }
 
 .start-but {
     height: 54px;
+}
+
+/* 按钮点击样式 */
+.start-but-hover {
+    /* 添加渐变阴影 */
+    box-shadow: 0px 0px 10px 5px rgba(188, 92, 255, 0.5);
 }
 
 .text1 {

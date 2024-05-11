@@ -9,10 +9,33 @@ page {
   --color-main4: #2F1969;
   --color-main5: #1F1146;
   /* 辅助色 */
-  --color--success: #A4FF48;
-  --color--danger: #FF4848;
+  --color--success1: #A4FF48;
+  --color--success2: #CFF33C;
+  --color--danger1: #FF4848;
+  --color--danger2: #F3733C;
   width: 100vw;
   height: 100vh;
   background-color: var(--color-main);
   position: relative;
+}
+
+/* 重置文本样式 */
+view,
+text,
+textarea,
+input {
+  color: var(--color-white);
+  font-size: 20px;
+}
+
+button{
+    /* 内容居中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    margin: 0px ;
+    padding: 0px ;
+    border-radius: 3000px;
+    background-color: #fff ;
 }
