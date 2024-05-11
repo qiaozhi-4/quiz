@@ -6,9 +6,7 @@
 		 mode="heightFix"
 		 style="left: {{menuBotRight}}px;"
 		/>
-		<view class="text-title-min title" hover-class="none" hover-stop-propagation="false">
-			Quiz
-		</view>
+		<image class="title" src="/images/log-txt.svg" mode="heightFix" />
 	</view>
 </view>
 
