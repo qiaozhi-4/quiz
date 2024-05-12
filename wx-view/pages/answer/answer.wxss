@@ -1,0 +1,23 @@
+page {
+    background-image: linear-gradient(to bottom, #bc5cf8 0%, #6F3ED3 30%, #2F2460 100%);
+}
+
+.row {
+    width: 92vw;
+}
+
+.row-iocn {
+    height: 50px;
+    justify-content: flex-end;
+}
+
+.iocn {
+    height: 22px;
+    width: 22px;
+    margin-left: 30px;
+}
+
+.option {
+    width: 92vw;
+    background-color: rgba(255, 255, 255, 0.2)
+}
