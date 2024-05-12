@@ -15,11 +15,9 @@ App({
 
     // 获取胶囊信息
     let menuButtonObject = wx.getMenuButtonBoundingClientRect();
-    console.log(menuButtonObject);
     // 获取设备信息
     wx.getSystemInfo({
       success: res => {
-        console.log(res);
 
         // 边距
         let margin = menuButtonObject.top - res.statusBarHeight;

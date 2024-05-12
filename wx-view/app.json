@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/answer/answer",
     "pages/start-game/start-game",
+    "pages/index/index",
     "pages/first-login/first-login",
     "pages/logs/logs"
   ],
@@ -10,7 +11,8 @@
   },
   "usingComponents": {
     "avatar": "/components/avatar/avatar",
-    "page-header": "/components/page-header/page-header"
+    "page-header": "/components/page-header/page-header",
+    "progress": "/components/progress/progress"
   },
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
