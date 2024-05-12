@@ -1,5 +1,10 @@
 /* -------------------------------------------------------渐变色------------------------------------------------------- */
 
+/* 阴影渐变 */
+.color-shadow-gradient1 {
+  box-shadow: 0px 0px 10px 5px rgba(188, 92, 255, 0.5);
+}
+
 /* 背景渐变 */
 .color-bg-gradient1 {
   background: linear-gradient(to bottom, #bc5cf8 0%, #6F3ED3 30%, #2F2460 100%);
@@ -13,12 +18,22 @@
 /* 文字渐变 */
 .color-text-gradient1 {
   background: linear-gradient(to right, #be53ff, #ad5cff, #9c63ff, #8b68ff, #796dff);
-  -webkit-background-clip: text ;
-  background-clip: text ;
-  color: transparent ;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* -------------------------------------------------------字体------------------------------------------------------- */
+
+.text-overflow
+ {
+   /* 防止文本换行 */
+  white-space: nowrap;
+  /* 隐藏超出部分 */
+  overflow: hidden;
+  /* 显示省略号 */
+  text-overflow: ellipsis;
+}
 
 /* 标题 */
 .text-title {
@@ -64,4 +79,7 @@
 
 .row {
   width: 80vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
