@@ -36,6 +36,16 @@
 	</view>
 </view>
 
+<view class="footer">
+	<image class="iocn" src="/images/preview.svg" mode="heightFix" />
+	<image class="iocn" src="/images/bulb.svg" mode="heightFix" />
+	<input
+	 class=""
+	 value=""
+	 type="text"
+	 placeholder="记下观点"
+	/>
+</view>
 <wxs module="fn">
 	module.exports = {
 	split: function (str, sign) {
