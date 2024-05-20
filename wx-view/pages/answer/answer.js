@@ -2,11 +2,12 @@ const app = getApp();
 const { request } = require('../../utils/service.js');
 Page({
   data: {
-    avatarUrl: app.globalData.userInfo.avatarUrl ,
+    avatarUrl: app.globalData.userInfo.avatarUrl,
     questions: [],
     index: 0,
     showInput: false,
-    bottom:0,
+    bottom: 0,
+    inputValue: '',
   },
   onLoad() {
     request({
@@ -43,10 +44,15 @@ Page({
       showInput: false,
     });
   },
-  getBottom(event){
+  getBottom(event) {
     console.log(event);
     this.setData({
-      bottom:event.detail.height
+      bottom: event.detail.height
+    });
+  },
+  inputChange: function (e) {
+    this.setData({
+      inputValue: e.detail.value//e.detail.value表示输入框的当前值
     });
   },
 });

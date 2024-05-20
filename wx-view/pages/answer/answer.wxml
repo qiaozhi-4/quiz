@@ -43,19 +43,20 @@
 		记下观点
 	</button>
 </view>
-<view wx:else class="footer" style="bottom: {{bottom}}px;height: 53px;">
+<view wx:else class="footer" style="bottom: {{bottom}}px;">
 	<input
 	 focus="auto"
 	 bindkeyboardheightchange="getBottom"
 	 class="viewpoint text-min1"
 	 value=""
-	 type="text"
+	 value="{{inputValue}}"
+	 bindinput="inputChange"
 	 bindblur="onHideInput"
 	 adjust-position="{{false}}"
 	 placeholder="记下观点"
-	 placeholder-class="placeholderStyle"
+	 placeholder-class="viewpoint-placeholderStyle"
 	/>
-	<button class="viewpoint-but text-min1 " bindtap="handleFooterClick">
+	<button disabled="{{inputValue == '' ? true : false}}" class="viewpoint-but{{inputValue == '' ? '-disabled' : ''}} text-min1 " bindtap="handleFooterClick">
 		完成
 	</button>
 </view>

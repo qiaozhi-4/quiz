@@ -24,8 +24,8 @@ page {
 
 .footer {
     justify-content: space-between;
-    padding: 0 20px;
-    
+    padding: 14px 20px;
+    height: 64px;
 }
 
 .footer>.iocn {
@@ -43,7 +43,7 @@ page {
     color: rgba(255, 255, 255, 0.3);
 }
 
-.placeholderStyle {
+.viewpoint-placeholderStyle {
     color: rgba(255, 255, 255, 0.3);
 }
 
@@ -51,4 +51,10 @@ page {
     height: 36px;
     color: #fff;
     background-color: #5830C7;
+}
+
+.viewpoint-but-disabled {
+    height: 36px !important;
+    color: rgba(255, 255, 255, 0.3) !important;
+    background-color: rgba(255, 255, 255, 0.1)!important;
 }
