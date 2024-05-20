@@ -13,7 +13,7 @@ Component({
     },
     // 进度条百分比
     percentage: {
-      type: Number,
+      type: String,
       value: 10,
     }
   },
