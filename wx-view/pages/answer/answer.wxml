@@ -37,8 +37,18 @@
 </view>
 
 <view wx:if="{{!showInput}}" class="footer">
-	<image class="iocn" src="/images/menu.svg" mode="heightFix" />
-	<image class="iocn" src="/images/airplay-video.svg" mode="heightFix" />
+	<image
+	 class="iocn"
+	 src="/images/menu.svg"
+	 mode="heightFix"
+	 style="fill: red; "
+	/>
+	<image
+	 class="iocn"
+	 src="/images/airplay-video.svg"
+	 mode="heightFix"
+	 style="fill: red; "
+	/>
 	<button class=" viewpoint viewpoint-placeholderStyle text-min1" bindtap="handleFooterClick">
 		记下观点
 	</button>
