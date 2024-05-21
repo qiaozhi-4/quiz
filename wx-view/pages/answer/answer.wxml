@@ -46,15 +46,15 @@
 <view wx:else class="footer">
 	<input
 	 focus="auto"
-	 class="viewpoint {{inputValue == '' ? 'text-min1' : 'text-min'}}"
+	 class="viewpoint {{inputValues[index] == '' ? 'text-min1' : 'text-min'}}"
 	 value=""
-	 value="{{inputValue}}"
+	 value="{{inputValues[index]}}"
 	 bindinput="inputChange"
 	 bindblur="onHideInput"
 	 placeholder="记下观点"
 	 placeholder-class="viewpoint-placeholderStyle"
 	/>
-	<button disabled="{{inputValue == '' ? true : false}}" class="viewpoint-but{{inputValue == '' ? '-disabled' : ''}} text-min1 " bindtap="handleFooterClick">
+	<button disabled="{{inputValues[index] == '' ? true : false}}" class="viewpoint-but{{inputValues[index] == '' ? '-disabled' : ''}} text-min1 " bindtap="handleFooterClick">
 		完成
 	</button>
 </view>

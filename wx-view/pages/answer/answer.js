@@ -6,7 +6,7 @@ Page({
     questions: [],
     index: 0,
     showInput: false,
-    inputValue: '',
+    inputValues: [],
   },
   onLoad() {
     request({
@@ -33,19 +33,22 @@ Page({
       index: index + 1
     });
   },
-  handleFooterClick() {
-    this.setData({
-      showInput: true,
-    });
-  },
   onHideInput() {
     this.setData({
       showInput: false,
     });
   },
   inputChange: function (e) {
+    let inputValues = this.data.inputValues;
+    inputValues[this.data.index] = e.detail.value;
     this.setData({
-      inputValue: e.detail.value//e.detail.value表示输入框的当前值
+      inputValues: inputValues//e.detail.value表示输入框的当前值
+    });
+    console.log(this.data.inputValues, this.data.index);
+  },
+  handleFooterClick() {
+    this.setData({
+      showInput: true,
     });
   },
 });
