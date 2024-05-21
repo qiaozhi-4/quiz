@@ -39,14 +39,14 @@
 <view wx:if="{{!showInput}}" class="footer">
 	<image class="iocn" src="/images/menu.svg" mode="heightFix" />
 	<image class="iocn" src="/images/airplay-video.svg" mode="heightFix" />
-	<button class=" viewpoint text-min1" bindtap="handleFooterClick">
+	<button class=" viewpoint viewpoint-placeholderStyle text-min1" bindtap="handleFooterClick">
 		记下观点
 	</button>
 </view>
 <view wx:else class="footer">
 	<input
 	 focus="auto"
-	 class="viewpoint text-min1"
+	 class="viewpoint {{inputValue == '' ? 'text-min1' : 'text-min'}}"
 	 value=""
 	 value="{{inputValue}}"
 	 bindinput="inputChange"
