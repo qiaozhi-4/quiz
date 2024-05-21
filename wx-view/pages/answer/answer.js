@@ -6,7 +6,6 @@ Page({
     questions: [],
     index: 0,
     showInput: false,
-    bottom: 0,
     inputValue: '',
   },
   onLoad() {
@@ -42,12 +41,6 @@ Page({
   onHideInput() {
     this.setData({
       showInput: false,
-    });
-  },
-  getBottom(event) {
-    console.log(event);
-    this.setData({
-      bottom: event.detail.height
     });
   },
   inputChange: function (e) {

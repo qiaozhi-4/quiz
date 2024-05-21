@@ -43,16 +43,14 @@
 		记下观点
 	</button>
 </view>
-<view wx:else class="footer" style="bottom: {{bottom}}px;">
+<view wx:else class="footer">
 	<input
 	 focus="auto"
-	 bindkeyboardheightchange="getBottom"
 	 class="viewpoint text-min1"
 	 value=""
 	 value="{{inputValue}}"
 	 bindinput="inputChange"
 	 bindblur="onHideInput"
-	 adjust-position="{{false}}"
 	 placeholder="记下观点"
 	 placeholder-class="viewpoint-placeholderStyle"
 	/>
