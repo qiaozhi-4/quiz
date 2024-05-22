@@ -28,9 +28,8 @@
     </view>
 </view>
 <view wx:if="{{!showInput}}" class="footer">
-    <image class="iocn" src="/images/menu.svg" mode="heightFix" style="fill: red; " />
-    <svg class="iocn" colors="{{['','#fff']}}" opacitys="{{[1]}}" src="/images/menu.svg" />
-    <image class="iocn" src="/images/airplay-video.svg" mode="heightFix" style="fill: red; " />
+    <svg class="iocn" opacitys="{{[activityPreview == 'menu' ? 1 : 0.3]}}" src="/images/menu.svg" bindtap="changeActivityPreview" data-activity="menu" />
+    <svg class="iocn" opacitys="{{activityPreview == 'airplay-video' ? [1,1] : [0.3,0.3]}}" src="/images//airplay-video.svg" bindtap="changeActivityPreview" data-activity="airplay-video" />
     <button class=" viewpoint viewpoint-placeholderStyle text-min1" bindtap="handleFooterClick">
         记下观点
     </button>
