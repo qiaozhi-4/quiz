@@ -1,87 +1,50 @@
 <!-- 答题页 -->
-<page-header/>
+<page-header />
 <view class="container" hover-class="none" hover-stop-propagation="false">
-	<view class="row row-iocn">
-		<image class="iocn" src="/images/star.svg" mode="heightFix" />
-		<image class="iocn" src="/images/share.svg" mode="widthFix" />
-		<image class="iocn" src="/images/setting.svg" mode="heightFix" />
-	</view>
-	<view class="row row-avatar">
-		<avatar
-		 src="{{avatarUrl ? avatarUrl : '/images/avatar.svg'}}"
-		 size="58px"
-		 wrapperSize="3px"
-		 wrapperColor="#fff"
-		/>
-	</view>
-	<view class="row text-min2">
-		Questipn{{index >= 9 ? index+1 :'0' + (index+1)}}/{{questions.length}}
-	</view>
-	<view class="row">
-		<progress strokeWidth="92vw" strokeHeight="17px" percentage="{{(index+1)/questions.length*100}}" />
-	</view>
-
-	<!-- <button class="option" hover-class="color-shadow-gradient1 color-bg-gradient2" bindtap="handleOptionClick">
+    <view class="row row-iocn">
+        <image class="iocn" src="/images/star.svg" mode="heightFix" />
+        <image class="iocn" src="/images/share.svg" mode="widthFix" />
+        <image class="iocn" src="/images/setting.svg" mode="heightFix" />
+    </view>
+    <view class="row row-avatar">
+        <avatar src="{{avatarUrl ? avatarUrl : '/images/avatar.svg'}}" size="58px" wrapperSize="3px" wrapperColor="#fff" />
+    </view>
+    <view class="row text-min2">
+        Questipn{{index >= 9 ? index+1 :'0' + (index+1)}}/{{questions.length}}
+    </view>
+    <view class="row">
+        <progress strokeWidth="92vw" strokeHeight="17px" percentage="{{(index+1)/questions.length*100}}" />
+    </view>
+    <!-- <button class="option" hover-class="color-shadow-gradient1 color-bg-gradient2" bindtap="handleOptionClick">
 		<view class="text-main ">
 			fadsgfasdfhsadiofasdiofjsaidofuasidofuasiofdsioafusaoidgusiodgua
 		</view>
 	</button> -->
-	<view class="row text-title-min">{{questions[index].title}} </view>
-	<view wx:for="{{fn.split(questions[index].options,'@@')}}" wx:key="unique" class="row options">
-		<button class="option" hover-class="color-shadow-gradient1 color-bg-gradient2" bindtap="handleOptionClick">
-			<view class="text-main text-overflow">
-				{{item}}
-			</view>
-		</button>
-	</view>
+    <view class="row text-title-min">{{questions[index].title}}</view>
+    <view wx:for="{{fn.split(questions[index].options,'@@')}}" wx:key="unique" class="row options">
+        <button class="option" hover-class="color-shadow-gradient1 color-bg-gradient2" bindtap="handleOptionClick">
+            <view class="text-main text-overflow">{{item}}</view>
+        </button>
+    </view>
 </view>
-
 <view wx:if="{{!showInput}}" class="footer">
-	<image
-	 class="iocn"
-	 src="/images/menu.svg"
-	 mode="heightFix"
-	 style="fill: red; "
-	/>
-	<svg
-	 class="iocn"
-	 colors="{{['','#fff']}}"
-	 opacitys="{{[1]}}"
-	 src="/images/menu.svg"
-	/>
-	<image
-	 class="iocn"
-	 src="/images/airplay-video.svg"
-	 mode="heightFix"
-	 style="fill: red; "
-	/>
-	<button class=" viewpoint viewpoint-placeholderStyle text-min1" bindtap="handleFooterClick">
-		记下观点
-	</button>
+    <image class="iocn" src="/images/menu.svg" mode="heightFix" style="fill: red; " />
+    <svg class="iocn" colors="{{['','#fff']}}" opacitys="{{[1]}}" src="/images/menu.svg" />
+    <image class="iocn" src="/images/airplay-video.svg" mode="heightFix" style="fill: red; " />
+    <button class=" viewpoint viewpoint-placeholderStyle text-min1" bindtap="handleFooterClick">
+        记下观点
+    </button>
 </view>
 <view wx:else class="footer" style="bottom: {{bottom}}px;">
-	<input
-	 focus="auto"
-	 bindkeyboardheightchange="getBottom"
-	 class="viewpoint {{inputValues[index] == '' ? 'text-min1' : 'text-min'}}"
-	 value=""
-	 value="{{inputValues[index]}}"
-	 bindinput="inputChange"
-	 bindblur="onHideInput"
-	 adjust-position="{{false}}"
-	 placeholder="记下观点"
-	 placeholder-class="viewpoint-placeholderStyle"
-	/>
-	<button disabled="{{inputValues[index] == '' ? true : false}}" class="viewpoint-but{{inputValues[index] == '' ? '-disabled' : ''}} text-min1 " bindtap="handleFooterClick">
-		完成
-	</button>
+    <input focus="auto" bindkeyboardheightchange="getBottom" class="viewpoint {{inputValues[index] == '' ? 'text-min1' : 'text-min'}}" value="" value="{{inputValues[index]}}" bindinput="inputChange" bindblur="onHideInput" adjust-position="{{false}}" placeholder="记下观点" placeholder-class="viewpoint-placeholderStyle" />
+    <button disabled="{{inputValues[index] == '' ? true : false}}" class="viewpoint-but{{inputValues[index] == '' ? '-disabled' : ''}} text-min1 " bindtap="handleFooterClick">
+        完成
+    </button>
 </view>
-
 <wxs module="fn">
-	module.exports = {
-	split: function (str, sign) {
-	if(str) return str.split(sign);
-	}
-	};
+    module.exports = {
+    split: function (str, sign) {
+    if(str) return str.split(sign);
+    }
+    };
 </wxs>
-
