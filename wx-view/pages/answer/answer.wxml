@@ -43,6 +43,12 @@
 	 mode="heightFix"
 	 style="fill: red; "
 	/>
+	<svg
+	 class="iocn"
+	 colors="{{['','#fff']}}"
+	 opacitys="{{[1]}}"
+	 src="/images/menu.svg"
+	/>
 	<image
 	 class="iocn"
 	 src="/images/airplay-video.svg"
