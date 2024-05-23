@@ -23,6 +23,7 @@ page {
 }
 
 .drawer {
+    max-height: 636px;
     height: 636px;
     width: 100vw;
     position: absolute;
@@ -31,18 +32,34 @@ page {
     display: flex;
     /* 设置主轴方向为垂直 */
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 11px;
+}
+
+.drawer-header {
+    height: 27px;
+    padding-top: 30px;
+    padding-bottom: 7.5px;
+}
+
+.drawer-mian {
+    width: 100%;
+    /* 超出的子元素出现滚动条 */
+    overflow: auto;
+    display: flex;
+    /* 设置主轴方向为垂直 */
+    flex-direction: column;
+    align-items: center;
     box-sizing: border-box;
+    padding: 0px 12.5px;
 }
 
 .drawer-content {
-    margin: 13px 0;
+    margin: 6.5px 0;
     width: 100%;
-    min-height: 554px;
     border-radius: 15px;
     background-color: rgba(255, 255, 255, 0.1);
+    padding: 23px;
+    box-sizing: border-box;
 }
 
 .footer {

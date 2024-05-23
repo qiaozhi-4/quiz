@@ -4,6 +4,7 @@ Page({
     data: {
         avatarUrl: app.globalData.userInfo.avatarUrl,
         questions: [],
+        options: [],
         index: 0,
         showInput: false,
         bottom: 0,
@@ -28,11 +29,16 @@ Page({
             console.log('请求失败:' + err.message)
         })
     },
-    handleOptionClick() {
+    // 点击选项触发
+    handleOptionClick(e) {
         let index = this.data.index
+        let options = this.data.options
+        let option =  e.target.dataset.option
+        options[index] = option
         if (index >= this.data.questions.length - 1) return
         this.setData({
-            index: index + 1
+            index: index + 1,
+            options: options,
         })
     },
     onHideInput() {

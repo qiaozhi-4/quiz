@@ -15,21 +15,26 @@
     <view class="row">
         <progress strokeWidth="92vw" strokeHeight="17px" percentage="{{(index+1)/questions.length*100}}" />
     </view>
-    <!-- <button class="option" hover-class="color-shadow-gradient1 color-bg-gradient2" bindtap="handleOptionClick">
-		<view class="text-main ">
-			fadsgfasdfhsadiofasdiofjsaidofuasidofuasiofdsioafusaoidgusiodgua
-		</view>
-	</button> -->
     <view class="row text-title-min">{{questions[index].title}}</view>
     <view wx:for="{{fn.split(questions[index].options,'@@')}}" wx:key="unique" class="row options">
-        <button class="option" hover-class="color-shadow-gradient1 color-bg-gradient2" bindtap="handleOptionClick">
+        <button class="option" hover-class="color-shadow-gradient1 color-bg-gradient2" bindtap="handleOptionClick" data-option="{{item}}">
             <view class="text-main text-overflow">{{item}}</view>
         </button>
     </view>
 </view>
 <view class="drawer" wx:if="{{activityPreview!=''}}">
     <view class="drawer-header text-main">乔治 的 01号测试</view>
-    <view class="drawer-content"></view>
+    <view class="drawer-mian" style="height: 554px;">
+        <block wx:if="{{activityPreview == 'menu'}}">
+            <view wx:for="{{questions}}" wx:key="unique" class="drawer-content" style="min-height: 62px; padding: 13px 23px;">
+                <view class="text-overflow text-min2">{{item.title}}</view>
+                <view class="text-overflow text-min1">{{options[index] ? options[index] : '? ? ? ? ?'}}</view>
+            </view>
+        </block>
+        <view wx:else class="drawer-content" style="height: 96%;">
+            你好！🌟 开始你的自我探索之旅吧！凭回忆和直觉的选择回答就好。
+        </view>
+    </view>
 </view>
 <view wx:if="{{!showInput}}" class="footer" style="{{activityPreview!=''?'background-color: #1F1146' :''}}">
     <svg class="iocn" opacitys="{{[activityPreview == 'menu' ? 1 : 0.3]}}" src="/images/menu.svg" bindtap="changeActivityPreview" data-activity="menu" />
