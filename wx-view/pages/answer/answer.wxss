@@ -26,6 +26,7 @@ page {
     max-height: 636px;
     height: 636px;
     width: 100vw;
+    border-radius: 15px;
     position: absolute;
     bottom: 88px;
     background-color: #2F1969;
@@ -60,6 +61,11 @@ page {
     background-color: rgba(255, 255, 255, 0.1);
     padding: 23px;
     box-sizing: border-box;
+}
+
+.preview-item {
+    display: flex;
+    justify-content: space-between;
 }
 
 .footer {

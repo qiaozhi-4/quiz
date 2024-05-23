@@ -26,9 +26,14 @@
     <view class="drawer-header text-main">乔治 的 01号测试</view>
     <view class="drawer-mian" style="height: 554px;">
         <block wx:if="{{activityPreview == 'menu'}}">
-            <view wx:for="{{questions}}" wx:key="unique" class="drawer-content" style="min-height: 62px; padding: 13px 23px;">
+            <view wx:for="{{questions}}" wx:key="unique" class="drawer-content" style="min-height: 62px; padding: 12px 23px;">
                 <view class="text-overflow text-min2">{{item.title}}</view>
-                <view class="text-overflow text-min1">{{options[index] ? options[index] : '? ? ? ? ?'}}</view>
+                <view class="preview-item">
+                    <view class="text-overflow text-min1">
+                        {{options[index] ? options[index] : '? ? ? ? ?'}}
+                    </view>
+                    <view wx:if="{{inputValues[index]}}" class="text-overflow text-min2">{{inputValues[index]}}</view>
+                </view>
             </view>
         </block>
         <view wx:else class="drawer-content" style="height: 96%;">
