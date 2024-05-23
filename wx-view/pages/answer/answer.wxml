@@ -27,7 +27,11 @@
         </button>
     </view>
 </view>
-<view wx:if="{{!showInput}}" class="footer">
+<view class="drawer" wx:if="{{activityPreview!=''}}">
+    <view class="drawer-header text-main">乔治 的 01号测试</view>
+    <view class="drawer-content"></view>
+</view>
+<view wx:if="{{!showInput}}" class="footer" style="{{activityPreview!=''?'background-color: #1F1146' :''}}">
     <svg class="iocn" opacitys="{{[activityPreview == 'menu' ? 1 : 0.3]}}" src="/images/menu.svg" bindtap="changeActivityPreview" data-activity="menu" />
     <svg class="iocn" opacitys="{{activityPreview == 'airplay-video' ? [1,1] : [0.3,0.3]}}" src="/images//airplay-video.svg" bindtap="changeActivityPreview" data-activity="airplay-video" />
     <button class=" viewpoint viewpoint-placeholderStyle text-min1" bindtap="handleFooterClick">

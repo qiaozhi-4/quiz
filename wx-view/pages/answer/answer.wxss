@@ -22,6 +22,29 @@ page {
     background-color: rgba(255, 255, 255, 0.2)
 }
 
+.drawer {
+    height: 636px;
+    width: 100vw;
+    position: absolute;
+    bottom: 88px;
+    background-color: #2F1969;
+    display: flex;
+    /* 设置主轴方向为垂直 */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 11px;
+    box-sizing: border-box;
+}
+
+.drawer-content {
+    margin: 13px 0;
+    width: 100%;
+    min-height: 554px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
 .footer {
     justify-content: space-between;
     padding: 14px 20px;
@@ -54,5 +77,5 @@ page {
 .viewpoint-but-disabled {
     height: 36px !important;
     color: rgba(255, 255, 255, 0.3) !important;
-    background-color: rgba(255, 255, 255, 0.1)!important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
 }

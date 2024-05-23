@@ -61,8 +61,11 @@ Page({
     },
     // 修改当前活动的预览
     changeActivityPreview(e) {
+        let activityPreview = this.data.activityPreview
+        let activity =  e.target.dataset.activity
+        
         this.setData({
-            activityPreview: e.target.dataset.activity,
+            activityPreview: activityPreview == activity ? '' : activity,
         })
     },
 })
