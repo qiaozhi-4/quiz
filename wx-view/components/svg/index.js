@@ -18,7 +18,7 @@ Component({
                         basestr = basestr.replace(new RegExp(`${parmName}=".+?"`, 'g'), (word) => {
                             const newColor = paemVals[index]
                             index++
-                            return newColor ? word.replace(/".*"/,(w)=>`"${newColor}"`) : word
+                            return newColor ? word.replace(/".*"/,(_)=>`"${newColor}"`) : word
                         })
                     }
                     // 匹配颜色，并进行替换
