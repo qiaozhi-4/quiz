@@ -1,14 +1,8 @@
 Component({
     properties: {
         src: String,
-        width: {
-            type: String,
-            value: '16px',
-        },
-        height: {
-            type: String,
-            value: '16px',
-        },
+        width: String,
+        height: String,
         colors: Array,
         opacitys: Array,
     },
@@ -20,6 +14,24 @@ Component({
                 encoding: 'binary',
                 success: res => {
                     let basestr = res.data
+                    // 设置默认宽度
+                    if (!this.data.width) {
+                        try {
+                            let width = basestr.match(/width="\d+"/)[0].match(/\d+/)[0]
+                            this.setData({
+                                width: `${width}px`,
+                            })
+                        } catch (error) { }
+                    }
+                    // 设置默认高度
+                    if (!this.data.height) {
+                        try {
+                            let height = basestr.match(/height="\d+"/)[0].match(/\d+/)[0]
+                            this.setData({
+                                height: `${height}px`,
+                            })
+                        } catch (error) { }
+                    }
                     console.log(basestr)
                     // 替换参数对应的值
                     const fun = (parmName, paemVals) => {
