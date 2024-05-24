@@ -3,11 +3,11 @@ Component({
         src: String,
         width: {
             type: String,
-            value: '100%',
+            value: '16px',
         },
         height: {
             type: String,
-            value: '100%',
+            value: '16px',
         },
         colors: Array,
         opacitys: Array,

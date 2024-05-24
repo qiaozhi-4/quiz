@@ -1,4 +1,4 @@
-<!--components/svg/index.wxml-->
+<!-- components/svg/index.wxml -->
 <block wx:if="{{svgStyle}}">
-    <view class="svg" style="{{svgStyle}} width: {{width}};height: {{height}};"  />
+    <view class="svg" style="{{svgStyle}} width: {{width}};height: {{height}};" />
 </block>
