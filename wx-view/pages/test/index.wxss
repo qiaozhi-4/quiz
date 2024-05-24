@@ -1,0 +1,3 @@
+page {
+    background-image: linear-gradient(to bottom, #bc5cf8 0%, #6F3ED3 30%, #2F2460 100%);
+}
