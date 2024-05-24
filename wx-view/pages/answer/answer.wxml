@@ -18,7 +18,7 @@
     <view class="row text-title-min">{{questions[index].title}}</view>
     <view wx:for="{{fn.split(questions[index].options,'@@')}}" wx:key="unique" class="row options">
         <button class="option" hover-class="color-shadow-gradient1 color-bg-gradient2" bindtap="handleOptionClick" data-option="{{item}}">
-            <view class="text-main text-overflow">{{item }}</view>
+            <view class="text-main text-overflow">{{item}}</view>
         </button>
     </view>
 </view>
