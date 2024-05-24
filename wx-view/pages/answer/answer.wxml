@@ -32,7 +32,9 @@
                     <view class="text-overflow text-min1">
                         {{options[index] ? options[index] : '? ? ? ? ?'}}
                     </view>
-                    <view wx:if="{{inputValues[index]}}" class="text-overflow text-min2">{{inputValues[index]}}</view>
+                    <view wx:if="{{inputValues[index]}}" class="text-overflow text-min2">
+                        {{inputValues[index]}}
+                    </view>
                 </view>
             </view>
         </block>
