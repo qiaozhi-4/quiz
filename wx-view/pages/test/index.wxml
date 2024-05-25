@@ -28,7 +28,7 @@
             </swiper-item>
         </swiper>
     </view>
-    <view class="grid-item  grid-item-6">
+    <view class="grid-item  grid-item-6" style="{{activityContainer == 'input-viewpoint' ?'background-color: #1F1146' :''}}">
         <svg class="" width="24px" opacitys="{{[activityContainer == 'menu' ? 1 : 0.3]}}" src="/images/menu.svg" bindtap="changeActivityContainer" data-activity="menu" />
         <svg class="" width="24px" opacitys="{{activityContainer == 'airplay-video' ? [1,1] : [0.3,0.3]}}" src="/images/airplay-video.svg" bindtap="changeActivityContainer" data-activity="airplay-video" />
         <button class=" viewpoint  text-min1" hover-class="viewpoint-placeholderStyle" bindtap="changeActivityContainer" data-activity="input-viewpoint">
