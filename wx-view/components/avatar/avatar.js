@@ -4,10 +4,7 @@ Component({
     },
     properties: {
         // Avatar 图片的源地址
-        src: {
-            type: String,
-            value: '/images/log.svg',
-        },
+        src: String,
         //Avatar 的大小
         size: {
             type: String,
@@ -36,5 +33,5 @@ Component({
     methods: {
         // 这里是一个自定义方法
         customMethod: function () { }
-    }
-});
+    },
+})
