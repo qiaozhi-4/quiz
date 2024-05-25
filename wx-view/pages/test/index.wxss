@@ -6,8 +6,7 @@ page {
     display: grid;
     grid-template-rows: 1fr 6.1576vh 7.5123vh 1.8473vh 2.0936vh 57.88177vh 10.8374vh;
     place-content: space-between center;
-    height: 100%;
-    gap: 5px;
+    height: 100vh;
 }
 
 .grid-item {
