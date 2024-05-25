@@ -41,7 +41,7 @@ page {
 }
 
 .title {
-    padding:0 15px;
+    padding: 0 15px;
 }
 
 .options {
@@ -61,12 +61,12 @@ page {
     height: 43px;
 }
 
-.grid-item-6{
+.grid-item-6 {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     place-items: center;
     /* 基线对齐 */
-    align-content: first baseline ;
+    align-content: first baseline;
     padding-top: 1.97044vh;
     /* 宽度高度包括内边距和边框 */
     box-sizing: border-box;
@@ -83,8 +83,6 @@ page {
     color: rgba(255, 255, 255, 0.3);
     grid-column: 3/7;
     transition: transform 0.5s ease;
-
-    
 }
 
 .viewpoint-placeholderStyle {
@@ -92,7 +90,7 @@ page {
     transform: scale(0.9);
 }
 
-.page-container-main{
+.page-container-main {
     height: 89.16256vh;
     background-color: #2F1969;
 }
