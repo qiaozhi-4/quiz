@@ -4,19 +4,16 @@ page {
 
 .container-grid {
     display: grid;
-    grid-template-rows: 6.1576vh 7.5123vh 1.8473vh 2.0936vh 57.88177vh 10.8374vh;
+    grid-template-rows: 1fr 6.1576vh 7.5123vh 1.8473vh 2.0936vh 57.88177vh 10.8374vh;
     place-content: space-between center;
-    height: 88.67vh;
-
-    /* background-color: rgb(211, 212, 185); */
+    height: 100%;
+    gap: 5px;
 }
 
 .grid-item {
     width: 100vw;
     display: grid;
     place-content: center;
-
-    /* background-color: blueviolet; */
 }
 
 .grid-item-1 {
