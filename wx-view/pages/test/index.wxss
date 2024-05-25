@@ -71,8 +71,8 @@ page {
     /* 宽度高度包括内边距和边框 */
     box-sizing: border-box;
     padding: 16px 5px 0 15px;
-
     background-color: #2F1969;
+    z-index: 101;
 }
 
 .viewpoint {
@@ -90,4 +90,9 @@ page {
 .viewpoint-placeholderStyle {
     color: rgba(255, 255, 255);
     transform: scale(0.9);
+}
+
+.page-container-main{
+    height: 89.16256vh;
+    background-color: #2F1969;
 }
