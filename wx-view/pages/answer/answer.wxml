@@ -45,7 +45,7 @@
 </view>
 <view wx:if="{{!showInput}}" class="footer" style="{{activityPreview!=''?'background-color: #1F1146' :''}}">
     <svg class="iocn" opacitys="{{[activityPreview == 'menu' ? 1 : 0.3]}}" src="/images/menu.svg" bindtap="changeActivityPreview" data-activity="menu" />
-    <svg class="iocn" opacitys="{{activityPreview == 'airplay-video' ? [1,1] : [0.3,0.3]}}" src="/images//airplay-video.svg" bindtap="changeActivityPreview" data-activity="airplay-video" />
+    <svg class="iocn" opacitys="{{activityPreview == 'airplay-video' ? [1,1] : [0.3,0.3]}}" src="/images/airplay-video.svg" bindtap="changeActivityPreview" data-activity="airplay-video" />
     <button class=" viewpoint viewpoint-placeholderStyle text-min1" bindtap="handleFooterClick">
         记下观点
     </button>

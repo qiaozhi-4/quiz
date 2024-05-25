@@ -1,3 +1,93 @@
 page {
     background-image: linear-gradient(to bottom, #bc5cf8 0%, #6F3ED3 30%, #2F2460 100%);
 }
+
+.container-grid {
+    display: grid;
+    grid-template-rows: 6.1576vh 7.5123vh 1.8473vh 2.0936vh 57.88177vh 10.8374vh;
+    place-content: space-between center;
+    height: 88.67vh;
+
+    /* background-color: rgb(211, 212, 185); */
+}
+
+.grid-item {
+    width: 100vw;
+    display: grid;
+    place-content: center;
+
+    /* background-color: blueviolet; */
+}
+
+.grid-item-1 {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    place-items: center;
+}
+
+.grid-item-1-1 {
+    grid-column: 6/7;
+}
+
+.questions {
+    height: 57.88177vh;
+    width: 100vw;
+}
+
+.question {
+    display: grid;
+    place-content: start stretch;
+    gap: 10px;
+}
+
+.title {
+    padding:0 15px;
+}
+
+.options {
+    /* 当子元素过多时出现滚动条 */
+    overflow: auto;
+    /* max-height: 350px; */
+    max-height: 43.1103vh;
+    display: grid;
+    gap: 15px;
+    place-content: start space-evenly;
+}
+
+.option {
+    background-color: rgba(255, 255, 255, 0.2);
+    /* width: 345px; */
+    width: 92vw;
+    height: 43px;
+}
+
+.grid-item-6{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    place-items: center;
+    /* 基线对齐 */
+    align-content: first baseline ;
+    padding-top: 1.97044vh;
+    /* 宽度高度包括内边距和边框 */
+    box-sizing: border-box;
+    padding: 16px 5px 0 15px;
+
+    background-color: #2F1969;
+}
+
+.viewpoint {
+    height: 40px;
+    width: 90%;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0 20px;
+    color: rgba(255, 255, 255, 0.3);
+    grid-column: 3/7;
+    transition: transform 0.5s ease;
+
+    
+}
+
+.viewpoint-placeholderStyle {
+    color: rgba(255, 255, 255);
+    transform: scale(0.9);
+}

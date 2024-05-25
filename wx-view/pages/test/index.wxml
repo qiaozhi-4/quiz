@@ -1,4 +1,49 @@
 <page-header />
-<svg width="24px" height="24px" src="/images/star.svg"></svg>
-<svg src="/images/star.svg"></svg>
-<svg src="/images/star.svg"></svg>
+<view class="container-grid">
+    <view class="grid-item grid-item-1">
+        <svg class="grid-item-1-1" src="/images/star.svg"></svg>
+        <svg src="/images/share.svg"></svg>
+        <svg src="/images/setting.svg"></svg>
+    </view>
+    <view class="grid-item grid-item-2">
+        <avatar src="{{avatarUrl}}" size="58px" wrapperSize="3px" wrapperColor="#fff" />
+    </view>
+    <view class="grid-item grid-item-3 text-min2">
+        Questipn{{index >= 9 ? index+1 :'0' + (index+1)}}/{{questions.length}}
+    </view>
+    <view class="grid-item  grid-item-4">
+        <progress strokeWidth="92vw" strokeHeight="17px" percentage="{{(index+1)/questions.length*100}}" />
+    </view>
+    <view class="grid-item  grid-item-5">
+        <swiper class="questions" indicator-dots="true" current="{{index}}" bindchange="handleSwiperChange" indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#fff" indicator-height="{{111}}">
+            <swiper-item class="question" wx:for="{{questions}}" wx:key="unique">
+                <!-- 题目 -->
+                <view class="text-title-min title">{{item.title}}</view>
+                <!-- 选项 -->
+                <view class="options">
+                    <button wx:for="{{fn.split(questions[index].options,'@@')}}" wx:key="unique" class="option" hover-class="color-shadow-gradient1 color-bg-gradient2" bindtap="handleOptionClick" data-option="{{item}}">
+                        <view class="text-main text-overflow">{{item}}</view>
+                    </button>
+                </view>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="grid-item  grid-item-6">
+        <svg class="" width="24px" opacitys="{{[activityContainer == 'menu' ? 1 : 0.3]}}" src="/images/menu.svg" bindtap="changeActivityContainer" data-activity="menu" />
+        <svg class="" width="24px" opacitys="{{activityContainer == 'airplay-video' ? [1,1] : [0.3,0.3]}}" src="/images/airplay-video.svg" bindtap="changeActivityContainer" data-activity="airplay-video" />
+        <button class=" viewpoint  text-min1" hover-class="viewpoint-placeholderStyle" bindtap="changeActivityContainer" data-activity="input-viewpoint">
+            说说你的选择
+        </button>
+    </view>
+    <!-- 弹出框 -->
+    <page-container show="{{activityContainer}}" round="true" close-on-slide-down="true" bind:afterleave="hiddenContainer">
+        <view class="page-container-main"></view>
+    </page-container>
+</view>
+<wxs module="fn">
+    module.exports = {
+    split: function (str, sign) {
+    if(str) return str.split(sign);
+    }
+    };
+</wxs>
