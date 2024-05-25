@@ -6,6 +6,7 @@ Component({
         colors: Array,
         opacitys: Array,
     },
+    // 监听指定组件参数
     observers: {
         'src, colors, opacitys': function (src, colors, opacitys) {
             // 读取 src 链接资源
@@ -32,7 +33,6 @@ Component({
                             })
                         } catch (error) { }
                     }
-                    console.log(basestr)
                     // 替换参数对应的值
                     const fun = (parmName, paemVals) => {
                         let index = 0
@@ -48,8 +48,6 @@ Component({
                     // 匹配透明度，并进行替换
                     if (opacitys && opacitys.length)
                         fun('(fill|stroke)-opacity', opacitys)
-
-                    console.log(basestr)
                     // 将 svg 数据进行 URL 编码
                     basestr = encodeURIComponent(basestr)
                     this.setData({
