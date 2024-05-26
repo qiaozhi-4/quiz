@@ -2,96 +2,119 @@
 
 /* 阴影渐变 */
 .color-shadow-gradient1 {
-  box-shadow: 0px 0px 10px 5px rgba(188, 92, 255, 0.5);
+    box-shadow: 0px 0px 10px 5px rgba(188, 92, 255, 0.5);
 }
 
 /* 背景渐变 */
 .color-bg-gradient1 {
-  background: linear-gradient(to bottom, #bc5cf8 0%, #6F3ED3 30%, #2F2460 100%);
+    background: linear-gradient(to bottom, #bc5cf8 0%, #6F3ED3 30%, #2F2460 100%);
 }
 
 /* 背景渐变 */
 .color-bg-gradient2 {
-  background: linear-gradient(to right, #7756EC 0%, #B351F9 39%, #A627E1 100%);
+    background: linear-gradient(to right, #7756EC 0%, #B351F9 39%, #A627E1 100%);
 }
 
 /* 文字渐变 */
 .color-text-gradient1 {
-  background: linear-gradient(to right, #be53ff, #ad5cff, #9c63ff, #8b68ff, #796dff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+    background: linear-gradient(to right, #be53ff, #ad5cff, #9c63ff, #8b68ff, #796dff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* -------------------------------------------------------虚化------------------------------------------------------- */
+.bokeh-right {
+    mask-image: linear-gradient(to right,
+            rgba(0, 0, 0, 1),
+            rgba(0, 0, 0, 0.5) 20%,
+            rgba(0, 0, 0, 0));
+    -webkit-mask-image: linear-gradient(to right,
+            rgba(0, 0, 0, 1),
+            rgba(0, 0, 0, 0.5) 20%,
+            rgba(0, 0, 0, 0));
+}
+
+.bokeh-left {
+    mask-image: linear-gradient(to left,
+            rgba(0, 0, 0, 1),
+            rgba(0, 0, 0, 0.5) 50%,
+            rgba(0, 0, 0, 0));
+    -webkit-mask-image: linear-gradient(to left,
+            rgba(0, 0, 0, 1),
+            rgba(0, 0, 0, 0.5) 50%,
+            rgba(0, 0, 0, 0));
 }
 
 /* -------------------------------------------------------字体------------------------------------------------------- */
 
-.text-overflow
- {
-   /* 防止文本换行 */
-  white-space: nowrap;
-  /* 隐藏超出部分 */
-  overflow: hidden;
-  /* 显示省略号 */
-  text-overflow: ellipsis;
+.text-overflow {
+    /* 防止文本换行 */
+    white-space: nowrap;
+    /* 隐藏超出部分 */
+    overflow: hidden;
+    /* 显示省略号 */
+    text-overflow: ellipsis;
 }
 
 /* 标题 */
 .text-title {
-  font-size: 34px;
-  font-weight: 1000;
+    font-size: 34px;
+    font-weight: 1000;
 }
 
 /* 小标 */
 .text-title-min {
-  font-size: 32px;
-  font-weight: 900;
+    font-size: 32px;
+    font-weight: 900;
 }
 
 /* 正文 */
 .text-main {
-  font-size: 20px;
-  font-weight: 700;
+    font-size: 20px;
+    font-weight: 700;
 }
 
 /* 小字 */
 .text-min1 {
-  font-size: 16px;
-  font-weight: 500;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 /* 小字 */
 .text-min2 {
-  font-size: 12px;
-  font-weight: 500;
+    font-size: 12px;
+    font-weight: 500;
 }
 
 /* -------------------------------------------------------容器------------------------------------------------------- */
 /* 容器 */
 .container {
-  display: grid;
-  /* 每个元素自动占用新行 */
-  grid-auto-flow: row;
-  /* 水平和垂直居中 */
-  place-items: center;
-  /* 设置行间距 */
-  gap: 10px 5px;
+    display: grid;
+    /* 每个元素自动占用新行 */
+    grid-auto-flow: row;
+    /* 水平和垂直居中 */
+    place-items: center;
+    /* 设置行间距 */
+    gap: 10px 5px;
 }
 
 .row {
-  width: 80vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 80vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.footer{
-  position: absolute;
-  bottom: 0;
-  width: 100vw;
-  height: 88px;
-  box-sizing: border-box;
 
-  background-color: #2F1969;
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    height: 88px;
+    box-sizing: border-box;
 
-  display: flex;
-  align-items: center;
+    background-color: #2F1969;
+
+    display: flex;
+    align-items: center;
 }
