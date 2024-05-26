@@ -54,10 +54,32 @@ Page({
             activityContainer: currentActivityContainer == activity ? '' : activity,
         })
     },
-    // 隐藏容器
+    // 隐藏容器时触发
     hiddenContainer(e) {
         this.setData({
             activityContainer: ''
+        })
+    },
+    // 键盘高度发生变化的时候触发此事件，event.detail = {height: height, duration: duration}
+    getBottom(event) {
+        console.log(event)
+        this.setData({
+            bottom: event.detail.height
+        })
+    },
+    // 键盘输入时触发，event.detail = {value, cursor, keyCode}
+    inputChange: function (e) {
+        let inputValues = this.data.inputValues
+        inputValues[this.data.index] = e.detail.value
+        this.setData({
+            inputValues: inputValues//e.detail.value表示输入框的当前值
+        })
+        console.log(this.data.inputValues, this.data.index)
+    }, 
+    // 输入观点完成触发
+    handleFooterClick() {
+        this.setData({
+            showInput: true,
         })
     },
 })

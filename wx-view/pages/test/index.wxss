@@ -95,7 +95,20 @@ page {
     transform: scale(0.9);
 }
 
-.page-container-main {
+/* 抽屉样式 */
+.preview {
     height: 89.16256vh;
     background-color: #2F1969;
+    display: grid;
+    grid-template-rows: 1fr 68.222vh 10.8374vh;
+    place-items: stretch center;
 }
+
+/* 抽屉预览框头部样式 */
+.preview-header {}
+
+/* 抽屉预览框主体样式 */
+.preview-main {}
+
+/* 预览项样式 */
+.preview-item {}

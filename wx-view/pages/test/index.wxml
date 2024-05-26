@@ -34,15 +34,35 @@
     <view class="grid-item  grid-item-6" style="{{activityContainer != '' ?'background-color: #1F1146' :''}}">
         <svg class="" width="24px" opacitys="{{[activityContainer == 'menu' ? 1 : 0.3]}}" src="/images/menu.svg" bindtap="changeActivityContainer" data-activity="menu" />
         <svg class="" width="24px" opacitys="{{activityContainer == 'airplay-video' ? [1,1] : [0.3,0.3]}}" src="/images/airplay-video.svg" bindtap="changeActivityContainer" data-activity="airplay-video" />
-        <button class=" viewpoint  text-min1" hover-class="viewpoint-placeholderStyle" bindtap="changeActivityContainer" data-activity="input-viewpoint">
+        <button class=" viewpoint  text-min1" hover-class="viewpoint-placeholderStyle">
             说说你的选择
         </button>
     </view>
-    <!-- 弹出框 -->
-    <page-container show="{{activityContainer}}" round="true" close-on-slide-down="true" bind:afterleave="hiddenContainer">
-        <view class="page-container-main"></view>
-    </page-container>
 </view>
+<!-- 弹出框 -->
+<page-container show="{{activityContainer}}" round="true" close-on-slide-down="true" bind:afterleave="hiddenContainer">
+    <view class="preview">
+        <view class="preview-header text-main">乔治 的 01号测试</view>
+        <view class="preview-main">
+            <block wx:if="{{activityContainer == 'menu'}}">
+                <view wx:for="{{questions}}" wx:key="unique" class="preview-item" style="min-height: 62px; padding: 12px 23px;">
+                    <view class="text-overflow text-min2">{{item.title}}</view>
+                    <view class="">
+                        <view class="text-overflow text-min1">
+                            {{options[index] ? options[index] : '? ? ? ? ?'}}
+                        </view>
+                        <view wx:if="{{inputValues[index]}}" class="text-overflow text-min2">
+                            {{inputValues[index]}}
+                        </view>
+                    </view>
+                </view>
+            </block>
+            <view wx:elif="{{activityContainer == 'airplay-video'}}" class="drawer-content">
+                你好！🌟 开始你的自我探索之旅吧！凭回忆和直觉的选择回答就好。
+            </view>
+        </view>
+    </view>
+</page-container>
 <wxs module="fn">
     module.exports = {
     split: function (str, sign) {
