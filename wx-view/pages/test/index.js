@@ -75,7 +75,7 @@ Page({
             inputValues: inputValues//e.detail.value表示输入框的当前值
         })
         console.log(this.data.inputValues, this.data.index)
-    }, 
+    },
     // 输入观点完成触发
     handleFooterClick() {
         this.setData({

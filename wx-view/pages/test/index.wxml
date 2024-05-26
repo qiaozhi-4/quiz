@@ -1,5 +1,6 @@
 <page-header />
 <view class="container-grid">
+    <page-header />
     <view class="grid-item grid-item-1">
         <svg class="grid-item-1-1" src="/images/star.svg"></svg>
         <svg src="/images/share.svg"></svg>
