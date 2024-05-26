@@ -20,10 +20,12 @@
                 <!-- 题目 -->
                 <view class="text-title-min title">{{item.title}}</view>
                 <!-- 选项 -->
-                <view class="options">
-                    <button wx:for="{{fn.split(questions[index].options,'@@')}}" wx:key="unique" class="option" hover-class="color-shadow-gradient1 color-bg-gradient2" bindtap="handleOptionClick" data-option="{{item}}">
-                        <view class="text-main text-overflow">{{item}}</view>
-                    </button>
+                <view class="options-container">
+                    <view class="options">
+                        <button wx:for="{{fn.split(questions[index].options,'@@')}}" wx:key="unique" class="option" hover-class="color-shadow-gradient1 color-bg-gradient2" bindtap="handleOptionClick" data-option="{{item}}">
+                            <view class="text-main text-overflow">{{item}}</view>
+                        </button>
+                    </view>
                 </view>
             </swiper-item>
         </swiper>

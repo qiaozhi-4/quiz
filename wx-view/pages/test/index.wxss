@@ -41,9 +41,15 @@ page {
     padding: 0 15px;
 }
 
-.options {
-    /* 当子元素过多时出现滚动条 */
+.options-container {
+    /* 当子元素超出时出现滚动条 */
     overflow: auto;
+    /* 为了选项的阴影效果能够完全显示 */
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+.options {
     /* max-height: 350px; */
     /* max-height: 43.1103vh; */
     min-height: 22.2vh;
