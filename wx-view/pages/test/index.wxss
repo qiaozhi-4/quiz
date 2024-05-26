@@ -66,6 +66,40 @@ page {
     height: 43px;
 }
 
+/* 指示点容器 */
+.indicator-dots {
+    /* 限制宽高 */
+    display: flex;
+    width: 95px;
+    height: 11px;
+    gap: 10px;
+
+    /* 设置绝对定位 */
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    /* 通过transform将自身偏移自身宽度的50% */
+    transform: translateX(-50%);
+
+    /* 限制子元素超出部分隐藏 */
+    overflow: hidden;
+
+    transition: transform 0.5s ease;
+    /* background-color: rgba(192, 20, 100,1); */
+
+}
+
+/* 指示点 */
+.indicator-dots-item {
+    border-radius: 50%;
+    height: 11px;
+    min-width:  11px;
+    background-color: rgba(255, 255, 255, 0.3);
+
+    position: relative;
+    /* left: 50%; */
+}
+
 .grid-item-6 {
     display: grid;
     grid-template-columns: repeat(6, 1fr);

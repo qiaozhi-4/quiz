@@ -1,4 +1,3 @@
-<page-header />
 <view class="container-grid">
     <page-header />
     <view class="grid-item grid-item-1">
@@ -16,7 +15,8 @@
         <progress strokeWidth="92vw" strokeHeight="17px" percentage="{{(index+1)/questions.length*100}}" />
     </view>
     <view class="grid-item  grid-item-5">
-        <swiper class="questions" indicator-dots="true" current="{{index}}" bindchange="handleSwiperChange" indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#fff" indicator-height="{{111}}">
+        <!-- <swiper class="questions" indicator-dots="true" current="{{index}}" bindchange="handleSwiperChange" indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#fff" indicator-height="{{111}}"> -->
+        <swiper class="questions" current="{{index}}" bindchange="handleSwiperChange" indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#fff" indicator-height="{{111}}">
             <swiper-item class="question" wx:for="{{questions}}" wx:key="unique">
                 <!-- 题目 -->
                 <view class="text-title-min title">{{item.title}}</view>
@@ -30,6 +30,13 @@
                 </view>
             </swiper-item>
         </swiper>
+        <!-- 自定义指示点 -->
+        <view class="indicator-dots">
+            <view wx:for="{{questions}}" wx:key="unique" wx:for-index="idx" class="indicator-dots-item   " style="{{index == idx ? 'background-color: #fff;' : ''}}  transform: translateX({{index * -100}}%);"></view>
+            <!-- <view wx:for="{{questions}}" wx:key="unique" wx:for-index="idx" class="indicator-dots-item bokeh-right  " style="{{index == idx ? 'background-color: #fff;' : ''}}  transform: translateX({{index * -100}}%);"></view> -->
+            <!-- <view class="indicator-dots-item" style="{{index == 0 ? 'background-color: #fff' : ''}}"></view>
+            <view class="indicator-dots-item" style="{{index != 0 && index != questions.length-1 ? 'background-color: #fff' : ''}}"></view>
+            <view class="indicator-dots-item" style="{{index == questions.length-1 ? 'background-color: #fff' : ''}}"></view> -->
         </view>
     </view>
     <view class="grid-item  grid-item-6" style="{{activityContainer != '' ?'background-color: #1F1146' :''}}">
