@@ -7,6 +7,7 @@ page {
     grid-template-rows: 1fr 6.1576vh 7.5123vh 1.8473vh 2.0936vh 57.88177vh 10.8374vh;
     place-content: space-between center;
     height: 100vh;
+    gap: 3px;
 }
 
 .grid-item {
@@ -44,7 +45,8 @@ page {
     /* 当子元素过多时出现滚动条 */
     overflow: auto;
     /* max-height: 350px; */
-    max-height: 43.1103vh;
+    /* max-height: 43.1103vh; */
+    min-height: 22.2vh;
     display: grid;
     gap: 15px;
     place-content: start space-evenly;
