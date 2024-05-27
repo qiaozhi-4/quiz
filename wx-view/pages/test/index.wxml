@@ -32,11 +32,9 @@
         </swiper>
         <!-- 自定义指示点 -->
         <view class="indicator-dots">
-            <view wx:for="{{questions}}" wx:key="unique" wx:for-index="idx" class="indicator-dots-item   " style="{{index == idx ? 'background-color: #fff;' : ''}}  transform: translateX({{index * -100}}%);"></view>
-            <!-- <view wx:for="{{questions}}" wx:key="unique" wx:for-index="idx" class="indicator-dots-item bokeh-right  " style="{{index == idx ? 'background-color: #fff;' : ''}}  transform: translateX({{index * -100}}%);"></view> -->
-            <!-- <view class="indicator-dots-item" style="{{index == 0 ? 'background-color: #fff' : ''}}"></view>
-            <view class="indicator-dots-item" style="{{index != 0 && index != questions.length-1 ? 'background-color: #fff' : ''}}"></view>
-            <view class="indicator-dots-item" style="{{index == questions.length-1 ? 'background-color: #fff' : ''}}"></view> -->
+            <block wx:for="{{questions}}" wx:key="unique" wx:for-index="idx">
+                <view class="indicator-dots-item" style="{{index == idx ? 'background-color: #fff;' : ''}}  transform: translateX({{index < 2 ? 0 : index > questions.length - 1 - 2 ? (questions.length - 1 - 1 - 3) * -21 : (index-2) * -21}}px) {{(idx > index + 2 || idx < index - 2) && (index > 2 || idx > 4) && (index < questions.length-1-2 || idx < questions.length-1-4) ? 'scale(0)': ''}};"></view>
+            </block>
         </view>
     </view>
     <view class="grid-item  grid-item-6" style="{{activityContainer != '' ?'background-color: #1F1146' :''}}">
