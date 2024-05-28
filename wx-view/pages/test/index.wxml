@@ -49,9 +49,10 @@
 <page-container show="{{activityContainer}}" round="true" close-on-slide-down="true" bind:afterleave="hiddenContainer">
     <view class="preview">
         <view class="preview-header text-main">乔治 的 01号测试</view>
-        <view class="preview-main">
-            <block wx:if="{{activityContainer == 'menu'}}">
-                <view wx:for="{{questions}}" wx:key="unique" class="preview-item" style="min-height: 62px; padding: 12px 23px;">
+        <view class="preview-main" id="scrollContainer">
+            <block wx:for="{{questions}}" wx:key="unique" wx:for-index="idx">
+                <view hidden="{{activityContainer != 'menu'}}" class="preview-item" bindtap="jumpQuestion" data-index="{{idx}}">
+                    <svg src="/images/punctuation.svg"></svg>
                     <view class="preview-item-title text-overflow text-min2">{{item.title}}</view>
                     <view class="text-overflow text-min1">
                         {{options[index] ? options[index] : '? ? ? ? ?'}}
@@ -61,7 +62,7 @@
                     </view>
                 </view>
             </block>
-            <view wx:elif="{{activityContainer == 'airplay-video'}}" class="preview-described text-min1">
+            <view class="preview-described text-min1" hidden="{{activityContainer != 'airplay-video'}}">
                 你好！🌟 开始你的自我探索之旅吧！凭回忆和直觉的选择回答就好。
             </view>
         </view>

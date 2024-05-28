@@ -163,21 +163,18 @@ page {
     gap: 2px 20px;
     grid-template-columns: auto-fill;
     align-items: center;
+    min-height: 62px;
+    padding: 12px 23px;
 }
 
 .preview-item-title {
     grid-column: 1/3;
 }
 
-.preview-item-title::before {
-    content: "“";
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 2rem;
-
+.preview-item>svg {
     position: absolute;
-    left: -10px;
-    top: 5px;
-
+    top: 13px;
+    left: 10px;
 }
 
 .preview-item-title,

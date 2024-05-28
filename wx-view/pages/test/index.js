@@ -38,7 +38,7 @@ Page({
     handleOptionClick(e) {
         let index = this.data.index
         let options = this.data.options
-        let option = e.target.dataset.option
+        let option = e.currentTarget.dataset.option
         options[index] = option
         if (index >= this.data.questions.length - 1) return
         this.setData({
@@ -49,7 +49,7 @@ Page({
     // 修改当前活动的容器
     changeActivityContainer(e) {
         let currentActivityContainer = this.data.activityContainer
-        let activity = e.target.dataset.activity
+        let activity = e.currentTarget.dataset.activity
         this.setData({
             activityContainer: currentActivityContainer == activity ? '' : activity,
         })
@@ -60,6 +60,16 @@ Page({
             activityContainer: ''
         })
     },
+    // 隐藏容器时触发
+    jumpQuestion(e) {
+        let index = e.currentTarget.dataset.index
+        this.setData({
+            index: index,
+            activityContainer: ''
+        })
+    },
+
+
     // 键盘高度发生变化的时候触发此事件，event.detail = {height: height, duration: duration}
     getBottom(event) {
         console.log(event)
