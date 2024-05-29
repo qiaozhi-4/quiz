@@ -37,11 +37,17 @@
             </block>
         </view>
     </view>
-    <view class="grid-item  grid-item-6" style="{{activityContainer != '' ?'background-color: #1F1146' :''}}">
+    <view hidden="{{showInput}}" class="grid-item  grid-item-6" style="{{activityContainer != '' ?'background-color: #1F1146' :''}}">
         <svg class="" width="24px" opacitys="{{[activityContainer == 'menu' ? 1 : 0.3]}}" src="/images/menu.svg" bindtap="changeActivityContainer" data-activity="menu" />
         <svg class="" width="24px" opacitys="{{activityContainer == 'airplay-video' ? [1,1] : [0.3,0.3]}}" src="/images/airplay-video.svg" bindtap="changeActivityContainer" data-activity="airplay-video" />
-        <button class=" viewpoint  text-min1" hover-class="viewpoint-placeholderStyle">
+        <button class=" viewpoint  text-min1" hover-class="viewpoint-placeholderStyle" bindtap="onShowInput">
             说说你的选择
+        </button>
+    </view>
+    <view hidden="{{!showInput}}" class="grid-item grid-item-viewpoint" style="bottom: {{bottom}}px;">
+        <input class="viewpoint-input  text-min" focus="{{true}}" bindkeyboardheightchange="getKeyboardBottom" value="{{inputValues[index]}}" bindinput="inputChange" bindblur="onHideInput" adjust-position="{{false}}" placeholder="记下观点" />
+        <button disabled="{{!inputValues ? true : false}}" class="viewpoint-but{{!inputValues[index] ? '-disabled' : ''}} text-min1 " bindtap="onHideInput">
+            完成
         </button>
     </view>
 </view>
@@ -55,10 +61,10 @@
                     <svg src="/images/punctuation.svg"></svg>
                     <view class="preview-item-title text-overflow text-min2">{{item.title}}</view>
                     <view class="text-overflow text-min1">
-                        {{options[index] ? options[index] : '? ? ? ? ?'}}
+                        {{options[idx] ? options[idx] : '? ? ? ? ?'}}
                     </view>
-                    <view wx:if="{{inputValues[index]}}" class="preview-item-input text-overflow text-min2">
-                        {{inputValues[index]}}
+                    <view wx:if="{{inputValues[idx]}}" class="preview-item-input text-overflow text-min2">
+                        {{inputValues[idx]}}
                     </view>
                 </view>
             </block>

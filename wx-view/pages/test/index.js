@@ -8,6 +8,7 @@ Page({
         inputValues: [], // 输入框的值
         index: 0, // 当前题目索引
         activityContainer: '', // 活动预览窗口
+        showInput: false, // 是否显示输入框
     },
     onLoad() {
         // 获取随机题目
@@ -71,7 +72,7 @@ Page({
 
 
     // 键盘高度发生变化的时候触发此事件，event.detail = {height: height, duration: duration}
-    getBottom(event) {
+    getKeyboardBottom(event) {
         console.log(event)
         this.setData({
             bottom: event.detail.height
@@ -84,12 +85,19 @@ Page({
         this.setData({
             inputValues: inputValues//e.detail.value表示输入框的当前值
         })
-        console.log(this.data.inputValues, this.data.index)
+        console.log(this.data.inputValues);
     },
-    // 输入观点完成触发
-    handleFooterClick() {
+    // 显示输入框
+    onShowInput() {
         this.setData({
             showInput: true,
+            activityContainer: '',
+        })
+    },
+    // 隐藏输入框
+    onHideInput() {
+        this.setData({
+            showInput: false,
         })
     },
 })
