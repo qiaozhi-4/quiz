@@ -73,7 +73,7 @@ Page({
 
     // 键盘高度发生变化的时候触发此事件，event.detail = {height: height, duration: duration}
     getKeyboardBottom(event) {
-        console.log(event)
+        console.log(event.detail)
         this.setData({
             bottom: event.detail.height
         })
@@ -85,7 +85,6 @@ Page({
         this.setData({
             inputValues: inputValues//e.detail.value表示输入框的当前值
         })
-        console.log(this.data.inputValues);
     },
     // 显示输入框
     onShowInput() {
@@ -98,6 +97,7 @@ Page({
     onHideInput() {
         this.setData({
             showInput: false,
+            bottom: 0,
         })
     },
 })

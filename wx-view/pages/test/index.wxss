@@ -131,29 +131,33 @@ page {
 .grid-item-viewpoint {
     grid-template-columns: 77vw 16.5vw;
     background-color: #2F1969;
-    place-content: start space-evenly;
+    place-content: center space-evenly;
     padding-top: 10px;
+    padding-bottom: 10px;
+    align-self: end;
+}
+
+.viewpoint-input,
+.viewpoint-but,
+.viewpoint-but-disabled {
+    height: 40px;
+    white-space: nowrap;
 }
 
 .viewpoint-input {
     background-color: rgba(255, 255, 255, 0.1);
-    height: 40px;
     border-radius: 30px;
     padding: 0 20px;
 }
 
 .viewpoint-but {
-    white-space: nowrap;
-    height: 36px;
     color: #fff;
     background-color: #5830C7;
 }
 
 .viewpoint-but-disabled {
-    white-space: nowrap;
-    height: 36px !important;
-    color: rgba(255, 255, 255, 0.3) !important;
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* 抽屉样式 */
