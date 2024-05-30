@@ -211,6 +211,10 @@ page {
     color: rgba(255, 255, 255, 0.7);
 }
 
+.preview-item-input {
+    justify-self: end;
+}
+
 /* 预览概括 */
 .preview-described {
     padding: 23px;
