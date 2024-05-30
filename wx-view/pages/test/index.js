@@ -73,7 +73,6 @@ Page({
 
     // 键盘高度发生变化的时候触发此事件，event.detail = {height: height, duration: duration}
     getKeyboardBottom(event) {
-        console.log(event.detail)
         this.setData({
             bottom: event.detail.height
         })
