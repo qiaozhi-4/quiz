@@ -3,6 +3,5 @@
   "projectname": "wx-view",
   "setting": {
     "compileHotReLoad": true
-  },
-  "libVersion": "development"
+  }
 }
