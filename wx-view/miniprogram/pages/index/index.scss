@@ -60,3 +60,8 @@ page {
 .nickname-input {
   flex: 1;
 }
+
+.user-motto{
+  font-size:  map-get( global.$font-size, 'xxxx-large');
+  font-weight: bold;
+}

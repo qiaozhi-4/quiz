@@ -1,40 +1,65 @@
-// 最大标题
-$font-size-max-title: 36;
-$font-weight-max-title: 900;
-$font-color-max-title: rbga(255, 255, 255, 1);
-// 小标题
-$font-size-min-title: 32;
-$font-weight-min-title: 700;
-$font-color-min-title: rbga(255, 255, 255, 1);
+// $font-size: 60px;
+// $font-size: 40;
+// $font-size: 36;
+// $font-size: 32;
+// $font-size: 28;
+// $font-size: 20;
+// $font-size-smal: 16;
+// $font-size-mini: 12;
+// $font-weight: 900;
+// $font-weight: 700;
+// $font-weight: 400;
+// $font-weight: 200;
+// 强化的透明度
+// $font-color-intensify: rbga(255, 255, 255, 1);
+// 弱化的透明度
+// $font-color-weaken: rbga(255, 255, 255, 0.3);
+// 特殊页面超大标题
+// 特殊页面的大标题
+// 特殊页面正文
+// 主要页面的标题的强调信息
+// 主要页面的标题
+// 大按钮上的文字
+// 正文的强调信息
+// 主要正文
+// 大输入框未输入时提示
+// 次正文的强调信息
+// 次正文
+// 次正文辅助信息
+// 输入框未输入时提示文本
+// 说明注释的强调信息
+// 说明注释
+// 说明注释辅助信息
 
-// 标题强调最大号字体
-$font-size-min-title: 20;
-$font-weight-min-title: 900;
-$font-color-min-title: rbga(255, 255, 255, 1);
-// 常用标题大号字体
-$font-size-min-title: 20;
-$font-weight-min-title: 700;
-$font-color-min-title: rbga(255, 255, 255, 1);
 
-// 常用小标题或正文
-$font-size-min-title: 16;
-$font-weight-min-title: 700;
-$font-color-min-title: rbga(255, 255, 255, 1);
-// 较细字体正文
-$font-size-min-title: 16;
-$font-weight-min-title: 400;
-$font-color-min-title: rbga(255, 255, 255, 1);
-// 辅助提醒-超细
-$font-size-min-title: 16;
-$font-weight-min-title: 200;
-$font-color-min-title: rbga(255, 255, 255, 0.3);
+// $font-size: (
+//   'extra-large': 36px,
+//   'large': 32px,
+//   'medium': 28px,
+//   'base': 20px,
+//   'small': 16px,
+//   'extra-small': 12px
+// );
 
-// 小文字-加强
-$font-size-min-title: 12;
-$font-weight-min-title: 700;
-$font-color-min-title: rbga(255, 255, 255, 0.3);
-// 小文字-辅助
-$font-size-min-title: 12;
-$font-weight-min-title: 400;
-$font-color-min-title: rbga(255, 255, 255, 0.3);
+$font-size: (
+  'xxxx-large': 60px,
+  'xxx-large': 40px,
+  'xx-large': 36px,
+  'x-large': 32px,
+  'large': 28px,
+  'medium':20px,
+  'small': 16px,
+  'x-small': 12px,
+);
 
+$font-weight: (
+  'black': 900,
+  'extra-bold': 800,
+  'bold': 700,
+  'semi-bold': 600,
+  'medium': 500,
+  'normal': 400,
+  'light': 300,
+  'extra-light': 200,
+  'thin': 100,
+);
