@@ -4,10 +4,10 @@ const app = getApp<IAppOption>()
 const request = (options: WechatMiniprogram.RequestOption<Quiz.Result>) => {
   // 返回一个promise对象
   return new Promise((resolve, reject) => {
-    //设置基础请求头
+    /** 设置基础请求头 */
     const baseUrl = "https://qzwd yz.top/quiz"
     wx.request<Quiz.Result>({
-      url: baseUrl + options.url, //仅为示例，并非真实的接口地址
+      url: baseUrl + options.url,
       data: options.data,
       method: options.method,
       header: {
