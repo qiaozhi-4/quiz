@@ -53,15 +53,10 @@ Component({
   data: {
     /** 是否为IOS */
     ios: false,
-    // 导航栏样式
-    /**  */
-    innerPaddingRight: '',
-    // 导航栏高度
-    /**  */
-    leftWidth: '',
-    // 导航栏标题
-    /**  */
-    safeAreaTop: ''
+    /** 导航高度 */
+    paddingAround: '',
+    /** 导航栏左右边距 */
+    height: '',
   },
   // 组件生命周期声明对象
   lifetimes: {
@@ -73,16 +68,13 @@ Component({
           const isDevtools = res.platform === 'devtools'
           this.setData({
             ios: !isAndroid,
-            innerPaddingRight: `padding-right: ${res.windowWidth - rect.left}px`,
-            leftWidth: `width: ${res.windowWidth - rect.left}px`,
-            safeAreaTop: isDevtools || isAndroid ? `height: calc(var(--height) + ${res.safeArea.top}px); padding-top: ${res.safeArea.top}px` : ``
+            paddingAround: `padding-right: ${res.windowWidth - rect.right}px; padding-left: ${res.windowWidth - rect.right}px; padding-top: ${rect.top}px;`,
+            height: `height: calc(var(--padding) + ${rect.bottom}px);`,
           })
           console.log('胶囊:', rect)
           console.log('屏幕宽度:', res.windowWidth, ' 屏幕高度:', res.windowHeight)
           console.log(this.data.ios)
-          console.log(this.data.innerPaddingRight)
-          console.log(this.data.leftWidth)
-          console.log(this.data.safeAreaTop)
+          console.log(this.data.paddingAround)
 
         }
       })

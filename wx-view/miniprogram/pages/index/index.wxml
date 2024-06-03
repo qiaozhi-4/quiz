@@ -1,6 +1,6 @@
 <!-- index.wxml -->
 <!-- <navigation-bar title="Weixin" back="{{true}}" color="black" background="#FFF"></navigation-bar> -->
-<navigation-bar-new title="测试"></navigation-bar-new>
+<navigation-bar-new title="Weixin" ></navigation-bar-new>
 <scroll-view class="scrollarea" scroll-y type="list">
   <view class="container">
     <view class="userinfo">
