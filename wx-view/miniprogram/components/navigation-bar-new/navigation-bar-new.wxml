@@ -1,0 +1,5 @@
+<view class="navigation-bar">
+  <view class='navigation-bar-left'></view>
+  <view class='navigation-bar-center'></view>
+  <view class='navigation-bar-right'></view>
+</view>
