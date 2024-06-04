@@ -35,9 +35,7 @@ Component({
         filePath: src,
         encoding: 'binary',
         success: res => {
-          let basestr: any = res.data
-          console.log('6544544:',basestr);
-          
+          let basestr: any = res.data          
           // 设置默认宽度
           if (!this.data.width) {
             try {
