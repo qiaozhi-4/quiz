@@ -1,5 +1,0 @@
-<view class="navigation-bar" style="{{height + paddingAround}}">
-  <view class='navigation-bar-left'>11</view>
-  <view class='navigation-bar-center'>{{title}}</view>
-  <view class='navigation-bar-right'></view>
-</view>
