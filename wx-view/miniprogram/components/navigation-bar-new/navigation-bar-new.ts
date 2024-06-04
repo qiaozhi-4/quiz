@@ -65,7 +65,6 @@ Component({
       wx.getSystemInfo({
         success: (res) => {
           const isAndroid = res.platform === 'android'
-          const isDevtools = res.platform === 'devtools'
           this.setData({
             ios: !isAndroid,
             paddingAround: `padding-right: ${res.windowWidth - rect.right}px; padding-left: ${res.windowWidth - rect.right}px; padding-top: ${rect.top}px;`,
@@ -73,9 +72,6 @@ Component({
           })
           console.log('胶囊:', rect)
           console.log('屏幕宽度:', res.windowWidth, ' 屏幕高度:', res.windowHeight)
-          console.log(this.data.ios)
-          console.log(this.data.paddingAround)
-
         }
       })
     },

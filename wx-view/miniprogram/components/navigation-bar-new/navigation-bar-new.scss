@@ -1,6 +1,6 @@
 .navigation-bar {
   --padding: 10px;
-  padding-bottom: 10px;
+  padding-bottom: var(--padding);
   grid-template-columns: 1fr 2fr 1fr;
 
   background-color: aqua;
@@ -14,7 +14,7 @@
 
   .navigation-bar-center {
     place-content: center;
-    
+
     font-size: 36px;
     background-color: rgb(167, 115, 48);
   }
