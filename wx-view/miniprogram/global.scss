@@ -1,46 +1,3 @@
-// $font-size: 60px;
-// $font-size: 40;
-// $font-size: 36;
-// $font-size: 32;
-// $font-size: 28;
-// $font-size: 20;
-// $font-size-smal: 16;
-// $font-size-mini: 12;
-// $font-weight: 900;
-// $font-weight: 700;
-// $font-weight: 400;
-// $font-weight: 200;
-// 强化的透明度
-// $font-color-intensify: rbga(255, 255, 255, 1);
-// 弱化的透明度
-// $font-color-weaken: rbga(255, 255, 255, 0.3);
-// 特殊页面超大标题
-// 特殊页面的大标题
-// 特殊页面正文
-// 主要页面的标题的强调信息
-// 主要页面的标题
-// 大按钮上的文字
-// 正文的强调信息
-// 主要正文
-// 大输入框未输入时提示
-// 次正文的强调信息
-// 次正文
-// 次正文辅助信息
-// 输入框未输入时提示文本
-// 说明注释的强调信息
-// 说明注释
-// 说明注释辅助信息
-
-
-// $font-size: (
-//   'extra-large': 36px,
-//   'large': 32px,
-//   'medium': 28px,
-//   'base': 20px,
-//   'small': 16px,
-//   'extra-small': 12px
-// );
-
 $font-size: (
   'xxxx-large': 60px,
   'xxx-large': 40px,
@@ -51,7 +8,6 @@ $font-size: (
   'small': 16px,
   'x-small': 12px,
 );
-
 $font-weight: (
   'black': 900,
   'extra-bold': 800,
@@ -64,7 +20,26 @@ $font-weight: (
   'thin': 100,
 );
 $padding: (
-  'large': 8px 16px,
-  'default': 4px 12px,
+  'large': 10px 20px,
+  'default': 6px 12px,
   'small': 2px 8px,
-  ),
+);
+$colors: (
+  "主题色": rgba(88, 48, 199, 1),
+  "淡紫": rgba(119, 86, 236, 1),
+  "主题粉": rgba(188, 92, 248, 1),
+  "紫黑": rgba(31, 17, 70, 1),
+  "六紫": rgba(111, 62, 211, 1),
+  "纯白色": rgba(255, 255, 255, 1),
+  "亮紫蓝": rgba(78, 63, 246, 1),
+  "亮粉紫": rgba(167, 41, 226, 1),
+  "亮天蓝": rgba(39, 177, 255, 1),
+  "白色透明三十": rgba(255, 255, 255, 0.3),
+  "常用黑": rgba(4, 11, 31, 1),
+  "加深紫": rgba(47, 25, 105, 1),
+);
+$button: (
+  'large': ('height':40px, 'width': 105px),
+  'default': ('height':40px, 'width': 105px),
+  'small': ('height':40px, 'width': 105px),
+  )
