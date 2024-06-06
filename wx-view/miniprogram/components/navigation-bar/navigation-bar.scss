@@ -10,8 +10,8 @@
 
   .navigation-bar-center {
     place-content: end center;
-
-    font-size: 18px;
+    font-weight: map-get(global.$font-weight, 'black');
+    font-size: map-get(global.$font-size, large);
   }
 
   .navigation-bar-right {
