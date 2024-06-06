@@ -1,6 +1,6 @@
 <view class="navigation-bar" style="{{height + paddingAround}}">
   <view class='navigation-bar-left'>
-    <svg src="/images/return.svg" wx:if="{{back||homeButton}}"></svg>
+    <svg src="/images/return.svg" wx:if="{{back||homeButton}}"  bind:tap="back"></svg>
   </view>
   <view class='navigation-bar-center'>{{title}}</view>
   <view class='navigation-bar-right'></view>
