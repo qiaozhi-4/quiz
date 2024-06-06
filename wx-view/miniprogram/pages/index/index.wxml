@@ -1,2 +1,5 @@
 <!-- index.wxml -->
-<navigation-bar title="Weixin"></navigation-bar>
+<!-- <navigation-bar title="Weixin"></navigation-bar> -->
+<view class="container">
+  <button class="item">test</button>
+</view>
