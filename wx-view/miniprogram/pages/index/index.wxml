@@ -1,5 +1,11 @@
 <!-- index.wxml -->
-<!-- <navigation-bar title="Weixin"></navigation-bar> -->
+<!-- <view> -->
+<navigation-bar title="主页" back="{{false}}"></navigation-bar>
 <view class="container">
-  <button class="item">test</button>
+  <block wx:for="{{urls}}" wx:key="index" wx:for-item="item">
+    <view class="button-wrapper">
+      <button class="item" data-url="test" bind:tap="clickButton">test</button>
+    </view>
+  </block>
 </view>
+<!-- </view> -->

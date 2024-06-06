@@ -1,9 +1,29 @@
 .container {
-  padding: 50px;
-}
+  grid-template-columns: repeat(3, 1fr);
+  place-content: start space-evenly;
+  place-items: center;
+  gap: 10px;
+  padding: 10px;
 
-// .item {
-//   // height: 40vh;
-//   width: map-get(global.$button, large, width);
-//   height: map-get(global.$button, default, height) !important;
-// }
+  .button-wrapper {
+    background-color: map-get(global.$colors, 纯白色);
+    place-items: center;
+
+    .item {
+      background-color: map-get(global.$colors, 纯白色);
+      /* 文字加粗 */
+      background-image: linear-gradient(to right, #BE53FF 0%, #7756EC 100%);
+      /* 定义渐变色 */
+      -webkit-background-clip: text;
+      /* 使用渐变色剪辑文字 */
+      color: transparent;
+      /* 使文字颜色透明 */
+      transition: background 0.3s ease;
+      /* 添加过渡效果 */
+    }
+  }
+
+  .button-wrapper:hover {
+    filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8));
+  }
+}
