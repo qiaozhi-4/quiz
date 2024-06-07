@@ -14,7 +14,7 @@ declare namespace Quiz {
     /** 昵称 */
     nickname: string
     /** 权限集合 */
-    permissions: Array<string>
+    permissions: string[]
     /** 电话号码 */
     phone: string
     /** 更新时间 */
