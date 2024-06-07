@@ -1,6 +1,7 @@
 page {
   display: grid;
-  place-items: center;
+  place-items: start;
+  place-content: start;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -13,7 +14,8 @@ page {
 
 view {
   display: grid;
-  place-items: center;
+  place-items: start;
+  place-content: start;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
