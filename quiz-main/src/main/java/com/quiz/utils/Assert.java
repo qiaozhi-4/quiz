@@ -1,5 +1,6 @@
 package com.quiz.utils;
 
+import com.quiz.enumerate.ResultEnum;
 import com.quiz.exception.APIException;
 
 /**
@@ -13,6 +14,6 @@ import com.quiz.exception.APIException;
 public class Assert {
     public static void isTrue(boolean expression, String message) {
         if (!expression)
-            throw APIException.builder().message(message).build();
+            throw APIException.builder().message(message).code(ResultEnum.FAILED.getCode()).build();
     }
 }
