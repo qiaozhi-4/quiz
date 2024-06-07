@@ -3,7 +3,7 @@
 interface IAppOption {
   globalData: {
     /** 当前用户信息 */
-    userInfo?: WechatMiniprogram.UserInfo,
+    userInfo?: Quiz.UserInfo,
     /** 当前用户token */
     token?: string,
   }
