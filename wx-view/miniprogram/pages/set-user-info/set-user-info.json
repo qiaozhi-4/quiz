@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "quiz-navigation-bar": "/components/quiz-navigation-bar/quiz-navigation-bar"
+  }
+}
