@@ -1,7 +1,7 @@
 .navigation-bar {
   --padding: 10px;
   padding-bottom: var(--padding);
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr auto 1fr;
   place-content: end;
 
   .navigation-bar-left {
@@ -12,6 +12,8 @@
     place-content: end center;
     font-weight: map-get(global.$font-weight, 'black');
     font-size: map-get(global.$font-size, large);
+    /* 规定元素不换行 */
+    white-space: nowrap;
   }
 
   .navigation-bar-right {
