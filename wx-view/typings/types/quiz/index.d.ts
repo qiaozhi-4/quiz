@@ -6,6 +6,7 @@ declare namespace Quiz {
     avatarUrl: string
     /** 创建时间 */
     createdAt: string
+    /** 是否启用 */
     enabled: number
     /** 最后登录时间 */
     lastLoginAt: string
