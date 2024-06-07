@@ -4,7 +4,7 @@ const app = getApp<IAppOption>()
 
 Page({
   data: {
-    urls: ['test','test','test','test','test','test','test','test','test','test','test',]
+    urls: ['set-user-info',]
   },
   clickButton(e: WechatMiniprogram.TouchEvent) {
     let url = e.currentTarget.dataset.url

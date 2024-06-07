@@ -1,11 +1,9 @@
 <!-- index.wxml -->
-<!-- <view> -->
-<navigation-bar title="主页" back="{{false}}"></navigation-bar>
+<quiz-navigation-bar title="主页" back="{{false}}"></quiz-navigation-bar>
 <view class="container">
   <block wx:for="{{urls}}" wx:key="index" wx:for-item="item">
     <view class="button-wrapper">
-      <button class="item" data-url="test" bind:tap="clickButton">test</button>
+      <button class="item" data-url="{{item}}" bind:tap="clickButton">{{item}}</button>
     </view>
   </block>
 </view>
-<!-- </view> -->

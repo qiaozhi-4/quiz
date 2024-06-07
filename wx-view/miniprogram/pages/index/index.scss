@@ -1,5 +1,5 @@
 .container {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   place-content: start space-evenly;
   place-items: center;
   gap: 10px;
@@ -10,6 +10,8 @@
     place-items: center;
 
     .item {
+      width: 100% !important;
+      white-space: nowrap;
       background-color: map-get(global.$colors, 纯白色);
       /* 文字加粗 */
       background-image: linear-gradient(to right, #BE53FF 0%, #7756EC 100%);
