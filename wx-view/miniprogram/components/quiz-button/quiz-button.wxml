@@ -1,0 +1,6 @@
+<!-- components/quiz-button/quiz-button.wxml -->
+<view class="button-wrapper">
+  <button class="button">
+    <slot></slot>
+  </button>
+</view>
