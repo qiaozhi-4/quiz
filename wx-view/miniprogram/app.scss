@@ -24,8 +24,6 @@ view {
 button {
   display: grid;
   place-items: center;
-  width: map-get(global.$button, default, width) !important;
-  height: map-get(global.$button, default, height) !important;
   padding: map-get(global.$padding, default) !important;
   margin: 0 !important;
 }
