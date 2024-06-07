@@ -2,6 +2,6 @@
   "component": true,
   "styleIsolation": "apply-shared",
   "usingComponents": {
-    "svg": "/components/svg/svg"
+    "quiz-svg": "/components/quiz-svg/quiz-svg"
   }
 }
