@@ -19,4 +19,17 @@ public interface IUserService extends IService<User> {
      * @param account 用户名 or 邮箱 or 电话号码
      */
     UserDto getUserDtoByAccount(String account);
+
+    /**
+     * 平台注册用户
+     */
+    Boolean registerUser(User user);
+
+    /**
+     * 第三方注册用户
+     *
+     * @param tPName     第三方平台的名称
+     * @param providerId 用户在第三方平台相对当前应用的唯一id
+     */
+    void registerUserTP(User user, String tPName, String providerId);
 }

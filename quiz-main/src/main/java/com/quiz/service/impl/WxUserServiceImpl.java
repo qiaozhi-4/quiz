@@ -5,9 +5,8 @@ import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import com.quiz.constant.Constants;
 import com.quiz.dto.UserDto;
 import com.quiz.entity.User;
-import com.quiz.entity.UserAuth;
-import com.quiz.entity.UserRoles;
 import com.quiz.mapper.UserMapper;
+import com.quiz.service.IUserService;
 import com.quiz.service.IWxUserService;
 import com.quiz.utils.Assert;
 import com.quiz.utils.JWTUtils;
@@ -39,6 +38,7 @@ public class WxUserServiceImpl implements IWxUserService {
     private final WxMaService wxMaService;
     private final UserMapper userMapper;
     private final RedisTemplate<String, Object> redisTemplate;
+    private final IUserService userService;
 
     @Override
     public Result<Object> login(String code) throws WxErrorException {
@@ -50,18 +50,7 @@ public class WxUserServiceImpl implements IWxUserService {
             log.info("当前用户第一次登录,openID:" + sessionInfo.getOpenid());
             /* 创建用户,并插入数据库 */
             user = UserDto.defUser();
-            Assert.isTrue(user.insert(), "插入用户失败");
-            /* 创建用户关联的第三方登录信息,并插入数据库 */
-            Assert.isTrue(UserAuth.builder()
-                            .userId(user.getUserId())
-                            .provider(Constants.WX_NAME)
-                            .providerId(sessionInfo.getOpenid())
-                            .build()
-                            .insert()
-                    , "插入用户第三方登录信息失败");
-            Assert.isTrue(UserRoles.builder()
-                    .roleId(2).userId(user.getUserId())
-                    .build().insert(), "插入用户角色信息失败");
+            userService.registerUserTP(user, Constants.WX_NAME, sessionInfo.getOpenid());
         } else {
             user.setLastLoginAt(LocalDateTime.now());
             Assert.isTrue(user.updateById(), "更新用户上次登录时间失败");
