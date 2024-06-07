@@ -1,1 +1,20 @@
 /* pages/set-user-info/set-user-info.wxss */
+.page {
+  place-items: center;
+  place-content: start center;
+  width: 100%;
+
+  .header {
+    padding-top: 42px;
+  }
+
+  .form {
+    width: 100vw;
+    place-content: start space-evenly;
+    place-items: start stretch;
+  }
+
+  .form-item {
+    width: 100%;
+  }
+}
