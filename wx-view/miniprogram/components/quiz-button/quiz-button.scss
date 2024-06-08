@@ -8,12 +8,8 @@
   padding: map-get(global.$padding, default);
   /* 设置过渡效果 */
   transition: transform 0.5s ease, box-shadow 0.5s ease;
-
-  .button {
-    padding: 0 !important;
-    font-size: map-get(global.$font-size , medium);
-    font-weight: map-get(global.$font-weight , bold);
-  }
+  font-size: map-get(global.$font-size , medium);
+  font-weight: map-get(global.$font-weight , bold);
 }
 
 /* 按钮点击样式 */
