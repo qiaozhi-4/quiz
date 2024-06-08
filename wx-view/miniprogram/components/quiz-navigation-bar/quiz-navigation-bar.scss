@@ -4,9 +4,10 @@
   padding-bottom: var(--padding);
   grid-template-columns: 1fr auto 1fr;
   place-content: end;
-
+  place-items: end start;
   .navigation-bar-left {
     place-content: end start;
+    padding-left: 8px;
   }
 
   .navigation-bar-center {
