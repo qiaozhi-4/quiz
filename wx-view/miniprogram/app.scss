@@ -1,9 +1,4 @@
 page {
-  display: grid;
-  place-items: start center;
-  place-content: start center;
-  grid-template-columns: 1fr;
-  box-sizing: border-box;
   padding: 0;
   margin: 0;
   height: 100vh;
@@ -15,19 +10,41 @@ page {
 
 view {
   display: grid;
-  place-items: start center;
-  place-content: start center;
-  grid-template-columns: 1fr;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  overflow: auto;
   border-radius: map-get(global.$border-radius, small);
 }
 
 button {
   display: grid;
   place-items: center;
+  place-content: center;
   padding: map-get(global.$padding, default) !important;
   margin: 0 !important;
+}
+
+/************************************************** 文字样式 **************************************************/
+/* 文字渐变 */
+.text-color-gradient {
+  background: linear-gradient(to right, #be53ff, #ad5cff, #9c63ff, #8b68ff, #796dff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* 文字超出样式 */
+.text-overflow {
+  /* 防止文本换行 */
+  white-space: nowrap;
+  /* 隐藏超出部分 */
+  overflow: hidden;
+  /* 显示省略号 */
+  text-overflow: ellipsis;
+}
+
+/************************************************** 阴影样式 **************************************************/
+/* 阴影渐变 */
+.shadow-gradient {
+  box-shadow: 0px 0px 10px 5px rgba(188, 92, 255, 0.5);
 }
