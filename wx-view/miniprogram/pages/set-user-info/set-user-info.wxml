@@ -1,14 +1,25 @@
 <!-- pages/set-user-info/set-user-info.wxml -->
 <quiz-navigation-bar title="set-user-info"></quiz-navigation-bar>
-<view class="page">
+<view class="container">
   <view class="header">
-    <quiz-avatar size="130px"></quiz-avatar>
+    <button animation="{{isSetAvatar ? null :animationShake}}" class="avatar-button" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+      <block  wx:if="{{!avatarUrl}}" >
+        <quiz-avatar size="130px"></quiz-avatar>
+      </block>
+      <block wx:else>
+        <quiz-avatar size="130px" src="{{avatarUrl}}" wrapperSize="10px" wrapperColor="#fff"></quiz-avatar>
+        <quiz-svg class="svg" src="/images/change-avatar.svg"></quiz-svg>
+      </block>
+    </button>
   </view>
   <view class="form">
     <view class="form-item">
       <text class="label">昵称</text>
-      <input type="nickname" class="input" name="nickname" placeholder="请输入昵称" placeholder-class="placeholderStyle" value="{{nicknameValue}}" bindinput="onChangeNickname" />
+      <input type="nickname" class="input" name="nickname" placeholder="请输入昵称" placeholder-class="placeholder-input" value="{{nickname}}" bindblur="onChangeNickname" />
     </view>
-    <quiz-button>完成</quiz-button>
+    <view class="from-button">
+      <quiz-button class="reset">重置</quiz-button>
+      <quiz-button class="submit">完成</quiz-button>
+    </view>
   </view>
 </view>
