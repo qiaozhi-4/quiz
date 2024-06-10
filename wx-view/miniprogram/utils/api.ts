@@ -7,3 +7,11 @@ export function login(code: string) {
     method: 'POST',
   })
 }
+/** 保存个人信息 */
+export function userSave(data: Quiz.UserInfo) {
+  return request({
+    url: '/wx-user/save',
+    method: 'POST',
+    data,
+  })
+}
