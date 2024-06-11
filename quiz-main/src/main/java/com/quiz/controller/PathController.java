@@ -27,14 +27,12 @@ public class PathController {
     @ApiOperation("更新所有接口路径")
     @GetMapping("update-all-path")
     public String updateAllPath() {
-        pathService.updateAllPath();
         return pathService.updateAllPath() ? "请求路径更新成功" : "请求路径更新失败";
     }
 
     @ApiOperation(value = "更新所有接口路径(不要权限)", tags = {"Public"})
     @GetMapping("update-all-path-test")
     public String updateAllPathTest() {
-        pathService.updateAllPath();
         return pathService.updateAllPath() ? "请求路径更新成功" : "请求路径更新失败";
     }
 }

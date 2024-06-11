@@ -41,8 +41,6 @@ public class PathServiceImpl extends ServiceImpl<PathMapper, Path> implements IP
 
     @Override
     public Boolean updateAllPath() {
-        // 删除所有路径信息
-        this.remove(null);
         // 获取所有请求映射信息
         RequestMappingHandlerMapping mapping = applicationContext.getBean("requestMappingHandlerMapping", RequestMappingHandlerMapping.class);
         // 拿到Handler适配器中的全部方法
@@ -77,6 +75,8 @@ public class PathServiceImpl extends ServiceImpl<PathMapper, Path> implements IP
                         path.setPermissionId("2");
                     return path;
                 }).sorted(Comparator.comparing(Path::getPattern)).collect(Collectors.toList());
+        // 删除所有路径信息
+        this.remove(null);
         return this.saveBatch(paths);
     }
 }
