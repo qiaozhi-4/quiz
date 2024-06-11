@@ -1,18 +1,34 @@
-// pages/start-game/start-game.ts
+const app = getApp<IAppOption>()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    date: new Date().toLocaleDateString('zh-CN', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }),
+    avatarUrl: '',
+    nickname: '',
+    questionCount: 10,
   },
-
+  /* 点击开始路由到答题页 */
+  handleStartClick() {
+    wx.redirectTo({
+      url: '/pages/answer/answer',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-
+    this.setData({
+      avatarUrl: app.globalData.userInfo.avatarUrl,
+      nickname: app.globalData.userInfo.nickname
+    })
   },
 
   /**

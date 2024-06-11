@@ -1,2 +1,15 @@
-<!--pages/start-game/start-game.wxml-->
-<text>pages/start-game/start-game.wxml</text>
+<quiz-navigation-bar title="start-game"></quiz-navigation-bar>
+<view class="container">
+  <quiz-avatar size="97px" src="{{avatarUrl}}" wrapperSize="10px" wrapperColor="#fff"></quiz-avatar>
+  <view class="nick-name-container">
+    <text class="nick-name">{{nickname}}</text>
+    <text class="text">您好:</text>
+  </view>
+  <view class="describe">点击答题！🌟开启您的自我探索之旅吧！</view>
+  <view class="info" hover-class="none" hover-stop-propagation="false">
+    {{date}} Question {{questionCount}}/{{questionCount}}
+  </view>
+  <quiz-button extWrapperClass="start-button-wrapper" extButtonClass="start-button" bind:tap="handleStartClick">
+    开始测试
+  </quiz-button>
+</view>
