@@ -1,10 +1,8 @@
 import { userSave } from "../../utils/api"
 
-// pages/set-user-info/set-user-info.ts
 const app = getApp<IAppOption>()
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -14,49 +12,61 @@ Page({
   },
   /* 设置头像 */
   onChooseAvatar(e: WechatMiniprogram.TouchEvent) {
-    console.log(e.detail)
+    console.log('设置头像: ', e.detail)
 
     const { avatarUrl } = e.detail
-    if (!avatarUrl) return
     this.setData({
       avatarUrl,
     })
+    if (!avatarUrl) return
     /* 更新全局数据 */
     app.globalData.userInfo.avatarUrl = avatarUrl
   },
   /* 设置昵称 */
   onChangeNickname(e: WechatMiniprogram.TouchEvent) {
-    console.log(e.detail)
+    console.log('设置昵称: ', e.detail)
 
     const { value } = e.detail
-    if (!value) return
     this.setData({
       nickname: value
     })
+    if (!value) return
     /* 更新全局数据 */
     app.globalData.userInfo.nickname = value
   },
   /* 保存个人信息到服务端 */
   handleSubmitClick: function () {
+    const { avatarUrl, nickname } = this.data
+
     console.log(app.globalData.userInfo)
     console.log(app.globalData.token)
+    console.log('头像url: ', avatarUrl)
+    console.log('昵称: ', nickname)
 
-    const { avatarUrl, nickname } = this.data
-    if (!avatarUrl || !nickname) return
-    userSave({ avatarUrl, nickname } as Quiz.UserInfo)
+    if (!avatarUrl || !nickname) {
+      wx.showToast({
+        title: '头像或者昵称未设置!',
+        icon: 'error',
+        duration: 2000
+      })
+      return
+    }
+    userSave({ avatarUrl, nickname, userId: app.globalData.userInfo.userId } as Quiz.UserInfo)
       .then((res) => {
+        console.log('保存个人信息成功!', res)
         wx.redirectTo({
           url: '/pages/index/index',
         })
-      }).catch((err) => {
-        console.log('保存个人信息失败!' + err.data.message)
       })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-
+    this.setData({
+      avatarUrl: app.globalData.userInfo.avatarUrl,
+      nickname: app.globalData.userInfo.nickname
+    })
   },
 
   /**

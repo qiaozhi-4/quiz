@@ -3,7 +3,7 @@
 <view class="container">
   <view class="header">
     <button animation="{{isSetAvatar ? null :animationShake}}" class="avatar-button" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
-      <block  wx:if="{{!avatarUrl}}" >
+      <block wx:if="{{!avatarUrl}}">
         <quiz-avatar size="130px"></quiz-avatar>
       </block>
       <block wx:else>
@@ -19,7 +19,7 @@
     </view>
     <view class="from-button">
       <quiz-button class="reset">重置</quiz-button>
-      <quiz-button class="submit">完成</quiz-button>
+      <quiz-button class="submit" bind:tap="handleSubmitClick">完成</quiz-button>
     </view>
   </view>
 </view>
