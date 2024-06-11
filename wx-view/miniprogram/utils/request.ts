@@ -24,9 +24,9 @@ export const request = (options: WechatMiniprogram.RequestOption<Quiz.Result>): 
         else {
           console.error(res.data.message)
           wx.showToast({
-              title: '响应码错误!',
-              icon: 'error',
-              duration: 2000
+            title: '后端错误!',
+            icon: 'error',
+            duration: 2000
           })
           reject(res.data)
         }
@@ -34,9 +34,9 @@ export const request = (options: WechatMiniprogram.RequestOption<Quiz.Result>): 
       fail: (err) => {
         console.error(err)
         wx.showToast({
-            title: '请求失败!',
-            icon: 'error',
-            duration: 2000
+          title: '请求失败!',
+          icon: 'error',
+          duration: 2000
         })
         reject(err)
       },
