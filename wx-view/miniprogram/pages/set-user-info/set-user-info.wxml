@@ -18,7 +18,7 @@
       <input type="nickname" class="input" name="nickname" placeholder="请输入昵称" placeholder-class="placeholder-input" value="{{nickname}}" bindblur="onChangeNickname" />
     </view>
     <view class="from-button">
-      <quiz-button class="reset">重置</quiz-button>
+      <quiz-button class="reset" bind:tap="handleResetClick">重置</quiz-button>
       <quiz-button class="submit" bind:tap="handleSubmitClick">完成</quiz-button>
     </view>
   </view>

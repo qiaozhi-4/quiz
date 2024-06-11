@@ -59,6 +59,13 @@ Page({
         })
       })
   },
+  /** 重置设置值 */
+  handleResetClick: function () {
+    this.setData({
+      avatarUrl: '',
+      nickname: ''
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
