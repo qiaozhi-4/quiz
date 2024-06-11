@@ -3,7 +3,7 @@
 interface IAppOption {
   globalData: {
     /** 当前用户信息 */
-    userInfo: Quiz.UserInfo,
+    userInfo: Quiz.UserInfo | any,
     /** 当前用户token */
     token: string,
   }

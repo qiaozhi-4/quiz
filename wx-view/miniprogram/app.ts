@@ -2,7 +2,10 @@
 import { login } from "./utils/api"
 
 App<IAppOption>({
-  globalData: {},
+  globalData: {
+    userInfo: undefined,
+    token: ""
+  },
   onLaunch() {
     // 展示本地存储能力
     const logs = wx.getStorageSync('logs') || []
@@ -21,18 +24,17 @@ App<IAppOption>({
             this.globalData.token = res.data.token
             if (res.data.userInfo.nickname == null) {
               console.log('当前用户还没设置头像和用户名,跳转到设置页面')
-              wx.redirectTo({
-                url: '/pages/first-login/first-login',
-              })
             }
             else {
               console.log('已设置头像和用户名')
-              wx.redirectTo({
-                url: '/pages/start-game/start-game',
-              })
             }
           })
         } else {
+          wx.showToast({
+            title: '微信API调用失败!',
+            icon: 'error',
+            duration: 2000
+          })
           console.error('登录失败！' + res.errMsg)
         }
       },
