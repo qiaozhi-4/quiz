@@ -2,7 +2,7 @@
 
 Page({
   data: {
-    urls: ['set-user-info', 'start-game',]
+    urls: ['set-user-info', 'start-game', 'answer',]
   },
   clickButton(e: WechatMiniprogram.TouchEvent) {
     let url = e.currentTarget.dataset.url

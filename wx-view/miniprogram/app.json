@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/set-user-info/set-user-info",
     "pages/start-game/start-game",
+    "pages/answer/answer",
     "pages/logs/logs"
   ],
   "window": {
