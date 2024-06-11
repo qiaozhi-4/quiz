@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/set-user-info/set-user-info"
+    "pages/set-user-info/set-user-info",
+    "pages/start-game/start-game"
   ],
   "window": {
     "navigationBarTextStyle": "black",
