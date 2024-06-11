@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/set-user-info/set-user-info",
-    "pages/start-game/start-game"
+    "pages/start-game/start-game",
+    "pages/logs/logs"
   ],
   "window": {
     "navigationBarTextStyle": "black",
