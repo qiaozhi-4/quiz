@@ -5,15 +5,15 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    /** 宽度 */
-    width: {
+    /** 额外的包装器类名 */
+    extWrapperClass: {
       type: String,
-      value: '105px',
+      value: ''
     },
-    /** 高度 */
-    height: {
+    /** 额外的按钮类名 */
+    extButtonClass: {
       type: String,
-      value: '40px',
+      value: ''
     },
   },
 
