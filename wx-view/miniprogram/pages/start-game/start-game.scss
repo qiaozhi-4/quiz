@@ -29,12 +29,12 @@ page {
     opacity: 0.71;
   }
 
-  .start-button-wrapper {
+  .button-wrapper {
     border-radius: map-get(global.$border-radius , round);
-  }
 
-  .start-button {
-    font-size: map-get(global.$font-size , x-large);
-    font-weight: map-get(global.$font-weight , extra-bold);
+    .button {
+      font-size: map-get(global.$font-size , x-large);
+      font-weight: map-get(global.$font-weight , extra-bold);
+    }
   }
 }

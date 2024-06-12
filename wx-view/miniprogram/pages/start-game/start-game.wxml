@@ -9,7 +9,5 @@
   <view class="info" hover-class="none" hover-stop-propagation="false">
     {{date}} Question {{questionCount}}/{{questionCount}}
   </view>
-  <quiz-button extWrapperClass="start-button-wrapper" extButtonClass="start-button" bind:tap="handleStartClick">
-    开始测试
-  </quiz-button>
+  <quiz-button bind:tap="handleStartClick">开始测试</quiz-button>
 </view>
