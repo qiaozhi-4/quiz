@@ -1,5 +1,5 @@
 /* components/quiz-button/quiz-button.wxss */
-.button-wrapper {
+.quiz-button-wrapper {
   place-items: center;
   place-content: center;
   background-color: map-get(global.$colors, 纯白色);
@@ -13,7 +13,7 @@
 }
 
 /* 按钮点击样式 */
-.button-wrapper:active {
+.quiz-button-wrapper:active {
   transform: scale(0.9);
   box-shadow: 0px 0px 10px 5px rgba(188, 92, 255, 0.5);
 }

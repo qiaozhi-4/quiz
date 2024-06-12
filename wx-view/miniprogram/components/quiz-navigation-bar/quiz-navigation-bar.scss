@@ -1,6 +1,6 @@
-.navigation-bar {
+.quiz-navigation-bar {
   --padding: 10px;
-  
+
   grid-template-columns: 1fr auto 1fr;
   place-content: end;
   place-items: end start;
@@ -8,12 +8,12 @@
   width: 100vw;
   padding-bottom: var(--padding);
 
-  .navigation-bar-left {
+  .quiz-navigation-bar-left {
     place-content: end start;
     padding-left: 8px;
   }
 
-  .navigation-bar-center {
+  .quiz-navigation-bar-center {
     place-content: end center;
     font-weight: map-get(global.$font-weight, 'black');
     font-size: map-get(global.$font-size, large);
@@ -21,7 +21,7 @@
     white-space: nowrap;
   }
 
-  .navigation-bar-right {
+  .quiz-navigation-bar-right {
     place-content: end;
   }
 }

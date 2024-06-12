@@ -1,7 +1,7 @@
-<view class="navigation-bar" style="{{height + paddingAround}}">
-  <view class='navigation-bar-left'>
+<view class="quiz-navigation-bar" style="{{height + paddingAround}}">
+  <view class='quiz-navigation-bar-left'>
     <quiz-svg src="/images/return.svg" wx:if="{{back||homeButton}}" bind:tap="back"></quiz-svg>
   </view>
-  <view class='navigation-bar-center'>{{title}}</view>
-  <view class='navigation-bar-right'></view>
+  <view class='quiz-navigation-bar-center'>{{title}}</view>
+  <view class='quiz-navigation-bar-right'></view>
 </view>
