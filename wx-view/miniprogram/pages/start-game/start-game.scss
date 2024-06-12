@@ -29,10 +29,10 @@ page {
     opacity: 0.71;
   }
 
-  .button-wrapper {
+  .quiz-button-wrapper {
     border-radius: map-get(global.$border-radius , round);
 
-    .button {
+    .quiz-button {
       font-size: map-get(global.$font-size , x-large);
       font-weight: map-get(global.$font-weight , extra-bold);
     }
