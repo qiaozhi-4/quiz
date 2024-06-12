@@ -5,16 +5,6 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    /** 额外的包装器类名 */
-    extWrapperClass: {
-      type: String,
-      value: ''
-    },
-    /** 额外的按钮类名 */
-    extButtonClass: {
-      type: String,
-      value: ''
-    },
   },
 
   /**
