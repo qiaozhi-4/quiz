@@ -10,6 +10,15 @@
   transition: transform 0.5s ease, box-shadow 0.5s ease;
   font-size: map-get(global.$font-size , medium);
   font-weight: map-get(global.$font-weight , bold);
+
+  .quiz-button {
+    /* 防止文本换行 */
+    white-space: nowrap;
+    /* 隐藏超出部分 */
+    overflow: hidden;
+    /* 显示省略号 */
+    text-overflow: ellipsis;
+  }
 }
 
 /* 按钮点击样式 */
