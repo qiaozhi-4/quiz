@@ -3,7 +3,7 @@ import { login } from "./utils/api"
 
 App<IAppOption>({
   globalData: {
-    userInfo: undefined,
+    userInfo: {} as any,
     token: ""
   },
   onLaunch() {
