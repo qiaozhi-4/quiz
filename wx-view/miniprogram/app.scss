@@ -1,9 +1,10 @@
 page {
+  display: flex;
+  flex-direction: column;
   padding: 0;
   margin: 0;
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
   background-color: map-get(global.$colors, 主题色);
   color: map-get(global.$colors, 纯白色);
 }
