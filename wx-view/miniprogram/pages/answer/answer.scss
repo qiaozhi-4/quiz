@@ -1,1 +1,90 @@
 /* pages/answer/answer.wxss */
+page {
+  background: linear-gradient(180deg, #BC5CF8 0%, #6F3ED3 29.5%, #2F1969 100%);
+}
+
+.container {
+  height: 100%;
+  grid-template-rows: auto auto auto auto 1fr auto;
+
+  .svg-group {
+    display: flex;
+    place-content: center end;
+    gap: 30px;
+    padding: map-get(global.$padding , large);
+  }
+
+  .avatar {
+    place-content: center;
+    padding-top: 10px;
+  }
+
+  .info {
+    place-content: center;
+    padding: 2px 0;
+  }
+
+  .progress {
+    grid-template-columns: 1fr;
+    place-content: center;
+    padding: 8px 15px;
+  }
+
+  .question {
+    height: 100%;
+    place-content: center;
+    padding: 0 16px;
+    position: relative;
+
+
+    /* 指示点容器 */
+    .indicator-dots {
+      /* 限制宽高 */
+      display: flex;
+      width: 95px;
+      height: 11px;
+      gap: 10px;
+      padding: 0 21px;
+
+      /* 设置绝对定位 */
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      /* 通过transform将自身偏移自身宽度的50% */
+      transform: translateX(-50%);
+
+      /* 限制子元素超出部分隐藏 */
+      overflow: hidden;
+
+      /* 指示点 */
+      .indicator-dots-item {
+        border-radius: 50%;
+        height: 11px;
+        min-width: 11px;
+        background-color: rgba(255, 255, 255, 0.3);
+
+        position: relative;
+        transition: transform 0.5s linear,
+          background-color 0.5s linear;
+      }
+    }
+  }
+
+  .bottom {
+    background-color: map-get(global.$colors , 加深紫);
+    border-radius: 0;
+
+    .bottom-item {
+      padding: 17px 20px;
+    }
+
+    .line {
+      height: 1px;
+      background-color: rgba($color: #fff, $alpha: 0.15);
+    }
+
+    .svg-group {
+      height: 83px;
+    }
+  }
+}

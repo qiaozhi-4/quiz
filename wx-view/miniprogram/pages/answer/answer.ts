@@ -1,18 +1,40 @@
-// pages/answer/answer.ts
+import { getRandomQuestions } from "../../utils/api"
+
+const app = getApp<IAppOption>()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    avatarUrl: '',
+    /** 题目 */
+    questions: [],
+    /** 答案 */
+    options: [] as number[],
+    /** 输入框的值 */
+    inputValues: [] as string[],
+    /** 当前题目索引 */
+    index: 0,
+    /** 活动预览窗口 */
+    activityContainer: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
+    getRandomQuestions().then(res => {
+      console.log(res)
 
+      this.setData({
+        avatarUrl: app.globalData.userInfo.avatarUrl,
+        questions: res.data,
+        options: new Array(res.data.length),
+        inputValues: new Array(res.data.length).fill('')
+      })
+    })
   },
 
   /**

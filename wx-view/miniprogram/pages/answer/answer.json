@@ -2,6 +2,8 @@
   "usingComponents": {
     "quiz-navigation-bar": "/components/quiz-navigation-bar/quiz-navigation-bar",
     "quiz-button": "/components/quiz-button/quiz-button",
+    "quiz-svg": "/components/quiz-svg/quiz-svg",
+    "quiz-progress": "/components/quiz-progress/quiz-progress",
     "quiz-avatar": "/components/quiz-avatar/quiz-avatar"
   }
 }
