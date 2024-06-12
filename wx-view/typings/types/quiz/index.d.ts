@@ -1,7 +1,7 @@
 /// <reference path="./api.d.ts" />
 declare namespace Quiz {
   /** 用户信息 */
-  interface UserInfo  extends WechatMiniprogram.UserInfo{
+  interface UserInfo extends WechatMiniprogram.UserInfo {
     /** 头像Url */
     avatarUrl: string
     /** 创建时间 */
@@ -24,5 +24,17 @@ declare namespace Quiz {
     userId: number
     /** 用户名 */
     username: string
+  }
+  interface Question {
+    /** 创建时间 */
+    createdAt: string
+    /** 选项字符串,以 @@ 切割 */
+    options: string
+    /** 题目id */
+    questionId: number
+    /** 题目 */
+    title: string
+    /** 更新时间 */
+    updatedAt: string
   }
 }
