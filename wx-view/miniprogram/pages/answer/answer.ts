@@ -10,7 +10,7 @@ Page({
   data: {
     avatarUrl: '',
     /** 题目 */
-    questions: [],
+    questions: [] as Quiz.Question[],
     /** 答案 */
     options: [] as number[],
     /** 输入框的值 */
@@ -20,13 +20,30 @@ Page({
     /** 活动预览窗口 */
     activityContainer: '',
   },
-
+  /** 滑动触发 */
+  handleSwiperChange(e: WechatMiniprogram.TouchEvent) {
+    this.setData({
+      index: e.detail.current,
+    })
+  },
+  /** 点击选项触发 */
+  handleOptionClick(e: WechatMiniprogram.TouchEvent) {
+    let index = this.data.index
+    let options = this.data.options
+    let option = e.currentTarget.dataset.option
+    options[index] = option
+    if (index < this.data.questions.length - 1) {
+      this.setData({
+        index: index + 1,
+        options: options,
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
     getRandomQuestions().then(res => {
-      console.log(res)
 
       this.setData({
         avatarUrl: app.globalData.userInfo.avatarUrl,
