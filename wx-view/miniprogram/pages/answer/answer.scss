@@ -62,7 +62,6 @@ page {
           gap: 8px;
           width: 100%;
           height: 100%;
-          padding-top: 15px;
           overflow: auto;
 
           .quiz-button-wrapper {
@@ -123,12 +122,35 @@ page {
       padding: 17px 20px;
     }
 
+    .input {
+      position: relative;
+      font-size: map-get(global.$font-size , small);
+      font-weight: map-get(global.$font-weight , normal);
+    }
+
+    .input::before {
+      /* 引用本地SVG文件 */
+      // content: url('/images/chat-round.svg');
+      content: '';
+      // background-image: url('/images/chat-round.svg');
+
+      background: url('../images.png') no-repeat;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 18px;
+      height: 18px;
+      z-index: 101;
+    }
+
     .line {
       height: 1px;
       background-color: rgba($color: #fff, $alpha: 0.15);
     }
 
     .svg-group {
+      place-content: start;
+      place-items: start;
       height: 83px;
     }
   }

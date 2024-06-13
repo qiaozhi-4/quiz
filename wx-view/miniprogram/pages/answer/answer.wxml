@@ -42,7 +42,10 @@
   <view class="bottom">
     <input class="bottom-item input" placeholder="说说具体的想法" />
     <view class="line"></view>
-    <view class="bottom-item svg-group"></view>
+    <view class="bottom-item svg-group">
+      <quiz-svg src="/images/list.svg" opacitys="{{[activityContainer == 'list' ? 1 : 0.3]}}" data-activity="list" bindtap="changeActivityContainer"></quiz-svg>
+      <quiz-svg src="/images/monitor.svg" opacitys="{{activityContainer == 'monitor' ? [1,1] : [0.3,0.3]}}" data-activity="monitor" bindtap="changeActivityContainer"></quiz-svg>
+    </view>
   </view>
 </view>
 <wxs module="fn">

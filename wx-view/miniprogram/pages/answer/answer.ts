@@ -39,6 +39,14 @@ Page({
       })
     }
   },
+  /** 修改当前活动的容器 */
+  changeActivityContainer(e: WechatMiniprogram.TouchEvent) {
+    let currentActivityContainer = this.data.activityContainer
+    let activity = e.currentTarget.dataset.activity
+    this.setData({
+      activityContainer: currentActivityContainer == activity ? '' : activity,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
