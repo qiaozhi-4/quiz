@@ -34,8 +34,7 @@
     <!-- 自定义指示点 -->
     <view class="indicator-dots">
       <block wx:for="{{questions}}" wx:key="unique" wx:for-index="idx">
-        <!-- <view class="indicator-dots-item" style="{{index == idx ? 'background-color: #fff;' : ''}}  transform: translateX({{index < 2 ? 0 : index > questions.length - 1 - 2 ? (questions.length - 1 - 3) * -21 : (index-2) * -21}}px) {{(idx > index + 2 || idx < index - 2) && (index > 2 || idx > 4) && (index < questions.length-1-2 || idx < questions.length-1-4) ? 'scale(0)': ''}};"></view> -->
-        <view class="indicator-dots-item" style="{{index == idx ? 'background-color: #fff;' : ''}}  transform: translateX({{index < 2 ? 0 : index > questions.length - 1 - 2 ? (questions.length - 1 - 3) * -21 : (index-2) * -21}}px) {{(index >= 3 && idx <= index - 2) ? 'scale(0)': ''}};"></view>
+        <view class="indicator-dots-item" style="{{index == idx ? 'background-color: #fff;' : ''}}  transform: translateX({{index < 1 ? 0 : index > questions.length - 1 - 1 ? (questions.length - 1 - 1 - 1) * -21 : (index-1) * -21}}px) {{(idx > index +1 || idx < index - 1) && (index != 0 || idx > index + 2) && (index != questions.length - 1 || idx < index - 2)? 'scale(0)': ''}}"></view>
       </block>
     </view>
   </view>
