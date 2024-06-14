@@ -19,6 +19,8 @@ Page({
     index: 0,
     /** 活动预览窗口 */
     activityContainer: '',
+    /** 输入框上推距离 */
+    inputBottom: 0,
   },
   /** 滑动触发 */
   handleSwiperChange(e: WechatMiniprogram.TouchEvent) {
@@ -38,6 +40,21 @@ Page({
         options: options,
       })
     }
+  },
+  /** 输入框聚焦触发 */
+  handlFocus(e: WechatMiniprogram.TouchEvent) {
+    this.setData({
+      inputBottom: e.detail.height
+    })
+  },
+  /** 输入框失去焦点触发 */
+  handlBlur(e: WechatMiniprogram.TouchEvent) {
+    let inputValues = this.data.inputValues
+    inputValues[this.data.index] = e.detail.value
+    this.setData({
+      inputBottom: 0,
+      inputValues: inputValues
+    })
   },
   /** 修改当前活动的容器 */
   changeActivityContainer(e: WechatMiniprogram.TouchEvent) {
