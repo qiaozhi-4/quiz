@@ -56,12 +56,34 @@ Page({
       inputValues: inputValues
     })
   },
+  /** 键盘输入时触发 */
+  handlInput(e: WechatMiniprogram.TouchEvent) {
+    let inputValues = this.data.inputValues
+    inputValues[this.data.index] = e.detail.value
+    this.setData({
+      inputValues: inputValues
+    })
+  },
   /** 修改当前活动的容器 */
   changeActivityContainer(e: WechatMiniprogram.TouchEvent) {
     let currentActivityContainer = this.data.activityContainer
     let activity = e.currentTarget.dataset.activity
     this.setData({
       activityContainer: currentActivityContainer == activity ? '' : activity,
+    })
+  },
+  // 隐藏容器时触发
+  hiddenContainer() {
+    this.setData({
+      activityContainer: ''
+    })
+  },
+  /** 点击列表,跳转到题目 */
+  jumpQuestion(e: WechatMiniprogram.TouchEvent) {
+    let index = e.currentTarget.dataset.index
+    this.setData({
+      index: index,
+      activityContainer: ''
     })
   },
   /**

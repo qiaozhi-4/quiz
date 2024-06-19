@@ -41,8 +41,8 @@
   <!-- 底部 -->
   <view class="bottom">
     <view class="bottom-item input-group" style="bottom: {{inputBottom ? inputBottom - 83 : inputBottom}}px;">
-      <quiz-svg src="/images/chat-round.svg"></quiz-svg>
-      <input value="{{inputValues[index]}}" adjust-position="{{false}}" bindfocus="handlFocus" bindblur="handlBlur" class=" input" placeholder-class="placeholder-input" placeholder="说说具体的想法" />
+      <quiz-svg src="/images/chat-round.svg" opacitys="{{inputValues[index] ? [1] : [0.3]}}"></quiz-svg>
+      <input value="{{inputValues[index]}}" adjust-position="{{false}}" bindinput="handlInput" bindfocus="handlFocus" bindblur="handlBlur" class=" input" placeholder-class="placeholder-input" placeholder="说说具体的想法" />
     </view>
     <view class="line"></view>
     <view class="bottom-item svg-group">

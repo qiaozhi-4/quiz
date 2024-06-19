@@ -193,7 +193,7 @@ page {
     .preview-topic {
       grid-template-columns: min-content auto auto;
       padding: 11px 13px;
-      gap: 3;
+      gap: 3px;
 
       .preview-topic-svg {
         place-self: start center;
@@ -201,13 +201,23 @@ page {
 
       .preview-topic-title {
         grid-column: 2 / -1;
+        font-size: map-get(global.$font-size , x-small);
+        font-weight: map-get(global.$font-weight , medium);
+        opacity: 0.7;
       }
 
       .preview-topic-opt {
         grid-column-start: 2;
+        font-size: map-get(global.$font-size , small);
+        font-weight: map-get(global.$font-weight , bold);
       }
 
-      .preview-topic-input {}
+      .preview-topic-input {
+        place-items: center end;
+        font-size: map-get(global.$font-size , x-small);
+        font-weight: map-get(global.$font-weight , medium);
+        opacity: 0.7;
+      }
     }
   }
 }
