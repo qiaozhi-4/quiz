@@ -143,14 +143,71 @@ page {
     }
 
     .line {
+      z-index: 101;
       height: 1px;
       background-color: rgba($color: #fff, $alpha: 0.15);
     }
 
     .svg-group {
+      z-index: 101;
       place-content: start;
       place-items: start;
       height: 83px;
+    }
+  }
+}
+
+/* 抽屉样式 */
+.preview {
+  height: 89.16256vh;
+  padding: 20px 12px 103px 12px;
+  background-color: #2F1969;
+  place-items: start center;
+  gap: 20px;
+
+  /* 抽屉预览框头部样式 */
+  .preview-header {
+    font-size: map-get(global.$font-size , medium);
+    font-weight: map-get(global.$font-weight , bold);
+  }
+
+  .preview-main {
+    width: 100%;
+    height: 68.2266vh;
+    overflow: auto;
+    display: grid;
+    gap: 8px;
+    border-radius: 0;
+
+    .preview-item {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: map-get(global.$border-radius , base);
+    }
+
+    .preview-described {
+      font-size: map-get(global.$font-size , small);
+      font-weight: map-get(global.$font-weight , medium);
+      padding: 13px;
+    }
+
+    .preview-topic {
+      grid-template-columns: min-content auto auto;
+      padding: 11px 13px;
+      gap: 3;
+
+      .preview-topic-svg {
+        place-self: start center;
+      }
+
+      .preview-topic-title {
+        grid-column: 2 / -1;
+      }
+
+      .preview-topic-opt {
+        grid-column-start: 2;
+      }
+
+      .preview-topic-input {}
     }
   }
 }

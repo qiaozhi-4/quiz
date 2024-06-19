@@ -54,19 +54,21 @@
 <!-- 弹出框 -->
 <page-container show="{{activityContainer}}" round="true" close-on-slide-down="true" bind:afterleave="hiddenContainer">
   <view class="preview">
-    <view class="preview-header text-main">乔治 的 01号测试</view>
-    <view class="preview-main" id="scrollContainer">
+    <view class="preview-header">乔治 的 01号测试</view>
+    <view class="preview-main">
       <block wx:for="{{questions}}" wx:key="unique" wx:for-index="idx">
-        <view hidden="{{activityContainer != 'menu'}}" class="preview-item" bindtap="jumpQuestion" data-index="{{idx}}">
-          <svg src="/images/punctuation.svg"></svg>
-          <view class="preview-item-title text-overflow text-min2">{{item.title}}</view>
-          <view class="text-overflow text-min1">{{options[idx] ? options[idx] : '? ? ? ? ?'}}</view>
-          <view wx:if="{{inputValues[idx]}}" class="preview-item-input text-overflow text-min2">
+        <view hidden="{{activityContainer != 'monitor'}}" class="preview-item preview-topic" bindtap="jumpQuestion" data-index="{{idx}}">
+          <quiz-svg class='preview-topic-svg' src="/images/punctuation.svg"></quiz-svg>
+          <view class="preview-topic-title text-overflow">{{item.title}}</view>
+          <view class="preview-topic-opt text-overflow">
+            {{options[idx] ? options[idx] : '? ? ? ? ?'}}
+          </view>
+          <view wx:if="{{inputValues[idx]}}" class="preview-topic-input text-overflow">
             {{inputValues[idx]}}
           </view>
         </view>
       </block>
-      <view class="preview-described text-min1" hidden="{{activityContainer != 'airplay-video'}}">
+      <view class="preview-item preview-described" hidden="{{activityContainer != 'list'}}">
         你好！🌟 开始你的自我探索之旅吧！凭回忆和直觉的选择回答就好。
       </view>
     </view>
