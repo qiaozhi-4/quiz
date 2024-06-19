@@ -122,6 +122,7 @@ page {
 
     .bottom-item {
       padding: 17px 20px;
+      background-color: map-get(global.$colors , 加深紫);
     }
 
     .input-group {
@@ -130,7 +131,6 @@ page {
       place-content: center start;
       place-items: center stretch;
       gap: 6px;
-      background-color: map-get(global.$colors , 加深紫);
 
       .input {
         font-size: map-get(global.$font-size , small);
@@ -139,6 +139,7 @@ page {
 
       .placeholder-input {
         font-weight: map-get(global.$font-weight , normal);
+        color: map-get(global.$colors , 白色透明三十);
       }
     }
 
@@ -161,7 +162,7 @@ page {
 .preview {
   height: 89.16256vh;
   padding: 20px 12px 103px 12px;
-  background-color: #2F1969;
+  background-color: map-get(global.$colors , 加深紫);
   place-items: start center;
   gap: 20px;
 

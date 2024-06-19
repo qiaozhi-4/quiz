@@ -2,9 +2,9 @@
 <view class="container">
   <!-- svg按钮 -->
   <view class="svg-group">
-    <quiz-svg src="/images/star.svg"></quiz-svg>
-    <quiz-svg src="/images/arrows-right.svg"></quiz-svg>
-    <quiz-svg src="/images/setting.svg"></quiz-svg>
+    <!-- <quiz-svg src="/images/star.svg"></quiz-svg> -->
+    <!-- <quiz-svg src="/images/arrows-right.svg"></quiz-svg> -->
+    <!-- <quiz-svg src="/images/setting.svg"></quiz-svg> -->
     <quiz-svg src="/images/hint-gem.svg"></quiz-svg>
   </view>
   <!-- 头像 -->

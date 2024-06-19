@@ -39,7 +39,12 @@ Page({
         index: index + 1,
         options: options,
       })
+    } else {
+      // wx.showShareMenu({ withShareTicket: true })
     }
+    console.log(this.data.options);
+    console.log(this.data.options.every(value =>  value !== undefined));
+    
   },
   /** 输入框聚焦触发 */
   handlFocus(e: WechatMiniprogram.TouchEvent) {
