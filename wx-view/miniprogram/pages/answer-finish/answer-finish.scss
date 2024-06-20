@@ -22,7 +22,7 @@
       font-style: normal;
       font-weight: 700;
       font-size: 40px;
-      // line-height: 48px;
+
       text-align: center;
 
       color: #FFFFFF;
@@ -57,7 +57,7 @@
       font-style: normal;
       font-weight: 400;
       font-size: 160px;
-      // line-height: 194px;
+
       text-align: center;
 
       /* Inside auto layout */
@@ -67,4 +67,130 @@
 
     }
   }
+
+  .score-group {
+    /* 分数 */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0px;
+    gap: 10px;
+
+
+
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 3;
+    align-self: stretch;
+    flex-grow: 0;
+
+    .score {
+      /* 分数数字 */
+
+      /* Auto layout */
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0px;
+      gap: 5px;
+
+
+
+
+
+      /* Inside auto layout */
+      flex: none;
+      order: 0;
+      align-self: stretch;
+      flex-grow: 0;
+
+
+      .score-text {
+        /* + */
+
+
+
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 16px;
+
+
+        color: #FFFFFF;
+
+
+        /* Inside auto layout */
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+
+      }
+
+      .score-number {
+        /* 100 */
+
+
+
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 45px;
+
+
+        background: linear-gradient(142.35deg, #8C421D 22.68%, #FBE67B 42.5%, #FCFBE7 55.31%, #F7D14E 69.6%, #D4A041 83.62%), linear-gradient(128.64deg, #7A96AC 14.45%, #EAEFF3 27.29%, #C2D4E1 36.93%, #FFFFFF 49.55%, #D4DEE5 58.33%, #ABBDC8 70.46%, #BCCAD7 82.6%), radial-gradient(70.31% 37.22% at 30.94% 23.13%, #FF9FEA 0%, rgba(255, 255, 255, 0) 100%)
+          /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
+          , radial-gradient(156.71% 156.71% at -16.25% 73.33%, #A349EF 42.19%, #FF65E6 100%)
+          /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
+          , #FFFFFF;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+
+        text-shadow: 0px 2.2664px 45.0201px rgba(255, 255, 255, 0.25), 0px 2.2664px 37.8126px rgba(203, 218, 230, 0.5);
+
+        /* Inside auto layout */
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+
+
+      }
+    }
+
+    .text {
+      /* 这是您第1次自我探索！ 🌟自我探索值增加100分！ */
+
+
+
+
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+
+      text-align: center;
+
+      color: #FFFFFF;
+
+      transform: rotate(0.18deg);
+
+      /* Inside auto layout */
+      flex: none;
+      order: 1;
+      align-self: stretch;
+      flex-grow: 0;
+
+    }
+  }
+
+  .button-group {}
 }

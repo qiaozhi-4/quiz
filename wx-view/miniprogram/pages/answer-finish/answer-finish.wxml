@@ -9,11 +9,11 @@
   </view>
   <view class="score-group">
     <view class="score">
-      <text></text>
-      <text></text>
-      <text></text>
+      <text class="score-text">+</text>
+      <text class="score-number">100</text>
+      <text class="score-text">分</text>
     </view>
-    <text></text>
+    <text class="text">这是您第1次自我探索！🌟自我探索值增加100分！</text>
   </view>
   <view class="button-group"></view>
 </view>
