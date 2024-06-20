@@ -1,0 +1,19 @@
+<view class="container">
+  <quiz-navigation-bar title="answer-finish"></quiz-navigation-bar>
+  <view class="generalize">
+    <text>Done!</text>
+    <text>完成答题</text>
+  </view>
+  <view class="emoji">
+    <text>🥳</text>
+  </view>
+  <view class="score-group">
+    <view class="score">
+      <text></text>
+      <text></text>
+      <text></text>
+    </view>
+    <text></text>
+  </view>
+  <view class="button-group"></view>
+</view>
