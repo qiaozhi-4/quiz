@@ -116,7 +116,6 @@ page {
 
   .bottom {
     position: relative;
-    transition: bottom 0.2s ease;
     background-color: map-get(global.$colors , 加深紫);
     border-radius: 0;
 
@@ -127,6 +126,7 @@ page {
 
     .input-group {
       position: relative;
+      transition: bottom 0.2s ease;
       grid-template-columns: auto 1fr;
       place-content: center start;
       place-items: center stretch;
