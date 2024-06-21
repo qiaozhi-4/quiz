@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "quiz-svg": "/components/quiz-svg/quiz-svg",
+    "quiz-navigation-bar": "/components/quiz-navigation-bar/quiz-navigation-bar"
+  }
+}
