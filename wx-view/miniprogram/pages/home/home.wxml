@@ -1,8 +1,8 @@
-<quiz-navigation-bar title="answer"></quiz-navigation-bar>
+<quiz-navigation-bar title="home"></quiz-navigation-bar>
 <view class="container"></view>
 <!-- 底部 -->
 <view class="bottom">
+  <quiz-svg class="left" src="/images/monitor.svg" opacitys="{{activityContainer == 'monitor' ? [1,1] : [0.3,0.3]}}" data-activity="monitor" bindtap="changeActivityContainer" />
   <quiz-svg src="/images/monitor.svg" opacitys="{{activityContainer == 'monitor' ? [1,1] : [0.3,0.3]}}" data-activity="monitor" bindtap="changeActivityContainer" />
-  <quiz-svg src="/images/monitor.svg" opacitys="{{activityContainer == 'monitor' ? [1,1] : [0.3,0.3]}}" data-activity="monitor" bindtap="changeActivityContainer" />
-  <quiz-svg src="/images/monitor.svg" opacitys="{{activityContainer == 'monitor' ? [1,1] : [0.3,0.3]}}" data-activity="monitor" bindtap="changeActivityContainer" />
+  <quiz-svg class="right"  src="/images/monitor.svg" opacitys="{{activityContainer == 'monitor' ? [1,1] : [0.3,0.3]}}" data-activity="monitor" bindtap="changeActivityContainer" />
 </view>

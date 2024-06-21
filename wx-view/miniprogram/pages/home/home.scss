@@ -1,8 +1,20 @@
-
-.bottom{
+.bottom {
   grid-template-columns: 1fr 1fr 1fr;
-  
-  width: 100%;;
+  place-items: start center;
+  background: rgba(0, 0, 0, 0.15);
+  /* 设置背景模糊 */
+  backdrop-filter: blur(100px);
+  padding: 10px 35px;
+  height: 88px;
+  width: 100%;
   position: absolute;
   bottom: 0;
+
+  .left {
+    justify-self: start;
+  }
+
+  .right {
+    justify-self: end;
+  }
 }
