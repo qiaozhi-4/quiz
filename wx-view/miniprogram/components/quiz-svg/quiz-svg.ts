@@ -37,23 +37,23 @@ Component({
         success: res => {
           let basestr: any = res.data
           // 设置默认宽度
-          if (!this.data.width) {
-            try {
-              let width = basestr.match(/width="\d+"/)[0].match(/\d+/)[0]
-              this.setData({
-                width: `${width}px`,
-              })
-            } catch (error) { }
-          }
+          // if (!this.data.width) {
+          try {
+            let width = basestr.match(/width="\d+"/)[0].match(/\d+/)[0]
+            this.setData({
+              width: `${width}px`,
+            })
+          } catch (error) { }
+          // }
           // 设置默认高度
-          if (!this.data.height) {
-            try {
-              let height = basestr.match(/height="\d+"/)[0].match(/\d+/)[0]
-              this.setData({
-                height: `${height}px`,
-              })
-            } catch (error) { }
-          }
+          // if (!this.data.height) {
+          try {
+            let height = basestr.match(/height="\d+"/)[0].match(/\d+/)[0]
+            this.setData({
+              height: `${height}px`,
+            })
+          } catch (error) { }
+          // }
           // 替换参数对应的值
           const fun = (parmName: string, paemVals: any[]) => {
             let index = 0
