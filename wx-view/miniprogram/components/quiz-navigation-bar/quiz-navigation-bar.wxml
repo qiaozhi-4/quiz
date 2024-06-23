@@ -1,6 +1,7 @@
 <view class="quiz-navigation-bar" style="{{height + paddingAround}}">
   <view class='quiz-navigation-bar-left'>
     <quiz-svg src="/images/return.svg" wx:if="{{back||homeButton}}" bind:tap="back"/>
+    <slot wx:else name="before"></slot>
   </view>
   <view class='quiz-navigation-bar-center'>{{title}}</view>
   <view class='quiz-navigation-bar-right'>m</view>
