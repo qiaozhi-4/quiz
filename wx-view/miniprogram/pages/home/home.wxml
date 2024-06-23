@@ -1,8 +1,57 @@
-<quiz-navigation-bar title="home"></quiz-navigation-bar>
-<view class="container"></view>
+<!-- 主要展示页面 -->
+<swiper current="{{currentIndex}}">
+  <swiper-item>11111111111111111</swiper-item>
+  <swiper-item>2222222222222222222222</swiper-item>
+  <swiper-item class="container">
+    <quiz-navigation-bar title=""></quiz-navigation-bar>
+    <!-- 头像 -->
+    <view class="avatar">
+      <quiz-avatar size="69px" src="{{avatarUrl}}" wrapperSize="3px" wrapperColor="#fff"></quiz-avatar>
+      <text>{{nickname}}</text>
+    </view>
+    <!-- 统计 -->
+    <view class="statistics">
+      <block wx:for="{{statistics}}" wx:key="unique">
+        <view class="item">
+          <text class="count">{{item.value}}</text>
+          <text class="name">{{item.name}}</text>
+        </view>
+      </block>
+    </view>
+    <!-- 排行榜 -->
+    <view class="ranking">
+      <!-- 榜单类别 -->
+      <view class="class">
+        <view class="award">
+          <view class="text1">10答0问</view>
+          <view class="text2">本周连续回答10题</view>
+          <quiz-button>领取奖励</quiz-button>
+        </view>
+        <view class="tabs">
+          <view class="{{rankingIndex ==0 ? 'right' : ''}}" style="{{rankingIndex ==0 ? 'background: rgba(88, 48, 199, 1); border-radius: 0 0 20px 0;' : ''}}" data-index="0" bindtap="changeRankingIndex">亲密排行</view>
+          <view class="{{rankingIndex ==1 ? 'right left' : ''}}" style="{{rankingIndex ==1 ? 'background: rgba(88, 48, 199, 1); border-radius: 0 0 20px 20px;' : ''}}" data-index="1" bindtap="changeRankingIndex">我的选择</view>
+          <view class="{{rankingIndex ==2 ? 'left' : ''}}" style="{{rankingIndex ==2 ? 'background: rgba(88, 48, 199, 1); border-radius: 0 0 0 20px;' : ''}}" data-index="2" bindtap="changeRankingIndex">分类主题</view>
+        </view>
+      </view>
+      <scroll-view class="list" type="list" scroll-y>
+        <block wx:for="{{rankingData}}" wx:key="unique">
+          <view class="item">{{item.nickname}}--{{item.score}}</view>
+        </block>
+        <!-- 防止最下面的看不到 -->
+        <view class="bottom-view" style="height: 100px;"></view>
+      </scroll-view>
+    </view>
+  </swiper-item>
+</swiper>
 <!-- 底部 -->
 <view class="bottom">
-  <quiz-svg class="left" src="/images/monitor.svg" opacitys="{{activityContainer == 'monitor' ? [1,1] : [0.3,0.3]}}" data-activity="monitor" bindtap="changeActivityContainer" />
-  <quiz-svg src="/images/monitor.svg" opacitys="{{activityContainer == 'monitor' ? [1,1] : [0.3,0.3]}}" data-activity="monitor" bindtap="changeActivityContainer" />
-  <quiz-svg class="right"  src="/images/monitor.svg" opacitys="{{activityContainer == 'monitor' ? [1,1] : [0.3,0.3]}}" data-activity="monitor" bindtap="changeActivityContainer" />
+  <view class="svg" data-index="0" bindtap="changeCurrentIndex">
+    <quiz-svg src="/images/{{currentIndex == 0 ? '交流-实心':'交流-线条'}}.svg" />
+  </view>
+  <view class="svg" data-index="1" bindtap="changeCurrentIndex">
+    <quiz-svg src="/images/{{currentIndex == 1 ? '发布':'广场'}}.svg" />
+  </view>
+  <view class="svg" data-index="2" bindtap="changeCurrentIndex">
+    <quiz-svg src="/images/{{currentIndex == 2 ? '我的-实心':'我的-线条'}}.svg" />
+  </view>
 </view>
