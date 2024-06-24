@@ -5,15 +5,12 @@ App<IAppOption>({
   globalData: {
     userInfo: {} as any,
     token: "",
-    headHeight: "",
   },
   onLaunch() {
     // 展示本地存储能力
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
-    this.globalData.headHeight = wx.getMenuButtonBoundingClientRect().bottom + 10 + 'px'
 
     // 登录
     wx.login({
