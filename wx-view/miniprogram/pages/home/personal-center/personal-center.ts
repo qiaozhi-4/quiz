@@ -1,5 +1,4 @@
 // pages/home/personal-center/personal-center.ts
-const app = getApp<IAppOption>()
 
 Component({
 
@@ -29,7 +28,7 @@ Component({
     /** 当前激活的排行榜 */
     rankingIndex: 0,
     /** 头部高度,通过胶囊计算 */
-    headHeight: app.globalData.headHeight,
+    headHeight: "",
     /** 是否触发沾醒定位 */
     isSticky: false,
     /** 当切换榜单时,滚动条直接滚动到榜单位置 */
@@ -76,7 +75,8 @@ Component({
         })
       }
       this.setData({
-        rankingData: rankingData
+        rankingData: rankingData,
+        headHeight: wx.getMenuButtonBoundingClientRect().bottom + 10 + 'px',
       })
     },
     detached: function () {
