@@ -15,6 +15,12 @@ Page({
       currentIndex: index
     })
   },
+  /** current 改变时会触发 change 事件，event.detail = {current, source} */
+  bindChange(e: WechatMiniprogram.TouchEvent){
+    this.setData({
+      currentIndex: e.detail.current
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

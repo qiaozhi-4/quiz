@@ -1,6 +1,8 @@
 {
   "usingComponents": {
+    "interflow": "./interflow/interflow",
     "personal-center": "./personal-center/personal-center",
+    "plaza": "./plaza/plaza",
     "quiz-svg": "/components/quiz-svg/quiz-svg",
     "quiz-avatar": "/components/quiz-avatar/quiz-avatar",
     "quiz-button": "/components/quiz-button/quiz-button",

@@ -1,7 +1,11 @@
 <!-- 主要展示页面 -->
-<swiper current="{{currentIndex}}">
-  <swiper-item>564456456456456456546</swiper-item>
-  <swiper-item>2222222222222222222222</swiper-item>
+<swiper current="{{currentIndex}}" easing-function="linear" bindchange="bindChange">
+  <swiper-item>
+    <interflow></interflow>
+  </swiper-item>
+  <swiper-item>
+    <plaza></plaza>
+  </swiper-item>
   <swiper-item>
     <personal-center></personal-center>
   </swiper-item>
