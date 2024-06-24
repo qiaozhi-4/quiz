@@ -1,7 +1,7 @@
 .quiz-navigation-bar {
   --padding: 10px;
 
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 1fr auto 1fr;
   place-content: end space-between;
   place-items: end center;
 
