@@ -1,1 +1,26 @@
-/* pages/home/interflow/interflow.wxss */
+.container {
+  height: 100vh;
+  background-color: map-get(global.$colors, 主题色);
+
+  .quiz-navigation-bar {
+
+    .quiz-navigation-bar-left {
+      padding-left: 0;
+
+      .slot {
+        grid-template-columns: auto auto auto;
+        place-items: center;
+        padding: 0 12px;
+
+        border-radius: map-get($map: global.$border-radius, $key: round);
+        background-color: rgba($color: #000000, $alpha: 0.15);
+
+        .line {
+          background-color: rgba($color: #fff, $alpha: 0.25);
+          height: 19.2px;
+          width: 1px;
+        }
+      }
+    }
+  }
+}

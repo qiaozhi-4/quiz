@@ -1,2 +1,9 @@
-<!--pages/home/interflow/interflow.wxml-->
-<text>pages/home/interflow/interflow.wxml</text>
+<scroll-view class="container">
+  <quiz-navigation-bar back="{{false}}" title="QuizMatch">
+    <view slot="before" class="slot" style="height: {{capsule.height}}px; width: {{capsule.width}}px">
+      <quiz-svg src="/images/bell.svg" />
+      <view class="line"></view>
+      <quiz-svg src="/images/handrail.svg" />
+    </view>
+  </quiz-navigation-bar>
+</scroll-view>

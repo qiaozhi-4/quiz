@@ -12,7 +12,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    /** 胶囊信息 */
+    capsule: wx.getMenuButtonBoundingClientRect(),
   },
 
   /**

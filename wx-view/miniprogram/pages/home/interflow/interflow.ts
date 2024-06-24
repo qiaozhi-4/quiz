@@ -1,4 +1,3 @@
-// pages/home/interflow/interflow.ts
 Component({
 
   /**
@@ -12,7 +11,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    /** 胶囊信息 */
+    capsule: wx.getMenuButtonBoundingClientRect(),
   },
 
   /**
@@ -20,5 +20,14 @@ Component({
    */
   methods: {
 
-  }
+  },
+  /** 生命周期函数 */
+  lifetimes: {
+    attached: function () {
+      // 在组件实例进入页面节点树时执行
+    },
+    detached: function () {
+      // 在组件实例被从页面节点树移除时执行
+    },
+  },
 })

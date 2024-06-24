@@ -1,1 +1,26 @@
-/* pages/home/plaza/plaza.wxss */
+.plaza {
+  height: 100vh;
+  background-color: #020308;
+
+  .quiz-navigation-bar {
+    grid-template-columns: auto 1fr 1fr;
+
+    .quiz-navigation-bar-left {
+      padding-left: 0;
+
+        .input {
+          padding: 0 17px;
+          box-sizing: border-box;
+          font-size: map-get(global.$font-size , small);
+          font-weight: map-get(global.$font-weight , bold);
+          background-color: rgba($color: #fff, $alpha: 0.1);
+          border-radius: map-get($map: global.$border-radius, $key: round);
+        }
+
+        .placeholder-input {
+          font-weight: map-get(global.$font-weight , normal);
+          color: map-get(global.$colors , 白色透明三十);
+        }
+    }
+  }
+}
