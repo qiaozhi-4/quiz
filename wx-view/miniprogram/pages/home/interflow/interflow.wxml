@@ -1,4 +1,4 @@
-<scroll-view class="container">
+<scroll-view class="interflow">
   <quiz-navigation-bar back="{{false}}" title="QuizMatch">
     <view slot="before" class="slot" style="height: {{capsule.height}}px; width: {{capsule.width}}px">
       <quiz-svg src="/images/bell.svg" />

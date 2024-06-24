@@ -1,4 +1,4 @@
-<scroll-view type="nested" scroll-y bindscroll="handlScroll" scroll-into-view="{{clickRanking ? 'ranking' : ''}}" enable-passive scroll-with-animation>
+<scroll-view class="personal-center" type="nested" scroll-y bindscroll="handlScroll" scroll-into-view="{{clickRanking ? 'ranking' : ''}}" enable-passive scroll-with-animation>
   <quiz-navigation-bar back="{{false}}" title="">
     <quiz-svg slot="before" src="/images/我的-头部加号.svg" />
   </quiz-navigation-bar>
