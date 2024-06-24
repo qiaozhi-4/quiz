@@ -75,6 +75,14 @@
       background-color: map-get(global.$colors, 主题色);
       border-radius: map-get($map: global.$border-radius, $key: base) map-get($map: global.$border-radius, $key: base) 0 0;
 
+      .award-hidden {
+        // transform: translate(50%, -50%) scale(0);
+        opacity: 0;
+        width: 95vw;
+        position: absolute;
+      }
+
+
       .award {
         border-radius: 0 0 15px 15px;
         grid-template-columns: auto auto;
@@ -83,6 +91,8 @@
         padding: 10px 13px;
         margin: 0 14.5px;
         background-color: #46269E;
+        /* 设置过渡效果 */
+        transition: all 0.5s ease;
 
         .text1 {
           font-size: map-get(global.$font-size , medium);

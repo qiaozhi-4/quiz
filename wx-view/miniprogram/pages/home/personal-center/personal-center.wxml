@@ -21,8 +21,8 @@
   <!-- 榜单 -->
   <view class="ranking" id="ranking">
     <!-- 榜单类别 -->
-    <view class="class" style="{{isSticky ? 'padding-top: ' + headHeight + '; gap: 0;' : ''}}">
-      <view class="award" hidden="{{isSticky}}">
+    <view class="class" style="{{isSticky ? 'padding-top: ' + headHeight + 'px; gap: 0;' : ''}}">
+      <view class="award {{isSticky ? 'award-hidden' : ''}}">
         <view class="text1">10答0问</view>
         <view class="text2">本周连续回答10题</view>
         <quiz-button>领取奖励</quiz-button>

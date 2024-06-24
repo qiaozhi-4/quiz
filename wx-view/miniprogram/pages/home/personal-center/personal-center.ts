@@ -28,7 +28,7 @@ Component({
     /** 当前激活的排行榜 */
     rankingIndex: 0,
     /** 头部高度,通过胶囊计算 */
-    headHeight: "",
+    headHeight: 0,
     /** 是否触发沾醒定位 */
     isSticky: false,
     /** 当切换榜单时,滚动条直接滚动到榜单位置 */
@@ -76,7 +76,7 @@ Component({
       }
       this.setData({
         rankingData: rankingData,
-        headHeight: wx.getMenuButtonBoundingClientRect().bottom + 10 + 'px',
+        headHeight: wx.getMenuButtonBoundingClientRect().bottom + 10,
       })
     },
     detached: function () {

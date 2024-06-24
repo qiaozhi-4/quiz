@@ -1,5 +1,5 @@
 <!-- 主要展示页面 -->
-<swiper current="{{currentIndex}}" easing-function="linear" bindchange="bindChange">
+<swiper current="{{currentIndex}}" bindchange="bindChange">
   <swiper-item>
     <interflow></interflow>
   </swiper-item>
