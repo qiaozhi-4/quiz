@@ -32,6 +32,9 @@ Component({
     headHeight: app.globalData.headHeight,
     /** 是否触发沾醒定位 */
     isSticky: false,
+    /** 当切换榜单时,滚动条直接滚动到榜单位置 */
+    clickRanking: false,
+
   },
 
   /**
@@ -54,7 +57,8 @@ Component({
     changeRankingIndex(e: WechatMiniprogram.TouchEvent) {
       let index = e.currentTarget.dataset.index
       this.setData({
-        rankingIndex: index
+        rankingIndex: index,
+        clickRanking: true
       })
     },
 

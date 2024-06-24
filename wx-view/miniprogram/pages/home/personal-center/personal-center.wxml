@@ -1,4 +1,4 @@
-<scroll-view type="nested" scroll-y bindscroll="handlScroll">
+<scroll-view type="nested" scroll-y bindscroll="handlScroll" scroll-into-view="{{clickRanking ? 'ranking' : ''}}" enable-passive scroll-with-animation>
   <quiz-navigation-bar back="{{false}}" title="">
     <quiz-svg slot="before" src="/images/我的-头部加号.svg" />
   </quiz-navigation-bar>
@@ -19,7 +19,7 @@
     </block>
   </view>
   <!-- 榜单 -->
-  <view class="ranking">
+  <view class="ranking" id="ranking">
     <!-- 榜单类别 -->
     <view class="class" style="{{isSticky ? 'padding-top: ' + headHeight + '; gap: 0;' : ''}}">
       <view class="award" hidden="{{isSticky}}">
