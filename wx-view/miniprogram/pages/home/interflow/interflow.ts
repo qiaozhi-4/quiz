@@ -15,6 +15,10 @@ Component({
     capsule: wx.getMenuButtonBoundingClientRect(),
     /** 搜索输入框 */
     searchInput: '',
+    /** 多人聊天卡片 */
+    multiplayers: [] as any[],
+    /** 最近消息 */
+    messages: [] as any[],
   },
 
   /**
@@ -32,6 +36,25 @@ Component({
   lifetimes: {
     attached: function () {
       // 在组件实例进入页面节点树时执行
+      let multiplayers = []
+      let messages = []
+
+      for (let index = 0; index < 20; index++) {
+        multiplayers.push({
+          percentage: Math.floor(Math.random() * (100 - 1 + 1)) + 1,
+          title: '观点碰撞,思想闪耀',
+          describe: '关心相同话题但选择不同的人！'
+        })
+        messages.push({
+          nickname: `用户${index + 1}`,
+          avatarUrl: '',
+          msg: `你好，我是用户${index + 1}，很高兴认识你！`,
+        })
+      }
+      this.setData({
+        multiplayers,
+        messages
+      })
     },
     detached: function () {
       // 在组件实例被从页面节点树移除时执行

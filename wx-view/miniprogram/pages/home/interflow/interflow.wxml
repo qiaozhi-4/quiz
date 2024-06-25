@@ -1,4 +1,4 @@
-<scroll-view class="interflow">
+<scroll-view class="interflow" scroll-y>
   <quiz-navigation-bar back="{{false}}" title="QuizMatch">
     <view slot="before" class="slot" style="height: {{capsule.height}}px; width: {{capsule.width}}px">
       <quiz-svg src="/images/bell.svg" />
@@ -12,10 +12,34 @@
       <quiz-svg src="/images/搜索.svg" opacitys="{{searchInput ? [1] : [0.3]}}" />
       <input class="search-input" placeholder-class="placeholder-input" slot="before" value="{{searchInput}}" adjust-position="{{false}}" bindinput="handlInput" bindfocus="handlFocus" bindblur="handlBlur" placeholder="说说具体的想法" />
     </view>
-    <quiz-svg src="/images/我的-头部加号.svg"  />
+    <quiz-svg src="/images/我的-头部加号.svg" />
   </view>
   <!-- 多人聊天 -->
-  <view class="multiplayer"></view>
+  <view class="multiplayer">
+    <view class="title">即时在线-多维链接</view>
+    <scroll-view scroll-x style="width: 94vw;">
+      <view class="list">
+        <block wx:for="{{multiplayers}}" wx:key="unique">
+          <view class="item">
+            <view class="percentage">{{item.percentage}}%</view>
+            <view class="title">{{item.title}}</view>
+            <view class="describe">{{item.describe}}</view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
   <!-- 最近消息 -->
-  <view class="recently-message"></view>
+  <view class="recently-message">
+    <view class="title">最近消息</view>
+    <view class="list">
+      <block wx:for="{{messages}}" wx:key="unique">
+        <view class="item">
+          <quiz-avatar class="avatarUrl" size="42px" src="{{item.avatarUrl}}" wrapperSize="2px" wrapperColor="#fff"></quiz-avatar>
+          <view class="describe">{{item.nickname}}</view>
+          <view class="msg">{{item.msg}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
 </scroll-view>

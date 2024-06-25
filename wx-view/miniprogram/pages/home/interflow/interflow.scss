@@ -52,4 +52,47 @@
       }
     }
   }
+
+
+  .multiplayer,
+  .recently-message {
+    padding: 0 12px;
+
+    .title {
+      font-size: map-get(global.$font-size , small);
+      font-weight: map-get(global.$font-weight , bold);
+    }
+  }
+
+  .multiplayer {
+    .list {
+      display: flex;
+      gap: 12px;
+
+      .item {
+        position: relative;
+        min-width: 136px;
+        min-height: 181px;
+        border-radius: 12.5px;
+        background: url("https://th.bing.com/th?id=OIF.Es%2fn1y1KuN%2btilX1x6cuDw&w=291&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7") no-repeat center center;
+        // filter: blur(15px);
+      }
+      .item::after{
+        width: 136px;
+        height: 181px;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: inherit; /* 继承父元素背景 */
+        border-radius: 15px;
+        filter: blur(15px);
+        z-index: -1; /* 置于背景图层之下 */
+      }
+    }
+  }
+
+  .recently-message {}
 }
