@@ -1,7 +1,11 @@
 page {
   // background-color: #020308;
 }
-
+quiz-navigation-bar {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
 swiper {
   height: 100%;
 }
