@@ -9,10 +9,10 @@
   <!-- 搜索 -->
   <view class="search" style="padding-top:{{capsule.bottom + 10}}px">
     <view class="input-wrapper">
-      <quiz-svg src="/images/搜索.svg" opacitys="{{inputValues[index] ? [1] : [0.3]}}" />
-      <input class="search-input" placeholder-class="placeholder-input" slot="before" value="{{inputValues[index]}}" adjust-position="{{false}}" bindinput="handlInput" bindfocus="handlFocus" bindblur="handlBlur" placeholder="说说具体的想法" />
+      <quiz-svg src="/images/搜索.svg" opacitys="{{searchInput ? [1] : [0.3]}}" />
+      <input class="search-input" placeholder-class="placeholder-input" slot="before" value="{{searchInput}}" adjust-position="{{false}}" bindinput="handlInput" bindfocus="handlFocus" bindblur="handlBlur" placeholder="说说具体的想法" />
     </view>
-    <quiz-svg src="/images/我的-头部加号.svg" opacitys="{{inputValues[index] ? [1] : [0.3]}}" />
+    <quiz-svg src="/images/我的-头部加号.svg"  />
   </view>
   <!-- 多人聊天 -->
   <view class="multiplayer"></view>
