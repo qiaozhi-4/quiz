@@ -1,7 +1,11 @@
 .plaza {
   height: 100vh;
   background-color: #020308;
-
+  quiz-navigation-bar {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+  }
   .quiz-navigation-bar {
     grid-template-columns: auto 1fr 1fr;
 
