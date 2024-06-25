@@ -1,5 +1,8 @@
 <scroll-view class="plaza">
   <quiz-navigation-bar back="{{false}}" title="">
-      <input  slot="before"  style="height: {{capsule.height}}px; width: {{capsule.left - 18}}px;" value="{{inputValues[index]}}" adjust-position="{{false}}" bindinput="handlInput" bindfocus="handlFocus" bindblur="handlBlur" class="input" placeholder-class="placeholder-input" placeholder="说说具体的想法" />
+    <view slot="before" style="height: {{capsule.height}}px; width: {{capsule.left - 18}}px;">
+      <quiz-svg src="/images/搜索.svg" opacitys="{{inputValues[index] ? [1] : [0.3]}}" />
+      <input  value="{{inputValues[index]}}" adjust-position="{{false}}" bindinput="handlInput" bindfocus="handlFocus" bindblur="handlBlur" class="input" placeholder-class="placeholder-input" placeholder="说说具体的想法" />
+    </view>
   </quiz-navigation-bar>
 </scroll-view>

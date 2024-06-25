@@ -1,6 +1,8 @@
 .interflow {
   height: 100vh;
   background: linear-gradient(360deg, #2F1969 0%, #3E228B 52%, #A729E2 100%);
+
+
   .quiz-navigation-bar {
 
     .quiz-navigation-bar-left {
@@ -19,6 +21,34 @@
           height: 19.2px;
           width: 1px;
         }
+      }
+    }
+  }
+
+  .search {
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    padding: 0 12px;
+
+    .input-wrapper {
+      grid-template-columns: auto 1fr;
+      place-content: center;
+      align-items: center;
+      gap: 5px;
+      background-color: rgba($color: #fff, $alpha: 0.1);
+      border-radius: map-get($map: global.$border-radius, $key: round);
+      padding: 0 17px;
+
+      .search-input {
+        height: 30px;
+        box-sizing: border-box;
+        font-size: map-get(global.$font-size , small);
+        font-weight: map-get(global.$font-weight , bold);
+      }
+
+      .placeholder-input {
+        font-weight: map-get(global.$font-weight , normal);
+        color: map-get(global.$colors , 白色透明三十);
       }
     }
   }
