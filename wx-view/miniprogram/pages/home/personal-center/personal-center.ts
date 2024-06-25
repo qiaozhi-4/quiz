@@ -71,7 +71,8 @@ Component({
       for (let index = 0; index < 20; index++) {
         rankingData.push({
           nickname: `用户${index + 1}`,
-          score: (20 - index) * 1000
+          score: (20 - index) * 1000,
+          avatarUrl:''
         })
       }
       this.setData({
