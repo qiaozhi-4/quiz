@@ -39,8 +39,8 @@
         </view>
       </view>
     </view>
-    <!-- 榜单列表 -->
-    <view class="list">
+    <!-- 亲密排行 -->
+    <view class="list" hidden="{{rankingIndex != 0}}">
       <block wx:for="{{rankingData}}" wx:key="unique" wx:for-index="idx">
         <view class="item">
           <view class="v1 no{{idx + 1}}">{{idx + 1}}</view>
@@ -55,6 +55,22 @@
         </view>
       </block>
     </view>
+    <!-- 我的选择 -->
+    <view class="my-select" hidden="{{rankingIndex != 1}}">
+      <!-- 搜索 -->
+      <view class="search">
+        <!-- 搜索输入框 -->
+        <view class="input-wrapper">
+          <quiz-svg src="/images/搜索.svg" opacitys="{{searchInput ? [1] : [0.3]}}" />
+          <input class="search-input" placeholder-class="placeholder-input" slot="before" value="{{searchInput}}" adjust-position="{{false}}" bindinput="handlInput" bindfocus="handlFocus" bindblur="handlBlur" placeholder="搜索" />
+        </view>
+        <!-- <quiz-svg src="/images/我的-头部加号.svg" /> -->
+         <view class='score'>总分：100</view>
+      </view>
+      <view class='examination-paper'></view>
+    </view>
+    <!-- 分类主题 -->
+    <view class="class-theme" hidden="{{rankingIndex != 2}}"></view>
     <!-- 防止最下面的看不到 -->
     <view class="bottom-view" style="height: 100px;"></view>
   </view>

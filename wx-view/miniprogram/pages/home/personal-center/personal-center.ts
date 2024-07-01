@@ -26,14 +26,15 @@ Component({
     /** 排行榜数据 */
     rankingData: [] as any[],
     /** 当前激活的排行榜 */
-    rankingIndex: 0,
+    rankingIndex: 1,
     /** 头部高度,通过胶囊计算 */
     headHeight: 0,
     /** 是否触发沾醒定位 */
     isSticky: false,
     /** 当切换榜单时,滚动条直接滚动到榜单位置 */
     clickRanking: false,
-
+    /** 搜索输入框 */
+    searchInput:'',
   },
 
   /**
@@ -60,7 +61,12 @@ Component({
         clickRanking: true
       })
     },
-
+    /** 键盘输入时触发 */
+    handlInput(e: WechatMiniprogram.TouchEvent) {
+      this.setData({
+        searchInput: e.detail.value
+      })
+    },
   },
   /** 生命周期函数 */
   lifetimes: {
