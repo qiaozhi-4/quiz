@@ -20,9 +20,13 @@
     <scroll-view scroll-x style="width: 94vw;">
       <view class="list">
         <block wx:for="{{multiplayers}}" wx:key="unique">
-          <view class="item">
-            <view class="percentage">{{item.percentage}}%</view>
+          <view class="card">
             <view class="title">{{item.title}}</view>
+            <view class="percentage">
+              <text class="text1">{{item.percentage}}</text>
+              <text class="text2">%</text>
+              <text class="text3">选择相似度</text>
+            </view>
             <view class="describe">{{item.describe}}</view>
           </view>
         </block>

@@ -6,7 +6,7 @@ Page({
    */
   data: {
     /** 当前下标 */
-    currentIndex: 2,
+    currentIndex: 0,
   },
   /** 切换页面 */
   changeCurrentIndex(e: WechatMiniprogram.TouchEvent) {

@@ -42,8 +42,8 @@ Component({
       for (let index = 0; index < 20; index++) {
         multiplayers.push({
           percentage: Math.floor(Math.random() * (100 - 1 + 1)) + 1,
-          title: '观点碰撞,思想闪耀',
-          describe: '关心相同话题但选择不同的人！'
+          title: '灵魂匹配',
+          describe: '各类神奇问题上和你选择相同的人！'
         })
         messages.push({
           nickname: `用户${index + 1}`,
