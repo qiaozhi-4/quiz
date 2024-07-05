@@ -16,7 +16,13 @@ Component({
     /** 搜索输入框 */
     searchInput: '',
     /** 多人聊天卡片 */
-    multiplayers: [] as any[],
+    multiplayers: [
+      {
+        borderColor: '#7756EC',
+        bottonColor: '#B7A2FF',
+        imgUrl: '	https://game.gtimg.cn/images/lol/act/img/skin/big_a8918612-98ba-4822-90b9-331f89a419a5.jpg'
+      },
+    ] as any[],
     /** 最近消息 */
     messages: [] as any[],
   },
@@ -48,11 +54,11 @@ Component({
         messages.push({
           nickname: `用户${index + 1}`,
           avatarUrl: '',
-          msg: `你好，我是用户${index + 1}，很高兴认识你！`,
+          msg: `你好，我是用户${index + 1}，很高兴认识你！很高兴认识你！很高兴认识你！很高兴认识你！很高兴认识你！很高兴认识你！很高兴认识你！很高兴认识你！`,
         })
       }
       this.setData({
-        multiplayers,
+        // multiplayers,
         messages
       })
     },

@@ -85,32 +85,36 @@
         .title {
           font-size: map-get(global.$font-size , medium);
           font-weight: map-get(global.$font-weight , 'black');
+          padding: 4px 10px;
         }
 
         .percentage {
-          grid-template-rows: 1fr auto;
-          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto auto;
           place-content: center;
-          gap: 5px;
 
-          .text1 {
-            font-size: map-get(global.$font-size , xxx-large);
-            font-weight: map-get(global.$font-weight , 'extra-bold');
-            place-items: end;
-          }
+          .number {
+            grid-template-columns: auto auto;
+            place-content: end center;
 
-          .text2 {
-            font-size: map-get(global.$font-size , medium);
-            font-weight: map-get(global.$font-weight , 'bold');
-            justify-items: start;
-            align-items: end;
+            .text1 {
+              line-height: map-get(global.$font-size , xxx-large);
+              font-size: map-get(global.$font-size , xxx-large);
+              font-weight: map-get(global.$font-weight , 'extra-bold');
+              place-self: end;
+            }
+
+            .text2 {
+              font-size: map-get(global.$font-size , medium);
+              font-weight: map-get(global.$font-weight , 'bold');
+              place-self: end start;
+              line-height: map-get(global.$font-size , medium);
+            }
           }
 
           .text3 {
             font-size: map-get(global.$font-size , x-small);
             font-weight: map-get(global.$font-weight , 'bold');
-            grid-column: 1/3;
-            justify-items: center;
+            place-self: start center;
           }
         }
 
@@ -120,6 +124,8 @@
           height: 90rpx;
           backdrop-filter: blur(10px);
           /* 背景虚化 */
+          border-radius: 0 0 12.5px 12.5px;
+          color: #B7A2FF;
         }
       }
 
@@ -145,5 +151,31 @@
     }
   }
 
-  .recently-message {}
+  .recently-message {
+    .list {
+      .item {
+        grid-template-columns: auto 1fr;
+        grid-template-rows: 1fr 1fr;
+        padding: 6px;
+        gap: 6px;
+
+        .avatarUrl {
+          grid-row: 1/span 2;
+        }
+
+        .nickname{
+          width: 100%;
+          font-size: map-get(global.$font-size , small);
+          font-weight: map-get(global.$font-weight , bold);
+          place-self: end start;
+        }
+        .msg{
+          width: 100%;
+          font-size: map-get(global.$font-size , x-small);
+          font-weight: map-get(global.$font-weight , medium);
+          place-self: start;
+        }
+      }
+    }
+  }
 }
