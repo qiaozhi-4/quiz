@@ -20,18 +20,18 @@
     <scroll-view scroll-x style="width: 94vw;">
       <view class="list">
         <block wx:for="{{multiplayers}}" wx:key="unique">
-          <view class="card-wrapper">
-          <view class="card">
-            <view class="title">{{item.title}}</view>
-            <view class="percentage">
-              <view class="number">
-                <text class="text1">{{item.percentage}}</text>
-                <text class="text2">%</text>
+          <view class="card-wrapper" style=" border: 3px solid {{item.borderColor}};">
+            <view class="card"  style=" border: 1.5px solid {{item.borderColor}};  background: url({{item.imgUrl}}) no-repeat center center;">
+              <view class="title">{{item.title}}</view>
+              <view class="percentage">
+                <view class="number">
+                  <text class="text1">{{item.percentage}}</text>
+                  <text class="text2">%</text>
+                </view>
+                <text class="text3">选择相似度</text>
               </view>
-              <text class="text3">选择相似度</text>
+              <view class="describe" style="color: {{item.bottonTextColor}}; background: {{item.bottonBackgroundColor}};">{{item.describe}}</view>
             </view>
-            <view class="describe">{{item.describe}}</view>
-          </view>
           </view>
         </block>
       </view>
@@ -43,7 +43,7 @@
     <view class="list">
       <block wx:for="{{messages}}" wx:key="unique">
         <view class="item">
-          <quiz-avatar class="avatarUrl" size="54px" src="{{item.avatarUrl}}" ></quiz-avatar>
+          <quiz-avatar class="avatarUrl" size="54px" src="{{item.avatarUrl}}"></quiz-avatar>
           <text class="nickname text-overflow">{{item.nickname}}</text>
           <text class="msg text-overflow">{{item.msg}}</text>
         </view>
