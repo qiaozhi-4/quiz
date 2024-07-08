@@ -135,24 +135,11 @@
         }
       }
 
-      .card1::before {
-        content: "";
+      .card-top {
         position: absolute;
-        /* 绝对定位 */
-        top: -6px;
-        /* 上边距 -5px */
-        left: -6px;
-        /* 左边距 -5px */
-        width: calc(100% + 12px);
-        /* 宽度比父元素多 10px */
-        height: calc(100% + 12px);
-        /* 高度比父元素多 10px */
-        border: 3px solid red;
-        /* 设置边框 */
-        box-sizing: border-box;
-        /* 包含内边距和边框 */
-
-        border-radius: 12.5px;
+        top: 50vh;
+        left: 50vw;
+        // transform: translate(-50%, -50%);
       }
     }
   }

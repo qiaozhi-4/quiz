@@ -20,19 +20,23 @@
     <scroll-view scroll-x style="width: 94vw;">
       <view class="list">
         <block wx:for="{{multiplayers}}" wx:key="unique">
-          <view class="card-wrapper" style=" border: 3px solid {{item.borderColor}};">
-            <view class="card"  style=" border: 1.5px solid {{item.borderColor}};  background: url({{item.imgUrl}}) no-repeat center center;">
-              <view class="title">{{item.title}}</view>
-              <view class="percentage">
-                <view class="number">
-                  <text class="text1">{{item.percentage}}</text>
-                  <text class="text2">%</text>
+          <root-portal enable="{{cardIndex == index}}" >
+            <view class="card-wrapper {{cardIndex == index ? 'card-top' : ''}}" style=" border: 3px solid {{item.borderColor}};" bind:tap="handlTapCard" data-index='{{index}}'>
+              <view class="card" style=" border: 1.5px solid {{item.borderColor}};  background: url({{item.imgUrl}}) no-repeat center center;">
+                <view class="title">{{item.title}}</view>
+                <view class="percentage">
+                  <view class="number">
+                    <text class="text1">{{item.percentage}}</text>
+                    <text class="text2">%</text>
+                  </view>
+                  <text class="text3">选择相似度</text>
                 </view>
-                <text class="text3">选择相似度</text>
+                <view class="describe" style="color: {{item.bottonTextColor}}; background: {{item.bottonBackgroundColor}};">
+                  {{item.describe}}
+                </view>
               </view>
-              <view class="describe" style="color: {{item.bottonTextColor}}; background: {{item.bottonBackgroundColor}};">{{item.describe}}</view>
             </view>
-          </view>
+          </root-portal>
         </block>
       </view>
     </scroll-view>
