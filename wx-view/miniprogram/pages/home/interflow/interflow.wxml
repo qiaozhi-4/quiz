@@ -49,9 +49,8 @@
               <view class="describe" style="color: {{item.bottonTextColor}}; background: {{item.bottonBackgroundColor}};">
                 {{item.describe}}
               </view>
-
             </view>
-          </root-portal>
+          </view>
         </block>
       </view>
     </scroll-view>
