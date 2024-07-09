@@ -45,13 +45,13 @@
                   <text class="text1">{{item.percentage}}</text>
                   <text class="text2">%</text>
                 </view>
-                <text class="text3">选择相似度</text>
               </view>
               <view class="describe" style="color: {{item.bottonTextColor}}; background: {{item.bottonBackgroundColor}};">
                 {{item.describe}}
               </view>
+
             </view>
-          </view>
+          </root-portal>
         </block>
       </view>
     </scroll-view>
