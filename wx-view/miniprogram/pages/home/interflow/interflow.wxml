@@ -1,4 +1,4 @@
-<scroll-view class="interflow" scroll-y>
+<scroll-view class="interflow" scroll-y bind:tap="handlTap">
   <quiz-navigation-bar back="{{false}}" title="QuizMatch">
     <view slot="before" class="slot" style="height: {{capsule.height}}px; width: {{capsule.width}}px">
       <quiz-svg src="/images/bell.svg" />
@@ -17,11 +17,28 @@
   <!-- 多人聊天 -->
   <view class="multiplayer">
     <view class="title">即时在线-多维链接</view>
-    <scroll-view scroll-x style="width: 94vw;">
+    <block wx:for="{{multiplayers}}" wx:key="unique">
+      <view id="closeCard" hidden="{{cardIndex!= index}}" class="card-wrapper card-top" style=" border: 3px solid {{item.borderColor}}; ">
+        <view class="card" style=" border: 1.5px solid {{item.borderColor}};  background: url({{item.imgUrl}}) no-repeat center center;">
+          <view class="title">{{item.title}}</view>
+          <view class="percentage">
+            <view class="number">
+              <text class="text1">{{item.percentage}}</text>
+              <text class="text2">%</text>
+            </view>
+            <text class="text3">选择相似度</text>
+          </view>
+          <view class="describe" style="color: {{item.bottonTextColor}}; background: {{item.bottonBackgroundColor}};">
+            {{item.describe}}
+          </view>
+        </view>
+      </view>
+    </block>
+    <scroll-view scroll-x style="width: 94vw;" hidden="{{cardIndex}}">
       <view class="list">
         <block wx:for="{{multiplayers}}" wx:key="unique">
-          <view class="card-wrapper" style=" border: 3px solid {{item.borderColor}};">
-            <view class="card"  style=" border: 1.5px solid {{item.borderColor}};  background: url({{item.imgUrl}}) no-repeat center center;">
+          <view class="card-wrapper" style=" border: 3px solid {{item.borderColor}};" bind:tap="handlTapCard" data-index="{{index}}">
+            <view class="card" style=" border: 1.5px solid {{item.borderColor}};  background: url({{item.imgUrl}}) no-repeat center center;">
               <view class="title">{{item.title}}</view>
               <view class="percentage">
                 <view class="number">
@@ -30,7 +47,9 @@
                 </view>
                 <text class="text3">选择相似度</text>
               </view>
-              <view class="describe" style="color: {{item.bottonTextColor}}; background: {{item.bottonBackgroundColor}};">{{item.describe}}</view>
+              <view class="describe" style="color: {{item.bottonTextColor}}; background: {{item.bottonBackgroundColor}};">
+                {{item.describe}}
+              </view>
             </view>
           </view>
         </block>
@@ -38,7 +57,7 @@
     </scroll-view>
   </view>
   <!-- 最近消息 -->
-  <view class="recently-message">
+  <view class="recently-message" hidden="{{cardIndex}}">
     <view class="title">最近消息</view>
     <view class="list">
       <block wx:for="{{messages}}" wx:key="unique">

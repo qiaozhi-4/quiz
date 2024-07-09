@@ -68,6 +68,16 @@ Component({
         searchInput: e.detail.value
       })
     },
+    /** 点击卡片 */
+    handlTapCard(e: WechatMiniprogram.TouchEvent) {
+      this.setData({
+        cardIndex: e.currentTarget.dataset.index
+      })
+    },
+    /** 点击整个组件 */
+    handlTap(e: WechatMiniprogram.TouchEvent) {
+      console.log(JSON.stringify(e));
+    }
   },
   /** 生命周期函数 */
   lifetimes: {

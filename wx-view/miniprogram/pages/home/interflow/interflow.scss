@@ -71,89 +71,77 @@
       display: flex;
       gap: 20px;
 
-      .card-wrapper {
-        /* 防止子元素被压缩 */
-        flex: 0 0 auto;
+    }
+    
+    .card-wrapper {
+      /* 防止子元素被压缩 */
+      flex: 0 0 auto;
 
-        width: 139px;
-        height: 181px;
-        padding: 1.5px;
+      width: 139px;
+      height: 181px;
+      padding: 1.5px;
 
+      border-radius: 12.5px;
+
+      .card {
         border-radius: 12.5px;
+        background: url("https://th.bing.com/th?id=OIF.Es%2fn1y1KuN%2btilX1x6cuDw&w=291&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7") no-repeat center center;
 
-        .card {
-          border-radius: 12.5px;
-          background: url("https://th.bing.com/th?id=OIF.Es%2fn1y1KuN%2btilX1x6cuDw&w=291&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7") no-repeat center center;
+        grid-template-rows: auto 1fr auto;
 
-          grid-template-rows: auto 1fr auto;
+        .title {
+          font-size: map-get(global.$font-size , medium);
+          font-weight: map-get(global.$font-weight , 'black');
+          padding: 4px 10px;
+        }
 
-          .title {
-            font-size: map-get(global.$font-size , medium);
-            font-weight: map-get(global.$font-weight , 'black');
-            padding: 4px 10px;
-          }
+        .percentage {
+          grid-template-rows: auto auto;
+          place-content: center;
 
-          .percentage {
-            grid-template-rows: auto auto;
-            place-content: center;
+          .number {
+            grid-template-columns: auto auto;
+            place-content: end center;
 
-            .number {
-              grid-template-columns: auto auto;
-              place-content: end center;
-
-              .text1 {
-                line-height: map-get(global.$font-size , xxx-large);
-                font-size: map-get(global.$font-size , xxx-large);
-                font-weight: map-get(global.$font-weight , 'extra-bold');
-                place-self: end;
-              }
-
-              .text2 {
-                font-size: map-get(global.$font-size , medium);
-                font-weight: map-get(global.$font-weight , 'bold');
-                place-self: end start;
-                line-height: map-get(global.$font-size , medium);
-              }
+            .text1 {
+              line-height: map-get(global.$font-size , xxx-large);
+              font-size: map-get(global.$font-size , xxx-large);
+              font-weight: map-get(global.$font-weight , 'extra-bold');
+              place-self: end;
             }
 
-            .text3 {
-              font-size: map-get(global.$font-size , x-small);
+            .text2 {
+              font-size: map-get(global.$font-size , medium);
               font-weight: map-get(global.$font-weight , 'bold');
-              place-self: start center;
+              place-self: end start;
+              line-height: map-get(global.$font-size , medium);
             }
           }
 
-          .describe {
-            padding: 4px 10px;
+          .text3 {
             font-size: map-get(global.$font-size , x-small);
-            font-weight: map-get(global.$font-weight , bold);
-            height: 90rpx;
-            backdrop-filter: blur(10px);
-            border-radius: 0px 0px 12.0667px 12.0667px;
-
+            font-weight: map-get(global.$font-weight , 'bold');
+            place-self: start center;
           }
         }
-      }
 
-      .card1::before {
-        content: "";
-        position: absolute;
-        /* 绝对定位 */
-        top: -6px;
-        /* 上边距 -5px */
-        left: -6px;
-        /* 左边距 -5px */
-        width: calc(100% + 12px);
-        /* 宽度比父元素多 10px */
-        height: calc(100% + 12px);
-        /* 高度比父元素多 10px */
-        border: 3px solid red;
-        /* 设置边框 */
-        box-sizing: border-box;
-        /* 包含内边距和边框 */
+        .describe {
+          padding: 4px 10px;
+          font-size: map-get(global.$font-size , x-small);
+          font-weight: map-get(global.$font-weight , bold);
+          height: 90rpx;
+          backdrop-filter: blur(10px);
+          border-radius: 0px 0px 12.0667px 12.0667px;
 
-        border-radius: 12.5px;
+        }
       }
+    }
+
+    .card-top {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform:  translate(-50%, -50%)  scale(2);
     }
   }
 
