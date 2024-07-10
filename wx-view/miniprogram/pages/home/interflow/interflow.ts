@@ -56,6 +56,10 @@ Component({
     ] as any[],
     /** 最近消息 */
     messages: [] as any[],
+    /** 当前点击的卡片下标 */
+    cardIndex: -1,
+    /** 播放抽卡动画 */
+    draw: false,
   },
 
   /**
@@ -74,10 +78,25 @@ Component({
         cardIndex: e.currentTarget.dataset.index
       })
     },
-    /** 点击整个组件 */
-    handlTap(e: WechatMiniprogram.TouchEvent) {
-      console.log(JSON.stringify(e));
-    }
+    /** 抽取点击卡片 */
+    handlDrawTap(e: WechatMiniprogram.TouchEvent) {
+      console.log('抽取卡片下标:', e.currentTarget.dataset)
+      this.setData({
+        draw: true
+      })
+      // setTimeout(() => {
+      //   this.setData({
+      //     draw: false
+      //   })
+      // },2000)
+    },
+    /** 点击遮罩层 */
+    handlOverlayTap() {
+      this.setData({
+        cardIndex: -1,
+        draw: false,
+      })
+    },
   },
   /** 生命周期函数 */
   lifetimes: {

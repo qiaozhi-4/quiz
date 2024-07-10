@@ -72,7 +72,7 @@
       gap: 20px;
 
     }
-    
+
     .card-wrapper {
       /* 防止子元素被压缩 */
       flex: 0 0 auto;
@@ -124,6 +124,7 @@
             place-self: start center;
           }
         }
+
         .describe {
           padding: 4px 10px;
           font-size: map-get(global.$font-size , x-small);
@@ -141,8 +142,63 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform:  translate(-50%, -50%)  scale(2);
+      transform: translate(-50%, -50%) scale(2);
+      z-index: 3;
     }
+
+    .card-bottom {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      // transform: translate(-50%, -50%) scale(2) rotatey(10turn);
+      // transition: transform 1.5s;
+
+      animation: draw 2s 1;
+      z-index: 3;
+    }
+
+    /* 定义翻牌帧动画 */
+    @keyframes draw {
+      0% {
+        transform: translate(-50%, -50%) scale(2);
+      }
+
+      50% {
+        transform: translate(-50%, -50%) scale(0.5) rotatey(10turn);
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(2);
+      }
+    }
+
+    /* 使用伪元素创建扩散效果 */
+    .card-bottom::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 110%;
+      height: 110%;
+      background-color: white;
+      z-index: 4;
+      transform: translate(-5%, -5%);
+      border-radius: 12.5px;
+      box-shadow: 0 0 20px rgba($color: #7756EC, $alpha: 1.0); /* 添加阴影效果 */
+    }
+
+
+    .overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100vw;
+      height: 100vh;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2;
+    }
+
   }
 
   .recently-message {
