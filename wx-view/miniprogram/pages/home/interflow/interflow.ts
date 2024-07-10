@@ -60,6 +60,17 @@ Component({
     cardIndex: -1,
     /** 播放抽卡动画 */
     draw: false,
+    /** 卡片匹配到的用户 */
+    matchUser: {
+      imgUrl: 'https://game.gtimg.cn/images/lol/act/img/skin/big_a8918612-98ba-4822-90b9-331f89a419a5.jpg',
+      percentage: Math.floor(Math.random() * (100 - 1 + 1)) + 1,
+      nickname: '乔治',
+      age: 23,
+      question:'在朋友面临困难时，我通常会怎么做？',
+      answer:'帮助他解决',
+
+      // imgUrl: 'https://th.bing.com/th/id/OIP.iNCJT9OS8Iv2yQnOVR-1NgAAAA?rs=1&pid=ImgDetMain',
+    } as any,
   },
 
   /**

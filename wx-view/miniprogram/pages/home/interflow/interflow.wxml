@@ -21,7 +21,7 @@
     <view class="overlay" hidden="{{cardIndex == -1}}" bind:tap="handlOverlayTap"></view>
     <!-- 放大卡片 -->
     <block wx:for="{{multiplayers}}" wx:key="unique">
-      <view data-index='{{index}}' bind:tap="handlDrawTap" hidden="{{cardIndex != index}}" class="card-wrapper card-top {{draw ? 'card-bottom' : ''}}" style=" border: 3px solid {{item.borderColor}}; ">
+      <view class="card-wrapper card-top {{draw ? 'card-bottom' : ''}}" data-index='{{index}}' bind:tap="handlDrawTap" hidden="{{cardIndex != index}}" style=" border: 3px solid {{item.borderColor}}; ">
         <view class="card" style=" border: 1.5px solid {{item.borderColor}};  background: url({{item.imgUrl}}) no-repeat center center;">
           <view class="title">{{item.title}}</view>
           <view class="percentage">
@@ -35,8 +35,16 @@
             {{item.describe}}
           </view>
         </view>
+        <!-- 展示匹配的用户 -->
+        <view class="draw-card" hidden="{{!draw}}" style="background: url({{matchUser.imgUrl}}) no-repeat center center;">
+          <view >{{matchUser.percentage}}%回答相似度</view>
+          <view >{{matchUser.nickname + ' ' + matchUser.age}}</view>
+          <view >{{matchUser.question}}</view>
+          <view >{{matchUser.answer}}</view>
+        </view>
       </view>
     </block>
+    <!-- 卡片滚动列表 -->
     <scroll-view scroll-x style="width: 94vw;" hidden="{{cardIndex != -1}}">
       <view class="list">
         <block wx:for="{{multiplayers}}" wx:key="unique">

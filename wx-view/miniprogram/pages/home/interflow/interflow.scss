@@ -136,8 +136,34 @@
         }
 
       }
+
+      .draw-card {
+        border-radius: 12.5px;
+        width: 100%;
+        height: 100%;
+        // background-color: #9c2c2c;
+        position: absolute;
+        z-index: 4;
+        // animation: draw-show 2s 1;
+      }
+
+      /* 定义翻牌帧动画 */
+      @keyframes draw-show {
+        0% {
+          opacity: 0;
+        }
+
+        90% {
+          opacity: 0.8;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
     }
 
+    /** 选择卡片 */
     .card-top {
       position: absolute;
       top: 50%;
@@ -146,15 +172,9 @@
       z-index: 3;
     }
 
+    /** 点击选择卡片 */
     .card-bottom {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      // transform: translate(-50%, -50%) scale(2) rotatey(10turn);
-      // transition: transform 1.5s;
-
       animation: draw 2s 1;
-      z-index: 3;
     }
 
     /* 定义翻牌帧动画 */
@@ -178,13 +198,13 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 110%;
-      height: 110%;
+      width: 104%;
+      height: 104%;
       background-color: white;
-      z-index: 4;
-      transform: translate(-5%, -5%);
+      transform: translate(-2%, -2%);
       border-radius: 12.5px;
-      box-shadow: 0 0 20px rgba($color: #7756EC, $alpha: 1.0); /* 添加阴影效果 */
+      box-shadow: 0 0 20px rgba($color: #7756EC, $alpha: 1.0);
+      /* 添加阴影效果 */
     }
 
 
