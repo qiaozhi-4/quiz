@@ -137,24 +137,24 @@
 
       }
 
+      // 抽取到的卡片展示
       .draw-card {
         border-radius: 12.5px;
         width: 100%;
         height: 100%;
-        // background-color: #9c2c2c;
         position: absolute;
         z-index: 4;
-        // animation: draw-show 2s 1;
+        animation: draw-show 2s 1;
       }
 
-      /* 定义翻牌帧动画 */
+      /* 显示抽取到的卡片 */
       @keyframes draw-show {
         0% {
           opacity: 0;
         }
 
         90% {
-          opacity: 0.8;
+          opacity: 0.2;
         }
 
         100% {
@@ -163,7 +163,7 @@
       }
     }
 
-    /** 选择卡片 */
+    /** 放大选择卡片 */
     .card-top {
       position: absolute;
       top: 50%;
@@ -184,11 +184,12 @@
       }
 
       50% {
-        transform: translate(-50%, -50%) scale(0.5) rotatey(10turn);
+        transform: translate(-50%, -50%) scale(0.2) rotatey(10turn);
       }
 
       100% {
         transform: translate(-50%, -50%) scale(2);
+        border: 2px solid #7756EC; /* 2像素宽的黑色实线边框 */
       }
     }
 
@@ -203,10 +204,19 @@
       background-color: white;
       transform: translate(-2%, -2%);
       border-radius: 12.5px;
-      box-shadow: 0 0 20px rgba($color: #7756EC, $alpha: 1.0);
+      box-sizing: border-box;
       /* 添加阴影效果 */
+      box-shadow: 0 0 20px rgba($color: #7756EC, $alpha: 1.0);
+      z-index: 3;
+      animation: draw-before 2s 1 forwards;
     }
+    /* 伪元素最终添加边框 */
+    @keyframes draw-before {
 
+      100% {
+        border: 6.6px solid #7756EC; /* 2像素宽的黑色实线边框 */
+      }
+    }
 
     .overlay {
       position: absolute;
