@@ -154,3 +154,33 @@ create table if not exists quiz.q_paper_classes
     INDEX question_id (class_id),
     INDEX paper_id_question_id (paper_id, class_id)
 ) comment '试卷关联试卷分类';
+
+
+# 勇者相关
+create table yz_device
+(
+    username varchar(255)   not null comment '用户名',
+    android  varchar(18)    not null comment '安卓ID',
+    end_time datetime       null comment '过期时间',
+    lv       int default -1 null comment '-1封禁,0试用,1vip,2svip,3max',
+    primary key (android),
+    INDEX username (username)
+) comment '设备卡密信息';
+
+create table yz_use_info
+(
+    username      varchar(64)  not null comment '卡号',
+    account_      varchar(64)  not null comment '账号(游戏的)',
+    password      varchar(64)  null comment '密码(游戏的)',
+    function_name varchar(128) null comment '调用的方法名称',
+    server_id     int          null comment '区服id',
+    server_name   varchar(64)  null comment '区服名称',
+    brave_id      int          null comment '勇者id',
+    player_key    varchar(32)  null comment '玩家key',
+    player_name   varchar(64)  null comment '玩家昵称',
+    role_id       int          null comment '玩家角色id',
+    role_name     varchar(32)  null comment '玩家角色名称',
+    date_time     datetime     null comment '使用时间',
+    primary key (username),
+    INDEX account_ (account_)
+) comment '脚本使用信息';
