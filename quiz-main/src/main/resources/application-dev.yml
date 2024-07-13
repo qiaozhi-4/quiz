@@ -4,10 +4,10 @@ spring:
     name: quiz
   # 数据源配置
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/quiz
+    url: jdbc:mysql://101.34.56.241:3306/quiz
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: root
+    password: U2FsdGVkX1/w
     hikari:
       max-lifetime: 30000
   # redis配置
