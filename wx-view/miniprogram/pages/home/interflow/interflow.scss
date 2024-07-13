@@ -73,6 +73,8 @@
 
     }
 
+    $card-border-radius: 12.5px;
+
     .card-wrapper {
       /* 防止子元素被压缩 */
       flex: 0 0 auto;
@@ -81,10 +83,10 @@
       height: 181px;
       padding: 1.5px;
 
-      border-radius: 12.5px;
+      border-radius: $card-border-radius;
 
       .card {
-        border-radius: 12.5px;
+        border-radius: $card-border-radius;
         background: url("https://th.bing.com/th?id=OIF.Es%2fn1y1KuN%2btilX1x6cuDw&w=291&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7") no-repeat center center;
 
         grid-template-rows: auto 1fr auto;
@@ -137,24 +139,30 @@
 
       }
 
+      // 抽取到的卡片展示
       .draw-card {
-        border-radius: 12.5px;
-        width: 100%;
-        height: 100%;
-        // background-color: #9c2c2c;
+        border-radius: $card-border-radius;
+        width: 95%;
+        height: 97%;
         position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         z-index: 4;
-        // animation: draw-show 2s 1;
+        animation: draw-show 2s 1;
+
+        display: flex;
+        flex-direction: column;
       }
 
-      /* 定义翻牌帧动画 */
+      /* 显示抽取到的卡片 */
       @keyframes draw-show {
         0% {
           opacity: 0;
         }
 
         90% {
-          opacity: 0.8;
+          opacity: 0.2;
         }
 
         100% {
@@ -163,7 +171,7 @@
       }
     }
 
-    /** 选择卡片 */
+    /** 放大选择卡片 */
     .card-top {
       position: absolute;
       top: 50%;
@@ -184,11 +192,13 @@
       }
 
       50% {
-        transform: translate(-50%, -50%) scale(0.5) rotatey(10turn);
+        transform: translate(-50%, -50%) scale(0.2) rotatey(10turn);
       }
 
       100% {
         transform: translate(-50%, -50%) scale(2);
+        border: 2px solid #7756EC;
+        /* 2像素宽的黑色实线边框 */
       }
     }
 
@@ -202,12 +212,24 @@
       height: 104%;
       background-color: white;
       transform: translate(-2%, -2%);
-      border-radius: 12.5px;
-      box-shadow: 0 0 20px rgba($color: #7756EC, $alpha: 1.0);
+      border-radius: $card-border-radius;
+      box-sizing: border-box;
       /* 添加阴影效果 */
+      box-shadow: 0 0 20px rgba($color: #7756EC, $alpha: 1.0);
+      z-index: 3;
+      animation: draw-before 2s 1 forwards;
     }
 
+    /* 伪元素最终添加边框 */
+    @keyframes draw-before {
 
+      100% {
+        border: 3.3px solid #7756EC;
+        /* 2像素宽的黑色实线边框 */
+      }
+    }
+
+    // 遮罩层
     .overlay {
       position: absolute;
       top: 50%;
