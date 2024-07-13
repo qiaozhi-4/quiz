@@ -138,8 +138,10 @@ public class CodeGenerator {
 //                                .addInclude("q_answers")
 //                                .addInclude("q_paper_questions")
 //                                .addInclude("q_paper_tags")
-                                .addInclude("q_classes")
-                                .addInclude("q_paper_classes")
+//                                .addInclude("q_classes")
+//                                .addInclude("q_paper_classes")
+                                .addInclude("yz_device")
+                                .addInclude("yz_use_info")
                                 //.likeTable(new LikeTable("", SqlLike.RIGHT))
 
                                 /*配置 Entity*/
