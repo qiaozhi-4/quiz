@@ -18,8 +18,8 @@
         <maven.compiler.source>8</maven.compiler.source><!-- 设置编译源代码的Java版本 -->
         <maven.compiler.target>8</maven.compiler.target><!-- 设置目标字节码的Java版本 -->
         <spring.boot.version>2.7.0</spring.boot.version><!-- 定义spring.boot的版本 -->
-        <activated.profile>prod</activated.profile>
-        <activated.profile>dev</activated.profile>
+        <!--        <activated.profile>prod</activated.profile>-->
+        <!--        <activated.profile>dev</activated.profile>-->
     </properties>
 
     <!--用于集中管理依赖的版本号，使得在项目中引用这些依赖时可以省略版本号。-->

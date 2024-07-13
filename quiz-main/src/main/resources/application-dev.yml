@@ -34,8 +34,5 @@ knife4j:
 
 # 配置日志
 logging:
-  level:
-    root: INFO #日志级别
-    sql: INFO
-    com.quiz: DEBUG
+  config: classpath:log4j2-spring-dev.xml
 

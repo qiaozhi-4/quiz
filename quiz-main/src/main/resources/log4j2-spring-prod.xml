@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <!-- Properties节，用于定义配置中通用的属性 -->
+    <Properties>
+        <!-- LOG_DIR属性定义了日志文件存储的目录 -->
+        <Property name="LOG_DIR">/var/log/quiz</Property>
+        <!-- APP_NAME属性定义了日志文件的基础名称 -->
+        <Property name="APP_NAME">quiz</Property>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight{%-5level}{STYLE=Logback} %clr{%X{pid}}{faint} --- [%15t] %logger{36} : %msg%n%ex</Property>
+    </Properties>
+
+    <!-- Appenders节，定义了日志的输出目的地 -->
+    <Appenders>
+        <!-- 控制台输出器，用于将日志消息输出到控制台 -->
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <!-- PatternLayout定义了控制台日志消息的格式 -->
+            <PatternLayout disableAnsi="false" noConsoleNoAnsi="false" pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <!-- 滚动文件输出器，用于将日志输出到文件，并按日期进行滚动 -->
+        <RollingFile name="FileAppender"
+                     fileName="${LOG_DIR}/${APP_NAME}.log"
+                     filePattern="${LOG_DIR}/${APP_NAME}-%d{yyyy-MM-dd}.log">
+            <!-- 文件的日志格式也由PatternLayout定义 -->
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <!-- Policies定义了日志文件的滚动策略 -->
+            <Policies>
+                <!-- TimeBasedTriggeringPolicy根据时间触发滚动，这里设置为每天 -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <!-- DefaultRolloverStrategy定义了滚动文件的保留策略，这里设置为最多保留30天 -->
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+    </Appenders>
+
+    <!-- Loggers节，定义了日志记录器的具体行为 -->
+    <Loggers>
+        <!-- Root日志记录器设置全局的日志级别为INFO，并关联到前面定义的输出器 -->
+        <Root level="info">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="FileAppender"/>
+        </Root>
+
+        <!-- 特定于com.quiz包的日志记录器，设置日志级别为DEBUG -->
+        <Logger name="com.quiz" level="debug" additivity="false">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
+    </Loggers>
+</Configuration>
