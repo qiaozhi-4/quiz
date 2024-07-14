@@ -10,6 +10,26 @@ server:
 spring:
   profiles:
     active: @activated.profile@
+  # 邮箱配置
+  mail:
+    #smtp服务主机  qq邮箱则为smtp.qq.com
+    host: smtp.163.com
+    #服务协议
+    protocol: smtp
+    # 编码集
+    default-encoding: UTF-8
+    #发送邮件的账户
+    username: 18890176107@163.com
+    #授权码
+    password: RPZSKFJTGWQNYJLI
+    test-connection: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 
 # Mybatis-plus的配置
 mybatis-plus:
