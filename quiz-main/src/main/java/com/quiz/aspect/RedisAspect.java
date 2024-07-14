@@ -61,7 +61,7 @@ public class RedisAspect {
         log.debug("环绕通知: " + pjp.getSignature().getName() + "方法执行之前");
 
         // 如果redis存在该key则直接返回
-        final String key = "quiz:t-path:path-dto-list";
+        final String key = "quiz:path:path-dto-list";
         final ListOperations<String, Object> opsForList = redisTemplate.opsForList();
         if (Boolean.TRUE.equals(redisTemplate.hasKey(key))) {
             return opsForList.range(key, 0, -1);
@@ -82,7 +82,7 @@ public class RedisAspect {
     @Around("execution(*  com.quiz.service.impl.UserServiceImpl.getUserDtoByAccount(..))")
     public Object getUserDtoByAccount(ProceedingJoinPoint pjp) throws Throwable {
         // 如果redis存在该key则直接返回
-        final String key = "quiz:t-user:" + pjp.getArgs()[0];
+        final String key = "quiz:user:" + pjp.getArgs()[0];
         final ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
         if (Boolean.TRUE.equals(redisTemplate.hasKey(key))) {
             return valueOperations.getAndExpire(key, Duration.ofMinutes(10));
