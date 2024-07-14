@@ -177,7 +177,7 @@ public class CodeGenerator {
                                 .disable()
                                 .mapperTemplate("\\templates\\ftl\\mapper.java")
                                 .mapperXmlTemplate("\\templates\\ftl\\mapper.xml")
-//                                .enableFileOverride()//开启文件覆盖
+                                .enableFileOverride()//开启文件覆盖
                                 .enableBaseResultMap()
                                 //.enableBaseColumnList()
                                 .convertMapperFileName(entityName ->

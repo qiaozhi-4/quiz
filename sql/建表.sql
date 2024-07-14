@@ -159,11 +159,11 @@ create table if not exists quiz.q_paper_classes
 # 勇者相关
 create table yz_device
 (
-    username varchar(255)   not null comment '用户名',
-    android  varchar(18)    not null comment '安卓ID',
-    end_time datetime       null comment '过期时间',
-    lv       int default -1 null comment '-1封禁,0试用,1vip,2svip,3max',
-    primary key (android),
+    device_id varchar(18)    not null comment '安卓设备ID',
+    username  varchar(255)   not null comment '用户名',
+    end_time  datetime       null comment '过期时间',
+    lv        int default -1 null comment '-1封禁,0试用,1vip,2svip,3max',
+    primary key (device_id),
     INDEX username (username)
 ) comment '设备卡密信息';
 
