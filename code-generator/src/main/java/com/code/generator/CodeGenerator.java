@@ -55,7 +55,7 @@ public class CodeGenerator {
     /**
      * 数据连接路径
      */
-    private final static String URL = "jdbc:mysql://127.0.0.1:3306/quiz";
+    private final static String URL = "jdbc:mysql://101.34.56.241:3306/quiz";
     /**
      * 数据连接账号
      */
@@ -63,7 +63,11 @@ public class CodeGenerator {
     /**
      * 数据连接密码
      */
-    private final static String PASSWORD = "root";
+    private final static String PASSWORD = "U2FsdGVkX1/w";
+    /**
+     * 需要替换的表前缀
+     */
+    public static final String REGEX = "^\\w+?(?=[A-Z])";
 
     /**
      * <p>
@@ -155,7 +159,7 @@ public class CodeGenerator {
                                 //开启 ActiveRecord 模型(封装了实体一些简单持久化操作,必须有对应的BaseMapper实现)
                                 .enableActiveRecord()
                                 //配置生成文件的名字
-                                .convertFileName(entityName -> entityName.replaceAll("^[TQ](?=[A-Z])", ""))
+                                .convertFileName(entityName -> entityName.replaceAll(REGEX, ""))
 
                                 /*配置 Service*/
                                 .serviceBuilder()
@@ -164,9 +168,9 @@ public class CodeGenerator {
                                 .serviceImplTemplate("\\templates\\ftl\\serviceImpl.java")//设置模版路径
 //                                .enableFileOverride()//开启文件覆盖
                                 .convertServiceFileName(entityName ->
-                                        "I" + entityName.replaceAll("^[TQ](?=[A-Z])", "") + "Service")
+                                        "I" + entityName.replaceAll(REGEX, "") + "Service")
                                 .convertServiceImplFileName(entityName ->
-                                        entityName.replaceAll("^[TQ](?=[A-Z])", "") + "ServiceImpl")
+                                        entityName.replaceAll(REGEX, "") + "ServiceImpl")
 
                                 /*配置 Mapper*/
                                 .mapperBuilder()
@@ -177,9 +181,9 @@ public class CodeGenerator {
                                 .enableBaseResultMap()
                                 //.enableBaseColumnList()
                                 .convertMapperFileName(entityName ->
-                                        entityName.replaceAll("^[TQ](?=[A-Z])", "") + "Mapper")
+                                        entityName.replaceAll(REGEX, "") + "Mapper")
                                 .convertXmlFileName(entityName ->
-                                        entityName.replaceAll("^[TQ](?=[A-Z])", "") + "Mapper")
+                                        entityName.replaceAll(REGEX, "") + "Mapper")
 
                                 /*配置 Controller*/
                                 .controllerBuilder()
@@ -188,7 +192,7 @@ public class CodeGenerator {
 //                                .enableFileOverride()//开启文件覆盖
                                 .enableRestStyle()//开启生成@RestController 控制器(等同于@Controller + @ResponseBody。)
                                 .convertFileName(entityName ->
-                                        entityName.replaceAll("^[TQ](?=[A-Z])", "") + "Controller"))
+                                        entityName.replaceAll(REGEX, "") + "Controller"))
                 /*模板引擎配置，默认 Velocity 可选模板引擎 Beetl 或 Freemarker (需要导入相应包)*/
                 .templateEngine(new FreemarkerTemplateEngine())
                 .execute();
