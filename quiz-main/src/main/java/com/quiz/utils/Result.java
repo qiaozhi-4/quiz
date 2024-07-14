@@ -53,6 +53,10 @@ public class Result<T> {
         return new Result<T>(ResultEnum.FAILED).setMessage(message);
     }
 
+    public static <T> Result<T> failed(String message, T data) {
+        return new Result<T>(ResultEnum.FAILED).setMessage(message).setData(data);
+    }
+
     public static <T> Result<T> failed(ResultEnum resultEnum) {
         return new Result<>(resultEnum);
     }
