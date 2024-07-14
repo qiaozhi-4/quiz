@@ -169,6 +169,7 @@ create table yz_device
 
 create table yz_use_info
 (
+    use_id        int auto_increment comment '唯一主键',
     username      varchar(64)  not null comment '卡号',
     account_      varchar(64)  not null comment '账号(游戏的)',
     password      varchar(64)  null comment '密码(游戏的)',
@@ -181,6 +182,7 @@ create table yz_use_info
     role_id       int          null comment '玩家角色id',
     role_name     varchar(32)  null comment '玩家角色名称',
     date_time     datetime     null comment '使用时间',
-    primary key (username),
+    primary key (use_id),
+    INDEX username (username),
     INDEX account_ (account_)
 ) comment '脚本使用信息';
