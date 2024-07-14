@@ -32,5 +32,5 @@ public class ToEmail implements Serializable {
     /**
      * 发件人昵称
      */
-    private String nickname = "乔治";
+    private String nickname;
 }
