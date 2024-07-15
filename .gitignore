@@ -41,3 +41,4 @@ build/
 .idea/
 logs/
 node_modules/
+**modules/
