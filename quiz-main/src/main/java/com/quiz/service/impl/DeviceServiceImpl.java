@@ -91,7 +91,7 @@ public class DeviceServiceImpl extends ServiceImpl<DeviceMapper, Device> impleme
                         .lv(0)
                         .build();
                 //插入新设备信息
-                Assert.isTrue(device.updateById(), "插入新设备信息失败");
+                Assert.isTrue(device.insert(), "插入新设备信息失败");
                 throw new APIException("第一次登录,请复制日志里面的username给作者, username:" + device.getUsername());
             } else {
                 throw new APIException("垃圾东西你都要破?我日尼玛!!!");
