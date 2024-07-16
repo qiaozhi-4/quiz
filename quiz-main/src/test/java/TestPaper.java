@@ -45,7 +45,7 @@ public class TestPaper {
         final PaperDto paperDto = PaperDto.convertOf(paper)
                 .setQuestions(questionMapper.selectRandomQuestions())
                 .setTags(getTags());
-        final Boolean aBoolean = paperService.savePaperInfo(paperDto);
+        final Boolean aBoolean = paperService.addPaperInfo(paperDto);
         System.out.println(aBoolean);
     }
 

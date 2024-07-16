@@ -1,6 +1,8 @@
 package com.quiz.controller;
 
+import com.quiz.annotation.PathPermission;
 import com.quiz.entity.User;
+import com.quiz.enumerate.PermissionEnum;
 import com.quiz.service.IWxUserService;
 import com.quiz.utils.Result;
 import io.swagger.annotations.Api;
@@ -24,13 +26,14 @@ import org.springframework.web.bind.annotation.*;
 public class WxUserController {
     private final IWxUserService wxUserService;
 
-    @ApiOperation(value = "微信小程序登录", tags = {"Public"})
+    @ApiOperation(value = "微信小程序登录")
     @PostMapping("login")
     public Result<Object> login(@RequestParam String code) throws WxErrorException {
         return wxUserService.login(code);
     }
 
-    @ApiOperation(value = "保存微信小程序用户信息", tags = {"Public"})
+    @PathPermission(PermissionEnum.UPDATE_OWN)
+    @ApiOperation(value = "保存微信小程序用户信息")
     @PostMapping("save")
     public Boolean save(@RequestBody User user) {
         return wxUserService.saveUserInfo(user);

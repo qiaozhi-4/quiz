@@ -1,7 +1,9 @@
 package com.quiz.controller;
 
 
+import com.quiz.annotation.PathPermission;
 import com.quiz.dto.PaperDto;
+import com.quiz.enumerate.PermissionEnum;
 import com.quiz.mapper.PaperMapper;
 import com.quiz.service.IPaperService;
 import io.swagger.annotations.Api;
@@ -26,15 +28,17 @@ public class PaperController {
     private final PaperMapper paperMapper;
     private final IPaperService paperService;
 
+    @PathPermission(PermissionEnum.READ)
     @ApiOperation("通过试卷ID,获取试卷详情")
     @GetMapping("get/{paperId:\\d+}")
     public PaperDto get(@PathVariable Integer paperId) {
         return paperMapper.selectPaperById(paperId);
     }
 
+    @PathPermission(PermissionEnum.CREATE)
     @ApiOperation("保存试卷信息")
-    @PostMapping("save")
-    public Boolean save(@RequestBody PaperDto paperDto) {
-        return paperService.savePaperInfo(paperDto);
+    @PostMapping("add")
+    public Boolean add(@RequestBody PaperDto paperDto) {
+        return paperService.addPaperInfo(paperDto);
     }
 }

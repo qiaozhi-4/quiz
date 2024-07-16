@@ -1,6 +1,8 @@
 package com.quiz.controller;
 
 
+import com.quiz.annotation.PathPermission;
+import com.quiz.enumerate.PermissionEnum;
 import com.quiz.service.IPathService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,13 +26,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class PathController {
     private final IPathService pathService;
 
+    @PathPermission(PermissionEnum.UPDATE)
     @ApiOperation("更新所有接口路径")
     @GetMapping("update-all-path")
     public String updateAllPath() {
         return pathService.updateAllPath() ? "请求路径更新成功" : "请求路径更新失败";
     }
 
-    @ApiOperation(value = "更新所有接口路径(不要权限)", tags = {"Public"})
+    @ApiOperation(value = "更新所有接口路径(不要权限)" )
     @GetMapping("update-all-path-test")
     public String updateAllPathTest() {
         return pathService.updateAllPath() ? "请求路径更新成功" : "请求路径更新失败";

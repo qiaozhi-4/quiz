@@ -8,7 +8,8 @@ VALUES ('CREATE', '添加'),
        ('READ', '读取'),
        ('UPDATE', '更新'),
        ('DELETE', '删除'),
-       ('DD_CHANGE', '勇者的修改权限');
+       ('DD_CHANGE', '勇者的修改权限'),
+       ('UPDATE_OWN', '修改用户自己');
 
 -- ADMIN 角色权限
 INSERT INTO quiz.t_role_permissions (role_id, permission_id)
@@ -17,6 +18,7 @@ VALUES (1, 1),
        (1, 3),
        (1, 4),
        (2, 2);
+       (2, 6);
        (3, 5);
 
 -- 添加测试用户

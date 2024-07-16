@@ -1,7 +1,9 @@
 package com.quiz.controller;
 
 
+import com.quiz.annotation.PathPermission;
 import com.quiz.entity.Question;
+import com.quiz.enumerate.PermissionEnum;
 import com.quiz.mapper.QuestionMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,13 +29,14 @@ import java.util.List;
 public class QuestionController {
     private final QuestionMapper questionMapper;
 
-    @ApiOperation("随机获取10个题目")
+    @PathPermission(PermissionEnum.READ)
+    @ApiOperation(value = "随机获取10个题目")
     @GetMapping("get-random-questions")
     public List<Question> getRandomQuestions() {
         return questionMapper.selectRandomQuestions();
     }
 
-    @ApiOperation(value = "随机获取10个题目(不要权限)", tags = {"Public"})
+    @ApiOperation(value = "随机获取10个题目(不要权限)")
     @GetMapping("get-random-questions-test")
     public List<Question> getRandomQuestionsTest() {
         return questionMapper.selectRandomQuestions();

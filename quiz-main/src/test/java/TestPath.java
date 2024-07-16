@@ -20,9 +20,5 @@ public class TestPath {
     @Autowired
     private PathMapper pathMapper;
 
-    @Test
-    public void selectPathDtoList() {
-        final List<PathDto> pathDtoList = pathMapper.selectPathDtoList();
-        System.out.println(pathDtoList.toString());
-    }
+
 }

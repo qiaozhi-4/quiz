@@ -34,13 +34,16 @@ public class CustomizeAuthorizationManager implements AuthorizationManager<Reque
 
     @Override
     public AuthorizationDecision check(Supplier<Authentication> authentication, RequestAuthorizationContext context) {
+        /* 当前请求路径 */
         String requestPath = context.getRequest().getRequestURI();
-        final List<Path> pathDtoList = pathService.list();
-        final Optional<Path> pathOptional = pathDtoList.stream()
+
+        /* 获取路径信息 */
+        final List<Path> paths = pathService.list();
+        final Optional<Path> pathOptional = paths.stream()
                 .filter(path -> antPathMatcher.match(path.getPattern(), requestPath))
                 .findFirst();
         if (!pathOptional.isPresent() || StringUtils.isBlank(pathOptional.get().getPermissionName())) {
-            log.debug("[{}]:不存在数据库,或者所需权限为空!", requestPath);
+            log.debug("[{}]:不存在数据库,或者所需权限为空!可直接访问", requestPath);
             return new AuthorizationDecision(true);
         }
         return new AuthorizationDecision(authentication.get().getAuthorities().stream()

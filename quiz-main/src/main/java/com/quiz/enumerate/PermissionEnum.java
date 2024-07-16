@@ -16,7 +16,8 @@ public enum PermissionEnum {
     READ("READ"),
     UPDATE("UPDATE"),
     DELETE("DELETE"),
-    DD_CREATE("DD_CHANGE");
+    DD_CHANGE("DD_CHANGE"),
+    UPDATE_OWN("UPDATE_OWN");
     private String name;
 
 

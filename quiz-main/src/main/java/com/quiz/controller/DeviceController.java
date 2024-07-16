@@ -1,8 +1,10 @@
 package com.quiz.controller;
 
 
+import com.quiz.annotation.PathPermission;
 import com.quiz.dto.DeviceDto;
 import com.quiz.entity.Device;
+import com.quiz.enumerate.PermissionEnum;
 import com.quiz.service.IDeviceService;
 import com.quiz.utils.Assert;
 import com.quiz.utils.email.EmailUtil;
@@ -35,6 +37,7 @@ public class DeviceController {
     private final EmailUtil emailUtil;
     private final RedisTemplate<String, Object> redisTemplate;
 
+    @PathPermission(PermissionEnum.READ)
     @GetMapping("list/{current:\\d+}/{size:\\d+}")
     @ApiOperation("分页获取数据集合、总条数")
     @ApiImplicitParams({ //参数说明
@@ -58,6 +61,7 @@ public class DeviceController {
         return "修改设备成功";
     }
 
+    @PathPermission(PermissionEnum.DELETE)
     @DeleteMapping("delete-device")
     @ApiOperation("批量删除设备!")
     public Boolean deleteDevices(@RequestBody List<String> deviceIds) {
