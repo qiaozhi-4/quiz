@@ -23,7 +23,7 @@ public interface IUserService extends IService<User> {
     /**
      * 平台注册用户
      */
-    Boolean registerUser(User user);
+    User registerUser(User user);
 
     /**
      * 第三方注册用户
@@ -31,5 +31,5 @@ public interface IUserService extends IService<User> {
      * @param tPName     第三方平台的名称
      * @param providerId 用户在第三方平台相对当前应用的唯一id
      */
-    void registerUserTP(User user, String tPName, String providerId);
+    User registerUserTP( String tPName, String providerId);
 }

@@ -32,22 +32,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return userDto;
     }
 
-    @Override
-    public Boolean registerUser(User user) {
-        Assert.isNotNull(user.getPassword(), "密码不能为空");
-        return this.addUser(user);
-    }
-
-    private Boolean addUser(User user) {
+    private void addUser(User user) {
         Assert.isTrue(user.insert(), "插入用户失败");
-        Assert.isTrue(UserRoles.builder()
-                .roleId(2).userId(user.getUserId())
+        Assert.isTrue(UserRoles.builder().roleId(2).userId(user.getUserId())
                 .build().insert(), "插入用户角色信息失败");
-        return true;
     }
 
     @Override
-    public void registerUserTP(User user, String tPName, String providerId) {
+    public User registerUser(User user) {
+        Assert.isNotNull(user.getPassword(), "密码不能为空");
+        this.addUser(user);
+        return user;
+    }
+
+    @Override
+    public User registerUserTP(String tPName, String providerId) {
+        User user = UserDto.defUser();
         this.addUser(user);
         Assert.isTrue(UserAuth.builder()
                         .userId(user.getUserId())
@@ -56,5 +56,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
                         .build()
                         .insert()
                 , "插入用户第三方登录信息失败");
+        return user;
     }
 }

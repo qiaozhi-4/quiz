@@ -47,13 +47,11 @@ public class WxUserServiceImpl implements IWxUserService {
 
         Map<Object, Object> map = new HashMap<>();
         if (Objects.isNull(user)) {
-            log.info("当前用户第一次登录,openID:" + sessionInfo.getOpenid());
-            /* 创建用户,并插入数据库 */
-            user = UserDto.defUser();
-            userService.registerUserTP(user, Constants.WX_NAME, sessionInfo.getOpenid());
+            log.info("当前用户第一次登录,openID:{}", sessionInfo.getOpenid());
+            /* 第三方注册新用户 */
+            user = userService.registerUserTP( Constants.WX_NAME, sessionInfo.getOpenid());
         } else {
-            user.setLastLoginAt(LocalDateTime.now());
-            Assert.isTrue(user.updateById(), "更新用户上次登录时间失败");
+            Assert.isTrue(user.setLastLoginAt(LocalDateTime.now()).updateById(), "更新用户上次登录时间失败");
         }
         final String jwtToken = JWTUtils.getJwtToken(user.getUserId().toString(), user.getUsername());
         map.put(JWTUtils.TOKEN_KEY, jwtToken);
