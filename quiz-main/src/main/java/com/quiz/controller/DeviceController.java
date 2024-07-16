@@ -1,6 +1,7 @@
 package com.quiz.controller;
 
 
+import com.quiz.dto.DeviceDto;
 import com.quiz.entity.Device;
 import com.quiz.service.IDeviceService;
 import com.quiz.utils.Assert;
@@ -46,14 +47,14 @@ public class DeviceController {
 
     @PutMapping("update-device")
     @ApiOperation("更新设备信息,是否被封和过期时间")
-    public Boolean updateDevice(String deviceId, Long amountToAdd, String unit, Integer level) {
+    public Boolean updateDevice(@RequestBody DeviceDto deviceDto) {
         /*发送邮件*/
         emailUtil.commonEmail(ToEmail.builder().tos(new String[]{"468644641@qq.com"})
                 .subject("设备修改")
-                .content("本次修改的设备信息:\n" + String.format("deviceId: %s, amountToAdd: %d, unit: %s, level: %d", deviceId, amountToAdd, unit, level))
+                .content("本次修改的设备信息:\n" + deviceDto.toString())
                 .nickname("乔治")
                 .build());
-        return deviceService.change(deviceId, amountToAdd, unit, level);
+        return deviceService.change(deviceDto.getDeviceId(), deviceDto.getAmountToAdd(), deviceDto.getAmountUnit(), deviceDto.getLv());
     }
 
     @DeleteMapping("delete-device")
