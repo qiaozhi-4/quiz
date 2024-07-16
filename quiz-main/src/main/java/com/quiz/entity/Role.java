@@ -5,12 +5,15 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
 
 /**
  * <p>
@@ -18,7 +21,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-22  1124:00:15
+ * @since 2024-07-16
  */
 @Getter
 @Setter
@@ -39,6 +42,10 @@ public class Role extends Model<Role> {
     @ApiModelProperty("角色名称，如ROLE_ADMIN、ROLE_USER。")
     @TableField("role_name")
     private String roleName;
+
+    @ApiModelProperty("描述")
+    @TableField("describe_")
+    private String describe;
 
 
     @Override

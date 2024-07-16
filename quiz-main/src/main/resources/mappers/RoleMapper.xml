@@ -4,8 +4,9 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.quiz.entity.Role">
-        <id column="role_id" property="roleId"/>
-        <result column="role_name" property="roleName"/>
+        <id column="role_id" property="roleId" />
+        <result column="role_name" property="roleName" />
+        <result column="describe_" property="describe" />
     </resultMap>
 
 </mapper>

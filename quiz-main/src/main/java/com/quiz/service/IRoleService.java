@@ -1,7 +1,7 @@
 package com.quiz.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.quiz.entity.Role;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
@@ -9,7 +9,7 @@ import com.quiz.entity.Role;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-24
+ * @since 2024-07-16
  */
 public interface IRoleService extends IService<Role> {
 

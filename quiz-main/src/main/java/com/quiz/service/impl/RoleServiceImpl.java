@@ -1,9 +1,9 @@
 package com.quiz.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.quiz.entity.Role;
 import com.quiz.mapper.RoleMapper;
 import com.quiz.service.IRoleService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-24
+ * @since 2024-07-16
  */
 @Service
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IRoleService {
