@@ -1,23 +1,23 @@
-INSERT INTO quiz.t_role (role_name)
-VALUES ('ADMIN'),
-       ('USER');
+INSERT INTO quiz.t_role (role_name, describe_)
+VALUES ('ADMIN', '管理员'),
+       ('USER'.'普通用户'),
+       ('DING_DONG'.'勇者管理员');
 
-INSERT INTO quiz.t_permission (permission_name)
-VALUES ('CREATE'),
-       ('READ'),
-       ('UPDATE'),
-       ('DELETE');
+INSERT INTO quiz.t_permission (permission_name, describe_)
+VALUES ('CREATE', '修改'),
+       ('READ', '读取'),
+       ('UPDATE', '更新'),
+       ('DELETE', '删除'),
+       ('DD_CREATE', '勇者的修改权限');
 
 -- ADMIN 角色权限
 INSERT INTO quiz.t_role_permissions (role_id, permission_id)
 VALUES (1, 1),
        (1, 2),
        (1, 3),
-       (1, 4);
-
--- USER 角色权限
-INSERT INTO quiz.t_role_permissions (role_id, permission_id)
-VALUES (2, 2);
+       (1, 4),
+       (2, 2);
+       (3, 5);
 
 -- 添加测试用户
 INSERT INTO quiz.t_user (username, password, created_at)
@@ -26,13 +26,8 @@ VALUES ('admin', '$2a$10$CyxrV5piFp1AdrNAzBlLHeGYCI1kr4ajrulkyJsZTlAeRz9.ENL7q',
 
 -- 添加用户角色
 INSERT INTO quiz.t_user_roles (user_id, role_id)
-VALUES ('1', '1');
-
--- 添加路径所需权限
-INSERT INTO quiz.t_path (pattern, permission_id)
-VALUES ('/permission/test3/{current:\\d+}/{size:\\d+}', '1'),
-       ('/permission/test2', '2'),
-       ('/permission/test1', null);
+VALUES ('1', '1'),
+       ('2', '2');
 
 -- 题目数据
 insert into quiz.q_question

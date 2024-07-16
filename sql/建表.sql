@@ -31,29 +31,33 @@ create table if not exists quiz.t_user_auth
     INDEX provider_id (provider_id)
 ) comment '第三方登录表';
 
+drop table quiz.t_role;# 删除
 create table if not exists quiz.t_role
 (
     role_id   int auto_increment comment '主键，角色ID。',
     role_name varchar(255) not null comment '角色名称，如ROLE_ADMIN、ROLE_USER。',
+    describe_ varchar(511) comment '描述',
     primary key (role_id)
 ) comment '角色表';
 
+drop table quiz.t_permission;# 删除
 create table if not exists quiz.t_permission
 (
     permission_id   int auto_increment comment '主键，权限ID。',
     permission_name varchar(255) not null comment '权限名称，如read、write。',
+    describe_       varchar(511) comment '描述',
     primary key (permission_id)
 ) comment '权限表';
 
+drop table quiz.t_path;# 删除
 create table if not exists quiz.t_path
 (
-    path_id       int auto_increment comment '主键，路径ID。',
-    pattern       varchar(255) not null comment '路径模式，如/api/users/**，/device/list/{current:\d+}/{size:\d+}。',
-    http_method   varchar(255) null comment 'HTTP 方法,如 POST, GET',
-    describe_     varchar(255) null comment '路径描述。',
-    permission_id varchar(255) null comment '关联权限ID。',
-    primary key (path_id),
-    INDEX permission_id (permission_id)
+    path_id         int auto_increment comment '主键，路径ID。',
+    pattern         varchar(255) not null comment '路径模式，如/api/users/**，/device/list/{current:\d+}/{size:\d+}。',
+    http_method     varchar(255) null comment 'HTTP 方法,如 POST, GET',
+    describe_       varchar(255) null comment '路径描述。',
+    permission_name varchar(255) null comment '路径权限名称',
+    primary key (path_id)
 ) comment '路径表';
 
 create table if not exists quiz.t_user_roles
