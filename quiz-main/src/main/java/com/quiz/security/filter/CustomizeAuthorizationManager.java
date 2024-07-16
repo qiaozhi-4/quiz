@@ -1,7 +1,7 @@
 package com.quiz.security.filter;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.quiz.dto.PathDto;
+import com.quiz.entity.Path;
 import com.quiz.service.IPathService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -35,12 +35,12 @@ public class CustomizeAuthorizationManager implements AuthorizationManager<Reque
     @Override
     public AuthorizationDecision check(Supplier<Authentication> authentication, RequestAuthorizationContext context) {
         String requestPath = context.getRequest().getRequestURI();
-        final List<PathDto> pathDtoList = pathService.getPathDtoList();
-        final Optional<PathDto> pathOptional = pathDtoList.stream()
+        final List<Path> pathDtoList = pathService.list();
+        final Optional<Path> pathOptional = pathDtoList.stream()
                 .filter(path -> antPathMatcher.match(path.getPattern(), requestPath))
                 .findFirst();
         if (!pathOptional.isPresent() || StringUtils.isBlank(pathOptional.get().getPermissionName())) {
-            log.debug("[" + requestPath + "]:不存在数据库,或者所需权限为空!");
+            log.debug("[{}]:不存在数据库,或者所需权限为空!", requestPath);
             return new AuthorizationDecision(true);
         }
         return new AuthorizationDecision(authentication.get().getAuthorities().stream()
