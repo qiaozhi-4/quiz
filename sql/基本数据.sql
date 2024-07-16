@@ -4,11 +4,11 @@ VALUES ('ADMIN', '管理员'),
        ('DING_DONG'.'勇者管理员');
 
 INSERT INTO quiz.t_permission (permission_name, describe_)
-VALUES ('CREATE', '修改'),
+VALUES ('CREATE', '添加'),
        ('READ', '读取'),
        ('UPDATE', '更新'),
        ('DELETE', '删除'),
-       ('DD_CREATE', '勇者的修改权限');
+       ('DD_CHANGE', '勇者的修改权限');
 
 -- ADMIN 角色权限
 INSERT INTO quiz.t_role_permissions (role_id, permission_id)
