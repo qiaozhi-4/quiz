@@ -5,12 +5,15 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
 
 /**
  * <p>
@@ -18,7 +21,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-25
+ * @since 2024-07-16
  */
 @Getter
 @Setter
@@ -48,9 +51,9 @@ public class Path extends Model<Path> {
     @TableField("describe_")
     private String describe;
 
-    @ApiModelProperty("关联权限ID。")
-    @TableField("permission_id")
-    private String permissionId;
+    @ApiModelProperty("路径权限名称")
+    @TableField("permission_name")
+    private String permissionName;
 
 
     @Override

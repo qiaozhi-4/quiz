@@ -1,8 +1,8 @@
 package com.quiz.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.quiz.annotation.PathPermission;
 import com.quiz.constant.Constants;
-import com.quiz.dto.PathDto;
 import com.quiz.entity.Path;
 import com.quiz.mapper.PathMapper;
 import com.quiz.service.IPathService;
@@ -14,7 +14,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -26,18 +25,13 @@ import java.util.stream.Collectors;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-14  0924:57:20
+ * @since 2024-07-16
  */
 @Service
 @RequiredArgsConstructor
 public class PathServiceImpl extends ServiceImpl<PathMapper, Path> implements IPathService {
-    private final PathMapper pathMapper;
-    private final WebApplicationContext applicationContext;
 
-    @Override
-    public List<PathDto> getPathDtoList() {
-        return pathMapper.selectPathDtoList();
-    }
+    private final WebApplicationContext applicationContext;
 
     @Override
     public Boolean updateAllPath() {
@@ -57,23 +51,21 @@ public class PathServiceImpl extends ServiceImpl<PathMapper, Path> implements IP
                             .map(Enum::name).collect(Collectors.joining(Constants.SPACE_MARK));
                     assert handlerMethod.getKey().getPatternsCondition() != null;
                     // 拿到请求路径
-                    final String patterns = String.join(Constants.SPACE_MARK, handlerMethod.getKey()
-                            .getPatternsCondition().getPatterns());
+                    final String patterns = String.join(Constants.SPACE_MARK, handlerMethod.getKey().getPatternsCondition().getPatterns());
                     // 拿到请求路径对应的ApiOperation注解
                     final ApiOperation apiOperation = handlerMethod.getValue().getMethodAnnotation(ApiOperation.class);
-                    assert apiOperation != null;
-                    // 拿到请求路径对应的描述
-                    final String describe = apiOperation.value();
+                    // 获取请求路径对应的描述
+                    final String describe = apiOperation != null ? apiOperation.value() : null;
+                    // 拿到请求路径对应的PathPermission注解
+                    final PathPermission pathPermission = handlerMethod.getValue().getMethodAnnotation(PathPermission.class);
+                    // 获取路径所需权限
+                    final String permissionName = pathPermission != null ? pathPermission.value().getName() : null;
                     // 创建路径对象
-                    final Path path = Path.builder()
+                    return Path.builder()
                             .pattern(patterns)
                             .httpMethod(httpMethods)
-                            .describe(describe).build();
-                    // 判断是否是公共接口
-                    final String[] tags = apiOperation.tags();
-                    if (Arrays.stream(tags).noneMatch(t -> t.equalsIgnoreCase("Public")))
-                        path.setPermissionId("2");
-                    return path;
+                            .describe(describe)
+                            .permissionName(permissionName).build();
                 }).sorted(Comparator.comparing(Path::getPattern)).collect(Collectors.toList());
         // 删除所有路径信息
         this.remove(null);

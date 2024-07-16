@@ -4,17 +4,11 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.quiz.entity.Path">
-        <id column="path_id" property="pathId"/>
-        <result column="pattern" property="pattern"/>
-        <result column="http_method" property="httpMethod"/>
-        <result column="describe_" property="describe"/>
-        <result column="permission_id" property="permissionId"/>
+        <id column="path_id" property="pathId" />
+        <result column="pattern" property="pattern" />
+        <result column="http_method" property="httpMethod" />
+        <result column="describe_" property="describe" />
+        <result column="permission_name" property="permissionName" />
     </resultMap>
-
-    <select id="selectPathDtoList" resultType="com.quiz.dto.PathDto">
-        select *
-        from t_path a
-                 left join t_permission b on a.permission_id = b.permission_id
-    </select>
 
 </mapper>
