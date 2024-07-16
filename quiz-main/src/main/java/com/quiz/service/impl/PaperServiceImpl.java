@@ -31,7 +31,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     private final IPaperTagsService paperTagsService;
 
     @Override
-    public Boolean savePaperInfo(PaperDto paperDto) {
+    public Boolean addPaperInfo(PaperDto paperDto) {
         final Paper paper = PaperDto.convertFor(paperDto);
         /* 插入试卷主体 */
         Assert.isTrue(paper.insert(), "试卷插入失败");
