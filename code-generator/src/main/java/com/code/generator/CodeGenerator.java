@@ -131,9 +131,9 @@ public class CodeGenerator {
                         builder
 //                                .addInclude("t_user")
 //                                .addInclude("t_user_auth")
-//                                .addInclude("t_role")
-//                                .addInclude("t_permission")
-//                                .addInclude("t_path")
+                                .addInclude("t_role")
+                                .addInclude("t_permission")
+                                .addInclude("t_path")
 //                                .addInclude("t_user_roles")
 //                                .addInclude("t_role_permissions")
 //                                .addInclude("q_paper")
@@ -144,8 +144,8 @@ public class CodeGenerator {
 //                                .addInclude("q_paper_tags")
 //                                .addInclude("q_classes")
 //                                .addInclude("q_paper_classes")
-                                .addInclude("yz_device")
-                                .addInclude("yz_use_info")
+//                                .addInclude("yz_device")
+//                                .addInclude("yz_use_info")
                                 //.likeTable(new LikeTable("", SqlLike.RIGHT))
 
                                 /*配置 Entity*/
@@ -166,7 +166,7 @@ public class CodeGenerator {
                                 /*.disable()*/
                                 .serviceTemplate("\\templates\\ftl\\service.java")//设置模版路径
                                 .serviceImplTemplate("\\templates\\ftl\\serviceImpl.java")//设置模版路径
-//                                .enableFileOverride()//开启文件覆盖
+                                .enableFileOverride()//开启文件覆盖
                                 .convertServiceFileName(entityName ->
                                         "I" + entityName.replaceAll(REGEX, "") + "Service")
                                 .convertServiceImplFileName(entityName ->
@@ -189,7 +189,7 @@ public class CodeGenerator {
                                 .controllerBuilder()
                                 .disable()//禁用生成
                                 .template("\\templates\\ftl\\controller.java")//设置模版路径
-//                                .enableFileOverride()//开启文件覆盖
+                                .enableFileOverride()//开启文件覆盖
                                 .enableRestStyle()//开启生成@RestController 控制器(等同于@Controller + @ResponseBody。)
                                 .convertFileName(entityName ->
                                         entityName.replaceAll(REGEX, "") + "Controller"))
