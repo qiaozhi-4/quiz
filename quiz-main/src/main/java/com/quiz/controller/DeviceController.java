@@ -47,14 +47,15 @@ public class DeviceController {
 
     @PutMapping("update-device")
     @ApiOperation("更新设备信息,是否被封和过期时间")
-    public Boolean updateDevice(@RequestBody DeviceDto deviceDto) {
+    public String updateDevice(@RequestBody DeviceDto deviceDto) {
+        deviceService.change(deviceDto.getDeviceId(), deviceDto.getAmountToAdd(), deviceDto.getAmountUnit(), deviceDto.getLv());
         /*发送邮件*/
         emailUtil.commonEmail(ToEmail.builder().tos(new String[]{"468644641@qq.com"})
                 .subject("设备修改")
                 .content("本次修改的设备信息:\n" + deviceDto.toString())
                 .nickname("乔治")
                 .build());
-        return deviceService.change(deviceDto.getDeviceId(), deviceDto.getAmountToAdd(), deviceDto.getAmountUnit(), deviceDto.getLv());
+        return "修改设备成功";
     }
 
     @DeleteMapping("delete-device")
