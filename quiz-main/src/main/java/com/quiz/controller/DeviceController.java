@@ -69,7 +69,7 @@ public class DeviceController {
     }
 
     @PostMapping("verify")
-    @ApiOperation(value = "验证设备是否授权(无需操作)", tags = {"Public"}) //方法介绍
+    @ApiOperation(value = "验证设备是否授权(无需操作)") //方法介绍
     public Device verify(@RequestBody Map<String, Object> data) {
         final String key = "ding-dong:device";
         Assert.isTrue(Boolean.TRUE.equals(redisTemplate.hasKey(key)), "脚本不存在!!");

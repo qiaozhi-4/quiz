@@ -28,7 +28,7 @@ public class UseInfoController {
     private final IUseInfoService useInfoService;
 
     @PostMapping("send-log")
-    @ApiOperation(value = "保存用户使用功能日志", tags = {"Public"})
+    @ApiOperation(value = "保存用户使用功能日志")
     public String sendLog(@RequestBody UseInfo useInfo) {
         useInfoService.save(useInfo);
         return "保存日志成功!";
