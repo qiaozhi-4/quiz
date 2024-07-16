@@ -50,6 +50,9 @@ public class DeviceServiceImpl extends ServiceImpl<DeviceMapper, Device> impleme
 
     @Override
     public Boolean change(String deviceId, Long amountToAdd, String unit, Integer level) {
+        Assert.isNotNull(deviceId, "设备ID不能为空");
+        Assert.isNotNull(amountToAdd, "添加时间不能为空");
+        Assert.isNotNull(unit, "时间单位不能为空");
         val device = this.getById(deviceId);
         Assert.isNotNull(device, "设备不存在");
 
