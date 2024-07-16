@@ -1,7 +1,7 @@
 package com.quiz.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.quiz.entity.Permission;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
@@ -9,7 +9,7 @@ import com.quiz.entity.Permission;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-23  0224:01:42
+ * @since 2024-07-16
  */
 public interface PermissionMapper extends BaseMapper<Permission> {
 

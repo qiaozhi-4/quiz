@@ -4,9 +4,9 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.quiz.entity.Permission">
-        <id column="permission_id" property="permissionId"/>
-        <result column="permission_name" property="permissionName"/>
+        <id column="permission_id" property="permissionId" />
+        <result column="permission_name" property="permissionName" />
+        <result column="describe_" property="describe" />
     </resultMap>
-
 
 </mapper>
