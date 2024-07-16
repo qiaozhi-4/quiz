@@ -1,14 +1,11 @@
 package com.quiz.dto;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.quiz.entity.Device;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -22,23 +19,7 @@ import java.time.LocalDateTime;
 @Setter
 @Accessors(chain = true)
 @ApiModel(value = "DeviceDto对象", description = "设备相关信息")
-public class DeviceDto {
-
-    @ApiModelProperty("安卓设备ID")
-    @TableId("device_id")
-    private String deviceId;
-
-    @ApiModelProperty("用户名")
-    @TableField("username")
-    private String username;
-
-    @ApiModelProperty("过期时间")
-    @TableField("end_time")
-    private LocalDateTime endTime;
-
-    @ApiModelProperty("-1封禁,0试用,1vip,2svip,3max")
-    @TableField("lv")
-    private Integer lv;
+public class DeviceDto  extends Device {
 
     @ApiModelProperty("要添加到结果中的单位数量，可能是负数")
     private Long amountToAdd;
@@ -49,10 +30,10 @@ public class DeviceDto {
     @Override
     public String toString() {
         return "DeviceDto{" +
-                "deviceId='" + deviceId + '\'' +
-                ", username='" + username + '\'' +
-                ", endTime=" + endTime +
-                ", lv=" + lv +
+                "deviceId='" + getDeviceId() + '\'' +
+                ", username='" + getUsername() + '\'' +
+                ", endTime=" + getEndTime() +
+                ", lv=" + getLv() +
                 ", amountToAdd=" + amountToAdd +
                 ", amountUnit='" + amountUnit + '\'' +
                 '}';
