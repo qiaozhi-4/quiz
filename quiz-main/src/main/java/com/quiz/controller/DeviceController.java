@@ -48,6 +48,7 @@ public class DeviceController {
         return deviceService.paging(current, size);
     }
 
+    @PathPermission(PermissionEnum.DD_CHANGE)
     @PutMapping("update-device")
     @ApiOperation("更新设备信息,是否被封和过期时间")
     public String updateDevice(@RequestBody DeviceDto deviceDto) {
