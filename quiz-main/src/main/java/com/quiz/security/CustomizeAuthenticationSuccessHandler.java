@@ -1,13 +1,14 @@
 package com.quiz.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.quiz.entity.User;
+import com.quiz.dto.UserDto;
 import com.quiz.service.IUserService;
 import com.quiz.utils.Assert;
 import com.quiz.utils.JWTUtils;
 import com.quiz.utils.Result;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -37,8 +38,8 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         // 更新用户表上次登录时间
-        org.springframework.security.core.userdetails.User userDetails = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userService.getUserDtoByAccount(userDetails.getUsername());
+        User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDto user = userService.getUserDtoByAccount(userDetails.getUsername());
         user.setLastLoginAt(LocalDateTime.now());
         Assert.isTrue(userService.updateById(user), "更新登录时间失败!");
 
