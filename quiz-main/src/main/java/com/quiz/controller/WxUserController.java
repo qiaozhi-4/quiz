@@ -33,10 +33,10 @@ public class WxUserController {
     }
 
     @PathPermission(PermissionEnum.UPDATE_OWN)
-    @ApiOperation(value = "保存微信小程序用户信息")
-    @PostMapping("save")
-    public User save(@RequestBody User user) {
-        return wxUserService.saveUserInfo(user);
+    @ApiOperation(value = "修改微信小程序用户信息")
+    @PostMapping("update")
+    public User update(@RequestBody User user) {
+        return wxUserService.updateUserInfo(user);
     }
 
 }

@@ -22,9 +22,9 @@ public interface IWxUserService {
     Result<Object> login(String code) throws WxErrorException;
 
     /**
-     * 保存用户信息
+     * 修改用户信息
      *
      * @param user 用户id
      */
-    User saveUserInfo(User user);
+    User updateUserInfo(User user);
 }

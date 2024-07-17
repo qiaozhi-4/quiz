@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -61,9 +61,9 @@ public class WxUserServiceImpl implements IWxUserService {
         return Result.success(map);
     }
 
-    @CachePut(key = "#user.username", unless = "#result == null ")
+    @CacheEvict(key = "#user.username")
     @Override
-    public User saveUserInfo(User user) {
+    public User updateUserInfo(User user) {
         user.updateById();
         return user;
     }
