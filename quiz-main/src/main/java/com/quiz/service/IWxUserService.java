@@ -25,7 +25,6 @@ public interface IWxUserService {
      * 保存用户信息
      *
      * @param user 用户id
-     * @return Result
      */
-    Boolean saveUserInfo(User user);
+    User saveUserInfo(User user);
 }

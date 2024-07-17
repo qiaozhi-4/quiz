@@ -38,7 +38,7 @@ public class CustomizeAuthorizationManager implements AuthorizationManager<Reque
         String requestPath = context.getRequest().getRequestURI();
 
         /* 获取路径信息 */
-        final List<Path> paths = pathService.list();
+        final List<Path> paths = pathService.getAllPath();
         final Optional<Path> pathOptional = paths.stream()
                 .filter(path -> antPathMatcher.match(path.getPattern(), requestPath))
                 .findFirst();

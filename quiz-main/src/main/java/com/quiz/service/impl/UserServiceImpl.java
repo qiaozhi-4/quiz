@@ -9,6 +9,8 @@ import com.quiz.mapper.UserMapper;
 import com.quiz.service.IUserService;
 import com.quiz.utils.Assert;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,8 +23,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = "user")
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
-
+    @Cacheable(key = "#account", unless = "#result == null || #result.size() == 0")
     @Override
     public UserDto getUserDtoByAccount(String account) {
         Assert.isNotNull(account, "账户不能为空");

@@ -6,8 +6,12 @@ import com.quiz.constant.Constants;
 import com.quiz.entity.Path;
 import com.quiz.mapper.PathMapper;
 import com.quiz.service.IPathService;
+import com.quiz.utils.Assert;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.method.HandlerMethod;
@@ -29,12 +33,15 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = "path")
 public class PathServiceImpl extends ServiceImpl<PathMapper, Path> implements IPathService {
 
     private final WebApplicationContext applicationContext;
 
+    @CachePut(key = "'list'", unless = "#result == null || #result.size() == 0")
     @Override
-    public Boolean updateAllPath() {
+    public List<Path> updateAllPath() {
+        System.out.println("updateAllPath");
         // 获取所有请求映射信息
         RequestMappingHandlerMapping mapping = applicationContext.getBean("requestMappingHandlerMapping", RequestMappingHandlerMapping.class);
         // 拿到Handler适配器中的全部方法
@@ -69,6 +76,14 @@ public class PathServiceImpl extends ServiceImpl<PathMapper, Path> implements IP
                 }).sorted(Comparator.comparing(Path::getPattern)).collect(Collectors.toList());
         // 删除所有路径信息
         this.remove(null);
-        return this.saveBatch(paths);
+        Assert.isTrue(this.saveBatch(paths), "请求路径更新失败");
+        return paths;
+    }
+
+    @Cacheable(key = "'list'", unless = "#result == null || #result.size() == 0")
+    @Override
+    public List<Path> getAllPath() {
+        System.out.println("getAllPath");
+        return list();
     }
 }
