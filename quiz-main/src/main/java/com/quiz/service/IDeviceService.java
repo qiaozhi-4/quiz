@@ -32,7 +32,7 @@ public interface IDeviceService extends IService<Device> {
      * @param unit        要添加的时间单位，不为空
      * @param level       设备等级
      */
-    Boolean change(String deviceId, Long amountToAdd, String unit, Integer level);
+    Device change(String deviceId, Long amountToAdd, String unit, Integer level);
 
     /**
      * 验证涉笔

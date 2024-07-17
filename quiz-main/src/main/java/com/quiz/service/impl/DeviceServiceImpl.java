@@ -10,7 +10,9 @@ import com.quiz.service.IDeviceService;
 import com.quiz.utils.Assert;
 import com.quiz.utils.MD5Utils;
 import com.quiz.utils.RC4Util;
+import lombok.RequiredArgsConstructor;
 import lombok.val;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -29,7 +31,9 @@ import java.util.regex.Pattern;
  * @author XGeorge
  * @since 2024-07-14
  */
+@RequiredArgsConstructor
 @Service
+@CacheConfig(cacheNames = "device")
 public class DeviceServiceImpl extends ServiceImpl<DeviceMapper, Device> implements IDeviceService {
 
     @Override
@@ -49,7 +53,7 @@ public class DeviceServiceImpl extends ServiceImpl<DeviceMapper, Device> impleme
     }
 
     @Override
-    public Boolean change(String deviceId, Long amountToAdd, String unit, Integer level) {
+    public Device change(String deviceId, Long amountToAdd, String unit, Integer level) {
         Assert.isNotNull(deviceId, "设备ID不能为空");
         Assert.isNotNull(amountToAdd, "添加时间不能为空");
         Assert.isNotNull(unit, "时间单位不能为空");
@@ -67,7 +71,8 @@ public class DeviceServiceImpl extends ServiceImpl<DeviceMapper, Device> impleme
         /* 设置新等级 */
         device.setLv(level);
 
-        return device.updateById();
+        Assert.isTrue(device.updateById(), "修改设备失败");
+        return device;
     }
 
     @Override
