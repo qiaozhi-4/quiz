@@ -1,5 +1,6 @@
 package com.quiz.config;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -53,7 +54,9 @@ public class BeanConfig {
      */
     @Bean
     public ObjectMapper objectMapper() {
-        return getObjectMapper();
+        return getObjectMapper()
+                // 配置如果有未知字段直接忽略,而不是抛出异常
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     /**
