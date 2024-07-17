@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @CacheConfig(cacheNames = "user")
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
-    @Cacheable(key = "#account", unless = "#result == null || #result.size() == 0")
+    @Cacheable(key = "#account", unless = "#result == null")
     @Override
     public UserDto getUserDtoByAccount(String account) {
         Assert.isNotNull(account, "账户不能为空");
