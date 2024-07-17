@@ -52,8 +52,10 @@ public class RedisConfig {
                 .serializeKeysWith(RedisSerializationContext.SerializationPair
                         .fromSerializer(redisTemplate.getStringSerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair
-                        .fromSerializer(redisTemplate.getValueSerializer()))
-                .prefixCacheNameWith("quiz::");
+                        .fromSerializer(redisTemplate.getHashValueSerializer()))
+                // 禁用空值缓存
+                .disableCachingNullValues()
+                .computePrefixWith(cacheNames -> "quiz:" + cacheNames + ":");
 
 
         return RedisCacheManager.RedisCacheManagerBuilder
