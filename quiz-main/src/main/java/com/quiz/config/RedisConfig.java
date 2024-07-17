@@ -13,6 +13,7 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 
 import javax.annotation.Resource;
+import java.time.Duration;
 import java.util.Objects;
 
 /**
@@ -53,6 +54,7 @@ public class RedisConfig {
                         .fromSerializer(redisTemplate.getStringSerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair
                         .fromSerializer(redisTemplate.getHashValueSerializer()))
+                .entryTtl(Duration.ofMinutes(30)) // 设置缓存过期时间为30分钟
                 // 禁用空值缓存
                 .disableCachingNullValues()
                 .computePrefixWith(cacheNames -> "quiz:" + cacheNames + ":");
