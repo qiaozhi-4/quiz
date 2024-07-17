@@ -9,6 +9,7 @@
 <script lang="ts" setup>
 	const pages = [
 		{ name: 'ding-dong' },
+		{ name: 'set-user-info' },
 	]
 	function handleTo(pageName : String) {
 		uni.navigateTo({

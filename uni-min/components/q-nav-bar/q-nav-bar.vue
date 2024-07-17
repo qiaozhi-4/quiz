@@ -1,3 +1,38 @@
+<style lang="scss" scoped>
+	.q-fixed {
+		position: sticky;
+		top: 0;
+		/* 当滚动到距离顶部 0 像素时粘住 */
+		z-index: 1;
+		/* 确保粘性元素在其他元素上方 */
+	}
+
+	.q-nav-bar {
+		display: flex;
+		width: 100vw;
+		justify-content: space-between;
+
+		.q-nav-bar-left {
+			display: grid;
+			place-content: end start;
+			align-items: end;
+		}
+
+		.q-nav-bar-middle {
+			display: grid;
+			place-content: end center;
+
+			font-family: 'Inter';
+			font-style: normal;
+			font-weight: 800;
+			font-size: 32px;
+			line-height: 39px;
+		}
+
+		.q-nav-bar-right {}
+	}
+</style>
+
 <template>
 	<view class="q-nav-bar" :class="{'q-fixed': props.fixed}" :style="style">
 		<view class="q-nav-bar-left" :style="`width: ${menuButtonInfo.width}px`">
@@ -43,38 +78,3 @@
 		});
 	}
 </script>
-
-<style lang="scss" scoped>
-	.q-fixed {
-		position: sticky;
-		top: 0;
-		/* 当滚动到距离顶部 0 像素时粘住 */
-		z-index: 1;
-		/* 确保粘性元素在其他元素上方 */
-	}
-
-	.q-nav-bar {
-		display: flex;
-		width: 100vw;
-		justify-content: space-between;
-
-		.q-nav-bar-left {
-			display: grid;
-			place-content: end start;
-			align-items: end;
-		}
-
-		.q-nav-bar-middle {
-			display: grid;
-			place-content: end center;
-
-			font-family: 'Inter';
-			font-style: normal;
-			font-weight: 800;
-			font-size: 32px;
-			line-height: 39px;
-		}
-
-		.q-nav-bar-right {}
-	}
-</style>
