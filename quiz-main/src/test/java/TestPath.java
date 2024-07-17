@@ -1,11 +1,8 @@
 import com.quiz.Main;
-import com.quiz.dto.PathDto;
-import com.quiz.mapper.PathMapper;
+import com.quiz.service.IPathService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
 
 /**
  * <p>
@@ -18,7 +15,14 @@ import java.util.List;
 @SpringBootTest(classes = Main.class)
 public class TestPath {
     @Autowired
-    private PathMapper pathMapper;
+    private IPathService pathService;
+
+    @Test
+    public void test() {
+        pathService.updateAllPath().forEach(System.out::println);
+
+        pathService.getAllPath().forEach(System.out::println);
+    }
 
 
 }
