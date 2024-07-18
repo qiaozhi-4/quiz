@@ -1,5 +1,5 @@
 <style lang="scss">
-	.container {
+	.main {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		place-content: start center;
@@ -11,7 +11,7 @@
 <template>
 	<view class="page">
 		<q-nav-bar title="Quiz"></q-nav-bar>
-		<view class="container">
+		<view class="main">
 			<button v-for="(page,index) in pages" :key="index" class="button" type="primary"
 				@click="handleTo(page.name)">{{page.name}}</button>
 		</view>
@@ -23,6 +23,7 @@
 		{ name: 'ding-dong' },
 		{ name: 'set-user-info' },
 		{ name: 'start-test' },
+		{ name: 'answer-test' },
 	]
 	function handleTo(pageName : String) {
 		uni.navigateTo({

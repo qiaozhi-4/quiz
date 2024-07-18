@@ -7,7 +7,7 @@
 			userInfo: null,
 			token: "",
 			/** 除去导航栏的高度 */
-			containerHeight: 700
+			mainHeight: 700
 		},
 		onLaunch: function() {
 			console.warn('当前组件仅支持 uni_modules 目录结构 ，请升级 HBuilderX 到 3.1.0 版本以上！')
@@ -15,7 +15,7 @@
 			// 计算除去导航栏的高度
 			uni.getSystemInfo({
 				success: (res) => {
-					this.globalData.containerHeight = res.screenHeight - uni
+					this.globalData.mainHeight = res.screenHeight - uni
 						.getMenuButtonBoundingClientRect().bottom -
 						10
 				}
@@ -70,6 +70,8 @@
 	}
 
 	button {
+		display: grid;
+		place-items: center;
 		margin: 0;
 	}
 
