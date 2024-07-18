@@ -13,16 +13,21 @@ export const request = (options : WechatMiniprogram.RequestOption<Quiz.Result>) 
 				'content-type': 'application/json', // 默认值
 				'token': getApp().globalData.token
 			},
-			success: (res: { data: Quiz.Result<any> | PromiseLike<Quiz.Result<any>> }) => {
+			success: (res : { data : Quiz.Result<any> | PromiseLike<Quiz.Result<any>> }) => {
 				console.log(res.data)
 				// 请求成功，就将成功的数据返回出去
 				if (res.data.code == 200) resolve(res.data)
 				else {
 					console.error(res.data.message)
+					uni.showToast({
+						title: res.data.message,
+						icon: 'error',
+						duration: 2000
+					})
 					reject(res.data)
 				}
 			},
-			fail: (err: any) => {
+			fail: (err : any) => {
 				console.error(err)
 				uni.showToast({
 					title: '请求失败!',
