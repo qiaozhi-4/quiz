@@ -13,7 +13,6 @@ export function userUpdate(data : Quiz.UserInfo) {
 		url: '/wx-user/update',
 		method: 'POST',
 		data,
-		header,
 	})
 }
 /** 获取随机10个题目 */
