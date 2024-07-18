@@ -51,14 +51,16 @@ public class DeviceController {
     @PathPermission(PermissionEnum.DD_CHANGE)
     @PutMapping("update-device")
     @ApiOperation("更新设备信息,是否被封和过期时间")
-    public Device updateDevice(@RequestBody DeviceDto deviceDto) {
+    public Device updateDevice(@RequestHeader String nickname, @RequestBody DeviceDto deviceDto) {
+        Assert.isNotNull(nickname, "修改人昵称不能为空!!");
+        Device device = deviceService.change(deviceDto.getDeviceId(), deviceDto.getAmountToAdd(), deviceDto.getAmountUnit(), deviceDto.getLv());
         /*发送邮件*/
         emailUtil.commonEmail(ToEmail.builder().tos(new String[]{"468644641@qq.com"})
                 .subject("设备修改")
-                .content("本次修改的设备信息:\n" + deviceDto.toString())
+                .content("修改人:" + nickname + "\n本次修改的设备信息:" + deviceDto)
                 .nickname("乔治")
                 .build());
-        return deviceService.change(deviceDto.getDeviceId(), deviceDto.getAmountToAdd(), deviceDto.getAmountUnit(), deviceDto.getLv());
+        return device;
     }
 
     @PathPermission(PermissionEnum.DELETE)
