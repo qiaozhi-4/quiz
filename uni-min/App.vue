@@ -65,6 +65,10 @@
 		padding: 0;
 		margin: 0;
 	}
+	
+	button{
+		margin: 0;
+	}
 
 	/** flex布局元素横向排列 */
 	.flex-row {
