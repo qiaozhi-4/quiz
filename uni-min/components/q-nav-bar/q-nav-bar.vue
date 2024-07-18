@@ -16,6 +16,11 @@
 			display: grid;
 			place-content: end start;
 			align-items: end;
+
+			.icon {
+				width: 32px;
+				height: 32px;
+			}
 		}
 
 		.q-nav-bar-middle {
@@ -36,9 +41,8 @@
 <template>
 	<view class="q-nav-bar" :class="{'q-fixed': props.fixed}" :style="style">
 		<view class="q-nav-bar-left" :style="`width: ${menuButtonInfo.width}px`">
-			<view v-if="props.leftIcon" @click="handlerReverseBack">
-				<q-svg :icon="props.leftIcon" size="32px" />
-			</view>
+			<cover-image v-if="props.leftIcon" @click="handlerReverseBack" class="icon"
+				:src="`/static/svg/${props.leftIcon}.svg`" size="32px" />
 		</view>
 		<view class="q-nav-bar-middle">{{props.title}}</view>
 		<view class="q-nav-bar-right" :style="`width: ${menuButtonInfo.width}px`"></view>
@@ -60,7 +64,7 @@
 	/** 胶囊信息{width: 87, height: 32, left: 281, top: 51, right: 368} */
 	const menuButtonInfo = uni.getMenuButtonBoundingClientRect()
 	/** 设备信息 */
-	let systemInfo: UniApp.GetSystemInfoResult  
+	let systemInfo : UniApp.GetSystemInfoResult
 	uni.getSystemInfo({
 		success: function (res) {
 			systemInfo = res
