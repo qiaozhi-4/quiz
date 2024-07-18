@@ -1,11 +1,11 @@
 <style lang="scss">
-	.container {}
+	.main {}
 </style>
 
 <template>
 	<view class="page">
 		<q-nav-bar :title="pageArg?.pageName" leftIcon="头部导航-返回"></q-nav-bar>
-		<scroll-view :scroll-y="true" @scrolltolower="scrollBottom" class="container flex-column" :style="height">
+		<scroll-view :scroll-y="true" @scrolltolower="scrollBottom" class="main flex-column" :style="height">
 			<uni-card v-for="(device,index) in devices" :key="index">
 				<uni-forms ref="deviceRef" :model="device" :rules="rules" label-width="150">
 					<uni-forms-item label="安卓设备ID">
@@ -46,7 +46,7 @@
 	import { Lv, DateUnit } from '../../utils/dindong';
 
 	/** 计算滚动框的高度 */
-	const height = `height: ${getApp().globalData.containerHeight}px;`
+	const height = `height: ${getApp().globalData.mainHeight}px;`
 
 	/** 页面跳转过来的参数 */
 	const pageArg = ref()

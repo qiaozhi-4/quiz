@@ -1,5 +1,5 @@
 <style lang="scss">
-	.container {
+	.main {
 		display: grid;
 		justify-items: center;
 		gap: 5px;
@@ -110,7 +110,7 @@
 <template>
 	<view class="page">
 		<q-nav-bar></q-nav-bar>
-		<view class="container">
+		<view class="main">
 			<button class="avatar-button" open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
 				<cover-image v-if="userInfo?.avatarUrl" class="avatar avatar-border" :src="userInfo?.avatarUrl" />
 				<cover-image v-else class="avatar" src="/static/svg/默认头像.svg" />

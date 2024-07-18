@@ -4,7 +4,7 @@
 		background: linear-gradient(180deg, #BC5CF8 0%, #5830C7 29.5%, #1F1146 100%);
 		padding: 0 48px;
 
-		.container {
+		.main {
 			display: grid;
 			gap: 6px;
 
@@ -101,7 +101,7 @@
 <template>
 	<view class="page">
 		<q-nav-bar></q-nav-bar>
-		<view class="container">
+		<view class="main">
 			<cover-image class="avatar avatar-border" :src="userInfo?.avatarUrl" />
 			<view class="nickname-group">
 				<text class="nickname">{{userInfo?.nickname}}</text>
