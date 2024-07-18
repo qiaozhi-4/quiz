@@ -67,6 +67,8 @@
 	const popup = ref({ type: "", message: "" })
 	/** 弹出框ref */
 	const popupRef = ref();
+	/** 下拉加载样式 */
+	const status = ref("more")
 	/** 表单验证规则 */
 	const rules = {
 		amountToAdd: {
@@ -78,19 +80,6 @@
 				errorMessage: '只能是数字',
 			}]
 		},
-	}
-	/** 提交表单 */
-	function submitForm(device : any, index : number) {
-		deviceRef.value[index].validate().then((res : any) => {
-			updateDevice(device, getApp().globalData.userInfo.nickname).then((res) => {
-				device.endTime = res.data.endTime
-				popup.value.type = "success"
-				popup.value.message = "修改成功"
-			}).catch(res => {
-				popup.value.type = "error"
-				popup.value.message = res.message
-			}).finally(() => popupRef.value.open())
-		})
 	}
 	/** 设备等级枚举映射 */
 	const lvs = Object.keys(Lv)
@@ -110,6 +99,19 @@
 				value: currentValue
 			}
 		})
+	/** 提交表单 */
+	function submitForm(device : any, index : number) {
+		deviceRef.value[index].validate().then((res : any) => {
+			updateDevice(device, getApp().globalData.userInfo.nickname).then((res) => {
+				device.endTime = res.data.endTime
+				popup.value.type = "success"
+				popup.value.message = "修改成功"
+			}).catch(res => {
+				popup.value.type = "error"
+				popup.value.message = res.message
+			}).finally(() => popupRef.value.open())
+		})
+	}
 	/** 请求设备数据 */
 	function handleGetDevices() {
 		status.value = 'loading'
@@ -139,8 +141,6 @@
 			handleGetDevices()
 		}
 	}
-	/** 下拉加载样式 */
-	const status = ref("more")
 	onLoad((option) => {
 		pageArg.value = option
 		handleGetDevices()

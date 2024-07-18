@@ -112,14 +112,14 @@
 		<q-nav-bar></q-nav-bar>
 		<view class="container">
 			<button class="avatar-button" open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
-				<cover-image v-if="userInfo.avatarUrl" class="avatar avatar-border" :src="userInfo.avatarUrl" />
+				<cover-image v-if="userInfo?.avatarUrl" class="avatar avatar-border" :src="userInfo?.avatarUrl" />
 				<cover-image v-else class="avatar" src="/static/svg/默认头像.svg" />
-				<cover-image v-if="userInfo.avatarUrl" class="change-avatar" src="/static/svg/更换头像.svg" />
+				<cover-image v-if="userInfo?.avatarUrl" class="change-avatar" src="/static/svg/更换头像.svg" />
 			</button>
 			<view class="label">昵称</view>
 			<input class="nickname-input" placeholder-class="nickname-input-placeholder" type="nickname"
-				placeholder="请输入昵称" :value="userInfo.nickname" @input="onInput" @blur="onBlur" />
-			<button v-if="userInfo.avatarUrl && userInfo.nickname" class="submit-button" @click="onSubmit">
+				placeholder="请输入昵称" :value="userInfo?.nickname" @input="onInput" @blur="onBlur" />
+			<button v-if="userInfo?.avatarUrl && userInfo?.nickname" class="submit-button" @click="onSubmit">
 				<text class="submit-button-text">完成</text>
 			</button>
 		</view>
@@ -127,11 +127,10 @@
 </template>
 
 <script lang="ts" setup>
-	import { ref } from 'vue'
+	import { ref, onMounted } from 'vue'
 	import { userUpdate } from '../../utils/api';
 	/** 获取登录信息 */
-	const userInfo = ref(getApp().globalData.userInfo)
-
+	const userInfo = ref()
 	/** 获取微信头像触发 */
 	function onChooseAvatar(e) {
 		console.log("获取微信头像触发", e);
@@ -160,4 +159,7 @@
 			});
 		})
 	}
+	onMounted(() => {
+		userInfo.value = getApp().globalData.userInfo
+	})
 </script>
