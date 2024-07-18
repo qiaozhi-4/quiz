@@ -1,3 +1,13 @@
+<style lang="scss">
+	.container {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		place-content: start center;
+		place-items: center;
+		gap: 10px;
+	}
+</style>
+
 <template>
 	<q-nav-bar title="Quiz"></q-nav-bar>
 	<view class="container">
@@ -17,13 +27,3 @@
 		});
 	}
 </script>
-
-<style lang="scss">
-	.container {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		place-content: start center;
-		place-items: center;
-		gap: 10px;
-	}
-</style>

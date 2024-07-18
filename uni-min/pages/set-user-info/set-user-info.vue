@@ -13,6 +13,7 @@
 			width: 130px;
 			height: 130px;
 			padding: 0;
+			margin-top: 42px;
 			background-color: transparent;
 
 			.avatar {
@@ -107,9 +108,8 @@
 </style>
 
 <template>
-	<q-nav-bar leftIcon="头部导航-返回"></q-nav-bar>
+	<q-nav-bar></q-nav-bar>
 	<view class="container">
-
 		<button class="avatar-button" open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
 			<cover-image v-if="userInfo.avatarUrl" class="avatar avatar-border" :src="userInfo.avatarUrl" />
 			<cover-image v-else class="avatar" src="/static/svg/默认头像.svg" />
@@ -117,8 +117,8 @@
 		</button>
 		<view class="label">昵称</view>
 		<input class="nickname-input" placeholder-class="nickname-input-placeholder" type="nickname" placeholder="请输入昵称"
-			:value="userInfo.nickname" @input="onInput" />
-		<button class="submit-button" @click="onSubmit">
+			:value="userInfo.nickname" @input="onInput" @blur="onBlur" />
+		<button v-if="userInfo.avatarUrl && userInfo.nickname" class="submit-button" @click="onSubmit">
 			<text class="submit-button-text">完成</text>
 		</button>
 	</view>
@@ -143,8 +143,19 @@
 		userInfo.value.nickname = e.detail.value
 	}
 
+	/** 键盘失去焦点触发 */
+	function onBlur(e) {
+		console.log("键盘失去焦点触发", e);
+		userInfo.value.nickname = e.detail.value
+	}
+
 	/** 修改个人信息 */
 	function onSubmit() {
-		userUpdate(userInfo.value)
+		userUpdate(userInfo.value).then(e => {
+			console.log("修改个人信息成功", e);
+			uni.navigateBack({
+				delta: 1
+			});
+		})
 	}
 </script>

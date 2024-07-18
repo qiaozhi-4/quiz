@@ -29,6 +29,9 @@
 						this.globalData.token = res.data.token
 						if (res.data.userInfo.nickname == null) {
 							console.log('当前用户还没设置头像和用户名,跳转到设置页面')
+							uni.navigateTo({
+								url: `/pages/set-user-info/set-user-info`
+							});
 						} else {
 							console.log('已设置头像和用户名')
 						}
@@ -65,8 +68,8 @@
 		padding: 0;
 		margin: 0;
 	}
-	
-	button{
+
+	button {
 		margin: 0;
 	}
 
