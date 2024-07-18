@@ -9,10 +9,12 @@
 </style>
 
 <template>
-	<q-nav-bar title="Quiz"></q-nav-bar>
-	<view class="container">
-		<button v-for="(page,index) in pages" :key="index" class="button" type="primary"
-			@click="handleTo(page.name)">{{page.name}}</button>
+	<view class="page">
+		<q-nav-bar title="Quiz"></q-nav-bar>
+		<view class="container">
+			<button v-for="(page,index) in pages" :key="index" class="button" type="primary"
+				@click="handleTo(page.name)">{{page.name}}</button>
+		</view>
 	</view>
 </template>
 
@@ -20,6 +22,7 @@
 	const pages = [
 		{ name: 'ding-dong' },
 		{ name: 'set-user-info' },
+		{ name: 'start-test' },
 	]
 	function handleTo(pageName : String) {
 		uni.navigateTo({

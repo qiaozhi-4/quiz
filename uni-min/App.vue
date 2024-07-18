@@ -73,6 +73,15 @@
 		margin: 0;
 	}
 
+	/** 页面容器 */
+	.page {
+		display: flex;
+		flex-direction: column;
+		height: 100vh;
+		width: 100vw;
+		overflow-y: scroll;
+	}
+
 	/** flex布局元素横向排列 */
 	.flex-row {
 		display: flex;

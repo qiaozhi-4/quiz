@@ -18,6 +18,13 @@
 		{
 			"navigationBarTitleText" : ""
 		}
+	},
+	{
+		"path" : "pages/start-test/start-test",
+		"style" : 
+		{
+			"navigationBarTitleText" : ""
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

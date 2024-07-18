@@ -3,34 +3,36 @@
 </style>
 
 <template>
-	<q-nav-bar :title="pageArg?.pageName" leftIcon="头部导航-返回"></q-nav-bar>
-	<scroll-view :scroll-y="true" @scrolltolower="scrollBottom" class="container flex-column" :style="height">
-		<uni-card v-for="(device,index) in devices" :key="index">
-			<uni-forms ref="deviceRef" :model="device" :rules="rules" label-width="150">
-				<uni-forms-item label="安卓设备ID">
-					<uni-easyinput v-model="device.deviceId" disabled />
-				</uni-forms-item>
-				<uni-forms-item label="用户名">
-					<uni-easyinput v-model="device.username" disabled />
-				</uni-forms-item>
-				<uni-forms-item label="过期时间">
-					<uni-easyinput v-model="device.endTime" disabled />
-				</uni-forms-item>
-				<uni-forms-item label="设备等级">
-					<uni-data-checkbox v-model="device.lv" :localdata="lvs"></uni-data-checkbox>
-				</uni-forms-item>
-				<uni-forms-item label="添加的时间数量" name="amountToAdd">
-					<uni-easyinput type="number" v-model="device.amountToAdd" />
-				</uni-forms-item>
-				<uni-forms-item label="添加的时间单位">
-					<uni-data-checkbox v-model="device.amountUnit" :localdata="dateUnits"></uni-data-checkbox>
-				</uni-forms-item>
+	<view class="page">
+		<q-nav-bar :title="pageArg?.pageName" leftIcon="头部导航-返回"></q-nav-bar>
+		<scroll-view :scroll-y="true" @scrolltolower="scrollBottom" class="container flex-column" :style="height">
+			<uni-card v-for="(device,index) in devices" :key="index">
+				<uni-forms ref="deviceRef" :model="device" :rules="rules" label-width="150">
+					<uni-forms-item label="安卓设备ID">
+						<uni-easyinput v-model="device.deviceId" disabled />
+					</uni-forms-item>
+					<uni-forms-item label="用户名">
+						<uni-easyinput v-model="device.username" disabled />
+					</uni-forms-item>
+					<uni-forms-item label="过期时间">
+						<uni-easyinput v-model="device.endTime" disabled />
+					</uni-forms-item>
+					<uni-forms-item label="设备等级">
+						<uni-data-checkbox v-model="device.lv" :localdata="lvs"></uni-data-checkbox>
+					</uni-forms-item>
+					<uni-forms-item label="添加的时间数量" name="amountToAdd">
+						<uni-easyinput type="number" v-model="device.amountToAdd" />
+					</uni-forms-item>
+					<uni-forms-item label="添加的时间单位">
+						<uni-data-checkbox v-model="device.amountUnit" :localdata="dateUnits"></uni-data-checkbox>
+					</uni-forms-item>
 
-				<button type="primary" @click="submitForm(device,index)">修改</button>
-			</uni-forms>
-		</uni-card>
-		<uni-load-more :status="status" />
-	</scroll-view>
+					<button type="primary" @click="submitForm(device,index)">修改</button>
+				</uni-forms>
+			</uni-card>
+			<uni-load-more :status="status" />
+		</scroll-view>
+	</view>
 	<!-- 提示消息 -->
 	<uni-popup ref="popupRef" type="message">
 		<uni-popup-message :type="popup.type" :message="popup.message" :duration="2000"></uni-popup-message>
@@ -80,7 +82,7 @@
 	/** 提交表单 */
 	function submitForm(device : any, index : number) {
 		deviceRef.value[index].validate().then((res : any) => {
-			updateDevice(device,getApp().globalData.userInfo.nickname).then((res) => {
+			updateDevice(device, getApp().globalData.userInfo.nickname).then((res) => {
 				device.endTime = res.data.endTime
 				popup.value.type = "success"
 				popup.value.message = "修改成功"
