@@ -1,6 +1,7 @@
 /** 封装一个request请求 */
 export const request = (options : WechatMiniprogram.RequestOption<Quiz.Result>) : Promise<Quiz.Result> => {
 
+	console.log(options.header);
 	// 返回一个promise对象
 	return new Promise((resolve, reject) => {
 		/** 设置基础请求头 */
@@ -11,7 +12,8 @@ export const request = (options : WechatMiniprogram.RequestOption<Quiz.Result>) 
 			method: options.method,
 			header: {
 				'content-type': 'application/json', // 默认值
-				'token': getApp().globalData.token
+				'token': getApp().globalData.token,
+				...options.header
 			},
 			success: (res : { data : Quiz.Result<any> | PromiseLike<Quiz.Result<any>> }) => {
 				console.log(res.data)

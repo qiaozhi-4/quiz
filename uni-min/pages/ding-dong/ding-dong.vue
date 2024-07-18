@@ -80,7 +80,7 @@
 	/** 提交表单 */
 	function submitForm(device : any, index : number) {
 		deviceRef.value[index].validate().then((res : any) => {
-			updateDevice(device).then((res) => {
+			updateDevice(device,getApp().globalData.userInfo.nickname).then((res) => {
 				device.endTime = res.data.endTime
 				popup.value.type = "success"
 				popup.value.message = "修改成功"

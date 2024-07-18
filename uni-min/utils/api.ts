@@ -13,6 +13,7 @@ export function userUpdate(data : Quiz.UserInfo) {
 		url: '/wx-user/update',
 		method: 'POST',
 		data,
+		header,
 	})
 }
 /** 获取随机10个题目 */
@@ -30,10 +31,13 @@ export function getDevices(current : any, size : any) {
 	})
 }
 /** 修改设备 */
-export function updateDevice(data : any) {
+export function updateDevice(data : any, nickname : string) {
 	return request({
 		url: `/device/update-device`,
 		method: 'PUT',
 		data,
+		header: {
+			nickname
+		}
 	})
 }
