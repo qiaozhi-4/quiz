@@ -8,9 +8,9 @@ export function login(code : string) {
 	})
 }
 /** 保存个人信息 */
-export function userSave(data : Quiz.UserInfo) {
+export function userUpdate(data : Quiz.UserInfo) {
 	return request({
-		url: '/wx-user/save',
+		url: '/wx-user/update',
 		method: 'POST',
 		data,
 	})
