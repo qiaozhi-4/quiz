@@ -51,7 +51,7 @@ public class DeviceController {
     @PathPermission(PermissionEnum.DD_CHANGE)
     @PutMapping("update-device")
     @ApiOperation("更新设备信息,是否被封和过期时间")
-    public Device updateDevice(@RequestHeader String nickname, @RequestBody DeviceDto deviceDto) {
+    public Device updateDevice(@RequestParam String nickname, @RequestBody DeviceDto deviceDto) {
         Assert.isNotNull(nickname, "修改人昵称不能为空!!");
         Device device = deviceService.change(deviceDto.getDeviceId(), deviceDto.getAmountToAdd(), deviceDto.getAmountUnit(), deviceDto.getLv());
         /*发送邮件*/
