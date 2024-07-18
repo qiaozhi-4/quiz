@@ -109,7 +109,7 @@
 			</view>
 			<view class="explain-text">点击答题！🌟 开启您的自我探索之旅吧！</view>
 			<view class="date-statistics-text">
-				{{`${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')} Question ${options?.length}/${options?.length}`}}
+				{{`${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')} Question ${questions?.length}/${questions?.length}`}}
 			</view>
 			<button class="start-button" @click="onButton">
 				<text class="button-text">开始测试</text>
@@ -125,7 +125,7 @@
 	const userInfo = ref()
 
 	/** 获取测试题目信息 */
-	const options = ref()
+	const questions = ref()
 
 	/** 当前时间 */
 	const now = new Date();
@@ -140,7 +140,7 @@
 	onMounted(() => {
 		userInfo.value = getApp().globalData.userInfo
 		getRandomQuestions().then(res => {
-			options.value = res.data
+			questions.value = res.data
 		})
 	})
 </script>
