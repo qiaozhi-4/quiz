@@ -96,6 +96,15 @@
 		flex-direction: column;
 	}
 
+	.text-overflow {
+		/* 强制文本在同一行显示 */
+		white-space: nowrap;
+		/* 隐藏超出容器范围的部分 */
+		overflow: hidden;
+		/* 超出部分显示省略号 */
+		text-overflow: ellipsis;
+	}
+
 	/* #endif */
 	.example-info {
 		font-size: 14px;
