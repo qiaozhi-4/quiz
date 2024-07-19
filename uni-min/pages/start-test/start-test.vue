@@ -122,10 +122,10 @@
 	import { ref, onMounted } from 'vue'
 	import { getRandomQuestions } from '../../utils/api';
 	/** 获取登录信息 */
-	const userInfo = ref()
+	const userInfo = ref<Quiz.UserInfo>()
 
 	/** 获取测试题目信息 */
-	const questions = ref()
+	const questions = ref<Quiz.Question[]>()
 
 	/** 当前时间 */
 	const now = new Date();
