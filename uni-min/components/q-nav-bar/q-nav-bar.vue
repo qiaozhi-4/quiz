@@ -16,11 +16,6 @@
 			display: grid;
 			place-content: end start;
 			align-items: end;
-
-			.icon {
-				width: 32px;
-				height: 32px;
-			}
 		}
 
 		.q-nav-bar-middle {
@@ -41,8 +36,9 @@
 <template>
 	<view class="q-nav-bar" :class="{'q-fixed': props.fixed}" :style="style">
 		<view class="q-nav-bar-left" :style="`width: ${menuButtonInfo.width}px`">
-			<cover-image v-if="props.leftIcon" @click="handlerReverseBack" class="icon"
-				:src="`/static/svg/${props.leftIcon}.svg`" size="32px" />
+			<view class="icon"  @click="handlerReverseBack">
+				<q-svg :icon="props.leftIcon" size="32"></q-svg>
+			</view>
 		</view>
 		<view class="q-nav-bar-middle">{{props.title}}</view>
 		<view class="q-nav-bar-right" :style="`width: ${menuButtonInfo.width}px`"></view>
