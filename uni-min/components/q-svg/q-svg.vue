@@ -7,11 +7,11 @@
 </style>
 
 <template>
-	<view v-if="svgStyle" class="q-svg" :style="{backgroundImage: svgStyle,width: size, height: size}" />
+	<view @click="$emit('click')" v-if="style" class="q-svg" :style="style" />
 </template>
 
 <script lang="ts" setup>
-	import { ref, computed } from 'vue'
+	import { ref, onMounted, watch } from 'vue'
 	/** 传递的属性 */
 	const props = defineProps({
 		/** svg文件名称 */
@@ -23,35 +23,43 @@
 		/** 透明度 */
 		opacitys: Array,
 	})
-	/** svg */
-	const svgStyle = ref()
-	/** 大小 */
-	const size = computed(() => {
-		return isNaN(Number(props.size)) ? props.size : `${props.size}px`
-	})
-	uni.getFileSystemManager().readFile({
-		filePath: `/static/svg/${props.icon}.svg`,
-		encoding: 'binary',
-		success: (res) => {
-			let basestr : any = res.data
-			// 替换参数对应的值
-			const fun = (parmName : string, paemVals : any[]) => {
-				let index = 0
-				basestr = basestr.replace(new RegExp(`${parmName}=".+?"`, 'g'), (word : string) => {
-					const newColor = paemVals[index]
-					index++
-					return newColor ? word.replace(/".*"/, (_) => `"${newColor}"`) : word
-				})
+	/** svg样式 */
+	const style = ref()
+	/** 读取svg并设置样式 */
+	function redSvg(icon, size, colors, opacitys) {
+		uni.getFileSystemManager().readFile({
+			filePath: `/static/svg/${icon}.svg`,
+			encoding: 'binary',
+			success: (res) => {
+				let basestr : any = res.data
+				// 替换参数对应的值
+				const fun = (parmName : string, paemVals : any[]) => {
+					let index = 0
+					basestr = basestr.replace(new RegExp(`${parmName}=".+?"`, 'g'), (word : string) => {
+						const newColor = paemVals[index]
+						index++
+						return newColor ? word.replace(/".*"/, (_) => `"${newColor}"`) : word
+					})
+				}
+				// 匹配颜色，并进行替换
+				if (colors && colors.length)
+					fun('(fill|stroke)', colors)
+				// 匹配透明度，并进行替换
+				if (opacitys && opacitys.length)
+					fun('(fill|stroke)-opacity', opacitys)
+				// 将 svg 数据进行 URL 编码
+				basestr = encodeURIComponent(basestr)
+				style.value = {
+					backgroundImage: `url("data:image/svg+xml,${basestr}")`,
+					width: `${size}px`,
+					height: `${size}px`
+				}
 			}
-			// 匹配颜色，并进行替换
-			if (props.colors && props.colors.length)
-				fun('(fill|stroke)', props.colors)
-			// 匹配透明度，并进行替换
-			if (props.opacitys && props.opacitys.length)
-				fun('(fill|stroke)-opacity', props.opacitys)
-			// 将 svg 数据进行 URL 编码
-			basestr = encodeURIComponent(basestr)
-			svgStyle.value = `url("data:image/svg+xml,${basestr}");`
-		}
+		})
+	}
+	/** 监听这些属性 */
+	watch([() => props.icon, () => props.size, () => props.colors, () => props.opacitys], ([icon, size, colors, opacitys]) => {
+		redSvg(icon, size, colors, opacitys)
 	})
+	onMounted(() => redSvg(props.icon, props.size, props.colors, props.opacitys))
 </script>

@@ -36,9 +36,7 @@
 <template>
 	<view class="q-nav-bar" :class="{'q-fixed': props.fixed}" :style="style">
 		<view class="q-nav-bar-left" :style="`width: ${menuButtonInfo.width}px`">
-			<view class="icon"  @click="handlerReverseBack">
-				<q-svg :icon="props.leftIcon" size="32"></q-svg>
-			</view>
+			<q-svg @click="handlerReverseBack" :icon="props.leftIcon" size="32" />
 		</view>
 		<view class="q-nav-bar-middle">{{props.title}}</view>
 		<view class="q-nav-bar-right" :style="`width: ${menuButtonInfo.width}px`"></view>

@@ -16,15 +16,6 @@
 			margin-top: 42px;
 			background-color: transparent;
 
-			.avatar {
-				border-radius: 65px;
-			}
-
-			.avatar-border {
-				box-sizing: border-box;
-				border: 5px solid #FFFFFF;
-			}
-
 			.change-avatar {
 				width: 37px;
 				height: 37px;
@@ -112,9 +103,8 @@
 		<q-nav-bar></q-nav-bar>
 		<view class="main">
 			<button class="avatar-button" open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
-				<cover-image v-if="userInfo?.avatarUrl" class="avatar avatar-border" :src="userInfo?.avatarUrl" />
-				<cover-image v-else class="avatar" src="/static/svg/默认头像.svg" />
-				<cover-image v-if="userInfo?.avatarUrl" class="change-avatar" src="/static/svg/更换头像.svg" />
+				<q-avatar :src="userInfo?.avatarUrl" size="130" borderWidth="5"></q-avatar>
+				<q-svg class="change-avatar" v-if="userInfo?.avatarUrl" icon="更换头像" size="37" />
 			</button>
 			<view class="label">昵称</view>
 			<input class="nickname-input" placeholder-class="nickname-input-placeholder" type="nickname"
