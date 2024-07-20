@@ -37,43 +37,59 @@ public class Result<T> {
         this.message = resultEnum.getMessage();
     }
 
-    public static <T> Result<T> success() {
-        return new Result<>(ResultEnum.SUCCESS);
-    }
 
-    public static <T> Result<T> success(T data) {
-        return new Result<T>(ResultEnum.SUCCESS).setData(data);
-    }
-
-    public static <T> Result<T> failed() {
-        return new Result<>(ResultEnum.FAILED);
-    }
-
-    public static <T> Result<T> failed(String message) {
-        return new Result<T>(ResultEnum.FAILED).setMessage(message);
-    }
-
-    public static <T> Result<T> failed(String message, T data) {
-        return new Result<T>(ResultEnum.FAILED).setMessage(message).setData(data);
-    }
-
-    public static <T> Result<T> failed(ResultEnum resultEnum) {
-        return new Result<>(resultEnum);
-    }
-
-    public static <T> Result<T> failed(APIException e) {
-        return new Result<T>().setCode(e.getCode()).setMessage(e.getMessage());
-    }
-
-    public static <T> Result<T> failed(ResultEnum resultEnum, T data) {
-        return new Result<T>(resultEnum).setData(data);
-    }
-
-    public static <T> Result<T> instance(ResultEnum resultEnum) {
-        return new Result<>(resultEnum);
+    public static <T> Result<T> instance(Integer code, String message, T data) {
+        return new Result<>(code, message, data);
     }
 
     public static <T> Result<T> instance(ResultEnum resultEnum, T data) {
-        return new Result<T>(resultEnum).setData(data);
+        return instance(resultEnum.getCode(), resultEnum.getMessage(), data);
     }
+
+    public static <T> Result<T> instance(ResultEnum resultEnum) {
+        return instance(resultEnum, null);
+    }
+
+    public static <T> Result<T> success(String message, T data) {
+        return instance(ResultEnum.SUCCESS.getCode(), message, data);
+    }
+
+    public static <T> Result<T> success(String message) {
+        return success(message, null);
+    }
+
+    public static <T> Result<T> success(T data) {
+        return instance(ResultEnum.SUCCESS, data);
+    }
+
+    public static <T> Result<T> success() {
+        return instance(ResultEnum.SUCCESS);
+    }
+
+
+    public static <T> Result<T> failed(String message, T data) {
+        return instance(ResultEnum.FAILED_BACK_END_ERROR.getCode(), message, data);
+    }
+
+    public static <T> Result<T> failed(String message) {
+        return failed(message, null);
+    }
+
+    public static <T> Result<T> failed(ResultEnum resultEnum, T data) {
+        return instance(resultEnum, data);
+    }
+
+    public static <T> Result<T> failed(ResultEnum resultEnum) {
+        return failed(resultEnum, null);
+    }
+
+    public static <T> Result<T> failed(APIException e, T data) {
+        return instance(e.getCode(), e.getMessage(), data);
+    }
+
+    public static <T> Result<T> failed(APIException e) {
+        return failed(e, null);
+    }
+
+
 }

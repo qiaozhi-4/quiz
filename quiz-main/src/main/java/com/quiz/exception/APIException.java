@@ -21,7 +21,7 @@ public class APIException extends RuntimeException {
     private String message;
 
     public APIException(String message) {
-        this.code = ResultEnum.FAILED.getCode();
+        this.code = ResultEnum.FAILED_BACK_END_ERROR.getCode();
         this.message = message;
     }
 

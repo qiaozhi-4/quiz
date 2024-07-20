@@ -29,7 +29,7 @@ public class CustomizeAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
-        final Result<Object> result = Result.instance(ResultEnum.FAILED_NO_PERMISSION);
+        final Result<Object> result = Result.failed(ResultEnum.FAILED_NO_PERMISSION);
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(objectMapper.writeValueAsString(result));
     }

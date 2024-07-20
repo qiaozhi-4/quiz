@@ -15,18 +15,42 @@ import java.util.Objects;
  * @since 2024/4/24 16:23
  */
 public class Assert {
-    public static void isTrue(boolean expression, String message) {
+    public static void isTrue(boolean expression, Integer code, String message) {
         if (!expression)
-            throw APIException.builder().message(message).code(ResultEnum.FAILED.getCode()).build();
+            throw APIException.builder().code(code).message(message).build();
+    }
+
+    public static void isTrue(boolean expression, ResultEnum res) {
+        isTrue(expression, res.getCode(), res.getMessage());
+    }
+
+    public static void isTrue(boolean expression, String message) {
+        isTrue(expression, ResultEnum.FAILED_BACK_END_ERROR.getCode(), message);
+    }
+
+    public static void isNotNull(String expression, Integer code, String message) {
+        if (StringUtils.isBlank(expression))
+            throw APIException.builder().code(code).message(message).build();
+    }
+
+    public static void isNotNull(String expression, ResultEnum res) {
+        isNotNull(expression, res.getCode(), res.getMessage());
     }
 
     public static void isNotNull(String expression, String message) {
-        if (StringUtils.isBlank(expression))
-            throw APIException.builder().message(message).code(ResultEnum.FAILED.getCode()).build();
+        isNotNull(expression, ResultEnum.FAILED_BACK_END_ERROR.getCode(), message);
+    }
+
+    public static void isNotNull(Object expression,Integer code, String message) {
+        if (Objects.isNull(expression))
+            throw APIException.builder().code(code).message(message).build();
+    }
+
+    public static void isNotNull(Object expression,  ResultEnum res) {
+        isNotNull(expression, res.getCode(), res.getMessage());
     }
 
     public static void isNotNull(Object expression, String message) {
-        if (Objects.isNull(expression))
-            throw APIException.builder().message(message).code(ResultEnum.FAILED.getCode()).build();
+        isNotNull(expression, ResultEnum.FAILED_BACK_END_ERROR.getCode(), message);
     }
 }

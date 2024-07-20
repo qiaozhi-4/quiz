@@ -1,5 +1,6 @@
 package com.quiz.advice;
 
+import com.quiz.enumerate.ResultEnum;
 import com.quiz.exception.APIException;
 import com.quiz.utils.Result;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -22,7 +23,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({RuntimeException.class, Exception.class})
     @ResponseBody
     public Result<String> handleException(Exception e, HttpServletResponse response) {
-        return Result.failed(e.getMessage());
+        return Result.failed(ResultEnum.FAILED_BACK_END_ERROR_UN, e.getMessage());
     }
 
     @ExceptionHandler({APIException.class})
