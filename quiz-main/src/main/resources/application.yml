@@ -30,6 +30,10 @@ spring:
           starttls:
             enable: true
             required: true
+  servlet:
+    multipart:
+      max-file-size: 10MB  # 设置单个文件的最大大小
+      max-request-size: 20MB  # 设置整个请求的最大大小
 
 # Mybatis-plus的配置
 mybatis-plus:

@@ -36,3 +36,7 @@ knife4j:
 logging:
   config: classpath:log4j2-spring-dev.xml
 
+# 文件上传位置
+file:
+  dir: D:\temp\upload
+
