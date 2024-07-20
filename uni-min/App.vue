@@ -27,7 +27,8 @@
 					login(loginRes.code).then((res) => {
 						this.globalData.userInfo = res.data.userInfo
 						this.globalData.token = res.data.token
-						if (/^\s*$/.test(res.data.userInfo.nickname) || /^\s*$/.test(res.data.userInfo.avatarUrl)) {
+						if (/^\s*$/.test(res.data.userInfo.nickname) || /^\s*$/.test(res.data
+								.userInfo.avatarUrl)) {
 							console.log('当前用户还没设置头像和用户名,跳转到设置页面')
 							uni.navigateTo({
 								url: `/pages/set-user-info/set-user-info`
@@ -67,12 +68,14 @@
 		box-sizing: border-box;
 		padding: 0;
 		margin: 0;
+		color: #FFFFFF;
 	}
 
 	button {
 		display: grid;
 		place-items: center;
 		margin: 0;
+		color: #FFFFFF;
 	}
 
 	/** 页面容器 */

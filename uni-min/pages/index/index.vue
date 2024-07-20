@@ -24,7 +24,8 @@
 		{ name: 'set-user-info' },
 		{ name: 'start-test' },
 		{ name: 'answer-test' },
-		{ name: 'finish-answer' },
+		{ name: 'answer-finish' },
+		{ name: 'award' },
 	]
 	function handleTo(pageName : String) {
 		uni.navigateTo({

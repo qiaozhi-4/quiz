@@ -34,7 +34,14 @@
 		}
 	},
 	{
-		"path" : "pages/finish-answer/finish-answer",
+		"path" : "pages/answer-finish/answer-finish",
+		"style" : 
+		{
+			"navigationBarTitleText" : ""
+		}
+	},
+	{
+		"path" : "pages/award/award",
 		"style" : 
 		{
 			"navigationBarTitleText" : ""
