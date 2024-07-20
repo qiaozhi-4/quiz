@@ -2,6 +2,7 @@ package com.quiz.controller;
 
 import com.quiz.utils.Assert;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,6 +39,7 @@ public class FileUploadController {
 
     // 处理文件上传请求
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ApiOperation("文件上传")
     public String handleFileUpload(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
             return "文件为空";
