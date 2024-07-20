@@ -24,6 +24,7 @@
 		{ name: 'set-user-info' },
 		{ name: 'start-test' },
 		{ name: 'answer-test' },
+		{ name: 'finish-answer' },
 	]
 	function handleTo(pageName : String) {
 		uni.navigateTo({
