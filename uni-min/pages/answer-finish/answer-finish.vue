@@ -3,6 +3,7 @@
 		background: linear-gradient(180deg, #2F1969 48.5%, #5830C7 78%, #A729E2 100%);
 
 		.main {
+			padding-top: 10px;
 			align-items: center;
 
 			.v1 {
@@ -46,6 +47,7 @@
 
 			.v4 {
 				align-items: center;
+
 				.t1 {
 					/* + */
 					font-family: 'Inter';
@@ -154,12 +156,22 @@
 				<text class="text">这是您第1次自我探索！</text>
 				<text class="text">🌟自我探索值增加100分！</text>
 			</view>
-			<button class="b1">让朋友测测！</button>
-			<button class="b2">领取奖励</button>
+			<button class="b1" @click="share">让朋友测测！</button>
+			<button class="b2" @click="getAward">领取奖励</button>
 		</view>
 	</view>
 </template>
 
 <script lang="ts" setup>
-
+	/** 转发 */
+	function share() {
+		console.log("转发");
+	}
+	/** 领取奖励 */
+	function getAward() {
+		console.log("领取奖励");
+		uni.navigateTo({
+			url: `/pages/award/award`
+		});
+	}
 </script>

@@ -41,7 +41,12 @@
 		}
 
 		.nickname-input {
+			display: flex;
+			// align-items: center;
+			width: 100%;
+			height: 54px;
 			padding: 15px 26px;
+			box-sizing: border-box;
 
 			background: #7756EC;
 			border-radius: 30px;

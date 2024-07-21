@@ -72,8 +72,7 @@
 							gap: 10px;
 
 							.option-button {
-								/* 粉紫渐变 选项 */
-								background: linear-gradient(90deg, #BE53FF 0%, #7756EC 100%) !important;
+								background: rgba(255, 255, 255, 0.3);
 								border-radius: 30px !important;
 
 								min-height: 43px;
@@ -86,6 +85,11 @@
 								letter-spacing: -0.04em;
 
 								color: #FFFFFF;
+							}
+							.option-button:hover{
+								
+									/* 粉紫渐变 选项 */
+									background: linear-gradient(90deg, #BE53FF 0%, #7756EC 100%) !important;
 							}
 						}
 					}
