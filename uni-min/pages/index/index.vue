@@ -26,6 +26,7 @@
 		{ name: 'answer-test' },
 		{ name: 'answer-finish' },
 		{ name: 'award' },
+		{ name: 'home' },
 	]
 	function handleTo(pageName : String) {
 		uni.navigateTo({
