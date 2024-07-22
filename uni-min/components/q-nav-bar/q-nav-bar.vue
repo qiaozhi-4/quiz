@@ -67,7 +67,7 @@
 	/** 计算头部高度和内边距 */
 	const style = computed(() => {
 		let padding = systemInfo.screenWidth - menuButtonInfo.right
-		return `height: ${10 + menuButtonInfo.bottom}px; padding: 0 ${padding}px 10px ${padding}px; color: ${props.color}`
+		return `min-height: ${10 + menuButtonInfo.bottom}px; padding: 0 ${padding}px 10px ${padding}px; color: ${props.color}`
 	})
 	/** 关闭当前页面,返回上一个页面 */
 	function handlerReverseBack() {

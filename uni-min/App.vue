@@ -7,7 +7,9 @@
 			userInfo: null,
 			token: "",
 			/** 除去导航栏的高度 */
-			mainHeight: 700
+			mainHeight: 700,
+			/** 头部导航栏高度 */
+			headStyle: 93,
 		},
 		onLaunch: function() {
 			console.warn('当前组件仅支持 uni_modules 目录结构 ，请升级 HBuilderX 到 3.1.0 版本以上！')
@@ -15,9 +17,17 @@
 			// 计算除去导航栏的高度
 			uni.getSystemInfo({
 				success: (res) => {
-					this.globalData.mainHeight = res.screenHeight - uni
-						.getMenuButtonBoundingClientRect().bottom -
-						10
+					let menu = uni.getMenuButtonBoundingClientRect()
+					this.globalData.mainHeight = res.screenHeight - menu.bottom - 10
+					this.globalData.headStyle = {
+						minHeight: `${menu.bottom + 10}px`,
+						padding: `0 ${res.screenWidth-menu.right}px 10px ${res.screenWidth-menu.right}px`,
+						position: 'sticky',
+						/* 当滚动到距离顶部 0 像素时粘住 */
+						top: 0,
+						/* 确保粘性元素在其他元素上方 */
+						zIndex: 1,
+					}
 				}
 			});
 			uni.login({
