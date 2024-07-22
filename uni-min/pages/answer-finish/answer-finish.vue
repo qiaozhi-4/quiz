@@ -113,6 +113,7 @@
 				/* 按钮烟色渐变 */
 				background: linear-gradient(90deg, #7756EC 0%, #AE2FDB 27.5%, #A729E2 98.5%);
 				border-radius: 30px;
+				color: #FFFFFF;
 
 				font-family: 'Inter';
 				font-style: normal;
@@ -135,6 +136,7 @@
 				font-weight: 700;
 				font-size: 28px;
 				line-height: 34px;
+				color: #FFFFFF;
 			}
 		}
 	}
