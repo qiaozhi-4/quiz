@@ -3,10 +3,10 @@
 		background: linear-gradient(180deg, #2F1969 48.5%, #5830C7 78%, #A729E2 100%);
 
 		.main {
-			padding-top: 10px;
 			align-items: center;
 
 			.v1 {
+				padding-top: 50px;
 				/* Done! */
 				font-family: 'Inter';
 				font-style: normal;
@@ -27,6 +27,7 @@
 			}
 
 			.v3 {
+				padding-bottom: 20px;
 				/* 🥳 */
 				font-family: 'Inter';
 				font-style: normal;
