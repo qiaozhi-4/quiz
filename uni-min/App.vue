@@ -19,6 +19,7 @@
 				success: (res) => {
 					let menu = uni.getMenuButtonBoundingClientRect()
 					this.globalData.mainHeight = res.screenHeight - menu.bottom - 10
+					this.globalData.headHeight = menu.bottom + 10
 					this.globalData.headStyle = {
 						minHeight: `${menu.bottom + 10}px`,
 						padding: `0 ${res.screenWidth-menu.right}px 10px ${res.screenWidth-menu.right}px`,
