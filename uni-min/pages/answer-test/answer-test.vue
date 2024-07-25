@@ -321,11 +321,11 @@
 					@click="onClickPopupQuestion(index)">
 					<view class="question-title">
 						<q-svg icon="左双引号" size="10" />
-						<view class="title .text-overflow">{{question?.title}}</view>
+						<view class="title text-overflow">{{question?.title}}</view>
 					</view>
 					<view class="question-info">
-						<view class="option .text-overflow">{{question?.options.split('@@')[options[index]]}}</view>
-						<view class="input-value .text-overflow">{{inputValues[index]}}</view>
+						<view class="option text-overflow">{{question?.options.split('@@')[options[index]]}}</view>
+						<view class="input-value text-overflow">{{inputValues[index]}}</view>
 					</view>
 				</view>
 			</view>
