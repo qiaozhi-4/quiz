@@ -2,6 +2,11 @@
 	.page {
 		background: #1F1146;
 
+		.scroll-view {
+
+			height: 100vh;
+		}
+
 		.head {
 			display: grid;
 			place-content: end start;
@@ -40,8 +45,8 @@
 
 				.statistics {
 					justify-content: center;
-					align-items: flex-end;
-					padding: 6px 26px 9px;
+					align-items: center;
+					padding: 6px 26px;
 					gap: 6px;
 
 					width: 110px;
@@ -330,84 +335,568 @@
 							}
 						}
 					}
+
+					.test-info {
+						background: #1F1146;
+						gap: 20px;
+						padding: 0 20px;
+
+						.class {
+							gap: 10px;
+
+							.name1 {
+								font-family: 'Inter';
+								font-style: normal;
+								font-weight: 400;
+								font-size: 14px;
+								line-height: 17px;
+								/* identical to box height */
+
+								color: #FFFFFF;
+							}
+
+							.item1 {
+								position: relative;
+
+								padding: 11px 13px;
+								gap: 3px;
+
+								background: rgba(255, 255, 255, 0.1);
+								border-radius: 15px;
+
+								.question-title {
+									gap: 3px;
+
+									.svg {
+										width: 10px;
+										height: 10px;
+									}
+
+									.title {
+										font-family: 'Inter';
+										font-style: normal;
+										font-weight: 500;
+										font-size: 12px;
+										line-height: 15px;
+
+										color: #FFFFFF;
+
+										opacity: 0.7;
+									}
+								}
+
+								.question-info {
+									justify-content: space-between;
+									align-items: center;
+									gap: 3px;
+									padding-left: 10px;
+
+									.option {
+										font-family: 'Inter';
+										font-style: normal;
+										font-weight: 700;
+										font-size: 16px;
+										line-height: 19px;
+										letter-spacing: -0.04em;
+
+										color: #FFFFFF;
+									}
+
+									.input-value {
+										font-family: 'Inter';
+										font-style: normal;
+										font-weight: 500;
+										font-size: 12px;
+										line-height: 15px;
+										/* identical to box height */
+										letter-spacing: -0.04em;
+
+										color: rgba(255, 255, 255, 0.75);
+									}
+								}
+
+								.svg {
+									position: absolute;
+									right: -11px;
+									top: -11px;
+								}
+							}
+
+							.item1-1 {
+								position: relative;
+								padding: 8px 11px;
+								gap: 20px;
+
+								background: rgba(255, 255, 255, 0.07);
+								border-radius: 15px;
+
+								.user-info {
+									justify-content: center;
+									align-items: center;
+									gap: 2px;
+
+									.nickname {
+										font-family: 'Inter';
+										font-style: normal;
+										font-weight: 600;
+										font-size: 12px;
+										line-height: 15px;
+										text-align: center;
+
+										color: #FFFFFF;
+									}
+								}
+
+								.topic {
+									position: relative;
+									gap: 4px;
+									justify-content: center;
+
+									.svg {
+										position: absolute;
+										left: -10px;
+										top: 10px;
+									}
+
+									.title {
+										font-family: 'Inter';
+										font-style: normal;
+										font-weight: 300;
+										font-size: 12px;
+										line-height: 15px;
+
+										color: #FFFFFF;
+									}
+
+									.answer {
+										font-family: 'Inter';
+										font-style: normal;
+										font-weight: 900;
+										font-size: 16px;
+										line-height: 19px;
+
+										color: #FFFFFF;
+									}
+								}
+
+								.svg {
+									position: absolute;
+									right: -11px;
+									top: -11px;
+								}
+							}
+
+							.add {
+								justify-content: center;
+								gap: 4px;
+								position: relative;
+
+								box-sizing: border-box;
+								padding: 13px 30px;
+								border: 1px dashed #FFFFFF;
+								border-radius: 15px;
+
+								.t1 {
+									font-family: 'Inter';
+									font-style: normal;
+									font-weight: 900;
+									font-size: 16px;
+									line-height: 19px;
+
+									color: #FFFFFF;
+								}
+
+								.t2 {
+									font-family: 'Inter';
+									font-style: normal;
+									font-weight: 300;
+									font-size: 12px;
+									line-height: 15px;
+
+									color: rgba(255, 255, 255, 0.3);
+								}
+
+								.svg {
+									position: absolute;
+									right: -11px;
+									top: -11px;
+								}
+							}
+
+							.name2 {
+								font-family: 'Inter';
+								font-style: normal;
+								font-weight: 800;
+								font-size: 20px;
+								line-height: 24px;
+
+								color: #FFFFFF;
+							}
+
+							.items {
+								position: relative;
+								right: 20px;
+								width: 100vw;
+								background: rgba(255, 255, 255, 0.07);
+
+
+								.item2 {
+									display: grid;
+									grid-template-columns: 1fr auto;
+									gap: 10px;
+									align-items: center;
+									padding: 10px 20px;
+
+									.title {
+										font-family: 'Inter';
+										font-style: normal;
+										font-weight: 400;
+										font-size: 14px;
+										line-height: 17px;
+										color: #FFFFFF;
+									}
+
+									.option {
+										font-family: 'Inter';
+										font-style: normal;
+										font-weight: 600;
+										font-size: 14px;
+										line-height: 17px;
+
+										color: #A143FF;
+									}
+
+									.input-value {
+										font-family: 'Inter';
+										font-style: normal;
+										font-weight: 500;
+										font-size: 12px;
+										line-height: 15px;
+
+										color: rgba(255, 255, 255, 0.4);
+									}
+								}
+							}
+
+							.t1 {
+								/* 查看全部 */
+								font-family: 'Inter';
+								font-style: normal;
+								font-weight: 600;
+								font-size: 12px;
+								line-height: 15px;
+
+								color: #A729E2;
+
+							}
+						}
+					}
+
+
+
+					.table-record {
+						background: #1F1146;
+
+						.input-wrap {
+							align-items: center;
+							gap: 5px;
+							margin: 10px;
+							background: rgba(255, 255, 255, 0.1);
+							padding: 7px 18px;
+							border-radius: 30px;
+
+							.input {
+								width: 100%;
+								font-family: 'Inter';
+								font-style: normal;
+								font-weight: 700;
+								font-size: 16px;
+								line-height: 19px;
+
+								color: #FFFFFF;
+							}
+
+							.input-placeholder {
+								font-family: 'Inter';
+								font-style: normal;
+								font-weight: 400;
+								font-size: 16px;
+								line-height: 19px;
+
+								color: rgba(255, 255, 255, 0.3);
+							}
+						}
+
+						.data {
+							padding: 20px 20px 10px;
+
+							font-family: 'Inter';
+							font-style: normal;
+							font-weight: 800;
+							font-size: 20px;
+							line-height: 24px;
+
+							color: #FFFFFF;
+
+						}
+
+						.test-paper-title-wrap {
+							align-items: center;
+							justify-content: space-between;
+							padding: 10px 20px 6px 20px;
+
+							.test-paper-title {
+								font-family: 'Inter';
+								font-style: normal;
+								font-weight: 700;
+								font-size: 14px;
+								line-height: 17px;
+
+								color: #FFFFFF;
+							}
+						}
+
+						.items {
+							width: 100vw;
+							background: rgba(255, 255, 255, 0.07);
+
+
+							.item2 {
+								display: grid;
+								grid-template-columns: 1fr auto;
+								gap: 10px;
+								align-items: center;
+								padding: 10px 20px;
+
+								.title {
+									font-family: 'Inter';
+									font-style: normal;
+									font-weight: 400;
+									font-size: 14px;
+									line-height: 17px;
+									color: #FFFFFF;
+								}
+
+								.option {
+									font-family: 'Inter';
+									font-style: normal;
+									font-weight: 600;
+									font-size: 14px;
+									line-height: 17px;
+
+									color: #A143FF;
+								}
+
+								.input-value {
+									font-family: 'Inter';
+									font-style: normal;
+									font-weight: 500;
+									font-size: 12px;
+									line-height: 15px;
+
+									color: rgba(255, 255, 255, 0.4);
+								}
+							}
+						}
+					}
 				}
+			}
+		}
+
+		.footer {
+			width: 100vw;
+			position: absolute;
+			bottom: 0;
+			/* 当滚动到距离顶部 0 像素时粘住 */
+			z-index: 1;
+			/* 确保粘性元素在其他元素上方 */
+			/* 出题按钮 */
+
+			box-sizing: border-box;
+			flex-direction: column;
+			align-items: center;
+			padding: 30px 31px;
+
+			background: #1F1146;
+			border: 1px solid rgba(255, 255, 255, 0.3);
+			border-radius: 15px 15px 0px 0px;
+
+			.b1 {
+				flex-direction: column;
+				align-items: center;
+				padding: 10px;
+
+				width: 299px;
+
+				box-sizing: border-box;
+
+				background: linear-gradient(90deg, #8163FB 0%, #AE2EDA 23.19%, #A627E1 89.69%);
+				border-radius: 30px;
+
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 700;
+				font-size: 24px;
+				line-height: 29px;
+
+				color: #FFFFFF;
 			}
 		}
 	}
 </style>
 
 <template>
-	<!-- <view class="page"> -->
-	<scroll-view class="page" scroll-y="true" @scroll="onScroll" :scroll-top="scrollTop" scroll-with-animation>
-		<view class="head" :style="headStyle">
-			<q-svg icon="个人主页-头部-加号" size="32" />
-		</view>
-		<view class="main flex-column">
-			<view class="v1 flex-column">
-				<button class="avatar-button" open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
-					<q-avatar :src="userInfo?.avatarUrl" size="69" borderWidth="3"></q-avatar>
-				</button>
-				<view class="nickname">{{userInfo?.nickname}}</view>
+	<view class="page">
+		<scroll-view class="scroll-view" scroll-y="true" @scroll="onScroll" :scroll-top="scrollTop"
+			scroll-with-animation>
+			<view class="head" :style="headStyle">
+				<q-svg icon="个人主页-头部-加号" size="32" />
 			</view>
-			<view class="v2">
-				<view class="statistics">
-					<text class="text1">0</text>
-					<text class="text2">出题</text>
+			<view class="main flex-column">
+				<view class="v1 flex-column">
+					<button class="avatar-button" open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
+						<q-avatar :src="userInfo?.avatarUrl" size="69" borderWidth="3"></q-avatar>
+					</button>
+					<view class="nickname">{{userInfo?.nickname}}</view>
 				</view>
-				<view class="statistics">
-					<text class="text1">0</text>
-					<text class="text2">答题</text>
-				</view>
-				<view class="statistics">
-					<text class="text1">0</text>
-					<text class="text2">密友</text>
-				</view>
-			</view>
-			<view class="v3 flex-column">
-				<view class="task">
-					<text class="t1">10答0问</text>
-					<text class="t2">本周连续回答10题</text>
-					<button class="b1">领取奖励</button>
-				</view>
-				<view class="table flex-column">
-					<view class="table-tags" :style="{paddingTop:`${tagPaddingTop}px`}">
-						<view class="tag"
-							:class="{active:activeTag==index, left:index==activeTag+1, right:index==activeTag-1 }"
-							v-for="(tag,index) in tags" :key="index" @click="onTag(index)">
-							{{tag}}
-						</view>
+				<view class="v2">
+					<view class="statistics">
+						<text class="text1">0</text>
+						<text class="text2">出题</text>
 					</view>
-					<view v-show="activeTag==0" class="table-content flex-column">
-						<template v-if="friends.length!=0">
-							<view class="table-item" v-for="(friend, index) in friends" :key="index">
-								<view class="ranking" :class="`no${index+1}`">{{index+1}}</view>
-								<q-avatar :src="friend.avatarUrl" size="42" />
-								<view class="nickname" :class="`no${index+1}`">{{friend.nickname}}</view>
-								<view class="score" :class="`no${index+1}`">{{friend.score}}</view>
-								<q-svg class="svg" icon="个人主页-排行-转到好友" size="22" />
+					<view class="statistics">
+						<text class="text1">0</text>
+						<text class="text2">答题</text>
+					</view>
+					<view class="statistics">
+						<text class="text1">0</text>
+						<text class="text2">密友</text>
+					</view>
+				</view>
+				<view class="v3 flex-column">
+					<view class="task">
+						<text class="t1">10答0问</text>
+						<text class="t2">本周连续回答10题</text>
+						<button class="b1">领取奖励</button>
+					</view>
+					<view class="table flex-column">
+						<view class="table-tags" :style="{paddingTop:`${tagPaddingTop}px`}">
+							<view class="tag"
+								:class="{active:activeTag==index, left:index==activeTag+1, right:index==activeTag-1 }"
+								v-for="(tag,index) in tags" :key="index" @click="onTag(index)">
+								{{tag}}
 							</view>
-						</template>
-						<template v-else>
-							<text class="table-null-text t1">您的亲密排行空空如也</text>
-							<text class="table-null-text t2">🌟快去邀请朋友吧！</text>
-							<button class="table-null-button b1">让朋友测测！</button>
-						</template>
+						</view>
+						<view v-show="activeTag==0" class="table-content flex-column">
+							<template v-if="friends.length!=0">
+								<view class="table-item" v-for="(friend, index) in friends" :key="index">
+									<view class="ranking" :class="`no${index+1}`">{{index+1}}</view>
+									<q-avatar :src="friend.avatarUrl" size="42" />
+									<view class="nickname" :class="`no${index+1}`">{{friend.nickname}}</view>
+									<view class="score" :class="`no${index+1}`">{{friend.score}}</view>
+									<q-svg class="svg" icon="个人主页-排行-转到好友" size="22" />
+								</view>
+							</template>
+							<template v-else>
+								<text class="table-null-text t1">您的亲密排行空空如也</text>
+								<text class="table-null-text t2">🌟快去邀请朋友吧！</text>
+								<button class="table-null-button b1">让朋友测测！</button>
+							</template>
+						</view>
+						<view v-show="activeTag==1" class="test-info flex-column">
+							<view class="class flex-column" v-for="(e ,index) in testInfo" :key="index">
+								<template v-if="index < 2">
+									<view class="name1">{{e?.name}}</view>
+									<template v-for="(item,i) in e.items" :key="i">
+										<view class="item1 flex-column" v-if="item?.title && index == 0">
+											<view class="question-title">
+												<q-svg icon="左双引号" size="10" />
+												<view class="title text-overflow">{{item?.title}}</view>
+											</view>
+											<view class="question-info">
+												<view class="option text-overflow">{{item?.select}}</view>
+												<view class="input-value text-overflow">{{item?.input}}</view>
+											</view>
+											<q-svg class="svg" icon="个人主页-测试信息-删除" size="22"
+												@click="remove(index,i)"></q-svg>
+										</view>
+
+										<view class="item1-1" v-if="item?.title && index == 1">
+											<view class="user-info flex-column">
+												<q-avatar :src="item?.avatarUrl" size="41"></q-avatar>
+												<view class="nickname">{{item?.nickname}}</view>
+											</view>
+											<view class="topic flex-column">
+												<q-svg class="svg" icon="左双引号" size="10" />
+												<text class="title text-overflow">{{item?.title}}</text>
+												<text class="answer text-overflow">{{item?.select}}</text>
+											</view>
+											<q-svg class="svg" icon="个人主页-测试信息-删除" size="22"
+												@click="remove(index,i)"></q-svg>
+										</view>
+									</template>
+									<view class="add flex-column" @click="add(index)">
+										<text class="t1">{{e?.extra?.t1}}</text>
+										<text class="t2">{{e?.extra?.t2}}</text>
+										<q-svg class="svg" icon="个人主页-测试信息-添加" size="22"></q-svg>
+									</view>
+								</template>
+								<template v-else>
+									<view class="name2">{{e.name}}</view>
+									<view class="items flex-column">
+										<template v-for="(item,i) in e.items" :key="i">
+											<view class="item2" v-if="i < 2 || e.spread">
+												<view class="title text-overflow">{{item?.title}}</view>
+												<view class="option text-overflow">{{item?.select}}</view>
+												<view class="input-value text-overflow">{{item?.input}}</view>
+											</view>
+										</template>
+									</view>
+									<text class="t1" v-if="e.spread" @click="hidden(index)">收起</text>
+									<text class="t1" v-else @click="showAll(index)">查看全部</text>
+								</template>
+							</view>
+						</view>
+						<view v-show="activeTag==2" class="table-record flex-column">
+							<view class="input-wrap">
+								<q-svg class="svg" icon="搜索" size="14.5" />
+								<input class="input" placeholder-class="input-placeholder" placeholder="搜索"
+									:adjust-position="false" @input="onInput" @blur="onBlur" :value="input" />
+							</view>
+							<template v-for="(record,index) in testRecord" :key="index">
+								<text class="data">{{record.date}}</text>
+								<template v-for="(testPaper,index) in record.testPapers" :key="index">
+									<view class="test-paper-title-wrap">
+										<text class="test-paper-title">{{testPaper.title}}</text>
+										<q-svg class="svg" :icon="testPaper.spread ? '三角形-向下' : '三角形-向左'" size="17"
+											@click="testPaper.spread = !testPaper.spread" />
+									</view>
+									<view class="items flex-column" v-show="testPaper.spread">
+										<view class="item2" v-for="(item,index) in testPaper.questions" :key="index">
+											<view class="title text-overflow">{{item?.title}}</view>
+											<view class="option text-overflow">{{item?.select}}</view>
+											<view class="input-value text-overflow">{{item?.input}}</view>
+										</view>
+									</view>
+								</template>
+
+							</template>
+						</view>
+						<view style="min-height: 160px; background-color: #1F1146;"></view>
 					</view>
-					<view v-show="activeTag==1" class="table-content flex-column">
-						<view class="table-null" style="min-height: 100vh;">测试信息</view>
-					</view>
-					<view v-show="activeTag==2" class="table-content flex-column">
-						<view class="table-null" style="min-height: 100vh;">测试记录</view>
-					</view>
+
 				</view>
 			</view>
+		</scroll-view>
+		<view class="footer">
+			<button class="b1">去出题</button>
 		</view>
-	</scroll-view>
-	<!-- </view> -->
+	</view>
 </template>
 
 <script lang="ts" setup>
 	import { ref, onMounted } from 'vue'
+	import { onLoad } from '@dcloudio/uni-app'
 	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
 	/** 头部样式 */
@@ -419,14 +908,138 @@
 	/** 标签 */
 	const tags = ref(['亲密排行', '测试信息', '测试记录'])
 	/** 当前激活的标签 */
-	const activeTag = ref(0)
+	const activeTag = ref(1)
 	/** 滚动条位置 */
 	const scrollTop = ref(0)
 	/** 标签触发粘性定位的上边距 */
 	const tagPaddingTop = ref(0)
 	/** 亲密排行榜数据 */
 	const friends = ref([])
-
+	/** 测试信息数据 */
+	const testInfo = ref([
+		{
+			name: '关键题',
+			items: [{
+				title: '你最喜欢在周末做什么？',
+				select: '在家进行个人活动',
+				input: '吃饭睡觉游戏代码'
+			}, {
+				title: '你更喜欢哪种类型的电影？',
+				select: '白开水',
+			},],
+			extra: {
+				t1: '选择一道题',
+				t2: '展示你的答案',
+			}
+		},
+		{
+			name: '朋友的看法',
+			items: [],
+			extra: {
+				t1: '选择1条朋友的看法',
+				t2: '展示回答',
+			}
+		},
+		{
+			name: '基础题',
+			spread: false,
+			items: [{
+				title: '你最喜欢在周末做什么？',
+				select: '在家进行个人活动',
+				input: '吃饭睡觉游戏代码'
+			}, {
+				title: '你更喜欢哪种类型的电影？',
+				select: '白开水',
+			},]
+		},
+		{
+			name: '进阶题',
+			spread: false,
+			items: [{
+				title: '你最喜欢在周末做什么？',
+				select: '在家进行个人活动',
+				input: '吃饭睡觉游戏代码'
+			}, {
+				title: '你更喜欢哪种类型的电影？',
+				select: '白开水',
+			},]
+		},
+		{
+			name: '核心题',
+			spread: false,
+			items: [{
+				title: '你最喜欢在周末做什么？',
+				select: '在家进行个人活动',
+				input: '吃饭睡觉游戏代码'
+			}, {
+				title: '你更喜欢哪种类型的电影？',
+				select: '白开水',
+			},]
+		},
+	])
+	/** 搜索框输入 */
+	const input = ref('')
+	/** 测试记录数据 */
+	const testRecord = ref([
+		{
+			date: '2024.7.24',
+			testPapers: [
+				{
+					title: "试卷1",
+					spread: true,
+					questions: [{
+						title: '你最喜欢在周末做什么？',
+						select: '在家进行个人活动',
+						input: '吃饭睡觉游戏代码'
+					}, {
+						title: '你更喜欢哪种类型的电影？',
+						select: '白开水',
+					},]
+				},
+				{
+					title: "试卷2",
+					spread: false,
+					questions: [{
+						title: '你最喜欢在周末做什么？',
+						select: '在家进行个人活动',
+						input: '吃饭睡觉游戏代码'
+					}, {
+						title: '你更喜欢哪种类型的电影？',
+						select: '白开水',
+					},]
+				},
+			]
+		},
+		{
+			date: '2024.7.21',
+			testPapers: [
+				{
+					title: "试卷1",
+					spread: false,
+					questions: [{
+						title: '你最喜欢在周末做什么？',
+						select: '在家进行个人活动',
+						input: '吃饭睡觉游戏代码'
+					}, {
+						title: '你更喜欢哪种类型的电影？',
+						select: '白开水',
+					},]
+				},
+				{
+					title: "试卷2",
+					spread: false,
+					questions: [{
+						title: '你最喜欢在周末做什么？',
+						select: '在家进行个人活动',
+						input: '吃饭睡觉游戏代码'
+					}, {
+						title: '你更喜欢哪种类型的电影？',
+						select: '白开水',
+					},]
+				},
+			]
+		},
+	])
 	/** 获取微信头像触发 */
 	function onChooseAvatar(e) {
 		console.log("获取微信头像触发", e);
@@ -435,7 +1048,7 @@
 	}
 	/** 页面滚动触发 */
 	function onScroll(e) {
-		if (e.detail.scrollTop > 250) {
+		if (e.detail.scrollTop > 230) {
 			tagPaddingTop.value = headHeight
 		} else {
 			tagPaddingTop.value = 0
@@ -444,8 +1057,50 @@
 	/** 点击tag触发 */
 	function onTag(index) {
 		scrollTop.value = 0
-		scrollTop.value = 351
+		scrollTop.value = 325
 		activeTag.value = index
+	}
+	/** 删除展示关键题 */
+	function remove(infoIindex, itemIndx) {
+		delete testInfo.value[infoIindex].items[itemIndx]
+	}
+	/** 添加展示关键题 */
+	function add(infoIindex) {
+		console.log('添加展示关键题:', infoIindex);
+		if (testInfo.value[infoIindex].name == "关键题") {
+			uni.navigateTo({
+				url: `/pages/select-topic/select-topic?index=${infoIindex}`
+			});
+		} else if (testInfo.value[infoIindex].name == "朋友的看法") {
+			uni.navigateTo({
+				url: `/pages/select-friend-view/select-friend-view?index=${infoIindex}`
+			});
+		}
+	}
+	/** 展示全部测试信息 */
+	function showAll(infoIindex) {
+		if (testInfo.value[infoIindex].items.length < 5) {
+			for (let i = 0; i < 5; i++) {
+				testInfo.value[infoIindex].items.push({
+					title: '你最喜欢在周末做什么？',
+					select: '在家进行个人活动',
+					input: '吃饭睡觉游戏代码'
+				})
+			}
+		}
+		testInfo.value[infoIindex].spread = true
+	}
+	/** 收起全部测试信息 */
+	function hidden(infoIindex) {
+		testInfo.value[infoIindex].spread = false
+	}
+	/** 键盘输入触发 */
+	function onInput(e : any) {
+		input.value = e.detail.value
+	}
+	/** 键盘失去焦点触发 */
+	function onBlur(e : any) {
+		input.value = e.detail.value
 	}
 	onMounted(() => {
 		userInfo.value = getApp().globalData.userInfo
@@ -454,6 +1109,24 @@
 				nickname: `用户${i + 1}`,
 				score: (20 - i) * 1000,
 				avatarUrl: ''
+			})
+		}
+	})
+	onLoad((option) => {
+		if (option.topicId) {
+			console.log('这是从选择题目来的参数', option);
+			testInfo.value[0].items.push({
+				title: `题目${option.topicId}`,
+				select: '后续从数据查询',
+				input: '吃饭睡觉游戏代码'
+			})
+		} else if (option.friendId) {
+			console.log('这是从选择朋友看法来的参数', option);
+			testInfo.value[1].items.push({
+				nickname: `用户${option.friendId}`,
+				avatarUrl: '',
+				title: '后续从数据查询',
+				select: '喜欢不冷不热不雨不晴，阴天最好',
 			})
 		}
 	})
