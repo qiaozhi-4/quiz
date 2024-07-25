@@ -38,7 +38,7 @@
 		<view class="q-nav-bar-left" :style="`width: ${menuButtonInfo.width}px`">
 			<q-svg @click="handlerReverseBack" :icon="props.leftIcon" size="32" />
 		</view>
-		<view class="q-nav-bar-middle">{{props.title}}</view>
+		<view class="q-nav-bar-middle" :style="`font-size: ${props.titleSize}px;`">{{props.title}}</view>
 		<view class="q-nav-bar-right" :style="`width: ${menuButtonInfo.width}px`"></view>
 	</view>
 </template>
@@ -48,6 +48,8 @@
 	const props = defineProps({
 		/** 标题文字 */
 		title: { type: String, default: '' },
+		/** 标题文字大小 */
+		titleSize: { type: String, default: '32' },
 		/** 左侧按钮图标 */
 		leftIcon: { type: String, default: '' },
 		/** 文字颜色 */
