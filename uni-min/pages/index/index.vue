@@ -29,6 +29,7 @@
 		{ name: 'home' },
 		{ name: 'select-topic' },
 		{ name: 'select-friend-view' },
+		{ name: 'task' },
 	]
 	function handleTo(pageName : String) {
 		uni.navigateTo({
