@@ -38,7 +38,7 @@
 		<view class="q-nav-bar-left" :style="`width: ${menuButtonInfo.width}px`">
 			<q-svg @click="handlerReverseBack" :icon="props.leftIcon" size="32" />
 		</view>
-		<view class="q-nav-bar-middle" :style="`font-size: ${props.titleSize}px;`">{{props.title}}</view>
+		<view class="q-nav-bar-middle"  :style="`font-size: ${props.titleSize}px;`">{{props.title}}</view>
 		<view class="q-nav-bar-right" :style="`width: ${menuButtonInfo.width}px`"></view>
 	</view>
 </template>

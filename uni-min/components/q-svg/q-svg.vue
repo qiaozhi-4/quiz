@@ -3,6 +3,8 @@
 		background-repeat: no-repeat;
 		background-size: contain;
 		border-radius: 0px;
+		/* 设置背景图片在中间 */
+		background-position: center;
 	}
 </style>
 
