@@ -18,6 +18,7 @@
 				justify-content: center;
 				align-items: center;
 				padding: 10px;
+				gap: 8px;
 
 				.avatar-button::after {
 					border: none;
@@ -116,8 +117,8 @@
 						grid-row: 1 / span 2;
 						place-self: center end;
 
-						width: 89px;
-						height: 30px;
+						padding: 6px 15px;
+
 						/* 淡紫 粉色渐变 */
 						background: linear-gradient(90deg, #5830C7 0%, #BE53FF 100%);
 						border-radius: 30px;
@@ -127,7 +128,7 @@
 						font-style: normal;
 						font-weight: 700;
 						font-size: 12px;
-						line-height: 15px;
+						line-height: 19px;
 						text-align: center;
 
 						color: #FFFFFF;
@@ -718,7 +719,7 @@
 			padding: 30px 31px;
 
 			background: #1F1146;
-			border: 1px solid rgba(255, 255, 255, 0.3);
+			border-top: 1px solid rgba(255, 255, 255, 0.3);
 			border-radius: 15px 15px 0px 0px;
 
 			.b1 {
@@ -777,7 +778,7 @@
 					<view class="task">
 						<text class="t1">10答0问</text>
 						<text class="t2">本周连续回答10题</text>
-						<button class="b1">领取奖励</button>
+						<button class="b1" @click="clickTask">领取奖励</button>
 					</view>
 					<view class="table flex-column">
 						<view class="table-tags" :style="{paddingTop:`${tagPaddingTop}px`}">
@@ -1045,6 +1046,12 @@
 		console.log("获取微信头像触发", e);
 		const { avatarUrl } = e.detail
 		userInfo.value.avatarUrl = avatarUrl
+	}
+	/** 点击领取奖励触发,跳转到任务页面 */
+	function clickTask() {
+		uni.navigateTo({
+			url: `/pages/task/task`
+		});
 	}
 	/** 页面滚动触发 */
 	function onScroll(e) {
