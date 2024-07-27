@@ -14,6 +14,7 @@
 		.main {
 			padding: 10px;
 			padding-bottom: 50px;
+			gap: 8px;
 
 			.v-global {
 				align-items: center;
@@ -56,7 +57,8 @@
 						color: #FFFFFF;
 					}
 				}
-				.gem{
+
+				.gem {
 					padding: 8px 22px;
 				}
 
@@ -80,6 +82,198 @@
 					color: #FFFFFF;
 				}
 			}
+
+			.class {
+				padding: 10px;
+				padding-top: 20px;
+				/* 本周限时奖励 */
+
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 800;
+				font-size: 20px;
+				line-height: 24px;
+
+				color: #FFFFFF;
+			}
+
+			.tasks {
+				align-items: start;
+				padding: 7px 12px;
+				gap: 8px;
+
+				.title {
+					padding: 8px;
+					/* 测测对朋友的了解😊 */
+					font-family: 'Inter';
+					font-style: normal;
+					font-weight: 800;
+					font-size: 16px;
+					line-height: 19px;
+				}
+
+				.task-global {
+					position: relative;
+					width: 100%;
+					justify-content: space-between;
+					align-items: center;
+					padding: 7px 10px;
+
+					background: rgba(167, 41, 226, 0.15);
+					border-radius: 30px;
+
+					.progress {
+						width: 100%;
+						height: 100%;
+						position: absolute;
+						top: 0;
+						left: 0;
+
+						border-radius: 30px;
+						z-index: -1;
+					}
+
+					.svg-grap {
+						align-items: center;
+
+						.count {
+							/* 1 */
+							font-family: 'Inter';
+							font-style: normal;
+							font-weight: 900;
+							font-size: 16px;
+							line-height: 19px;
+						}
+					}
+
+					.title {
+						/* 做1位朋友的测试！ */
+						font-family: 'Inter';
+						font-style: normal;
+						font-weight: 700;
+						font-size: 15px;
+						line-height: 18px;
+
+					}
+
+					.but {
+						width: 76px;
+						height: 21px;
+						border-radius: 30px;
+
+						font-family: 'Inter';
+						font-style: normal;
+						font-weight: 700;
+						font-size: 12px;
+						line-height: 15px;
+						/* identical to box height */
+						text-align: center;
+					}
+
+					.but-unfinished {
+						width: 76px;
+						height: 21px;
+						border-radius: 30px;
+
+						/* 还差3 */
+						font-family: 'Inter';
+						font-style: normal;
+						font-weight: 500;
+						font-size: 12px;
+						line-height: 15px;
+						/* identical to box height */
+						text-align: center;
+
+						color: #FFFFFF;
+
+						background: rgba(255, 255, 255, 0.15);
+					}
+				}
+
+
+				.task1 {
+					background: rgba(78, 63, 246, 0.3);
+
+					.but {
+						/* 领取奖励 */
+						color: #4E3FF6;
+					}
+
+					.progress {
+						background-color: #4E3FF6;
+					}
+				}
+
+				.task2 {
+					background: rgba(167, 41, 226, 0.3);
+
+					.but {
+						color: #A729E2;
+					}
+
+					.progress {
+						background-color: #A729E2;
+					}
+				}
+			}
+
+			.ranking-list {
+				align-items: start;
+				gap: 15px;
+				padding: 12px;
+
+				.title {
+					font-family: 'Inter';
+					font-style: normal;
+					font-weight: 800;
+					font-size: 16px;
+					line-height: 19px;
+				}
+
+				.user {
+					gap: 10px;
+					align-items: center;
+					width: 100%;
+					position: relative;
+
+
+					.progress {
+						width: 100%;
+						height: 100%;
+						position: absolute;
+						top: 0;
+						left: 0;
+
+						z-index: -1;
+
+						box-sizing: border-box;
+						background: rgba(78, 63, 246, 0.5);
+						border-right: 3px solid #4536C5;
+						border-radius: 30px;
+					}
+
+					.t1 {
+						font-family: 'Inter';
+						font-style: normal;
+						font-weight: 700;
+						font-size: 20px;
+						line-height: 24px;
+
+						color: #FFFFFF;
+					}
+
+					.nickname {
+						/* 网名 */
+						font-family: 'Inter';
+						font-style: normal;
+						font-weight: 700;
+						font-size: 12px;
+						line-height: 15px;
+
+						color: #FFFFFF;
+					}
+				}
+			}
 		}
 	}
 </style>
@@ -87,7 +281,7 @@
 <template>
 	<view class="page">
 		<q-nav-bar titleExtraClass="head-title" leftIcon="头部导航-返回" title="my Quiz" />
-		<view class="main">
+		<view class="main flex-column">
 			<view class="v1">
 				<view class="v-global achievement-score flex-column">
 					<text class="t1">目前成就</text>
@@ -107,8 +301,30 @@
 					<q-svg icon="空心向右箭头" size="14" />
 				</view>
 			</view>
-			<view class="v2">
-
+			<text class="class">本周限时奖励</text>
+			<view class="v-global tasks flex-column" v-for="(item ,index) in tasks" :key="index">
+				<text class="title">{{item.title}}</text>
+				<view class="task-global" :class="`task${item.type}`" v-for="(task,i) in item.list" :key="i">
+					<view class="progress"
+						:style="{width:`${task.finish < task.total ? task.finish/task.total*100 : 100}%`}"></view>
+					<view class="svg-grap">
+						<q-svg :icon="task.awardName" size="33" />
+						<text class="count">{{task.awardCount}}</text>
+					</view>
+					<text class="title">{{task.title}}</text>
+					<button class="but-unfinished" v-if="task.finish < task.total">还差{{task.total-task.finish}}</button>
+					<button class="but" v-else>领取奖励</button>
+				</view>
+			</view>
+			<text class="class">本月我最关注的朋友🤩</text>
+			<view class="v-global ranking-list flex-column">
+				<text class="title">答题数量排行：</text>
+				<view class="user" v-for="(item, index) in rankingList" :key="index">
+					<view class="progress" :style="{width:`${item.count / rankingList[0].count * 100}%`}"></view>
+					<q-avatar :src="item?.avatarUrl" size="42" borderWidth="2"></q-avatar>
+					<text class="t1">{{item.count}}答</text>
+					<view class="nickname">{{item?.nickname}}</view>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -131,11 +347,72 @@
 		},
 	})
 	/** 任务数据 */
-	const tasks = ref({
+	const tasks = ref([
+		{
+			title: '测测对朋友的了解😊',
+			type: 1,
+			list: [
+				{
+					title: '做1位朋友的测试！',
+					awardName: '提示宝石',
+					awardCount: 1,
+					finish: 3,
+					total: 1,
+				},
+				{
+					title: '做7位朋友的测试！',
+					awardName: '复活宝石',
+					awardCount: 2,
+					finish: 3,
+					total: 7,
+				},
+				{
+					title: '做15位朋友的测试！',
+					awardName: '提示宝石',
+					awardCount: 2,
+					finish: 3,
+					total: 15,
+				},
+			]
+		}, {
+			title: '出题给朋友们～ 😆',
+			type: 2,
+			list: [
+				{
+					title: '出题1次！',
+					awardName: '提示宝石',
+					awardCount: 1,
+					finish: 6,
+					total: 1,
+				},
+				{
+					title: '出题5次！',
+					awardName: '复活宝石',
+					awardCount: 2,
+					finish: 6,
+					total: 5,
+				},
+				{
+					title: '出题10次！',
+					awardName: '复活宝石',
+					awardCount: 2,
+					finish: 6,
+					total: 10,
+				},
+			]
 
-	})
-
+		}
+	])
+	/** 答题数据 */
+	const rankingList = ref([])
 	onMounted(() => {
 		score.value = 545120
+		for (var i = 0; i < 8; i++) {
+			rankingList.value.push({
+				avatarUrl: '',
+				nickname: '乔治',
+				count: (8 - i) * 10,
+			})
+		}
 	})
 </script>
