@@ -50,7 +50,7 @@
 					.t2 {
 						font-family: 'Inter';
 						font-style: normal;
-						font-weight: 900;
+						font-weight: 1000;
 						font-size: 36px;
 						line-height: 44px;
 
@@ -110,6 +110,8 @@
 					font-weight: 800;
 					font-size: 16px;
 					line-height: 19px;
+
+					text-align: center;
 				}
 
 				.task-global {
@@ -117,7 +119,7 @@
 					width: 100%;
 					justify-content: space-between;
 					align-items: center;
-					padding: 7px 10px;
+					padding: 0 10px;
 
 					background: rgba(167, 41, 226, 0.15);
 					border-radius: 30px;
