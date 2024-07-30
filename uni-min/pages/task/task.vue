@@ -289,15 +289,15 @@
 					<text class="t1">目前成就</text>
 					<text class="t2">{{score}}分</text>
 				</view>
-				<view class="v-global gem">
+				<view class="v-global gem" @click="onProp(1)">
 					<q-svg icon="复活宝石" size="33" />
 					<text class="count">{{prop.resurgenceGem.count}}</text>
 				</view>
-				<view class="v-global gem">
+				<view class="v-global gem" @click="onProp(2)">
 					<q-svg icon="提示宝石" size="33" />
 					<text class="count">{{prop.hintGem.count}}</text>
 				</view>
-				<view class="v-global badge">
+				<view class="v-global badge" @click="onBadge()">
 					<q-svg icon="徽章" size="33" />
 					<text class="count">一共获得{{prop.badge.count}}枚徽章</text>
 					<q-svg icon="空心向右箭头" size="14" />
@@ -407,6 +407,18 @@
 	])
 	/** 答题数据 */
 	const rankingList = ref([])
+	/** 点击道具,跳转道具介绍页面 */
+	function onProp(id) {
+		uni.navigateTo({
+			url: `/pages/prop-explain/prop-explain?id=${id}`
+		});
+	}
+	/** 点击徽章,跳转徽章详情 */
+	function onBadge() {
+		uni.navigateTo({
+			url: `/pages/badge/badge`
+		});
+	}
 	onMounted(() => {
 		score.value = 545120
 		for (var i = 0; i < 8; i++) {
