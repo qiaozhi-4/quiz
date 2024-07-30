@@ -206,7 +206,7 @@
 	const visibleDots = computed(() => {
 		let start = currentIndex.value - 1;
 		let end = currentIndex.value + 1;
-		let totalSlides = badgeData.value[activateBadge.value].count
+		let totalSlides = badgeData.value[activateBadge.value]?.count
 
 		// 确保 start 和 end 在合理范围内
 		if (start < 0) {
