@@ -1,16 +1,10 @@
 <style lang="scss" scoped>
-	.img {
-		background-repeat: no-repeat;
-		background-size: contain;
-		border-radius: 0px;
-		/* 设置背景图片在中间 */
-		background-position: center;
-	}
+
 </style>
 
 <template>
 	<view>
-		<view class="img" :style="style"></view>
+		<image v-if="props.src" :src="src" :mode="props?.mode" :style="style" />
 	</view>
 </template>
 
@@ -22,30 +16,30 @@
 		src: { type: String, default: '' },
 		width: { type: String, default: '' },
 		height: { type: String, default: '' },
+		/** 图片裁剪、缩放的模式 */
+		mode: { type: String, default: 'aspectFit' },
 	})
 	/** 图片样式 */
-	const style = ref()
+	const style = ref({})
+	/** 图片源地址 */
+	const src = ref('')
 
 	watch(props, (newValue, oldValue) => {
-		style.value = {
-			backgroundImage: `url('/static/img/${newValue.src}.png')`,
-		}
 		if (newValue.width) {
 			style.value.width = isNaN(newValue.width) ? newValue.width : `${newValue.width}px`
 		}
 		if (newValue.height) {
-			style.value.height = isNaN(newValue.height) ? newValue.height :  `${newValue.height}px`
+			style.value.height = isNaN(newValue.height) ? newValue.height : `${newValue.height}px`
 		}
 	})
 	onMounted(() => {
-		style.value = {
-			backgroundImage: `url('/static/img/${props.src}.png')`,
-		}
 		if (props.width) {
 			style.value.width = isNaN(props.width) ? props.width : `${props.width}px`
 		}
 		if (props.height) {
 			style.value.height = isNaN(props.height) ? props.height : `${props.height}px`
 		}
+
+		src.value = /http/i.test(props.src) ? props.src : `/static/img/${props.src}.png`
 	})
 </script>
