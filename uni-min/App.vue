@@ -98,6 +98,13 @@
 		overflow-y: scroll;
 	}
 
+	/** 头部粘性定位 */
+	.head-sticky {
+		position: sticky;
+		top: 0;
+		z-index: 1;
+	}
+
 	/** flex布局元素横向排列 */
 	.flex-row {
 		display: flex;
