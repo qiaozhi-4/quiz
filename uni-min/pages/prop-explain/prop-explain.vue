@@ -33,8 +33,7 @@
 			}
 
 			.img {
-				width: 170px;
-				height: 170px;
+				mix-blend-mode: color-dodge;
 			}
 
 			.count {
@@ -132,7 +131,7 @@
 		<view class="main flex-column">
 			<text class="t1">{{prop?.explain}}</text>
 			<text class="t2">{{prop?.name}}</text>
-			<q-image :src="prop?.icon"></q-image>
+			<q-image :src="prop?.icon" width="170" height="170"></q-image>
 			<view>
 				<text class="count">{{prop?.count}}</text>
 				<text class="unit">颗</text>
@@ -151,8 +150,6 @@
 	import { onLoad } from '@dcloudio/uni-app'
 	/** 道具信息 */
 	const prop = ref()
-	/** 页面跳转过来的参数 */
-	const pageArg = ref()
 	onLoad((option) => {
 		console.log(option);
 		/** 页面跳转过来的参数 */
