@@ -1,12 +1,4 @@
 <style lang="scss" scoped>
-	.q-fixed {
-		position: sticky;
-		top: 0;
-		/* 当滚动到距离顶部 0 像素时粘住 */
-		z-index: 1;
-		/* 确保粘性元素在其他元素上方 */
-	}
-
 	.q-nav-bar {
 		display: flex;
 		width: 100vw;
@@ -34,11 +26,11 @@
 </style>
 
 <template>
-	<view class="q-nav-bar" :class="{'q-fixed': props.fixed}" :style="style">
+	<view class="q-nav-bar" :style="style">
 		<view class="q-nav-bar-left" :style="`width: ${menuButtonInfo.width}px`">
 			<q-svg @click="handlerReverseBack" :icon="props.leftIcon" size="32" />
 		</view>
-		<view class="q-nav-bar-middle"  :style="`font-size: ${props.titleSize}px;`">{{props.title}}</view>
+		<view class="q-nav-bar-middle" :style="`font-size: ${props.titleSize}px;`">{{props.title}}</view>
 		<view class="q-nav-bar-right" :style="`width: ${menuButtonInfo.width}px`"></view>
 	</view>
 </template>
@@ -54,8 +46,6 @@
 		leftIcon: { type: String, default: '' },
 		/** 文字颜色 */
 		color: { type: String, default: '#ffffff' },
-		/** 是否固定顶部 */
-		fixed: { type: Boolean, default: true },
 	})
 	/** 胶囊信息{width: 87, height: 32, left: 281, top: 51, right: 368} */
 	const menuButtonInfo = uni.getMenuButtonBoundingClientRect()
