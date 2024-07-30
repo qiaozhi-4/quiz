@@ -31,10 +31,10 @@
 			backgroundImage: `url('/static/img/${newValue.src}.png')`,
 		}
 		if (newValue.width) {
-			style.value.width = `${newValue.width}px`
+			style.value.width = isNaN(newValue.width) ? newValue.width : `${newValue.width}px`
 		}
 		if (newValue.height) {
-			style.value.height = `${newValue.height}px`
+			style.value.height = isNaN(newValue.height) ? newValue.height :  `${newValue.height}px`
 		}
 	})
 	onMounted(() => {
@@ -42,10 +42,10 @@
 			backgroundImage: `url('/static/img/${props.src}.png')`,
 		}
 		if (props.width) {
-			style.value.width = `${props.width}px`
+			style.value.width = isNaN(props.width) ? props.width : `${props.width}px`
 		}
 		if (props.height) {
-			style.value.height = `${props.height}px`
+			style.value.height = isNaN(props.height) ? props.height : `${props.height}px`
 		}
 	})
 </script>
