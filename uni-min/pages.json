@@ -81,6 +81,13 @@
 		{
 			"navigationBarTitleText" : ""
 		}
+	},
+	{
+		"path" : "pages/badge/badge",
+		"style" : 
+		{
+			"navigationBarTitleText" : ""
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

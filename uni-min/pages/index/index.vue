@@ -30,6 +30,8 @@
 		{ name: 'select-topic' },
 		{ name: 'select-friend-view' },
 		{ name: 'task' },
+		{ name: 'prop-explain' },
+		{ name: 'badge' },
 	]
 	function handleTo(pageName : String) {
 		uni.navigateTo({
