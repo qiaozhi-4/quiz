@@ -20,7 +20,10 @@
 	<view class="page">
 		<q-nav-bar leftIcon="头部导航-返回" title="我的徽章" />
 		<view class="main">
-			<q-image src="徽章"></q-image>
+			<q-image src="金徽章" width="200" height="200"></q-image>
+			<q-image src="加100分" width="200" height="200"></q-image>
+			<text>2024/03/23 意气相投徽章+1</text>
+			<text>恭喜 您获得了乔治的 “蓝颜知己”勋章。</text>
 		</view>
 	</view>
 </template>
