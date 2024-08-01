@@ -24,22 +24,21 @@
 	/** 图片源地址 */
 	const src = ref('')
 
+	function setImg(width_, height_, src_) {
+
+		if (width_) {
+			style.value.width = isNaN(width_) ? width_ : `${width_}px`
+		}
+		if (height_) {
+			style.value.height = isNaN(height_) ? height_ : `${height_}px`
+		}
+		src.value = /http/i.test(src_) ? src_ : `/static/img/${src_}.png`
+	}
+
 	watch(props, (newValue, oldValue) => {
-		if (newValue.width) {
-			style.value.width = isNaN(newValue.width) ? newValue.width : `${newValue.width}px`
-		}
-		if (newValue.height) {
-			style.value.height = isNaN(newValue.height) ? newValue.height : `${newValue.height}px`
-		}
+		setImg(newValue.width, newValue.height, props.src)
 	})
 	onMounted(() => {
-		if (props.width) {
-			style.value.width = isNaN(props.width) ? props.width : `${props.width}px`
-		}
-		if (props.height) {
-			style.value.height = isNaN(props.height) ? props.height : `${props.height}px`
-		}
-
-		src.value = /http/i.test(props.src) ? props.src : `/static/img/${props.src}.png`
+		setImg(props.width, props.height, props.src)
 	})
 </script>
