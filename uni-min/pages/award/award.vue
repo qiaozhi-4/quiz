@@ -29,23 +29,21 @@
 				text-align: center;
 			}
 
-			.v3 {
-				/* 宝石和发光 */
+			// .v3 {
+			// 	/* 宝石和发光 */
 
-				/* Auto layout */
-				display: flex;
-				flex-direction: column;
-				justify-content: flex-end;
-				align-items: center;
-				padding: 0px;
-				isolation: isolate;
+			// 	/* Auto layout */
+			// 	display: flex;
+			// 	flex-direction: column;
+			// 	justify-content: flex-end;
+			// 	align-items: center;
+			// 	padding: 0px;
+			// 	isolation: isolate;
 
-				width: 100%;
-				height: 161px;
-				background: url('/static/img/复活宝石.png');
-				transform: rotate(0.44deg);
-				mix-blend-mode: color-dodge;
-			}
+			// 	width: 100%;
+			// 	height: 161px;
+			// 	transform: rotate(0.44deg);
+			// }
 
 			.v4 {
 				padding: 10px;
@@ -99,7 +97,7 @@
 		<view class="main flex-column">
 			<view class="v1">{{items[itemIndex].describe}}</view>
 			<view class="v2">{{items[itemIndex].name}}</view>
-			<view class="v3" :style="{background: `url('/static/img/${items[itemIndex].name}.png')`} "></view>
+			<q-image  class="v3" :src="items[itemIndex].name" height="161" width="161"></q-image>
 			<view class="v4">{{items[itemIndex].count}}</view>
 			<view class="v5 flex-column">
 				<text class="text">
