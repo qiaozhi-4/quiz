@@ -151,7 +151,7 @@
 
 						.tag {
 							width: 100%;
-							padding: 15px 0px;
+							padding: 9px 0px;
 							justify-content: center;
 							align-items: center;
 
@@ -497,6 +497,8 @@
 								border: 1px dashed #FFFFFF;
 								border-radius: 15px;
 
+								background: #2F1969;
+
 								.t1 {
 									font-family: 'Inter';
 									font-style: normal;
@@ -522,16 +524,6 @@
 									right: -11px;
 									top: -11px;
 								}
-							}
-
-							.name2 {
-								font-family: 'Inter';
-								font-style: normal;
-								font-weight: 800;
-								font-size: 20px;
-								line-height: 24px;
-
-								color: #FFFFFF;
 							}
 
 							.items {
@@ -597,6 +589,7 @@
 
 					.table-record {
 						background: #1F1146;
+						gap: 10px;
 
 						.input-wrap {
 							align-items: center;
@@ -628,77 +621,144 @@
 							}
 						}
 
-						.data {
-							padding: 20px 20px 10px;
+						.test-paper {
+							margin: 0 12.5px;
+							padding: 11px 13px;
+							gap: 12px;
 
-							font-family: 'Inter';
-							font-style: normal;
-							font-weight: 800;
-							font-size: 20px;
-							line-height: 24px;
+							background: #5830C7;
+							border-radius: 15px;
 
-							color: #FFFFFF;
-
-						}
-
-						.test-paper-title-wrap {
-							align-items: center;
-							justify-content: space-between;
-							padding: 10px 20px 6px 20px;
-
-							.test-paper-title {
-								font-family: 'Inter';
-								font-style: normal;
-								font-weight: 700;
-								font-size: 14px;
-								line-height: 17px;
-
-								color: #FFFFFF;
-							}
-						}
-
-						.items {
-							width: 100vw;
-							background: rgba(255, 255, 255, 0.07);
-
-
-							.item2 {
-								display: grid;
-								grid-template-columns: 1fr auto;
-								gap: 10px;
+							.v1 {
+								padding: 0;
 								align-items: center;
-								padding: 10px 20px;
+								justify-content: space-between;
 
 								.title {
 									font-family: 'Inter';
 									font-style: normal;
-									font-weight: 400;
-									font-size: 14px;
-									line-height: 17px;
+									font-weight: 700;
+									font-size: 16px;
+									line-height: 19px;
+									letter-spacing: -0.04em;
+
 									color: #FFFFFF;
 								}
 
-								.option {
-									font-family: 'Inter';
-									font-style: normal;
-									font-weight: 600;
-									font-size: 14px;
-									line-height: 17px;
-
-									color: #A143FF;
-								}
-
-								.input-value {
+								.count {
 									font-family: 'Inter';
 									font-style: normal;
 									font-weight: 500;
 									font-size: 12px;
 									line-height: 15px;
+									/* identical to box height */
+									letter-spacing: -0.04em;
 
-									color: rgba(255, 255, 255, 0.4);
+									color: rgba(255, 255, 255, 0.7);
+
+								}
+							}
+
+							.v2 {
+								padding: 0;
+								gap: 10px;
+								align-items: center;
+								justify-content: flex-end;
+
+								.button {
+									justify-content: center;
+									align-items: center;
+									padding: 5px 15px;
+									gap: 10px;
+
+									background: rgba(255, 255, 255, 0.3);
+									backdrop-filter: blur(25px);
+									border-radius: 30px;
+
+									font-family: 'Inter';
+									font-style: normal;
+									font-weight: 700;
+									font-size: 12px;
+									line-height: 15px;
+									/* identical to box height */
+
+									color: #FFFFFF;
+
 								}
 							}
 						}
+
+						// .data {
+						// 	padding: 20px 20px 10px;
+
+						// 	font-family: 'Inter';
+						// 	font-style: normal;
+						// 	font-weight: 800;
+						// 	font-size: 20px;
+						// 	line-height: 24px;
+
+						// 	color: #FFFFFF;
+
+						// }
+
+						// .test-paper-title-wrap {
+						// 	align-items: center;
+						// 	justify-content: space-between;
+						// 	padding: 10px 20px 6px 20px;
+
+						// 	.test-paper-title {
+						// 		font-family: 'Inter';
+						// 		font-style: normal;
+						// 		font-weight: 700;
+						// 		font-size: 14px;
+						// 		line-height: 17px;
+
+						// 		color: #FFFFFF;
+						// 	}
+						// }
+
+						// .items {
+						// 	width: 100vw;
+						// 	background: rgba(255, 255, 255, 0.07);
+
+
+						// 	.item2 {
+						// 		display: grid;
+						// 		grid-template-columns: 1fr auto;
+						// 		gap: 10px;
+						// 		align-items: center;
+						// 		padding: 10px 20px;
+
+						// 		.title {
+						// 			font-family: 'Inter';
+						// 			font-style: normal;
+						// 			font-weight: 400;
+						// 			font-size: 14px;
+						// 			line-height: 17px;
+						// 			color: #FFFFFF;
+						// 		}
+
+						// 		.option {
+						// 			font-family: 'Inter';
+						// 			font-style: normal;
+						// 			font-weight: 600;
+						// 			font-size: 14px;
+						// 			line-height: 17px;
+
+						// 			color: #A143FF;
+						// 		}
+
+						// 		.input-value {
+						// 			font-family: 'Inter';
+						// 			font-style: normal;
+						// 			font-weight: 500;
+						// 			font-size: 12px;
+						// 			line-height: 15px;
+
+						// 			color: rgba(255, 255, 255, 0.4);
+						// 		}
+						// 	}
+						// }
 					}
 				}
 			}
@@ -843,10 +903,10 @@
 									</view>
 								</template>
 								<template v-else>
-									<view class="name2">{{e.name}}</view>
+									<view class="name1">{{e.name}}</view>
 									<view class="items flex-column">
 										<template v-for="(item,i) in e.items" :key="i">
-											<view class="item2" v-if="i < 2 || e.spread">
+											<view class="item2" v-if="i < 4 || e.spread">
 												<view class="title text-overflow">{{item?.title}}</view>
 												<view class="option text-overflow">{{item?.select}}</view>
 												<view class="input-value text-overflow">{{item?.input}}</view>
@@ -864,24 +924,16 @@
 								<input class="input" placeholder-class="input-placeholder" placeholder="搜索"
 									:adjust-position="false" @input="onInput" @blur="onBlur" :value="input" />
 							</view>
-							<template v-for="(record,index) in testRecord" :key="index">
-								<text class="data">{{record.date}}</text>
-								<template v-for="(testPaper,index) in record.testPapers" :key="index">
-									<view class="test-paper-title-wrap">
-										<text class="test-paper-title">{{testPaper.title}}</text>
-										<q-svg class="svg" :icon="testPaper.spread ? '三角形-向下' : '三角形-向左'" size="17"
-											@click="testPaper.spread = !testPaper.spread" />
-									</view>
-									<view class="items flex-column" v-show="testPaper.spread">
-										<view class="item2" v-for="(item,index) in testPaper.questions" :key="index">
-											<view class="title text-overflow">{{item?.title}}</view>
-											<view class="option text-overflow">{{item?.select}}</view>
-											<view class="input-value text-overflow">{{item?.input}}</view>
-										</view>
-									</view>
-								</template>
-
-							</template>
+							<view class="test-paper flex-column" v-for="(question,index) in questionBank" :key="index">
+								<view class="v1">
+									<text class="title">{{question?.title}}</text>
+									<text class="count">{{question?.count}}个朋友测过</text>
+								</view>
+								<view class="v2">
+									<button class="button" @click="onParticulars(index,question?.title)">查看详情</button>
+									<button class="button">分享给朋友</button>
+								</view>
+							</view>
 						</view>
 						<view style="min-height: 160px; background-color: #1F1146;"></view>
 					</view>
@@ -907,9 +959,9 @@
 	/** 主体高度 */
 	const mainHeight = getApp().globalData.mainHeight
 	/** 标签 */
-	const tags = ref(['亲密排行', '测试信息', '测试记录'])
+	const tags = ref(['亲密排行', '问答展示', '我的题库'])
 	/** 当前激活的标签 */
-	const activeTag = ref(1)
+	const activeTag = ref(2)
 	/** 滚动条位置 */
 	const scrollTop = ref(0)
 	/** 标签触发粘性定位的上边距 */
@@ -951,12 +1003,26 @@
 			}, {
 				title: '你更喜欢哪种类型的电影？',
 				select: '白开水',
+			}, {
+				title: '你最喜欢在周末做什么？',
+				select: '在家进行个人活动',
+				input: '吃饭睡觉游戏代码'
+			}, {
+				title: '你更喜欢哪种类型的电影？',
+				select: '白开水',
 			},]
 		},
 		{
 			name: '进阶题',
 			spread: false,
 			items: [{
+				title: '你最喜欢在周末做什么？',
+				select: '在家进行个人活动',
+				input: '吃饭睡觉游戏代码'
+			}, {
+				title: '你更喜欢哪种类型的电影？',
+				select: '白开水',
+			}, {
 				title: '你最喜欢在周末做什么？',
 				select: '在家进行个人活动',
 				input: '吃饭睡觉游戏代码'
@@ -975,72 +1041,20 @@
 			}, {
 				title: '你更喜欢哪种类型的电影？',
 				select: '白开水',
+			}, {
+				title: '你最喜欢在周末做什么？',
+				select: '在家进行个人活动',
+				input: '吃饭睡觉游戏代码'
+			}, {
+				title: '你更喜欢哪种类型的电影？',
+				select: '白开水',
 			},]
 		},
 	])
 	/** 搜索框输入 */
 	const input = ref('')
-	/** 测试记录数据 */
-	const testRecord = ref([
-		{
-			date: '2024.7.24',
-			testPapers: [
-				{
-					title: "试卷1",
-					spread: true,
-					questions: [{
-						title: '你最喜欢在周末做什么？',
-						select: '在家进行个人活动',
-						input: '吃饭睡觉游戏代码'
-					}, {
-						title: '你更喜欢哪种类型的电影？',
-						select: '白开水',
-					},]
-				},
-				{
-					title: "试卷2",
-					spread: false,
-					questions: [{
-						title: '你最喜欢在周末做什么？',
-						select: '在家进行个人活动',
-						input: '吃饭睡觉游戏代码'
-					}, {
-						title: '你更喜欢哪种类型的电影？',
-						select: '白开水',
-					},]
-				},
-			]
-		},
-		{
-			date: '2024.7.21',
-			testPapers: [
-				{
-					title: "试卷1",
-					spread: false,
-					questions: [{
-						title: '你最喜欢在周末做什么？',
-						select: '在家进行个人活动',
-						input: '吃饭睡觉游戏代码'
-					}, {
-						title: '你更喜欢哪种类型的电影？',
-						select: '白开水',
-					},]
-				},
-				{
-					title: "试卷2",
-					spread: false,
-					questions: [{
-						title: '你最喜欢在周末做什么？',
-						select: '在家进行个人活动',
-						input: '吃饭睡觉游戏代码'
-					}, {
-						title: '你更喜欢哪种类型的电影？',
-						select: '白开水',
-					},]
-				},
-			]
-		},
-	])
+	/** 题库数据 */
+	const questionBank = ref([])
 	/** 获取微信头像触发 */
 	function onChooseAvatar(e) {
 		console.log("获取微信头像触发", e);
@@ -1109,6 +1123,12 @@
 	function onBlur(e : any) {
 		input.value = e.detail.value
 	}
+	/** 跳转题库的试卷详情 */
+	function onParticulars(id, title) {
+		uni.navigateTo({
+			url: `/pages/question-particulars/question-particulars?id=${id}&title=${title}`
+		});
+	}
 	onMounted(() => {
 		userInfo.value = getApp().globalData.userInfo
 		for (var i = 0; i < 20; i++) {
@@ -1116,6 +1136,13 @@
 				nickname: `用户${i + 1}`,
 				score: (20 - i) * 1000,
 				avatarUrl: ''
+			})
+		}
+		for (var i = 0; i < 4; i++) {
+			questionBank.value.push({
+				id: 1,
+				title: `乔治的0${i + 1}号测试`,
+				count: (4 - i) * 4
 			})
 		}
 	})
