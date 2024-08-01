@@ -12,7 +12,7 @@
 	<view class="page">
 		<q-nav-bar title="Quiz"></q-nav-bar>
 		<view class="main">
-			<button v-for="(page,index) in pages" :key="index" class="button" type="primary"
+			<button v-for="(page,index) in pages" :key="index" class="button text-overflow" type="primary"
 				@click="handleTo(page.name)">{{page.name}}</button>
 		</view>
 	</view>
@@ -29,6 +29,7 @@
 		{ name: 'home' },
 		{ name: 'select-topic' },
 		{ name: 'select-friend-view' },
+		{ name: 'question-particulars' },
 		{ name: 'task' },
 		{ name: 'prop-explain' },
 		{ name: 'badge' },
