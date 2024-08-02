@@ -315,7 +315,7 @@
 	<uni-popup ref="popupRef" type="bottom" mask-background-color="rgba(0,0,0,0)" @maskClick="onMaskClick"
 		:safe-area="false">
 		<view class="popup" :style="popupStyle">
-			<view class="title">乔治 的 01号测试</view>
+			<view class="title">{{userInfo.nickname}} 的 01号测试</view>
 			<view class="questions flex-column" v-show="activityPopup=='总览'">
 				<view class="question flex-column" v-for="(question,index) in questions" :key="index"
 					@click="onClickPopupQuestion(index)">

@@ -1141,7 +1141,7 @@
 		for (var i = 0; i < 4; i++) {
 			questionBank.value.push({
 				id: 1,
-				title: `乔治的0${i + 1}号测试`,
+				title: `${userInfo.value.nickname}的0${i + 1}号测试`,
 				count: (4 - i) * 4
 			})
 		}
