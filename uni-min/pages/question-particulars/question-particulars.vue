@@ -8,6 +8,7 @@
 
 		.main {
 			padding: 0 12.5px;
+			padding-bottom: 150px;
 
 			.questions {
 				flex-grow: 1;
@@ -77,12 +78,58 @@
 				}
 			}
 		}
+		
+		.footer {
+			width: 100vw;
+			position: absolute;
+			bottom: 0;
+			/* 当滚动到距离顶部 0 像素时粘住 */
+			z-index: 1;
+			/* 确保粘性元素在其他元素上方 */
+			/* 出题按钮 */
+		
+			box-sizing: border-box;
+			gap: 6px;
+			flex-direction: column;
+			padding: 30px 31px;
+		
+			background: #1F1146;
+			border-top: 1px solid rgba(255, 255, 255, 0.3);
+			border-radius: 15px 15px 0px 0px;
+			
+			.text{
+				/* 意外错失正确答案？再答一次试试看！ */
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 600;
+				font-size: 12px;
+				line-height: 15px;
+				/* identical to box height */
+				
+				color: rgba(255, 255, 255, 0.75);
+			}
+		
+			.button {
+				padding: 6px 16px;
+				background: linear-gradient(89.13deg, #C84EED 0.25%, #873CFE 48.54%, #5623CD 96.47%);
+				box-shadow: 0px 6px 20px #2F1969;
+				border-radius: 15px;
+				
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 700;
+				font-size: 24px;
+				line-height: 29px;
+				
+				color: #FFFFFF;
+			}
+		}
 	}
 </style>
 
 <template>
 	<view class="page">
-		<q-nav-bar leftIcon="头部导航-返回" :title="pageArg?.title" />
+		<q-nav-bar class="head-sticky" leftIcon="头部导航-返回" :title="pageArg?.title" />
 		<view class="main">
 			<view class="questions flex-column">
 				<view class="question flex-column" v-for="(question,index) in questions" :key="index">
@@ -96,6 +143,11 @@
 				</view>
 			</view>
 		</view>
+
+		<view class="footer flex-column" v-show="pageArg.from == 'friend-home'">
+			<text class="text">意外错失正确答案？再答一次试试看！</text>
+			<button class="button flex-row text-overflow" @click="anewTast"><q-svg icon="复活宝石" size="34" />使用复活宝石再测一次！</button>
+		</view>
 	</view>
 </template>
 
@@ -107,6 +159,10 @@
 	const pageArg = ref()
 	/** 获取测试题目信息 */
 	const questions = ref<Quiz.Question[]>()
+	/** 重新答题 */
+	function anewTast(){
+		
+	}
 	onLoad((option) => {
 		pageArg.value = option
 		getRandomQuestions().then(res => {
