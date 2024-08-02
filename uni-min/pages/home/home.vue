@@ -687,78 +687,6 @@
 								}
 							}
 						}
-
-						// .data {
-						// 	padding: 20px 20px 10px;
-
-						// 	font-family: 'Inter';
-						// 	font-style: normal;
-						// 	font-weight: 800;
-						// 	font-size: 20px;
-						// 	line-height: 24px;
-
-						// 	color: #FFFFFF;
-
-						// }
-
-						// .test-paper-title-wrap {
-						// 	align-items: center;
-						// 	justify-content: space-between;
-						// 	padding: 10px 20px 6px 20px;
-
-						// 	.test-paper-title {
-						// 		font-family: 'Inter';
-						// 		font-style: normal;
-						// 		font-weight: 700;
-						// 		font-size: 14px;
-						// 		line-height: 17px;
-
-						// 		color: #FFFFFF;
-						// 	}
-						// }
-
-						// .items {
-						// 	width: 100vw;
-						// 	background: rgba(255, 255, 255, 0.07);
-
-
-						// 	.item2 {
-						// 		display: grid;
-						// 		grid-template-columns: 1fr auto;
-						// 		gap: 10px;
-						// 		align-items: center;
-						// 		padding: 10px 20px;
-
-						// 		.title {
-						// 			font-family: 'Inter';
-						// 			font-style: normal;
-						// 			font-weight: 400;
-						// 			font-size: 14px;
-						// 			line-height: 17px;
-						// 			color: #FFFFFF;
-						// 		}
-
-						// 		.option {
-						// 			font-family: 'Inter';
-						// 			font-style: normal;
-						// 			font-weight: 600;
-						// 			font-size: 14px;
-						// 			line-height: 17px;
-
-						// 			color: #A143FF;
-						// 		}
-
-						// 		.input-value {
-						// 			font-family: 'Inter';
-						// 			font-style: normal;
-						// 			font-weight: 500;
-						// 			font-size: 12px;
-						// 			line-height: 15px;
-
-						// 			color: rgba(255, 255, 255, 0.4);
-						// 		}
-						// 	}
-						// }
 					}
 				}
 			}
@@ -850,7 +778,8 @@
 						</view>
 						<view v-show="activeTag==0" class="table-content flex-column">
 							<template v-if="friends.length!=0">
-								<view class="table-item" v-for="(friend, index) in friends" :key="index">
+								<view class="table-item" v-for="(friend, index) in friends" :key="index"
+									@click="goFriendHome(friend.id)">
 									<view class="ranking" :class="`no${index+1}`">{{index+1}}</view>
 									<q-avatar :src="friend.avatarUrl" size="42" />
 									<view class="nickname" :class="`no${index+1}`">{{friend.nickname}}</view>
@@ -961,7 +890,7 @@
 	/** 标签 */
 	const tags = ref(['亲密排行', '问答展示', '我的题库'])
 	/** 当前激活的标签 */
-	const activeTag = ref(2)
+	const activeTag = ref(0)
 	/** 滚动条位置 */
 	const scrollTop = ref(0)
 	/** 标签触发粘性定位的上边距 */
@@ -1061,6 +990,12 @@
 		const { avatarUrl } = e.detail
 		userInfo.value.avatarUrl = avatarUrl
 	}
+	/** 点击朋友触发 */
+	function goFriendHome(id) {
+		uni.navigateTo({
+			url: `/pages/friend-home/friend-home?id=${id}`
+		});
+	}
 	/** 点击领取奖励触发,跳转到任务页面 */
 	function clickTask() {
 		uni.navigateTo({
@@ -1135,7 +1070,8 @@
 			friends.value.push({
 				nickname: `用户${i + 1}`,
 				score: (20 - i) * 1000,
-				avatarUrl: ''
+				avatarUrl: '',
+				id: i
 			})
 		}
 		for (var i = 0; i < 4; i++) {
