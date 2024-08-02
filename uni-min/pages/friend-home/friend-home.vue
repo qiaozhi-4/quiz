@@ -1124,23 +1124,6 @@
 		scrollTop.value = 325
 		activeTag.value = index
 	}
-	/** 删除展示关键题 */
-	function remove(infoIindex, itemIndx) {
-		delete testInfo.value[infoIindex].items[itemIndx]
-	}
-	/** 添加展示关键题 */
-	function add(infoIindex) {
-		console.log('添加展示关键题:', infoIindex);
-		if (testInfo.value[infoIindex].name == "关键题") {
-			uni.navigateTo({
-				url: `/pages/select-topic/select-topic?index=${infoIindex}`
-			});
-		} else if (testInfo.value[infoIindex].name == "朋友的看法") {
-			uni.navigateTo({
-				url: `/pages/select-friend-view/select-friend-view?index=${infoIindex}`
-			});
-		}
-	}
 	/** 展示全部测试信息 */
 	function showAll(infoIindex) {
 		if (testInfo.value[infoIindex].items.length < 5) {
