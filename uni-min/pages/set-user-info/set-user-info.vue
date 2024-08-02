@@ -149,8 +149,11 @@
 	function onSubmit() {
 		userUpdate(userInfo.value).then(e => {
 			console.log("修改个人信息成功", e);
-			uni.navigateBack({
-				delta: 1
+			// uni.navigateBack({
+			// 	delta: 1
+			// });
+			uni.redirectTo({
+				url: `/pages/home/home`
 			});
 		})
 	}
