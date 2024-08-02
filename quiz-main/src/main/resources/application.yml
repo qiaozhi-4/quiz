@@ -44,6 +44,9 @@ mybatis-plus:
 wx:
   min-app:
     configs:
-      - appid: wx0f4e873ad758a586
-        secret: cf5c68b3ff0d85251cfb178d0f9c0025
+#      - appid: wx0f4e873ad758a586
+#        secret: cf5c68b3ff0d85251cfb178d0f9c0025
+#        msg-data-format: JSON
+      - appid: wxf2f9d21291120320
+        secret: fd6a2a284d6fe7a520bec312d0408d0d
         msg-data-format: JSON
