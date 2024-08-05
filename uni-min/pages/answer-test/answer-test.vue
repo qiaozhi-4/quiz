@@ -5,7 +5,7 @@
 		.main {
 			gap: 6px;
 			align-items: center;
-			padding: 0 15px;
+			// padding: 0 15px;
 			height: 100%;
 
 			.avatar {
@@ -24,11 +24,12 @@
 			}
 
 			.progress-wrap {
+				box-sizing: border-box;
 				position: relative;
 				border-radius: 15px;
 				background: linear-gradient(90deg, #BE53FF 0%, #5830C7 100%);
 				height: 17px;
-				width: 100%;
+				width: 92%;
 				box-sizing: border-box;
 				border: 3px solid #FFFFFF;
 
@@ -53,6 +54,8 @@
 					height: 100%;
 
 					.swiper-item {
+						box-sizing: border-box;
+						padding: 0 15px;
 						gap: 10px;
 
 						.title {
@@ -86,10 +89,11 @@
 
 								color: #FFFFFF;
 							}
-							.option-button:hover{
-								
-									/* 粉紫渐变 选项 */
-									background: linear-gradient(90deg, #BE53FF 0%, #7756EC 100%) !important;
+
+							.option-button:hover {
+
+								/* 粉紫渐变 选项 */
+								background: linear-gradient(90deg, #BE53FF 0%, #7756EC 100%) !important;
 							}
 						}
 					}

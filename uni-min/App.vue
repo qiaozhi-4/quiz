@@ -38,14 +38,19 @@
 					login(loginRes.code).then((res) => {
 						this.globalData.userInfo = res.data.userInfo
 						this.globalData.token = res.data.token
-						if (/^\s*$/.test(res.data.userInfo.nickname) || /^\s*$/.test(res.data
+						if (res.data.userInfo.nickname == null || res.data.userInfo.avatarUrl == null || /^\s*$/.test(res.data.userInfo.nickname) || /^\s*$/.test(res.data
 								.userInfo.avatarUrl)) {
 							console.log('当前用户还没设置头像和用户名,跳转到设置页面')
-							uni.navigateTo({
+							// uni.navigateTo({
+							uni.redirectTo({
 								url: `/pages/set-user-info/set-user-info`
 							});
 						} else {
 							console.log('已设置头像和用户名')
+							// uni.navigateTo({
+							uni.redirectTo({
+								url: `/pages/home/home`
+							});
 						}
 					})
 				}

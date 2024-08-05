@@ -790,7 +790,7 @@
 							<template v-else>
 								<text class="table-null-text t1">您的亲密排行空空如也</text>
 								<text class="table-null-text t2">🌟快去邀请朋友吧！</text>
-								<button class="table-null-button b1">让朋友测测！</button>
+								<!-- <button class="table-null-button b1">让朋友测测！</button> -->
 							</template>
 						</view>
 						<view v-show="activeTag==1" class="test-info flex-column">
@@ -860,7 +860,7 @@
 								</view>
 								<view class="v2">
 									<button class="button" @click="onParticulars(index,question?.title)">查看详情</button>
-									<button class="button">分享给朋友</button>
+									<button class="button" open-type="share">分享给朋友</button>
 								</view>
 							</view>
 						</view>
@@ -871,7 +871,7 @@
 			</view>
 		</scroll-view>
 		<view class="footer">
-			<button class="b1">去出题</button>
+			<button class="b1" @click="goSetTest">去出题</button>
 		</view>
 	</view>
 </template>
@@ -1064,6 +1064,12 @@
 			url: `/pages/question-particulars/question-particulars?id=${id}&title=${title}`
 		});
 	}
+	/** 跳转到出题页 */
+	function goSetTest() {
+		uni.navigateTo({
+			url: `/pages/set-test/set-test`
+		});
+	}
 	onMounted(() => {
 		userInfo.value = getApp().globalData.userInfo
 		for (var i = 0; i < 20; i++) {
@@ -1084,6 +1090,7 @@
 	})
 	onLoad((option) => {
 		if (option.topicId) {
+			activeTag.value = 1
 			console.log('这是从选择题目来的参数', option);
 			testInfo.value[0].items.push({
 				title: `题目${option.topicId}`,
@@ -1091,6 +1098,7 @@
 				input: '吃饭睡觉游戏代码'
 			})
 		} else if (option.friendId) {
+			activeTag.value = 1
 			console.log('这是从选择朋友看法来的参数', option);
 			testInfo.value[1].items.push({
 				nickname: `用户${option.friendId}`,

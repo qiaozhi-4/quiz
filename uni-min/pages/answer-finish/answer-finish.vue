@@ -159,7 +159,7 @@
 				<text class="text">这是您第1次自我探索！</text>
 				<text class="text">🌟自我探索值增加100分！</text>
 			</view>
-			<button class="b1" @click="share">让朋友测测！</button>
+			<button class="b1" @click="share" open-type="share">让朋友测测！</button>
 			<button class="b2" @click="getAward">领取奖励</button>
 		</view>
 	</view>
