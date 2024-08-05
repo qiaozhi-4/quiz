@@ -43,7 +43,8 @@ public class WxUserServiceImpl implements IWxUserService {
     private final IUserService userService;
 
     @Override
-    public Result<Object> login(String code) throws WxErrorException {
+    public Result<Object> login(String miniappId, String code) throws WxErrorException {
+        Assert.isTrue(wxMaService.switchover(miniappId), "AppID错误");
         final WxMaJscode2SessionResult sessionInfo = wxMaService.getUserService().getSessionInfo(code);
         User user = userMapper.selectUserByProviderId(sessionInfo.getOpenid());
 

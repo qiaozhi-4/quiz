@@ -28,8 +28,8 @@ public class WxUserController {
 
     @ApiOperation(value = "微信小程序登录")
     @PostMapping("login")
-    public Result<Object> login(@RequestParam String code) throws WxErrorException {
-        return wxUserService.login(code);
+    public Result<Object> login(@RequestParam String miniappId, @RequestParam String code) throws WxErrorException {
+        return wxUserService.login(miniappId, code);
     }
 
     @PathPermission(PermissionEnum.UPDATE_OWN)

@@ -19,7 +19,7 @@ public interface IWxUserService {
      * @param code 微信临时登录凭证code
      * @return 登录成功返回token信息
      */
-    Result<Object> login(String code) throws WxErrorException;
+    Result<Object> login(String miniappId, String code) throws WxErrorException;
 
     /**
      * 修改用户信息
