@@ -12,21 +12,18 @@ import lombok.Getter;
  */
 @Getter
 public enum PermissionEnum {
-    CREATE("CREATE"),
-    READ("READ"),
-    UPDATE("UPDATE"),
-    DELETE("DELETE"),
-    DD_CHANGE("DD_CHANGE"),
-    UPDATE_OWN("UPDATE_OWN");
-    private String name;
+    CREATE("CREATE", "添加"),
+    READ("READ", "读取"),
+    UPDATE("UPDATE", "更新"),
+    DELETE("DELETE", "删除"),
+    DD_CHANGE("DD_CHANGE", "勇者的修改权限"),
+    UPDATE_OWN("UPDATE_OWN", "修改用户自己");
 
+    private final String name;
+    private final String describe;
 
-    PermissionEnum(String name) {
+    PermissionEnum(String name, String describe) {
         this.name = name;
-    }
-
-    public PermissionEnum setName(String name) {
-        this.name = name;
-        return this;
+        this.describe = describe;
     }
 }
