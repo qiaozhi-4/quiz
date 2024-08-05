@@ -96,16 +96,16 @@ create table if not exists quiz.q_tag
     tag_id   int auto_increment comment '唯一主键',
     tag_name varchar(127) null comment '标签名称',
     primary key (tag_id)
-) comment '试卷标签';
+) comment '题目标签';
 
-create table if not exists quiz.q_paper_tags
+create table if not exists quiz.q_question_tags
 (
-    paper_id int not null comment '试卷ID。',
+    question_id int not null comment '题目ID。',
     tag_id   int not null comment '标签ID。',
-    INDEX paper_id (paper_id),
+    INDEX question_id (question_id),
     INDEX tag_id (tag_id),
-    INDEX paper_id_tag_id (paper_id, tag_id)
-) comment '试卷关联标签';
+    INDEX paper_id_tag_id (question_id, tag_id)
+) comment '题目关联标签';
 
 create table if not exists quiz.q_question
 (

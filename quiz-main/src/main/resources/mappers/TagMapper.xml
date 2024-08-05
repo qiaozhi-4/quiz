@@ -4,8 +4,8 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.quiz.entity.Tag">
-        <id column="tag_id" property="tagId"/>
-        <result column="tag_name" property="tagName"/>
+        <id column="tag_id" property="tagId" />
+        <result column="tag_name" property="tagName" />
     </resultMap>
 
 </mapper>

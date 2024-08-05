@@ -4,11 +4,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.quiz.dto.PaperDto;
 import com.quiz.entity.Paper;
 import com.quiz.entity.PaperQuestions;
-import com.quiz.entity.PaperTags;
 import com.quiz.mapper.PaperMapper;
 import com.quiz.service.IPaperQuestionsService;
 import com.quiz.service.IPaperService;
-import com.quiz.service.IPaperTagsService;
 import com.quiz.utils.Assert;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,7 +26,6 @@ import java.util.stream.Collectors;
 public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements IPaperService {
 
     private final IPaperQuestionsService paperQuestionsService;
-    private final IPaperTagsService paperTagsService;
 
     @Override
     public Boolean addPaperInfo(PaperDto paperDto) {
@@ -44,11 +41,11 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
         Assert.isTrue(pq, "试卷插入失败");
 
         /* 批量插入试卷关联标签数据 */
-        boolean pt = paperTagsService.saveBatch(paperDto.getTags().stream().map(tag -> PaperTags.builder()
-                        .paperId(paper.getPaperId())
-                        .tagId(tag.getTagId()).build())
-                .collect(Collectors.toList()));
-        Assert.isTrue(pt, "试卷插入失败");
+//        boolean pt = paperTagsService.saveBatch(paperDto.getTags().stream().map(tag -> PaperTags.builder()
+//                        .paperId(paper.getPaperId())
+//                        .tagId(tag.getTagId()).build())
+//                .collect(Collectors.toList()));
+//        Assert.isTrue(pt, "试卷插入失败");
         return true;
     }
 }

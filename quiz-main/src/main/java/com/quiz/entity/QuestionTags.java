@@ -3,20 +3,23 @@ package com.quiz.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
 
 /**
  * <p>
- * 试卷关联标签
+ * 题目关联标签
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-22  1124:00:15
+ * @since 2024-08-05
  */
 @Getter
 @Setter
@@ -24,15 +27,15 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-@TableName("q_paper_tags")
-@ApiModel(value = "PaperTags对象", description = "试卷关联标签")
-public class PaperTags extends Model<PaperTags> {
+@TableName("q_question_tags")
+@ApiModel(value = "QuestionTags对象", description = "题目关联标签")
+public class QuestionTags extends Model<QuestionTags> {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("试卷ID。")
-    @TableField("paper_id")
-    private Integer paperId;
+    @ApiModelProperty("题目ID。")
+    @TableField("question_id")
+    private Integer questionId;
 
     @ApiModelProperty("标签ID。")
     @TableField("tag_id")

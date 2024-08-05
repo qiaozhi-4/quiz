@@ -14,11 +14,11 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 试卷标签
+ * 题目标签
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-22  1124:00:15
+ * @since 2024-08-05
  */
 @Getter
 @Setter
@@ -27,7 +27,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Accessors(chain = true)
 @TableName("q_tag")
-@ApiModel(value = "Tag对象", description = "试卷标签")
+@ApiModel(value = "Tag对象", description = "题目标签")
 public class Tag extends Model<Tag> {
 
     private static final long serialVersionUID = 1L;
