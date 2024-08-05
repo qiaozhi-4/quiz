@@ -12,10 +12,10 @@ spring:
       max-lifetime: 30000
   # redis配置
   redis:
-    host: redis-10455.c9.us-east-1-4.ec2.cloud.redislabs.com
+    host: redis-10570.c323.us-east-1-2.ec2.redns.redis-cloud.com
     username: default
-    password: iMr1NbXlD8HjKWVjJtbDNsXiKT1BaKW8
-    port: 10455
+    password: XgmlrCOGSDsZKBAZQMnms7IqXgJsBV9d
+    port: 10570
     connect-timeout: 10000
     lettuce:
       pool:
