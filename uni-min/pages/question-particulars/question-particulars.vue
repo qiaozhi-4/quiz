@@ -154,7 +154,7 @@
 <script lang="ts" setup>
 	import { ref } from 'vue'
 	import { onLoad } from '@dcloudio/uni-app'
-	import { getRandomQuestions } from '../../utils/api';
+	import { getRandomQuestions } from '../../utils/api/question';
 	/** 页面跳转过来的参数 */
 	const pageArg = ref()
 	/** 获取测试题目信息 */
