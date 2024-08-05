@@ -43,7 +43,7 @@ public class TestPaper {
                 .answers(getAnswers())
                 .build();
         final PaperDto paperDto = PaperDto.convertOf(paper)
-                .setQuestions(questionMapper.selectRandomQuestions())
+                .setQuestions(questionMapper.selectRandomQuestions(10))
                 .setTags(getTags());
         final Boolean aBoolean = paperService.addPaperInfo(paperDto);
         System.out.println(aBoolean);

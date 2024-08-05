@@ -33,12 +33,12 @@ public class QuestionController {
     @ApiOperation(value = "随机获取10个题目")
     @GetMapping("get-random-questions")
     public List<Question> getRandomQuestions() {
-        return questionMapper.selectRandomQuestions();
+        return questionMapper.selectRandomQuestions(10);
     }
 
     @ApiOperation(value = "随机获取10个题目(不要权限)")
     @GetMapping("get-random-questions-test")
     public List<Question> getRandomQuestionsTest() {
-        return questionMapper.selectRandomQuestions();
+        return questionMapper.selectRandomQuestions(10);
     }
 }

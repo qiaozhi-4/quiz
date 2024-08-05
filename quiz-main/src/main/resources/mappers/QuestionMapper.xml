@@ -11,12 +11,11 @@
         <result column="updated_at" property="updatedAt"/>
     </resultMap>
 
-    <select id="selectRandomQuestions" resultType="com.quiz.entity.Question">
+    <select id="selectRandomQuestions" resultType="com.quiz.entity.Question" parameterType="java.lang.Integer">
         SELECT *
         FROM quiz.q_question
-        WHERE RAND() >= 0.1
         ORDER BY RAND()
-        LIMIT 10;
+        LIMIT #{paperId};
     </select>
 
 </mapper>
