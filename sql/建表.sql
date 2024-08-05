@@ -91,41 +91,6 @@ create table if not exists quiz.q_paper
     INDEX user_id (creator_user_id)
 ) comment '题目试卷';
 
-create table if not exists quiz.q_tag
-(
-    tag_id   int auto_increment comment '唯一主键',
-    tag_name varchar(127) null comment '标签名称',
-    primary key (tag_id)
-) comment '题目标签';
-
-create table if not exists quiz.q_question_tags
-(
-    question_id int not null comment '题目ID。',
-    tag_id   int not null comment '标签ID。',
-    INDEX question_id (question_id),
-    INDEX tag_id (tag_id),
-    INDEX paper_id_tag_id (question_id, tag_id)
-) comment '题目关联标签';
-
-create table if not exists quiz.q_question
-(
-    question_id int auto_increment comment '唯一主键',
-    title       varchar(511)                       not null comment '题目',
-    options_    varchar(1023)                      not null comment '选项,以@@分隔',
-    created_at  datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    updated_at  datetime                           null comment '修改时间',
-    primary key (question_id)
-) comment '题目表';
-
-create table if not exists quiz.q_paper_questions
-(
-    paper_id    int not null comment '试卷ID。',
-    question_id int not null comment '题目ID。',
-    INDEX paper_id (paper_id),
-    INDEX question_id (question_id),
-    INDEX paper_id_question_id (paper_id, question_id)
-) comment '试卷关联题目';
-
 create table if not exists quiz.q_answers
 (
     answer_id         int auto_increment comment '唯一主键',
@@ -137,6 +102,41 @@ create table if not exists quiz.q_answers
     INDEX paper_id (paper_id),
     INDEX user_id (responder_user_id)
 ) comment '题目答卷';
+
+create table if not exists quiz.q_paper_questions
+(
+    paper_id    int not null comment '试卷ID。',
+    question_id int not null comment '题目ID。',
+    INDEX paper_id (paper_id),
+    INDEX question_id (question_id),
+    INDEX paper_id_question_id (paper_id, question_id)
+) comment '试卷关联题目';
+
+create table if not exists quiz.q_question
+(
+    question_id int auto_increment comment '唯一主键',
+    title       varchar(511)                       not null comment '题目',
+    options_    varchar(1023)                      not null comment '选项,以@@分隔',
+    created_at  datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    updated_at  datetime                           null comment '修改时间',
+    primary key (question_id)
+) comment '题目表';
+
+create table if not exists quiz.q_question_tags
+(
+    question_id int not null comment '题目ID。',
+    tag_id      int not null comment '标签ID。',
+    INDEX question_id (question_id),
+    INDEX tag_id (tag_id),
+    INDEX paper_id_tag_id (question_id, tag_id)
+) comment '题目关联标签';
+
+create table if not exists quiz.q_tag
+(
+    tag_id   int auto_increment comment '唯一主键',
+    tag_name varchar(127) null comment '标签名称',
+    primary key (tag_id)
+) comment '题目标签';
 
 create table if not exists quiz.q_classes
 (
