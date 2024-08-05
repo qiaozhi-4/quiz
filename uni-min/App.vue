@@ -1,7 +1,7 @@
 <script>
 	import {
 		login
-	} from './utils/api';
+	} from './utils/api/user';
 	export default {
 		globalData: {
 			userInfo: null,
@@ -36,7 +36,7 @@
 				success: loginRes => {
 					console.log("微信登录信息:", loginRes);
 					login('wxf2f9d21291120320', loginRes.code).then((res) => {
-					// login('wx0f4e873ad758a586', loginRes.code).then((res) => {
+						// login('wx0f4e873ad758a586', loginRes.code).then((res) => {
 						this.globalData.userInfo = res.data.userInfo
 						this.globalData.token = res.data.token
 						if (res.data.userInfo.nickname == null || res.data.userInfo.avatarUrl ==

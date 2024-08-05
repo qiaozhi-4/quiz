@@ -110,7 +110,7 @@
 
 <script lang="ts" setup>
 	import { ref, onMounted } from 'vue'
-	import { getRandomQuestions } from '../../utils/api';
+	import { getRandomQuestions } from '../../utils/api/question';
 	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
 

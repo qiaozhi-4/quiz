@@ -42,7 +42,7 @@
 <script lang="ts" setup>
 	import { ref } from 'vue'
 	import { onLoad } from '@dcloudio/uni-app'
-	import { getDevices, updateDevice } from '../../utils/api';
+	import { getDevices, updateDevice } from '../../utils/api/device';
 	import { Lv, DateUnit } from '../../utils/dindong';
 
 	/** 计算滚动框的高度 */

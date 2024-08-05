@@ -123,7 +123,7 @@
 
 <script lang="ts" setup>
 	import { ref, onMounted } from 'vue'
-	import { userUpdate } from '../../utils/api';
+	import { userUpdate } from '../../utils/api/user';
 	/** 获取登录信息 */
 	const userInfo = ref()
 	/** 获取微信头像触发 */
