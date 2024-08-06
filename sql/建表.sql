@@ -84,7 +84,7 @@ create table if not exists quiz.q_paper
     paper_id        int auto_increment comment '唯一主键',
     creator_user_id int comment '出题用户id',
     order_          int comment '序号',
-    state           int comment '状态',
+    state           int      default 0 comment '状态',
     cover_url       varchar(255) comment '封面url',
     title           varchar(255) comment '标题',
     describe_       varchar(511) comment '描述',

@@ -33,8 +33,14 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
 
     @Override
     public PaperDto savePaper(PaperDto paperDto) {
+        // 创建试卷
         Paper paper = Paper.builder().build();
         BeanUtils.copyProperties(paperDto, paper);
+        // 获取当前用户的试卷列表的最大序号
+        val lastPaper = this.getOneOpt(new LambdaQueryWrapper<Paper>().eq(Paper::getCreatorUserId, paperDto.getCreatorUserId())
+                .orderByDesc(Paper::getOrder).last("LIMIT 1"));
+        // 设置试卷的序号
+        paper.setOrder(lastPaper.map(value -> value.getOrder() + 1).orElse(1));
         Assert.isTrue(paper.insert(), "试卷插入失败");
         paperDto.setPaperId(paper.getPaperId());
         val paperQuestionsList = paperDto.getQuestions().stream()
@@ -56,15 +62,12 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
 
     @Override
     public List<Paper> getPaperListByUserId(Integer userId) {
-        return this.list(new LambdaQueryWrapper<Paper>().eq(Paper::getCreatorUserId, userId));
+        return this.list(new LambdaQueryWrapper<Paper>().eq(Paper::getCreatorUserId, userId).ne(Paper::getState, -1));
     }
 
     @Override
     public Boolean removePaperByPaperId(Integer paperId) {
-        // 删除试卷关联的题目
-        val boo1 = paperQuestionsService.remove(new LambdaQueryWrapper<PaperQuestions>().eq(PaperQuestions::getPaperId, paperId));
-        // 删除试卷
-        val boo2 = this.removeById(paperId);
-        return boo1 && boo2;
+        val paper = this.getById(paperId).setState(-1);
+        return this.updateById(paper);
     }
 }

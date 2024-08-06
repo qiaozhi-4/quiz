@@ -35,6 +35,12 @@ public class PaperDto implements Serializable {
     @ApiModelProperty("出题用户id")
     private Integer creatorUserId;
 
+    @ApiModelProperty("序号")
+    private Integer order;
+
+    @ApiModelProperty("状态")
+    private Integer state;
+
     @ApiModelProperty("封面url")
     private String coverUrl;
 
