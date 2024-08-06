@@ -1,9 +1,9 @@
 import { request } from "../request"
 
 /** 保存试卷信息 */
-export function saveExam(paperDto : Quiz.Paper) {
+export function save(paperDto : Quiz.Paper) {
 	return request({
-		url: `/paper/save-exam`,
+		url: `/paper/save`,
 		method: 'POST',
 		data: paperDto,
 	})

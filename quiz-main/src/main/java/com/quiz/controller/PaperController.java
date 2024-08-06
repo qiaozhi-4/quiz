@@ -32,10 +32,10 @@ public class PaperController {
     private final IPaperService paperService;
 
     @PathPermission(PermissionEnum.USER_CREATE)
-    @ApiOperation("保存试卷信息")
-    @PostMapping("save-exam")
-    public PaperDto saveExam(@RequestBody PaperDto paperDto) {
-        return paperService.addPaper(paperDto);
+    @ApiOperation("添加试卷")
+    @PostMapping("save")
+    public PaperDto save(@RequestBody PaperDto paperDto) {
+        return paperService.savePaper(paperDto);
     }
 
     @PathPermission(PermissionEnum.USER_UPDATE)

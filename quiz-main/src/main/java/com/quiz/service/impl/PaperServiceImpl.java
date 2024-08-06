@@ -32,7 +32,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     private final IPaperQuestionsService paperQuestionsService;
 
     @Override
-    public PaperDto addPaper(PaperDto paperDto) {
+    public PaperDto savePaper(PaperDto paperDto) {
         Paper paper = Paper.builder().build();
         BeanUtils.copyProperties(paperDto, paper);
         Assert.isTrue(paper.insert(), "试卷插入失败");
