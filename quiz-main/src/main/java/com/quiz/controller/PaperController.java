@@ -56,7 +56,7 @@ public class PaperController {
 
     @PathPermission(PermissionEnum.USER_DELETE)
     @ApiOperation("删除试卷")
-    @GetMapping("delete/{paperId:\\d+}")
+    @DeleteMapping("delete/{paperId:\\d+}")
     public Boolean delete(@PathVariable Integer paperId) {
         return paperService.deletePaperByPaperId(paperId);
     }
