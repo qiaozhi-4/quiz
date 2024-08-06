@@ -4,23 +4,25 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.quiz.entity.Paper">
-        <id column="paper_id" property="paperId" />
-        <result column="creator_user_id" property="creatorUserId" />
-        <result column="order_" property="order" />
-        <result column="state" property="state" />
-        <result column="cover_url" property="coverUrl" />
-        <result column="title" property="title" />
-        <result column="describe_" property="describe" />
-        <result column="answers" property="answers" />
-        <result column="created_at" property="createdAt" />
+        <id column="paper_id" property="paperId"/>
+        <result column="creator_user_id" property="creatorUserId"/>
+        <result column="order_" property="order"/>
+        <result column="state" property="state"/>
+        <result column="cover_url" property="coverUrl"/>
+        <result column="title" property="title"/>
+        <result column="describe_" property="describe"/>
+        <result column="answers" property="answers"/>
+        <result column="created_at" property="createdAt"/>
     </resultMap>
     <!-- Dto查询映射结果 -->
     <resultMap id="PaperDtoResultMap" extends="BaseResultMap" type="com.quiz.dto.PaperDto">
-        <collection property="questions" autoMapping="true" ofType="com.quiz.entity.Question"/>
+        <collection property="questions" autoMapping="true" ofType="com.quiz.entity.Question">
+            <result column="question_title" property="title"/>
+        </collection>
     </resultMap>
 
     <select id="selectPaperById" resultMap="PaperDtoResultMap" parameterType="java.lang.Integer">
-        select a.*, c.*
+        select a.*, c.*, c.title as question_title
         from quiz.q_paper a
                  left join quiz.q_paper_questions b
                            on a.paper_id = b.paper_id
