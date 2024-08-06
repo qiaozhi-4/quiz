@@ -17,6 +17,9 @@ public enum PermissionEnum {
     UPDATE("UPDATE", "更新"),
     DELETE("DELETE", "删除"),
     DD_CHANGE("DD_CHANGE", "勇者的修改权限"),
+    USER_CREATE("USER_CREATE", "用户添加自己相关"),
+    USER_UPDATE("USER_UPDATE", "用户更新自己相关"),
+    USER_DELETE("USER_DELETE", "用户删除自己相关"),
     UPDATE_OWN("UPDATE_OWN", "修改用户自己");
 
     private final String name;
