@@ -10,7 +10,7 @@ import com.quiz.entity.Paper;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-24
+ * @since 2024-08-06
  */
 public interface PaperMapper extends BaseMapper<Paper> {
     /**

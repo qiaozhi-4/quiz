@@ -78,12 +78,15 @@ create table if not exists quiz.t_role_permissions
     INDEX role_id_permission_id (role_id, permission_id)
 ) comment '角色权限关联表';
 
+drop table quiz.q_paper;# 删除
 create table if not exists quiz.q_paper
 (
     paper_id        int auto_increment comment '唯一主键',
     creator_user_id int comment '出题用户id',
+    order_          int comment '序号',
+    state           int comment '状态',
     cover_url       varchar(255) comment '封面url',
-    title           varchar(255)                       not null comment '标题',
+    title           varchar(255) comment '标题',
     describe_       varchar(511) comment '描述',
     answers         varchar(63) comment '答案下标集合,以@@分隔',
     created_at      datetime default CURRENT_TIMESTAMP not null comment '创建时间',

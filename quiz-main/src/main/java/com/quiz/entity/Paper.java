@@ -5,13 +5,16 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
-import lombok.experimental.Accessors;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -19,7 +22,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-26
+ * @since 2024-08-06
  */
 @Getter
 @Setter
@@ -40,6 +43,14 @@ public class Paper extends Model<Paper> {
     @ApiModelProperty("出题用户id")
     @TableField("creator_user_id")
     private Integer creatorUserId;
+
+    @ApiModelProperty("序号")
+    @TableField("order_")
+    private Integer order;
+
+    @ApiModelProperty("状态")
+    @TableField("state")
+    private Integer state;
 
     @ApiModelProperty("封面url")
     @TableField("cover_url")
