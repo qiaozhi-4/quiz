@@ -1,16 +1,13 @@
 package com.quiz.dto;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.quiz.entity.Paper;
 import com.quiz.entity.Question;
-import com.quiz.entity.Tag;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.Accessors;
-import org.springframework.beans.BeanUtils;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -23,33 +20,37 @@ import java.util.List;
  */
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Accessors(chain = true)
 @ApiModel(value = "PaperDto对象", description = "试卷所有信息")
-public class PaperDto extends Paper {
+public class PaperDto implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty("唯一主键")
+    private Integer paperId;
+
+    @ApiModelProperty("出题用户id")
+    private Integer creatorUserId;
+
+    @ApiModelProperty("封面url")
+    private String coverUrl;
+
+    @ApiModelProperty("标题")
+    private String title;
+
+    @ApiModelProperty("描述")
+    private String describe;
+
+    @ApiModelProperty("答案下标集合,以@@分隔")
+    private String answers;
+
+    @ApiModelProperty("创建时间")
+    private LocalDateTime createdAt;
 
     @ApiModelProperty("试卷题目集合")
-    @TableField("questions")
     private List<Question> questions;
 
-    @ApiModelProperty("试卷标签集合")
-    @TableField("tags")
-    private List<Tag> tags;
-
-    /**
-     * 转换为 entity
-     */
-    public static Paper convertFor(PaperDto paperDto) {
-        final Paper build = Paper.builder().build();
-        BeanUtils.copyProperties(paperDto, build);
-        return build;
-    }
-
-    /**
-     * 转换为 dto
-     */
-    public static PaperDto convertOf(Paper paper) {
-        final PaperDto build = new PaperDto();
-        BeanUtils.copyProperties(paper, build);
-        return build;
-    }
 }
