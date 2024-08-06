@@ -34,6 +34,20 @@ declare namespace Quiz {
 		/** 用户名 */
 		username : string
 	}
+	interface Device {
+		/** 安卓设备ID */
+		deviceId : number
+		/** 用户名 */
+		username : string
+		/** 过期时间 */
+		endTime : Date
+		/** 设备等级[-1封禁,0试用,1vip,2svip,3max] */
+		lv : number
+		/** 要添加到结果中的单位数量，可能是负数 */
+		amountToAdd : number
+		/** 要添加的时间单位，不为空 */
+		amountUnit : string
+	}
 	interface Question {
 		/** 创建时间 */
 		createdAt : string
@@ -46,18 +60,36 @@ declare namespace Quiz {
 		/** 更新时间 */
 		updatedAt : string
 	}
-	interface Device {
-		/** 安卓设备ID */
-		deviceId : string
-		/** 用户名 */
-		username : string
-		/** 过期时间 */
-		endTime : Date
-		/** 设备等级[-1封禁,0试用,1vip,2svip,3max] */
-		lv : number
-		/** 要添加到结果中的单位数量，可能是负数 */
-		amountToAdd : number
-		/** 要添加的时间单位，不为空 */
-		amountUnit : string
+	/** 试卷所有信息 */
+	interface Paper {
+		/** 唯一主键 */
+		paperId : number
+
+		/** 出题用户id */
+		creatorUserId : number
+
+		/** 序号 */
+		order : number
+
+		/** 状态 */
+		state : number
+
+		/** 封面url */
+		coverUrl : string
+
+		/** 标题 */
+		title : string
+
+		/** 描述 */
+		describe : string
+
+		/** 答案下标集合,以@@分隔 */
+		answers : string
+
+		/** 创建时间 */
+		createdAt : string
+
+		/** 试卷题目集合 */
+		questions : Quiz.Question[]
 	}
 }

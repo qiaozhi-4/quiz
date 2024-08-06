@@ -1,6 +1,6 @@
 import { request } from "../request"
 
-/** 保存试卷信息 */
+/** 保存试卷 */
 export function save(paperDto : Quiz.Paper) {
 	return request({
 		url: `/paper/save`,
@@ -9,7 +9,7 @@ export function save(paperDto : Quiz.Paper) {
 	})
 }
 
-/** 保存试卷信息 */
+/** 更新试卷 */
 export function update(paper : Quiz.Paper) {
 	return request({
 		url: `/paper/update`,
