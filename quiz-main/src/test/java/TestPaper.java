@@ -1,6 +1,5 @@
 import com.quiz.Main;
 import com.quiz.dto.PaperDto;
-import com.quiz.entity.Paper;
 import com.quiz.entity.Tag;
 import com.quiz.mapper.PaperMapper;
 import com.quiz.mapper.QuestionMapper;
@@ -32,21 +31,6 @@ public class TestPaper {
     public void selectPaperById() {
         final PaperDto paperDto = paperMapper.selectPaperById(1);
         System.out.println(paperDto.toString());
-    }
-
-    @Test
-    public void savePaperInfo() {
-        final Paper paper = Paper.builder()
-                .creatorUserId(3)
-                .coverUrl("https://img2.imgtp.com/2023/10/26/rQkEoyFQ.jpg")
-                .title("测试试卷1")
-                .answers(getAnswers())
-                .build();
-        final PaperDto paperDto = PaperDto.convertOf(paper)
-                .setQuestions(questionMapper.selectRandomQuestions(10))
-                .setTags(getTags());
-        final Boolean aBoolean = paperService.addPaperInfo(paperDto);
-        System.out.println(aBoolean);
     }
 
     /**
