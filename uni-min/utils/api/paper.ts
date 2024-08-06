@@ -26,9 +26,9 @@ export function getAll() {
 }
 
 /** 删除试卷 */
-export function delete_(paperId : number) {
+export function remove(paperId : number) {
 	return request({
-		url: `/paper/delete/${paperId}`,
+		url: `/paper/remove/${paperId}`,
 		method: 'DELETE',
 	})
 }

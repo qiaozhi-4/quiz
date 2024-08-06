@@ -45,5 +45,5 @@ public interface IPaperService extends IService<Paper> {
      * @param paperId 试卷id
      * @return 删除结果
      */
-    Boolean deletePaperByPaperId(Integer paperId);
+    Boolean removePaperByPaperId(Integer paperId);
 }

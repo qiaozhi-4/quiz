@@ -54,7 +54,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     }
 
     @Override
-    public Boolean deletePaperByPaperId(Integer paperId) {
+    public Boolean removePaperByPaperId(Integer paperId) {
         // 删除试卷关联的题目
         val boo1 = paperQuestionsService.remove(new LambdaQueryWrapper<PaperQuestions>().eq(PaperQuestions::getPaperId, paperId));
         // 删除试卷
