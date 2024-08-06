@@ -13,7 +13,7 @@ export function save(paperDto : Quiz.Paper) {
 export function update(paper : Quiz.Paper) {
 	return request({
 		url: `/paper/update`,
-		method: 'POST',
+		method: 'PUT',
 		data: paper,
 	})
 }

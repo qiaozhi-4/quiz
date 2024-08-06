@@ -40,7 +40,7 @@ public class PaperController {
 
     @PathPermission(PermissionEnum.USER_UPDATE)
     @ApiOperation("更新试卷")
-    @PostMapping("update")
+    @PutMapping("update")
     public Boolean update(@RequestBody Paper paper) {
         return paperService.updatePaper(paper);
     }
