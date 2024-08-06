@@ -9,6 +9,15 @@ export function saveExam(paperDto : Quiz.Paper) {
 	})
 }
 
+/** 保存试卷信息 */
+export function update(paper : Quiz.Paper) {
+	return request({
+		url: `/paper/update`,
+		method: 'POST',
+		data: paper,
+	})
+}
+
 /** 通过试卷ID,获取试卷详情 */
 export function get(paperId : number) {
 	return request({

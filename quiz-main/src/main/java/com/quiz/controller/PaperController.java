@@ -38,6 +38,13 @@ public class PaperController {
         return paperService.addPaper(paperDto);
     }
 
+    @PathPermission(PermissionEnum.USER_UPDATE)
+    @ApiOperation("更新试卷")
+    @PostMapping("update")
+    public Boolean update(@RequestBody Paper paper) {
+        return paperService.updatePaper(paper);
+    }
+
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("通过试卷ID,获取试卷详情")
     @GetMapping("get/{paperId:\\d+}")

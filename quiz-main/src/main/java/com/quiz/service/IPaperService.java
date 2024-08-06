@@ -24,6 +24,14 @@ public interface IPaperService extends IService<Paper> {
     PaperDto addPaper(PaperDto paperDto);
 
     /**
+     * 更新试卷
+     *
+     * @param paper 试卷信息
+     * @return 更新结果
+     */
+    Boolean updatePaper(Paper paper);
+
+    /**
      * 获取试卷
      *
      * @param paperId 试卷id

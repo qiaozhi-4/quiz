@@ -38,9 +38,15 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
         Assert.isTrue(paper.insert(), "试卷插入失败");
         paperDto.setPaperId(paper.getPaperId());
         val paperQuestionsList = paperDto.getQuestions().stream()
-                .map(question -> PaperQuestions.builder().paperId(paperDto.getPaperId()).questionId(question.getQuestionId()).build()).collect(Collectors.toList());
+                .map(question -> PaperQuestions.builder().paperId(paperDto.getPaperId()).questionId(question.getQuestionId()).build())
+                .collect(Collectors.toList());
         Assert.isTrue(paperQuestionsService.saveBatch(paperQuestionsList), "试卷插入失败");
         return paperDto;
+    }
+
+    @Override
+    public Boolean updatePaper(Paper paper) {
+        return this.updateById(paper);
     }
 
     @Override
