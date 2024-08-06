@@ -32,7 +32,7 @@ public class WxUserController {
         return wxUserService.login(miniappId, code);
     }
 
-    @PathPermission(PermissionEnum.UPDATE_OWN)
+    @PathPermission(PermissionEnum.USER_UPDATE)
     @ApiOperation(value = "修改微信小程序用户信息")
     @PostMapping("update")
     public User update(@RequestBody User user) {
