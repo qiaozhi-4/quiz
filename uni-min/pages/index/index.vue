@@ -10,11 +10,20 @@
 	.main2 {
 		align-items: center;
 		justify-content: center;
-		gap: 20px;
+		height: 100%;
 
 		.svg {
 			padding: 280px 0;
 		}
+
+
+	}
+
+	.footer {
+		align-items: center;
+		justify-content: start;
+		height: 145px;
+		gap: 10px;
 
 		.progress-wrap,
 		.progress {
@@ -27,7 +36,7 @@
 			position: relative;
 			background: linear-gradient(90deg, #BE53FF 0%, #5830C7 100%);
 			height: 28px;
-			width: 92%;
+			width: 90%;
 
 			.progress {
 				position: absolute;
@@ -71,8 +80,10 @@
 		</view>
 		<view class="main2 flex-column">
 			<q-svg class="svg" icon="log" size="104"></q-svg>
+		</view>
+		<view class="footer flex-column">
 			<view class="progress-wrap">
-				<view class="progress" :style="{width: `${((questionIndex + 1) / questions?.length * 100)}%`}"></view>
+				<view class="progress"></view>
 			</view>
 			<text class="text">“我不关心你来自何处，我只关心你要去向何方”——Quiz</text>
 		</view>
