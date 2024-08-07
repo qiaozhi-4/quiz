@@ -101,20 +101,47 @@
 			}
 		}
 	}
+
+	/* 抖动动画 */
+	@keyframes shake {
+
+		0%,
+		100% {
+			transform: translateX(0);
+		}
+
+		25% {
+			transform: translateX(-5px);
+		}
+
+		50% {
+			transform: translateX(5px);
+		}
+
+		75% {
+			transform: translateX(-5px);
+		}
+	}
+
+	.shake {
+		animation: shake 0.5s;
+		animation-timing-function: ease-in-out;
+	}
 </style>
 
 <template>
 	<view class="page">
 		<q-nav-bar></q-nav-bar>
 		<view class="main">
-			<button class="avatar-button" open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
+			<button class="avatar-button" :class="{shake:avatarShake}" open-type="chooseAvatar"
+				@chooseavatar="onChooseAvatar">
 				<q-avatar :src="userInfo?.avatarUrl" size="130" borderWidth="5"></q-avatar>
 				<q-svg class="change-avatar" v-if="userInfo?.avatarUrl" icon="更换头像" size="37" />
 			</button>
 			<view class="label">昵称</view>
-			<input class="nickname-input" placeholder-class="nickname-input-placeholder" type="nickname"
-				placeholder="请输入昵称" :value="userInfo?.nickname" @input="onInput" @blur="onBlur" />
-			<button v-if="userInfo?.avatarUrl && userInfo?.nickname" class="submit-button" @click="onSubmit">
+			<input class="nickname-input" :class="{shake:nicknameShake}" placeholder-class="nickname-input-placeholder"
+				type="nickname" placeholder="请输入昵称" :value="userInfo?.nickname" @input="onInput" @blur="onBlur" />
+			<button class="submit-button" @click="onSubmit">
 				<text class="submit-button-text">完成</text>
 			</button>
 		</view>
@@ -125,7 +152,11 @@
 	import { ref, onMounted } from 'vue'
 	import { userUpdate } from '../../utils/api/user';
 	/** 获取登录信息 */
-	const userInfo = ref()
+	const userInfo = ref<Quiz.UserInfo>()
+	/** 是否需要动画 */
+	const avatarShake = ref<boolean>(false)
+	/** 是否需要动画 */
+	const nicknameShake = ref<boolean>(false)
 	/** 获取微信头像触发 */
 	function onChooseAvatar(e) {
 		console.log("获取微信头像触发", e);
@@ -147,15 +178,26 @@
 
 	/** 修改个人信息 */
 	function onSubmit() {
-		userUpdate(userInfo.value).then(e => {
-			console.log("修改个人信息成功", e);
-			// uni.navigateBack({
-			// 	delta: 1
-			// });
-			uni.redirectTo({
-				url: `/pages/home/home`
-			});
-		})
+		if (!userInfo.value.avatarUrl) {
+			avatarShake.value = true
+			setTimeout(() => {
+				avatarShake.value = false
+			}, 500); // 动画持续时间应与CSS中定义的相同
+		}
+		if (!userInfo.value.nickname) {
+			nicknameShake.value = true
+			setTimeout(() => {
+				nicknameShake.value = false
+			}, 500); // 动画持续时间应与CSS中定义的相同
+		}
+		if (userInfo.value.avatarUrl && userInfo.value.nickname) {
+			userUpdate(userInfo.value).then(e => {
+				console.log("第一次设置个人信息", e);
+				uni.redirectTo({
+					url: `/pages/set-test/set-test`
+				})
+			})
+		}
 	}
 	onMounted(() => {
 		userInfo.value = getApp().globalData.userInfo
