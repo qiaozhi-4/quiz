@@ -96,13 +96,23 @@
 				<text class="nickname">{{userInfo?.nickname}}</text>
 				<text class="polite">您好：</text>
 			</view>
-			<view class="explain-text">点击答题！🌟</view>
-			<view class="explain-text">开启您的自我探索之旅吧！</view>
+			<template v-if="isAnswer">
+				<view class="explain-text">点击答题！🌟</view>
+				<view class="explain-text">开启您的自我探索之旅吧！</view>
+			</template>
+			<template v-else>
+				<view class="explain-text">点击出题！🌟</view>
+				<view class="explain-text">看看他们对您的了解有多深！</view>
+			</template>
+			<!-- 	<view class="date-statistics-text">
+				{{`${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')} Question 10/10`}}
+			</view> -->
 			<view class="date-statistics-text">
-				{{`${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')} Question ${questions?.length}/${questions?.length}`}}
+				{{`${now} Question 10/10`}}
 			</view>
 			<button class="start-button" @click="onButton">
-				<text class="button-text">开始测试</text>
+				<text v-if="isAnswer" class="button-text">开始测试</text>
+				<text v-else class="button-text">开始出题</text>
 			</button>
 		</view>
 	</view>
@@ -110,27 +120,34 @@
 
 <script lang="ts" setup>
 	import { ref, onMounted } from 'vue'
-	import { getRandomQuestions } from '../../utils/api/question';
+	import { formatDate } from '../../utils/utils';
+	import { onLoad } from '@dcloudio/uni-app'
 	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
-
-	/** 获取测试题目信息 */
-	const questions = ref<Quiz.Question[]>()
+	/** 出题还是答题 */
+	const isAnswer = ref<boolean>()
 
 	/** 当前时间 */
-	const now = new Date();
+	const now = ref(formatDate(new Date, 'YYYY/MM/DD'));
+
 
 	/** 点击'开始测试'跳转测试页 */
 	function onButton() {
-		uni.navigateTo({
-			url: `/pages/answer-test/answer-test`
-		});
+		if (isAnswer.value) {
+			uni.redirectTo({
+				url: `/pages/answer-test/answer-test`
+			});
+		} else {
+			uni.redirectTo({
+				url: `/pages/set-test/set-test`
+			});
+		}
 	}
 
 	onMounted(() => {
 		userInfo.value = getApp().globalData.userInfo
-		getRandomQuestions().then(res => {
-			questions.value = res.data
-		})
+	})
+	onLoad((option) => {
+		isAnswer.value = option.isAnswer === 'true'
 	})
 </script>

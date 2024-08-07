@@ -106,7 +106,6 @@
 		});
 	}
 	onMounted(() => {
-
 		uni.login({
 			provider: 'weixin', //使用微信登录
 			success: loginRes => {
@@ -129,7 +128,7 @@
 						getAll().then((res) => {
 							if (res.data.length == 0) {
 								uni.redirectTo({
-									url: `/pages/set-test/set-test`
+									url: `/pages/start-test/start-test?isAnswer=${false}`
 								})
 							} else {
 								uni.redirectTo({

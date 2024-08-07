@@ -25,7 +25,8 @@
 				}
 
 				.avatar-button {
-
+					padding: 0;
+					border-radius: 50%;
 					background-color: transparent;
 				}
 
@@ -1069,7 +1070,7 @@
 	/** 跳转到出题页 */
 	function goSetTest() {
 		uni.navigateTo({
-			url: `/pages/set-test/set-test`
+			url: `/pages/start-test/start-test?isAnswer=${false}`
 		});
 	}
 	onMounted(() => {

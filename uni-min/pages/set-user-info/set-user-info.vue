@@ -194,7 +194,7 @@
 			userUpdate(userInfo.value).then(e => {
 				console.log("第一次设置个人信息", e);
 				uni.redirectTo({
-					url: `/pages/set-test/set-test`
+					url: `/pages/start-test/start-test?isAnswer=${false}`
 				})
 			})
 		}
