@@ -45,12 +45,15 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
                 .orderByDesc(Paper::getOrder).last("LIMIT 1"));
         // 设置试卷的序号
         paper.setOrder(lastPaper.map(value -> value.getOrder() + 1).orElse(1));
-        Assert.isTrue(paper.insert(), "试卷插入失败");
-        paperDto.setPaperId(paper.getPaperId());
-        val paperQuestionsList = paperDto.getQuestions().stream()
-                .map(question -> PaperQuestions.builder().paperId(paperDto.getPaperId()).questionId(question.getQuestionId()).build())
-                .collect(Collectors.toList());
-        Assert.isTrue(paperQuestionsService.saveBatch(paperQuestionsList), "试卷插入失败");
+        Assert.isTrue(paper.insertOrUpdate(), "试卷插入失败");
+        // 如果id已经存在,说明是更新
+        if (paperDto.getPaperId() == null) {
+            paperDto.setPaperId(paper.getPaperId());
+            val paperQuestionsList = paperDto.getQuestions().stream()
+                    .map(question -> PaperQuestions.builder().paperId(paper.getPaperId()).questionId(question.getQuestionId()).build())
+                    .collect(Collectors.toList());
+            Assert.isTrue(paperQuestionsService.saveBatch(paperQuestionsList), "试卷插入失败");
+        }
         return paperDto;
     }
 
