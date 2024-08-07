@@ -80,9 +80,6 @@
 </template>
 
 <script lang="ts" setup>
-	import { ref, onMounted } from 'vue'
-	import { login } from '../../utils/api/user';
-	import { getAll } from '../../utils/api/paper';
 	const pages = [
 		{ name: 'ding-dong' },
 		{ name: 'set-user-info' },
@@ -99,46 +96,9 @@
 		{ name: 'prop-explain' },
 		{ name: 'badge' },
 	]
-	const globalData = ref<Quiz.GlobalData>(getApp().globalData as Quiz.GlobalData)
 	function handleTo(pageName : String) {
 		uni.navigateTo({
 			url: `/pages/${pageName}/${pageName}?id=1&pageName=${pageName}`
 		});
 	}
-	onMounted(() => {
-		uni.login({
-			provider: 'weixin', //使用微信登录
-			success: loginRes => {
-				console.log("微信登录信息:", loginRes);
-				login('wxf2f9d21291120320', loginRes.code).then((res) => {
-					// login('wx0f4e873ad758a586', loginRes.code).then((res) => {
-					globalData.value.userInfo = res.data.userInfo
-					globalData.value.token = res.data.token
-					if (res.data.userInfo.nickname == null || res.data.userInfo.avatarUrl ==
-						null || /^\s*$/.test(res.data.userInfo.nickname) || /^\s*$/.test(res
-							.data
-							.userInfo.avatarUrl)) {
-						console.log('当前用户还没设置头像和用户名,跳转到设置页面')
-						// uni.navigateTo({
-						uni.redirectTo({
-							url: `/pages/set-user-info/set-user-info`
-						});
-					} else {
-						console.log('已设置头像和用户名')
-						getAll().then((res) => {
-							if (res.data.length == 0) {
-								uni.redirectTo({
-									url: `/pages/start-test/start-test?isAnswer=${false}`
-								})
-							} else {
-								uni.redirectTo({
-									url: `/pages/home/home`
-								});
-							}
-						})
-					}
-				})
-			}
-		});
-	})
 </script>

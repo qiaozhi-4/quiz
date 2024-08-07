@@ -2,6 +2,9 @@
 	import {
 		login
 	} from './utils/api/user';
+	import {
+		getAll
+	} from './utils/api/paper';
 	export default {
 		globalData: {
 			userInfo: null,
@@ -29,6 +32,45 @@
 						/* 确保粘性元素在其他元素上方 */
 						zIndex: 1,
 					}
+				}
+			});
+
+			uni.login({
+				provider: 'weixin', //使用微信登录
+				success: loginRes => {
+					console.log("微信登录信息:", loginRes);
+					login('wxf2f9d21291120320', loginRes.code).then((res) => {
+						// login('wx0f4e873ad758a586', loginRes.code).then((res) => {
+						this.globalData.userInfo = res.data.userInfo
+						this.globalData.token = res.data.token
+						if (res.data.userInfo.nickname == null || res.data.userInfo.avatarUrl ==
+							null || /^\s*$/.test(res.data.userInfo.nickname) || /^\s*$/.test(res
+								.data
+								.userInfo.avatarUrl)) {
+							console.log('当前用户还没设置头像和用户名,跳转到设置页面')
+							// uni.navigateTo({
+							uni.redirectTo({
+								url: `/pages/set-user-info/set-user-info`
+							});
+						} else {
+							console.log('已设置头像和用户名')
+							getAll().then((res) => {
+								if (res.data.length == 0) {
+									uni.redirectTo({
+										url: `/pages/start-test/start-test?isAnswer=${false}`
+									})
+
+								}
+								// 判断是不是通过分享进来的
+								else if ('pages/index/index' == getCurrentPages()[0]
+									.route) {
+									uni.redirectTo({
+										url: `/pages/home/home`
+									});
+								}
+							})
+						}
+					})
 				}
 			});
 		},
