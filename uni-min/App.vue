@@ -3,7 +3,7 @@
 		login
 	} from './utils/api/user';
 	import {
-		getAll
+		getPaperTotal
 	} from './utils/api/paper';
 	export default {
 		globalData: {
@@ -62,9 +62,9 @@
 							}
 						} else {
 							console.log('已设置头像和用户名')
-							getAll().then((res) => {
+							getPaperTotal().then((res) => {
 								if ('pages/index/index' == route) {// 不是分享进来的就跳转
-									if (res.data.length == 0) {
+									if (res.data == 0) {
 										uni.redirectTo({
 											url: `/pages/start-test/start-test?isAnswer=${false}`
 										})
