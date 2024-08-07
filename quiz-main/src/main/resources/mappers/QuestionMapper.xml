@@ -15,7 +15,7 @@
         SELECT *
         FROM quiz.q_question
         ORDER BY RAND()
-        LIMIT #{paperId};
+        LIMIT #{num};
     </select>
 
 </mapper>
