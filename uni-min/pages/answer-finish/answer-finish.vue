@@ -173,8 +173,11 @@
 	/** 领取奖励 */
 	function getAward() {
 		console.log("领取奖励");
-		uni.navigateTo({
-			url: `/pages/award/award`
+		// uni.navigateTo({
+		// 	url: `/pages/award/award`
+		// });
+		uni.redirectTo({
+			url: `/pages/home/home`
 		});
 	}
 </script>

@@ -855,11 +855,12 @@
 							</view>
 							<view class="test-paper flex-column" v-for="(question,index) in questionBank" :key="index">
 								<view class="v1">
-									<text class="title">{{question?.title}}</text>
+									<!-- <text class="title">{{question?.title}}</text> -->
+									<text class="title">{{userInfo?.nickname}}的{{question?.order}}号测试</text>
 									<text class="count">{{question?.count}}个朋友测过</text>
 								</view>
 								<view class="v2">
-									<button class="button" @click="onParticulars(index,question?.title)">查看详情</button>
+									<button class="button" @click="onParticulars(question?.paperId)">查看详情</button>
 									<button class="button" open-type="share">分享给朋友</button>
 								</view>
 							</view>
@@ -879,6 +880,7 @@
 <script lang="ts" setup>
 	import { ref, onMounted } from 'vue'
 	import { onLoad } from '@dcloudio/uni-app'
+	import { getAll } from '../../utils/api/paper';
 	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
 	/** 头部样式 */
@@ -1059,9 +1061,9 @@
 		input.value = e.detail.value
 	}
 	/** 跳转题库的试卷详情 */
-	function onParticulars(id, title) {
+	function onParticulars(paperId : number) {
 		uni.navigateTo({
-			url: `/pages/question-particulars/question-particulars?id=${id}&title=${title}`
+			url: `/pages/question-particulars/question-particulars?paperId=${paperId}`
 		});
 	}
 	/** 跳转到出题页 */
@@ -1080,13 +1082,9 @@
 				id: i
 			})
 		}
-		for (var i = 0; i < 4; i++) {
-			questionBank.value.push({
-				id: 1,
-				title: `${userInfo.value.nickname}的0${i + 1}号测试`,
-				count: (4 - i) * 4
-			})
-		}
+		getAll().then((res) => {
+			questionBank.value = res.data
+		})
 	})
 	onLoad((option) => {
 		if (option.topicId) {

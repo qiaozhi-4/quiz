@@ -310,7 +310,7 @@
 				<q-svg class="svg" :icon="`答题测试-底部-总览${activityPopup=='总览' ? '-激活':''}`" size="19"
 					@click="onChangeActivityPopup('总览')" />
 				<!-- <q-svg class="svg" :icon="`答题测试-底部-电脑${activityPopup=='电脑' ? '-激活':''}`" size="19" -->
-					<!-- @click="onChangeActivityPopup('电脑')" /> -->
+				<!-- @click="onChangeActivityPopup('电脑')" /> -->
 			</view>
 		</view>
 	</view>
@@ -342,6 +342,7 @@
 <script lang="ts" setup>
 	import { ref, onMounted } from 'vue'
 	import { getRandomQuestions } from '../../utils/api/question';
+	import { save } from '../../utils/api/paper';
 
 	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
@@ -367,19 +368,26 @@
 	}
 	/** 点击选项 */
 	function onButtonClick(index : number) {
+		console.log(`questionIndex.value:${questionIndex.value}, index:${index}`);
 		options.value[questionIndex.value] = index
 		if (questionIndex.value < questions.value.length - 1) {
 			questionIndex.value++
 		} else {
 			for (var i = 0; i < options.value.length; i++) {
-				if (!options.value[i]) {
+				if (options.value[i] == -1) {
 					questionIndex.value = i
 					return
 				}
 			}
-			uni.navigateTo({
-				url: `/pages/answer-finish/answer-finish`
-			});
+			save({
+				creatorUserId: userInfo.value.userId,
+				answers: options.value.join('@@'),
+				questions: questions.value
+			} as Quiz.Paper).then((res) => {
+				uni.redirectTo({
+					url: `/pages/answer-finish/answer-finish`
+				});
+			})
 		}
 	}
 	/** 键盘输入触发 */
@@ -420,7 +428,7 @@
 		userInfo.value = getApp().globalData.userInfo
 		getRandomQuestions().then(res => {
 			questions.value = res.data
-			options.value = new Array(res.data.length)
+			options.value = new Array(res.data.length).fill(-1)
 			inputValues.value = new Array(res.data.length).fill('')
 		})
 		popupStyle.value = {

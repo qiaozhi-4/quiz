@@ -862,15 +862,12 @@
 					</view>
 				</view>
 				<view class="v3 flex-column">
-					<view class="task">
-						<text class="t1">10答0问</text>
-						<text class="t2">本周连续回答10题</text>
-						<button class="b1" @click="clickTask">领取奖励</button>
+					<view class="" style="height: 30px;">
 					</view>
 					<view class="table flex-column">
 						<view class="table-tags" :style="{paddingTop:`${tagPaddingTop}px`}">
 							<view class="tag"
-								:class="{active:activeTag==index, left:index==activeTag+1, right:index==activeTag-1 }"
+								:class="{active:activeTag==index, left:index==activeTag+1 , right:index==activeTag-1   }"
 								v-for="(tag,index) in tags" :key="index" @click="onTag(index)">
 								{{tag}}
 							</view>
@@ -885,7 +882,8 @@
 								<view class="ranking">位于第{{myRanking?.ranking}}名</view>
 							</view>
 							<template v-if="friends?.length!=0">
-								<view class="table-item" v-for="(friend, index) in friends" :key="index">
+								<view class="table-item" v-for="(friend, index) in friends" :key="index"
+									@click="goFriendHome(friend.id)">
 									<view class="ranking" :class="`no${index+1}`">{{index+1}}</view>
 									<q-avatar :src="friend?.avatarUrl" size="42" />
 									<view class="nickname" :class="`no${index+1}`">{{friend?.nickname}}</view>
@@ -1104,10 +1102,9 @@
 		const { avatarUrl } = e.detail
 		userInfo.value.avatarUrl = avatarUrl
 	}
-	/** 点击领取奖励触发,跳转到任务页面 */
-	function clickTask() {
+	function goFriendHome(id) {
 		uni.navigateTo({
-			url: `/pages/task/task`
+			url: `/pages/friend-home/friend-home?id=${id}`
 		});
 	}
 	/** 页面滚动触发 */
