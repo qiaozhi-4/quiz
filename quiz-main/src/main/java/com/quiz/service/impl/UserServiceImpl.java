@@ -61,4 +61,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
                 , "插入用户第三方登录信息失败");
         return user;
     }
+
+    @Override
+    public User getUserById(Integer id) {
+        return this.getById(id);
+    }
 }

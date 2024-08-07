@@ -6,6 +6,7 @@ import com.quiz.service.IUserService;
 import com.quiz.utils.Assert;
 import com.quiz.utils.JWTUtils;
 import com.quiz.utils.Result;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -41,7 +42,9 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDto user = userService.getUserDtoByAccount(userDetails.getUsername());
         user.setLastLoginAt(LocalDateTime.now());
-        Assert.isTrue(userService.updateById(user), "更新登录时间失败!");
+        com.quiz.entity.User quser = com.quiz.entity.User.builder().build();
+        BeanUtils.copyProperties(user, quser);
+        Assert.isTrue(userService.updateById(quser), "更新登录时间失败!");
 
         // 根据用户的 id 和 username 生成 token 并返回
         String jwtToken = JWTUtils.getJwtToken(user.getUserId().toString(), user.getUsername());

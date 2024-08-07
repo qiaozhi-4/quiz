@@ -32,4 +32,6 @@ public interface IUserService extends IService<User> {
      * @param providerId 用户在第三方平台相对当前应用的唯一id
      */
     User registerUserTP( String tPName, String providerId);
+
+    User getUserById(Integer id);
 }

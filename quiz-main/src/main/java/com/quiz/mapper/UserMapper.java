@@ -25,5 +25,5 @@ public interface UserMapper extends BaseMapper<User> {
      *
      * @param providerId 第三方提供的唯一标识符。比如微信的openId
      */
-    UserDto selectUserByProviderId(String providerId);
+    User selectUserByProviderId(String providerId);
 }
