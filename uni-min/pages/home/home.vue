@@ -666,6 +666,10 @@
 								align-items: center;
 								justify-content: flex-end;
 
+								.extra {
+									flex-grow: 1;
+								}
+
 								.button {
 									justify-content: center;
 									align-items: center;
@@ -751,7 +755,7 @@
 				</view>
 				<view class="v2">
 					<view class="statistics">
-						<text class="text1">0</text>
+						<text class="text1">{{questionBank?.length}}</text>
 						<text class="text2">出题</text>
 					</view>
 					<view class="statistics">
@@ -858,9 +862,14 @@
 								<view class="v1">
 									<!-- <text class="title">{{question?.title}}</text> -->
 									<text class="title">{{userInfo?.nickname}}的{{question?.order}}号测试</text>
-									<text class="count">{{question?.count}}个朋友测过</text>
+									<text class="count">{{question?.answersTotal}}个朋友测过</text>
 								</view>
 								<view class="v2">
+									<view class="extra">
+										<!-- <text class="text" @click="">...</text> -->
+										<button class="button" 
+											@click="onRemorPafer(question?.paperId,index)">删除</button>
+									</view>
 									<button class="button" @click="onParticulars(question?.paperId)">查看详情</button>
 									<button class="button" open-type="share">分享给朋友</button>
 								</view>
@@ -881,7 +890,7 @@
 <script lang="ts" setup>
 	import { ref, onMounted } from 'vue'
 	import { onLoad } from '@dcloudio/uni-app'
-	import { getAll } from '../../utils/api/paper';
+	import * as paper from '../../utils/api/paper';
 	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
 	/** 头部样式 */
@@ -1067,6 +1076,13 @@
 			url: `/pages/question-particulars/question-particulars?paperId=${paperId}`
 		});
 	}
+	/** 删除试卷 */
+	function onRemorPafer(paperId : number, index : number) {
+		paper.remove(paperId).then(res => {
+			questionBank.value.splice(index, 1)
+		})
+
+	}
 	/** 跳转到出题页 */
 	function goSetTest() {
 		uni.navigateTo({
@@ -1083,7 +1099,7 @@
 				id: i
 			})
 		}
-		getAll().then((res) => {
+		paper.getAll().then((res) => {
 			questionBank.value = res.data
 		})
 	})

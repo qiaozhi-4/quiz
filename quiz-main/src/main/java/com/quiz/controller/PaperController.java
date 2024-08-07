@@ -55,7 +55,7 @@ public class PaperController {
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("获取试卷列表")
     @GetMapping("get-all")
-    public List<Paper> getAll(@RequestHeader String token) {
+    public List<PaperDto> getAll(@RequestHeader String token) {
         val userId = Integer.parseInt(JWTUtils.getMemberIdByJwtToken(token));
         return paperService.getPaperListByUserId(userId);
     }

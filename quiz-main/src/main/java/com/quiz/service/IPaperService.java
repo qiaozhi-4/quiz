@@ -45,7 +45,7 @@ public interface IPaperService extends IService<Paper> {
      * @param userId 用户id
      * @return 试卷列表
      */
-    List<Paper> getPaperListByUserId(Integer userId);
+    List<PaperDto> getPaperListByUserId(Integer userId);
 
     /**
      * 删除试卷

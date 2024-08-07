@@ -91,5 +91,8 @@ declare namespace Quiz {
 
 		/** 试卷题目集合 */
 		questions : Quiz.Question[]
+
+		/** 用户答题总数,被多少人做过 */
+		answersTotal : number
 	}
 }

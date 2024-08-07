@@ -59,4 +59,7 @@ public class PaperDto implements Serializable {
     @ApiModelProperty("试卷题目集合")
     private List<Question> questions;
 
+    @ApiModelProperty("用户答题总数,被多少人做过")
+    private Integer answersTotal;
+
 }
