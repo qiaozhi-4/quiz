@@ -148,16 +148,11 @@
 		<q-nav-bar leftIcon="头部导航-返回" />
 		<view class="main flex-column">
 			<view class="v1">Done!</view>
-			<view class="v2">完成答题</view>
+			<view class="v2">完成出题</view>
 			<view class="v3">🥳</view>
-			<view class="v4">
-				<text class="t1">+</text>
-				<text class="t2">100</text>
-				<text class="t3">分</text>
-			</view>
 			<view class="v5 flex-column">
 				<text class="text">这是您第1次自我探索！</text>
-				<text class="text">🌟自我探索值增加100分！</text>
+				<text class="text">🌟转发给朋友看看你们之间有多少默契吧！</text>
 			</view>
 			<button class="b1" open-type="share">让朋友测测！</button>
 			<button class="b2" @click="getAward">领取奖励</button>
@@ -169,14 +164,15 @@
 	import { onLoad, onShareAppMessage } from '@dcloudio/uni-app'
 	import { ref } from 'vue';
 
-	/** 出题还是答题 */
-	const isAnswer = ref<boolean>()
+	const paperId = ref<boolean>()
+	const userId = ref<boolean>()
+	
 	/** 分享试卷 */
 	onShareAppMessage((res) => {
 		if (res.from === 'button') {// 来自页面内分享按钮
 			return {
 				title: '我们之间有多亲密？',
-				path: `/pages/start-test/start-test?isAnswer=true&paperId=${res.target.dataset.paperid}&userId=${userInfo.value.userId}`,
+				path: `/pages/start-test/start-test?isAnswer=true&paperId=${paperId.value}&userId=${userId.value}`,
 				imageUrl: '/static/img/小转发窗.png'
 			}
 		}
@@ -189,12 +185,13 @@
 	/** 领取奖励 */
 	function getAward() {
 		console.log("领取奖励");
-		uni.redirectTo({
+		uni.reLaunch({
 			url: `/pages/home/home`
 		});
 	}
 
 	onLoad((option) => {
-		isAnswer.value = option.isAnswer === 'true'
+		paperId.value = option.paperId
+		userId.value = option.userId
 	})
 </script>

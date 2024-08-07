@@ -867,11 +867,11 @@
 								<view class="v2">
 									<view class="extra">
 										<!-- <text class="text" @click="">...</text> -->
-										<button class="button" 
+										<button class="button"
 											@click="onRemorPafer(question?.paperId,index)">删除</button>
 									</view>
 									<button class="button" @click="onParticulars(question?.paperId)">查看详情</button>
-									<button class="button" open-type="share">分享给朋友</button>
+									<button class="button" open-type="share" :data-paperId="question?.paperId" >分享给朋友</button>
 								</view>
 							</view>
 						</view>
@@ -889,7 +889,7 @@
 
 <script lang="ts" setup>
 	import { ref, onMounted } from 'vue'
-	import { onLoad } from '@dcloudio/uni-app'
+	import { onLoad, onShareAppMessage } from '@dcloudio/uni-app'
 	import * as paper from '../../utils/api/paper';
 	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
@@ -1070,12 +1070,6 @@
 	function onBlur(e : any) {
 		input.value = e.detail.value
 	}
-	/** 跳转题库的试卷详情 */
-	function onParticulars(paperId : number) {
-		uni.navigateTo({
-			url: `/pages/question-particulars/question-particulars?paperId=${paperId}`
-		});
-	}
 	/** 删除试卷 */
 	function onRemorPafer(paperId : number, index : number) {
 		paper.remove(paperId).then(res => {
@@ -1083,10 +1077,31 @@
 		})
 
 	}
+	/** 跳转题库的试卷详情 */
+	function onParticulars(paperId : number) {
+		uni.navigateTo({
+			url: `/pages/question-particulars/question-particulars?paperId=${paperId}`
+		});
+	}
+	/** 分享试卷 */
+	onShareAppMessage((res) => {
+		if (res.from === 'button') {// 来自页面内分享按钮
+			return {
+				title: '我们之间有多亲密？',
+				path: `/pages/start-test/start-test?isAnswer=true&paperId=${res.target.dataset.paperid}&userId=${userInfo.value.userId}`,
+				imageUrl: '/static/img/小转发窗.png'
+			}
+		}
+		return {
+			title: '这测试',
+			path: '/pages/start-test/start-test?isAnswer=true',
+			imageUrl: '/static/img/小转发窗.png'
+		}
+	})
 	/** 跳转到出题页 */
 	function goSetTest() {
 		uni.navigateTo({
-			url: `/pages/start-test/start-test?isAnswer=${false}`
+			url: `/pages/start-test/start-test?isAnswer=false`
 		});
 	}
 	onMounted(() => {

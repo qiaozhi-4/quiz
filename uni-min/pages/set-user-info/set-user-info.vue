@@ -192,10 +192,18 @@
 		}
 		if (userInfo.value.avatarUrl && userInfo.value.nickname) {
 			userUpdate(userInfo.value).then(e => {
-				console.log("第一次设置个人信息", e);
-				uni.redirectTo({
-					url: `/pages/start-test/start-test?isAnswer=${false}`
-				})
+				console.log("第一次设置个人信息");
+				// 判断是不是通过分享进来的
+				let route = getCurrentPages()[0].route
+				if ('pages/set-user-info/set-user-info' == route) {
+					uni.redirectTo({
+						url: `/pages/start-test/start-test?isAnswer=${false}`
+					})
+				} else {
+					uni.navigateBack({
+						delta: 1
+					})
+				}
 			})
 		}
 	}

@@ -15,3 +15,10 @@ export function userUpdate(data : Quiz.UserInfo) {
 		data,
 	})
 }
+/** 通过用户ID,获取用户信息 */
+export function getUserById(userId : number) {
+	return request({
+		url: `/user/get/${userId}`,
+		method: 'GET',
+	})
+}

@@ -277,7 +277,7 @@
 	<view class="page">
 		<q-nav-bar leftIcon="头部导航-返回" title="Quiz" />
 		<view class="main flex-column">
-			<q-avatar class="avatar" :src="userInfo?.avatarUrl" size="62" borderWidth="3"></q-avatar>
+			<q-avatar class="avatar" :src="friendInfo?.avatarUrl" size="62" borderWidth="3"></q-avatar>
 			<view class="statistics-text">
 				{{`Question ${questionIndex+1}/${questions?.length}`}}
 			</view>
@@ -319,7 +319,7 @@
 	<uni-popup ref="popupRef" type="bottom" mask-background-color="rgba(0,0,0,0)" @maskClick="onMaskClick"
 		:safe-area="false">
 		<view class="popup" :style="popupStyle">
-			<view class="title">{{userInfo.nickname}} 的 01号测试</view>
+			<view class="title">{{friendInfo?.nickname}} 的 {{paperInfo?.order}}号测试</view>
 			<view class="questions flex-column" v-show="activityPopup=='总览'">
 				<view class="question flex-column" v-for="(question,index) in questions" :key="index"
 					@click="onClickPopupQuestion(index)">
@@ -341,12 +341,18 @@
 
 <script lang="ts" setup>
 	import { ref, onMounted } from 'vue'
-	import { getRandomQuestions } from '../../utils/api/question';
+	import { onLoad } from '@dcloudio/uni-app'
+	import * as paper from '../../utils/api/paper'
+	import { getUserById } from '../../utils/api/user';
 
 	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
+	/** 朋友信息 */
+	const friendInfo = ref<Quiz.UserInfo>()
 	/** 题目 */
 	const questions = ref<Quiz.Question[]>()
+	/** 试卷信息 */
+	const paperInfo = ref<Quiz.Paper>()
 	/** 选择的答案 */
 	const options = ref<number[]>()
 	/** 输入框的值 */
@@ -418,13 +424,19 @@
 	}
 	onMounted(() => {
 		userInfo.value = getApp().globalData.userInfo
-		getRandomQuestions().then(res => {
-			questions.value = res.data
-			options.value = new Array(res.data.length)
-			inputValues.value = new Array(res.data.length).fill('')
-		})
 		popupStyle.value = {
 			height: `${getApp().globalData.mainHeight}px`
 		}
+	})
+	onLoad((option) => {
+		paper.get(option.paperId).then(res => {
+			paperInfo.value = res.data
+			questions.value = res.data.questions
+			options.value = new Array(res.data.questions.length)
+			inputValues.value = new Array(res.data.questions.length).fill('')
+		})
+		getUserById(option.userId).then(res => {
+			friendInfo.value = res.data
+		})
 	})
 </script>

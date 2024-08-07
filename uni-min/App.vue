@@ -43,30 +43,36 @@
 						// login('wx0f4e873ad758a586', loginRes.code).then((res) => {
 						this.globalData.userInfo = res.data.userInfo
 						this.globalData.token = res.data.token
+
+						// 获取第一个页面,判断是不是通过分享进来的
+						let route = getCurrentPages()[0].route
 						if (res.data.userInfo.nickname == null || res.data.userInfo.avatarUrl ==
 							null || /^\s*$/.test(res.data.userInfo.nickname) || /^\s*$/.test(res
 								.data
 								.userInfo.avatarUrl)) {
 							console.log('当前用户还没设置头像和用户名,跳转到设置页面')
-							// uni.navigateTo({
-							uni.redirectTo({
-								url: `/pages/set-user-info/set-user-info`
-							});
+							if ('pages/index/index' == route) {
+								uni.redirectTo({
+									url: `/pages/set-user-info/set-user-info`
+								});
+							} else {// 分享进来的要保留分享页
+								uni.navigateTo({
+									url: `/pages/set-user-info/set-user-info`
+								});
+							}
 						} else {
 							console.log('已设置头像和用户名')
 							getAll().then((res) => {
-								if (res.data.length == 0) {
-									uni.redirectTo({
-										url: `/pages/start-test/start-test?isAnswer=${false}`
-									})
-
-								}
-								// 判断是不是通过分享进来的
-								else if ('pages/index/index' == getCurrentPages()[0]
-									.route) {
-									uni.redirectTo({
-										url: `/pages/home/home`
-									});
+								if ('pages/index/index' == route) {// 不是分享进来的就跳转
+									if (res.data.length == 0) {
+										uni.redirectTo({
+											url: `/pages/start-test/start-test?isAnswer=${false}`
+										})
+									} else {
+										uni.redirectTo({
+											url: `/pages/home/home`
+										});
+									}
 								}
 							})
 						}

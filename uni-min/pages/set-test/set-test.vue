@@ -347,6 +347,8 @@
 	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
 	/** 题目 */
+	const paper = ref<Quiz.Paper>({} as Quiz.Paper)
+	/** 题目 */
 	const questions = ref<Quiz.Question[]>()
 	/** 选择的答案 */
 	const options = ref<number[]>()
@@ -379,13 +381,13 @@
 					return
 				}
 			}
-			save({
-				creatorUserId: userInfo.value.userId,
-				answers: options.value.join('@@'),
-				questions: questions.value
-			} as Quiz.Paper).then((res) => {
-				uni.redirectTo({
-					url: `/pages/answer-finish/answer-finish`
+			paper.value.creatorUserId = userInfo.value.userId
+			paper.value.answers = options.value.join('@@')
+			paper.value.questions = questions.value
+			save(paper.value).then((res) => {
+				paper.value = res.data
+				uni.navigateTo({
+					url: `/pages/set-test-finish/set-test-finish?paperId=${res.data.paperId}&userId=${userInfo.value.userId}`
 				});
 			})
 		}
