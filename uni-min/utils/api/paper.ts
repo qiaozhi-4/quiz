@@ -34,6 +34,14 @@ export function getAll() {
 	})
 }
 
+/** 获取用户试卷总数(包括已删除) */
+export function getPaperTotal() {
+	return request({
+		url: `/paper/get-total`,
+		method: 'GET',
+	})
+}
+
 /** 删除试卷 */
 export function remove(paperId : number) {
 	return request({

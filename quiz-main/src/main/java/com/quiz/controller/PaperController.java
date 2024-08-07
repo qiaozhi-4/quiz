@@ -60,6 +60,14 @@ public class PaperController {
         return paperService.getPaperListByUserId(userId);
     }
 
+    @PathPermission(PermissionEnum.READ)
+    @ApiOperation("获取用户试卷总数(包括已删除)")
+    @GetMapping("get-total")
+    public Integer getTotal(@RequestHeader String token) {
+        val userId = Integer.parseInt(JWTUtils.getMemberIdByJwtToken(token));
+        return paperService.getTotalByUserId(userId, false);
+    }
+
 
     @PathPermission(PermissionEnum.USER_DELETE)
     @ApiOperation("删除试卷")

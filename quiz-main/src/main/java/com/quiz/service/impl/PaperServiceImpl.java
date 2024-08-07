@@ -79,6 +79,16 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     }
 
     @Override
+    public Integer getTotalByUserId(Integer userId, Boolean filterDelete) {
+        val queryWrapper = new LambdaQueryWrapper<Paper>();
+        queryWrapper.eq(Paper::getCreatorUserId, userId);
+        if (filterDelete) {
+            queryWrapper.ne(Paper::getState, -1);
+        }
+        return this.list(queryWrapper).size();
+    }
+
+    @Override
     public Boolean removePaperByPaperId(Integer paperId) {
         val paper = this.getById(paperId).setState(-1);
         return this.updateById(paper);
