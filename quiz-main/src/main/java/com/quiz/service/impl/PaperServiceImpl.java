@@ -3,9 +3,9 @@ package com.quiz.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.quiz.dto.PaperDto;
+import com.quiz.entity.Answers;
 import com.quiz.entity.Paper;
 import com.quiz.entity.PaperQuestions;
-import com.quiz.mapper.AnswersMapper;
 import com.quiz.mapper.PaperMapper;
 import com.quiz.service.IAnswersService;
 import com.quiz.service.IPaperQuestionsService;
@@ -33,7 +33,6 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
 
     private final IPaperQuestionsService paperQuestionsService;
     private final IAnswersService answersService;
-    private final AnswersMapper answersMapper;
 
     @Override
     public PaperDto savePaper(PaperDto paperDto) {
@@ -76,19 +75,20 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
                 .map(paper -> {
                     PaperDto paperDto = PaperDto.builder().build();
                     BeanUtils.copyProperties(paper, paperDto);
-                    paperDto.setAnswersTotal(answersMapper.selectTotalByPagerId(paper.getPaperId()));
+                    paperDto.setAnswersTotal(answersService.getBaseMapper()
+                            .selectCount(new LambdaQueryWrapper<Answers>().eq(Answers::getPaperId, paper.getPaperId())));
                     return paperDto;
                 }).collect(Collectors.toList());
     }
 
     @Override
-    public Integer getTotalByUserId(Integer userId, Boolean filterDelete) {
+    public Long getTotalByUserId(Integer userId, Boolean filterDelete) {
         val queryWrapper = new LambdaQueryWrapper<Paper>();
         queryWrapper.eq(Paper::getCreatorUserId, userId);
         if (filterDelete) {
             queryWrapper.ne(Paper::getState, -1);
         }
-        return this.list(queryWrapper).size();
+        return this.baseMapper.selectCount(queryWrapper);
     }
 
     @Override

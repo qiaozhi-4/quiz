@@ -52,7 +52,7 @@ public interface IPaperService extends IService<Paper> {
      * @param userId 用户id
      * @param filterDelete 是否需要过滤已删除
      */
-    Integer getTotalByUserId(Integer userId,Boolean filterDelete);
+    Long getTotalByUserId(Integer userId,Boolean filterDelete);
 
     /**
      * 删除试卷

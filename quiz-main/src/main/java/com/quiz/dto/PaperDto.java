@@ -60,6 +60,6 @@ public class PaperDto implements Serializable {
     private List<Question> questions;
 
     @ApiModelProperty("用户答题总数,被多少人做过")
-    private Integer answersTotal;
+    private Long answersTotal;
 
 }

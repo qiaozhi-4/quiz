@@ -12,10 +12,4 @@ import com.quiz.entity.Answers;
  * @since 2024-04-22  1124:07:48
  */
 public interface AnswersMapper extends BaseMapper<Answers> {
-    /**
-     * 根据pageId查询总记录数
-     *
-     * @param pagerId 试卷id
-     */
-    Integer selectTotalByPagerId(Integer pagerId);
 }
