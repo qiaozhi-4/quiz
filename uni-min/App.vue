@@ -68,6 +68,14 @@
 		place-items: center;
 		margin: 0;
 		color: #FFFFFF;
+		transition: transform 0.5s, box-shadow 0.2s;
+	}
+
+	button:active {
+		/* 缩小按钮 */
+		transform: scale(0.92);
+		/* 添加阴影以模拟发光效果 */
+		box-shadow: 0 0 15px rgba(98, 0, 234, 0.6);
 	}
 
 	/** 页面容器 */
