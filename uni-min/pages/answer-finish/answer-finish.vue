@@ -283,28 +283,33 @@
 			<text>最新亲密值将更新入排行榜中......</text>
 
 			<view class="but-group flex-column">
-				<button class="but b1" @click="getAward">查看排名</button>
-				<button class="but b2" @click="getAward">我也去出题</button>
-				<view class="svg" v-if="statistics?.correct/statistics?.total*100 > 30">
-					<q-svg icon="复活宝石" size="50" />
-					<view class="badge">2</view>
+				<button class="but b1" @click="goHome">查看排名</button>
+				<button class="but b2" @click="goSetTest">我也去出题</button>
+				<view class="svg">
+					<q-svg icon="复活宝石" size="50"  @click="showFooter = !showFooter"/>
+					<view class="badge">{{props.filter(item => item.propName === '复活宝石')[0].number}}</view>
 				</view>
 			</view>
 		</view>
-		<view class="footer flex-column" v-if="!(statistics?.correct/statistics?.total*100 > 30)">
+		<view class="footer flex-column" v-if="!(statistics?.correct/statistics?.total*100 > 30) || showFooter">
 			<text class="t1">选快了？评分不满意？再答一次试试看！</text>
-			<button class="but " @click="getAward">
+			<button class="but " @click="goStartTest">
 				<q-svg icon="复活宝石" size="34" />
 				<text class="b-t1">用复活宝石再次答题！</text>
 			</button>
 		</view>
 	</view>
+	<!-- 提示信息弹窗 -->
+	<uni-popup ref="message" type="message">
+		<uni-popup-message type="error" message="宝石不足" :duration="2000"></uni-popup-message>
+	</uni-popup>
 </template>
 
 <script lang="ts" setup>
 	import { ref } from 'vue';
 	import { onLoad } from '@dcloudio/uni-app'
 	import { getUserById } from '../../utils/api/user';
+	const message = ref()
 	/** 路径参数 */
 	type Option = {
 		/** 题目总数 */
@@ -313,6 +318,8 @@
 		correct : number,
 		/** 出题人id */
 		userId : number
+		/** 试卷id */
+		paperId : number
 
 	}
 	/** 路径参数 */
@@ -321,6 +328,8 @@
 	const friendInfo = ref<Quiz.UserInfo>()
 	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
+	/** 获取道具信息 */
+	const props = ref()
 	/** 相似数据 */
 	const data = [
 		{
@@ -371,9 +380,34 @@
 			badgeName: '金徽章',
 		},
 	]
+	/** 显示底部 */
+	const showFooter = ref(false)
+	/** 查看排行榜 */
+	function goHome() {
+		uni.redirectTo({
+			url: `/pages/home/home`
+		});
+	}
+	/** 跳转到出题页 */
+	function goSetTest() {
+		uni.navigateTo({
+			url: `/pages/start-test/start-test?isAnswer=false`
+		});
+	}
+	/** 重新答题 */
+	function goStartTest() {
+		if (props.value.filter(item => item.propName === '复活宝石')[0].number < 1) {
+			message.value.open()
+			return
+		}
+		uni.navigateTo({
+			url: `/pages/start-test/start-test?isAnswer=true&paperId=${statistics.value.paperId}&userId=${userInfo.value.userId}`
+		});
+	}
 	onLoad((option : Option) => {
 
 		userInfo.value = getApp().globalData.userInfo
+		props.value = getApp().globalData.props
 		statistics.value = option
 		getUserById(option.userId).then(res => {
 			friendInfo.value = res.data

@@ -389,15 +389,13 @@
 				}
 				if (options.value[i] == Number(paperInfo.value.answers[i])) correct++
 			}
-			console.log( paperInfo.value);
-			console.log( paperInfo.value.paperId);
 			answers.value.paperId = paperInfo.value.paperId
 			answers.value.selects = options.value.join('@@')
 			answers.value.responderUserId = userInfo.value.userId
 			saveAnswers(answers.value).then((res) => {
 				answers.value = res.data
 				uni.redirectTo({
-					url: `/pages/answer-finish/answer-finish?total=${paperInfo.value.questions.length}&correct=${correct}&userId=${friendInfo.value.userId}`
+					url: `/pages/answer-finish/answer-finish?total=${paperInfo.value.questions.length}&correct=${correct}&userId=${friendInfo.value.userId}&paperId=${answers.value.paperId}`
 				});
 			})
 		}
