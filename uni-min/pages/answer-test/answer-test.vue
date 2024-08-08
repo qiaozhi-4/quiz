@@ -344,6 +344,7 @@
 	import { onLoad } from '@dcloudio/uni-app'
 	import * as paper from '../../utils/api/paper'
 	import { getUserById } from '../../utils/api/user';
+	import { saveAnswers } from '../../utils/api/answers';
 
 	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
@@ -353,6 +354,8 @@
 	const questions = ref<Quiz.Question[]>()
 	/** 试卷信息 */
 	const paperInfo = ref<Quiz.Paper>()
+	/** 答卷信息 */
+	const answers = ref<Quiz.Answers>({} as Quiz.Answers)
 	/** 选择的答案 */
 	const options = ref<number[]>()
 	/** 输入框的值 */
@@ -377,15 +380,26 @@
 		if (questionIndex.value < questions.value.length - 1) {
 			questionIndex.value++
 		} else {
+			/** 正确个数 */
+			let correct = 0
 			for (var i = 0; i < options.value.length; i++) {
-				if (!options.value[i]) {
+				if (options.value[i] == -1) {
 					questionIndex.value = i
 					return
 				}
+				if (options.value[i] == Number(paperInfo.value.answers[i])) correct++
 			}
-			uni.navigateTo({
-				url: `/pages/finish-answer/finish-answer`
-			});
+			console.log( paperInfo.value);
+			console.log( paperInfo.value.paperId);
+			answers.value.paperId = paperInfo.value.paperId
+			answers.value.selects = options.value.join('@@')
+			answers.value.responderUserId = userInfo.value.userId
+			saveAnswers(answers.value).then((res) => {
+				answers.value = res.data
+				uni.redirectTo({
+					url: `/pages/answer-finish/answer-finish?total=${paperInfo.value.questions.length}&correct=${correct}&userId=${friendInfo.value.userId}`
+				});
+			})
 		}
 	}
 	/** 键盘输入触发 */
@@ -431,8 +445,9 @@
 	onLoad((option) => {
 		paper.get(option.paperId).then(res => {
 			paperInfo.value = res.data
+			paperInfo.value.answers = res.data.answers.split('@@')
 			questions.value = res.data.questions
-			options.value = new Array(res.data.questions.length)
+			options.value = new Array(res.data.questions.length).fill(-1)
 			inputValues.value = new Array(res.data.questions.length).fill('')
 		})
 		getUserById(option.userId).then(res => {

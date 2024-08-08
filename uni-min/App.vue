@@ -10,7 +10,7 @@
 			userInfo: null,
 			token: "",
 			/** 用户道具信息 */
-			props,
+			props:null,
 			/** 除去导航栏的高度 */
 			mainHeight: 700,
 			/** 头部导航栏高度 */

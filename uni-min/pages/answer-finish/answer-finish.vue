@@ -4,117 +4,154 @@
 
 		.main {
 			align-items: center;
+			justify-content: start;
+			padding: 10px 12px;
+			// flex-grow: 1;
+			gap: 10px;
 
 			.v1 {
-				padding-top: 50px;
-				/* Done! */
-				font-family: 'Inter';
-				font-style: normal;
-				font-weight: 700;
-				font-size: 40px;
-				line-height: 48px;
-				text-align: center;
+				width: 100%;
+				justify-content: flex-end;
+				align-items: center;
+				gap: 8px;
+
+				.ball {
+					width: 15px;
+					height: 15px;
+					border-radius: 50%;
+				}
+
+				.right {
+					background: linear-gradient(180deg, #A4FF48 0%, #CFF33C 100%);
+					box-shadow: 4px 0px 4px rgba(112, 184, 39, 0.25);
+				}
+
+				.wrong {
+					background: linear-gradient(180deg, #FF4848 0%, #F3733C 100%);
+					box-shadow: 4px 0px 4px rgba(231, 40, 28, 0.25);
+				}
 			}
 
-			.v2 {
-				/* 完成答题 */
-				font-family: 'Inter';
-				font-style: normal;
-				font-weight: 800;
-				font-size: 60px;
-				line-height: 73px;
-				text-align: center;
+			.avatar-group {
+				gap: 8px;
+				justify-content: center;
 			}
 
-			.v3 {
-				padding-bottom: 20px;
-				/* 🥳 */
+			.t1 {
 				font-family: 'Inter';
 				font-style: normal;
 				font-weight: 400;
-				font-size: 160px;
-				line-height: 194px;
+				font-size: 20px;
+				line-height: 24px;
 				text-align: center;
 
-				text-shadow: 0 0 10px rgba(201, 88, 255, 0.5),
-					0 0 20px rgba(201, 88, 255, 0.5),
-					0 0 30px rgba(201, 88, 255, 0.5),
-					0 0 40px rgba(201, 88, 255, 0.5),
-					0 0 70px rgba(201, 88, 255, 0.5),
-					0 0 80px rgba(201, 88, 255, 0.5),
-					0 0 100px rgba(201, 88, 255, 0.5),
-					0 0 150px rgba(201, 88, 255, 0.5);
-			}
-
-			.v4 {
-				align-items: center;
-
-				.t1 {
-					/* + */
-					font-family: 'Inter';
-					font-style: normal;
-					font-weight: 700;
-					font-size: 20px;
-					line-height: 24px;
-				}
-
-				.t2 {
-					/* 100 */
-					font-family: 'Inter';
-					font-style: normal;
-					font-weight: 900;
-					font-size: 45px;
-					line-height: 54px;
-
-					background: linear-gradient(142.35deg, #8C421D 22.68%, #FBE67B 42.5%, #FCFBE7 55.31%, #F7D14E 69.6%, #D4A041 83.62%), linear-gradient(128.64deg, #7A96AC 14.45%, #EAEFF3 27.29%, #C2D4E1 36.93%, #FFFFFF 49.55%, #D4DEE5 58.33%, #ABBDC8 70.46%, #BCCAD7 82.6%), radial-gradient(70.31% 37.22% at 30.94% 23.13%, #FF9FEA 0%, rgba(255, 255, 255, 0) 100%)
-						/* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
-						, radial-gradient(156.71% 156.71% at -16.25% 73.33%, #A349EF 42.19%, #FF65E6 100%)
-						/* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
-						, #FFFFFF;
-					-webkit-background-clip: text;
-					-webkit-text-fill-color: transparent;
-					background-clip: text;
-					text-fill-color: transparent;
-
-					text-shadow: 0px 2.2664px 45.0201px rgba(255, 255, 255, 0.25), 0px 2.2664px 37.8126px rgba(203, 218, 230, 0.5);
-				}
-
-				.t3 {
-					padding-left: 5px;
-					/* 分 */
-					font-family: 'Inter';
-					font-style: normal;
-					font-weight: 900;
-					font-size: 16px;
-					line-height: 19px;
-				}
-			}
-
-			.v5 {
-				.text {
-					/* 这是您第1次自我探索！ 🌟自我探索值增加100分！ */
-					font-family: 'Inter';
-					font-style: normal;
-					font-weight: 700;
-					font-size: 20px;
-					line-height: 24px;
-					text-align: center;
-
-					transform: rotate(0.18deg);
-				}
-			}
-
-			.b1 {
-				margin-top: 20px;
-				margin-bottom: 10px;
-				/* 让朋友测测！ */
-				width: 279px;
-				height: 52px;
-
-				/* 按钮烟色渐变 */
-				background: linear-gradient(90deg, #7756EC 0%, #AE2FDB 27.5%, #A729E2 98.5%);
-				border-radius: 30px;
 				color: #FFFFFF;
+			}
+
+			.t2 {
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 700;
+				font-size: 60px;
+				line-height: 73px;
+				text-align: center;
+
+				color: #FFFFFF;
+			}
+
+			.t3 {
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 400;
+				font-size: 10px;
+				line-height: 12px;
+				text-align: center;
+
+				color: rgba(255, 255, 255, 0.75);
+			}
+
+			.but-group {
+				align-items: center;
+				justify-content: start;
+				// height: 220px;
+				gap: 10px;
+
+				.but {
+					justify-content: center;
+					align-items: center;
+					padding: 9px;
+
+					width: 276px;
+
+					border-radius: 30px;
+
+					font-family: 'Inter';
+					font-style: normal;
+					font-weight: 700;
+					font-size: 28px;
+					line-height: 34px;
+					/* identical to box height */
+
+					color: #FFFFFF;
+				}
+
+				.b1 {
+					background: rgba(255, 255, 255, 0.1);
+				}
+
+				.b2 {
+					background: linear-gradient(90deg, #7756EC 0%, #AE2FDB 27.5%, #A729E2 98.5%);
+				}
+
+				.svg {
+					width: 100%;
+					position: relative;
+					justify-content: flex-end;
+
+					.badge {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						width: 21px;
+						height: 21px;
+						position: absolute;
+						right: 0;
+						top: 0;
+
+						border-radius: 50%;
+						background-color: #FFFFFF;
+
+						font-family: 'Manrope';
+						font-style: normal;
+						font-weight: 800;
+						font-size: 16px;
+						line-height: 22px;
+
+						color: #A143FF;
+
+						// transform: translate(50%, -50%);
+
+					}
+				}
+			}
+
+		}
+
+		.but-group {
+			padding: 10px 12px;
+			align-items: center;
+			justify-content: start;
+			height: 220px;
+			gap: 10px;
+
+			.but {
+				justify-content: center;
+				align-items: center;
+				padding: 9px;
+
+				width: 276px;
+
+				border-radius: 30px;
 
 				font-family: 'Inter';
 				font-style: normal;
@@ -122,22 +159,101 @@
 				font-size: 28px;
 				line-height: 34px;
 				/* identical to box height */
-				text-align: center;
+
+				color: #FFFFFF;
+			}
+
+			.b1 {
+				background: rgba(255, 255, 255, 0.1);
 			}
 
 			.b2 {
-				width: 279px;
-				height: 52px;
-				background: rgba(255, 255, 255, 0.1);
-				border-radius: 30px;
+				background: linear-gradient(90deg, #7756EC 0%, #AE2FDB 27.5%, #A729E2 98.5%);
+			}
 
-				/* 领取奖励 */
+			.svg {
+				width: 100%;
+				position: relative;
+				justify-content: flex-end;
+
+				.badge {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					width: 21px;
+					height: 21px;
+					position: absolute;
+					right: 0;
+					top: 0;
+
+					border-radius: 50%;
+					background-color: #FFFFFF;
+
+					font-family: 'Manrope';
+					font-style: normal;
+					font-weight: 800;
+					font-size: 16px;
+					line-height: 22px;
+
+					color: #A143FF;
+
+					// transform: translate(50%, -50%);
+
+				}
+			}
+		}
+
+		.footer {
+			position: sticky;
+			bottom: 0;
+			align-items: center;
+			justify-content: start;
+			box-sizing: border-box;
+			padding: 11px 31px;
+			gap: 6px;
+			isolation: isolate;
+
+			width: 375px;
+			height: 124px;
+
+			background: #2F1969;
+			border: 1px solid rgba(255, 255, 255, 0.3);
+			border-radius: 15px 15px 0px 0px;
+
+			.t1 {
 				font-family: 'Inter';
 				font-style: normal;
-				font-weight: 700;
-				font-size: 28px;
-				line-height: 34px;
-				color: #FFFFFF;
+				font-weight: 600;
+				font-size: 12px;
+				line-height: 15px;
+				/* identical to box height */
+
+				color: rgba(255, 255, 255, 0.75);
+
+			}
+
+			.but {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 5px;
+
+				width: 310px;
+				height: 51px;
+
+				background: linear-gradient(89.13deg, #C84EED 0.25%, #873CFE 48.54%, #5623CD 96.47%);
+				box-shadow: 0px 6px 20px #2F1969;
+				border-radius: 15px;
+
+				.t-t1 {
+					font-family: 'Inter';
+					font-style: normal;
+					font-weight: 700;
+					font-size: 24px;
+					line-height: 29px;
+
+					color: #FFFFFF;
+				}
 			}
 		}
 	}
@@ -145,56 +261,122 @@
 
 <template>
 	<view class="page">
-		<q-nav-bar leftIcon="头部导航-返回" />
+		<q-nav-bar />
 		<view class="main flex-column">
-			<view class="v1">Done!</view>
-			<view class="v2">完成答题</view>
-			<view class="v3">🥳</view>
-			<view class="v4">
-				<text class="t1">+</text>
-				<text class="t2">100</text>
-				<text class="t3">分</text>
+			<view class="v1">
+				<view class="ball right"></view>
+				<view>{{statistics?.correct}}</view>
+				<view class="ball wrong"></view>
+				<view>{{statistics?.total - statistics?.correct}}</view>
 			</view>
-			<view class="v5 flex-column">
-				<text class="text">这是您第1次自我探索！</text>
-				<text class="text">🌟自我探索值增加100分！</text>
+			<view class="avatar-group">
+				<q-avatar :src="userInfo?.avatarUrl" size="97" borderWidth="4"></q-avatar>
+				<q-avatar :src="friendInfo?.avatarUrl" size="97" borderWidth="4"></q-avatar>
 			</view>
-			<button class="b1" open-type="share">让朋友测测！</button>
-			<button class="b2" @click="getAward">领取奖励</button>
+			<text class="t1">恭喜你,你和{{friendInfo?.nickname}}是：</text>
+			<text class="t1">{{data[statistics?.correct]?.englishName}}</text>
+			<text class="t2">{{data[statistics?.correct]?.name}}</text>
+			<q-image v-if="data[statistics?.correct]?.badgeName" width="115" height="115"
+				:src="data[statistics?.correct]?.badgeName"></q-image>
+			<view v-else style="width: 115px; height: 115px;"></view>
+			<q-image :src="`加${statistics?.correct/statistics?.total*100}分`" width="195" height="40"></q-image>
+			<text>最新亲密值将更新入排行榜中......</text>
+
+			<view class="but-group flex-column">
+				<button class="but b1" @click="getAward">查看排名</button>
+				<button class="but b2" @click="getAward">我也去出题</button>
+				<view class="svg" v-if="statistics?.correct/statistics?.total*100 > 30">
+					<q-svg icon="复活宝石" size="50" />
+					<view class="badge">2</view>
+				</view>
+			</view>
+		</view>
+		<view class="footer flex-column" v-if="!(statistics?.correct/statistics?.total*100 > 30)">
+			<text class="t1">选快了？评分不满意？再答一次试试看！</text>
+			<button class="but " @click="getAward">
+				<q-svg icon="复活宝石" size="34" />
+				<text class="b-t1">用复活宝石再次答题！</text>
+			</button>
 		</view>
 	</view>
 </template>
 
 <script lang="ts" setup>
-	import { onLoad, onShareAppMessage } from '@dcloudio/uni-app'
 	import { ref } from 'vue';
+	import { onLoad } from '@dcloudio/uni-app'
+	import { getUserById } from '../../utils/api/user';
+	/** 路径参数 */
+	type Option = {
+		/** 题目总数 */
+		total : number,
+		/** 答对 */
+		correct : number,
+		/** 出题人id */
+		userId : number
 
-	/** 出题还是答题 */
-	const isAnswer = ref<boolean>()
-	/** 分享试卷 */
-	onShareAppMessage((res) => {
-		if (res.from === 'button') {// 来自页面内分享按钮
-			return {
-				title: '我们之间有多亲密？',
-				path: `/pages/start-test/start-test?isAnswer=true&paperId=${res.target.dataset.paperid}&userId=${userInfo.value.userId}`,
-				imageUrl: '/static/img/小转发窗.png'
-			}
-		}
-		return {
-			title: '这测试',
-			path: '/pages/start-test/start-test?isAnswer=true',
-			imageUrl: '/static/img/小转发窗.png'
-		}
-	})
-	/** 领取奖励 */
-	function getAward() {
-		console.log("领取奖励");
-		uni.redirectTo({
-			url: `/pages/home/home`
-		});
 	}
+	/** 路径参数 */
+	const statistics = ref<Option>()
+	/** 朋友信息 */
+	const friendInfo = ref<Quiz.UserInfo>()
+	/** 获取登录信息 */
+	const userInfo = ref<Quiz.UserInfo>()
+	/** 相似数据 */
+	const data = [
+		{
+			englishName: 'Totally different',
+			name: '截然不同',
+		},
+		{
+			englishName: 'poles apart',
+			name: '南辕北辙',
+		},
+		{
+			englishName: 'Vastly different',
+			name: '大相径庭',
+		},
+		{
+			englishName: 'Each is unique',
+			name: '各自独特',
+		},
+		{
+			englishName: 'Different factions',
+			name: '各持己见',
+		},
+		{
+			englishName: 'Hold different views',
+			name: '一面之交',
+		},
+		{
+			englishName: 'Understand',
+			name: '心领神会',
+		},
+		{
+			englishName: 'Congenial',
+			name: '如出一辙',
+		},
+		{
+			englishName: 'Congenial',
+			name: '意气相投',
+			badgeName: '铜徽章',
+		},
+		{
+			englishName: 'blue Bosom friend',
+			name: '蓝颜知己',
+			badgeName: '银徽章',
+		},
+		{
+			englishName: 'soulmate',
+			name: '灵魂之友',
+			badgeName: '金徽章',
+		},
+	]
+	onLoad((option : Option) => {
 
-	onLoad((option) => {
-		isAnswer.value = option.isAnswer === 'true'
+		userInfo.value = getApp().globalData.userInfo
+		statistics.value = option
+		getUserById(option.userId).then(res => {
+			friendInfo.value = res.data
+		})
 	})
 </script>

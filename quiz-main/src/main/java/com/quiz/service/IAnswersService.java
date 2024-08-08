@@ -12,5 +12,9 @@ import com.quiz.entity.Answers;
  * @since 2024-04-24
  */
 public interface IAnswersService extends IService<Answers> {
-
+    /**
+     * 保存答题记录
+     * @param answers 答题记录
+     */
+    Answers saveAnswers(Answers answers);
 }
