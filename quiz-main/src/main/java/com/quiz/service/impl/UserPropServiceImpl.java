@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- * 道具表 服务实现类
+ * 用户关联道具表 服务实现类
  * </p>
  *
  * @author XGeorge

@@ -94,7 +94,7 @@ create table if not exists quiz.q_user_prop
     primary key (id),
     INDEX user_id (user_id),
     INDEX prop_id (prop_id)
-) comment '道具表';
+) comment '用户关联道具表';
 
 drop table quiz.q_paper;# 删除
 create table if not exists quiz.q_paper

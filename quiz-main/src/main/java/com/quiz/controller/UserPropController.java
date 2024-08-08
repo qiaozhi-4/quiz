@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 道具表 前端控制器
+ * 用户关联道具表 前端控制器
  * </p>
  *
  * @author XGeorge
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/user-prop")
-@Api(tags = "道具表 前端控制器")
+@Api(tags = "用户关联道具表 前端控制器")
 public class UserPropController {
 
 }

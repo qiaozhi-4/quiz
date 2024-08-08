@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 道具表
+ * 用户关联道具表
  * </p>
  *
  * @author XGeorge
@@ -30,7 +30,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Accessors(chain = true)
 @TableName("q_user_prop")
-@ApiModel(value = "UserProp对象", description = "道具表")
+@ApiModel(value = "UserProp对象", description = "用户关联道具表")
 public class UserProp extends Model<UserProp> {
 
     private static final long serialVersionUID = 1L;

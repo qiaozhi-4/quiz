@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- * 道具表 服务类
+ * 用户关联道具表 服务类
  * </p>
  *
  * @author XGeorge

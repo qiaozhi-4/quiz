@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
- * 道具表 Mapper 接口
+ * 用户关联道具表 Mapper 接口
  * </p>
  *
  * @author XGeorge
