@@ -145,11 +145,12 @@
 			gap: 10px;
 
 			.but {
+				margin: 0 38px;
 				justify-content: center;
 				align-items: center;
 				padding: 9px;
 
-				width: 276px;
+				width: 100%;
 
 				border-radius: 30px;
 
@@ -213,7 +214,7 @@
 			gap: 6px;
 			isolation: isolate;
 
-			width: 375px;
+			width: 100%;
 			height: 124px;
 
 			background: #2F1969;
@@ -286,12 +287,12 @@
 				<button class="but b1" @click="goHome">查看排名</button>
 				<button class="but b2" @click="goSetTest">我也去出题</button>
 				<view class="svg">
-					<q-svg icon="复活宝石" size="50"  @click="showFooter = !showFooter"/>
+					<q-svg icon="复活宝石" size="50" @click="showFooter = !showFooter" />
 					<view class="badge">{{props.filter(item => item.propName === '复活宝石')[0].number}}</view>
 				</view>
 			</view>
 		</view>
-		<view class="footer flex-column" v-if="!(statistics?.correct/statistics?.total*100 > 30) || showFooter">
+		<view class="footer flex-column" v-if="showFooter">
 			<text class="t1">选快了？评分不满意？再答一次试试看！</text>
 			<button class="but " @click="goStartTest">
 				<q-svg icon="复活宝石" size="34" />
@@ -409,6 +410,7 @@
 		userInfo.value = getApp().globalData.userInfo
 		props.value = getApp().globalData.props
 		statistics.value = option
+		showFooter.value = statistics.value.correct / statistics.value.total * 100 <= 30
 		getUserById(option.userId).then(res => {
 			friendInfo.value = res.data
 		})
