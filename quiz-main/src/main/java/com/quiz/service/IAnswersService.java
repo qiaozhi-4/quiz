@@ -17,4 +17,10 @@ public interface IAnswersService extends IService<Answers> {
      * @param answers 答题记录
      */
     Answers saveAnswers(Answers answers);
+
+    /**
+     * 获取用户总得分
+     * @param userId 用户id
+     */
+    Integer getScoreByUserId(Integer userId);
 }

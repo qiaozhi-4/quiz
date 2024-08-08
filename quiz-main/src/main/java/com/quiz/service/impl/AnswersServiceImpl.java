@@ -7,7 +7,7 @@ import com.quiz.entity.Answers;
 import com.quiz.mapper.AnswersMapper;
 import com.quiz.mapper.PaperMapper;
 import com.quiz.service.IAnswersService;
-import com.quiz.service.IPropService;
+import com.quiz.service.IUserPropService;
 import com.quiz.utils.Assert;
 import lombok.AllArgsConstructor;
 import lombok.val;
@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class AnswersServiceImpl extends ServiceImpl<AnswersMapper, Answers> implements IAnswersService {
-    private final IPropService propService;
+    private final IUserPropService userPropService;
     private final PaperMapper paperMapper;
 
     @Override
@@ -46,9 +46,16 @@ public class AnswersServiceImpl extends ServiceImpl<AnswersMapper, Answers> impl
                 .ifPresent(value -> {
                     answers.setAnswerId(value.getAnswerId());
                     /* 这里扣除复活宝石 */
-                    Assert.isTrue(propService.useProp(answers.getResponderUserId(), 2, 1), "使用复活宝石失败");
+                    userPropService.useProp(answers.getResponderUserId(), 2, 1);
                 });
         Assert.isTrue(answers.insertOrUpdate(), "保存答卷失败");
+        /* 统计成就分数 */
+        userPropService.setProp(answers.getResponderUserId(), 1, this.baseMapper.selectScoreByUserId(answers.getResponderUserId()));
         return answers;
+    }
+
+    @Override
+    public Integer getScoreByUserId(Integer userId) {
+        return this.baseMapper.selectScoreByUserId(userId);
     }
 }

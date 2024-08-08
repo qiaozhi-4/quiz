@@ -12,4 +12,12 @@
         <result column="created_at" property="createdAt" />
     </resultMap>
 
+     <select id="selectScoreByUserId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+         select sum(a.score) as total_score
+         from quiz.q_answers a
+                  left join quiz.q_paper b
+                            on a.paper_id = b.paper_id
+         where a.responder_user_id = #{userId}
+           and b.state != -1;
+     </select>
 </mapper>

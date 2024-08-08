@@ -18,15 +18,8 @@ public interface IPropService extends IService<Prop> {
 
     /**
      * 获取用户道具
+     *
      * @param userId 用户id
      */
     List<PropDTO> getPropsByUserId(Integer userId);
-
-    /**
-     * 使用道具
-     * @param userId 用户id
-     * @param propId 道具id
-     * @param num 使用数量
-     */
-    Boolean useProp(Integer userId, Integer propId, Integer num);
 }

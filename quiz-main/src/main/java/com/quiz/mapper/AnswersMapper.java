@@ -13,4 +13,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface AnswersMapper extends BaseMapper<Answers> {
 
+
+    /**
+     * 获取用户总得分
+     *
+     * @param userId 用户id
+     */
+    Integer selectScoreByUserId(Integer userId);
 }
