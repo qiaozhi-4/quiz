@@ -95,6 +95,8 @@ declare namespace Quiz {
 		responderUserId : number
 		/** 选择下标集合,以@@分隔 */
 		selects : string | string[]
+		/** 得分 */
+		score : number
 		/** 创建时间 */
 		createdAt : string
 	}
