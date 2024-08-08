@@ -136,7 +136,7 @@ public class CodeGenerator {
 //                                .addInclude("t_path")
 //                                .addInclude("t_user_roles")
 //                                .addInclude("t_role_permissions")
-                                .addInclude("q_prop")
+//                                .addInclude("q_prop")
                                 .addInclude("q_user_prop")
 //                                .addInclude("q_paper")
 //                                .addInclude("q_tag")
