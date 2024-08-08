@@ -4,8 +4,19 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.quiz.entity.Prop">
-        <id column="prop_id" property="propId" />
-        <result column="prop_name" property="propName" />
+        <id column="prop_id" property="propId"/>
+        <result column="prop_name" property="propName"/>
     </resultMap>
 
+    <!-- DTO查询映射结果 -->
+    <resultMap id="PropDTOResultMap" extends="BaseResultMap" type="com.quiz.dto.PropDTO">
+        <result column="number" property="number"/>
+    </resultMap>
+
+    <select id="selectPropsByUserId" resultMap="PropDTOResultMap" parameterType="java.lang.Integer">
+        select a.prop_id, a.prop_name, COALESCE(b.number,0)
+        from quiz.q_prop a
+                 left join quiz.q_user_prop b
+                           on a.prop_id = b.prop_id and b.user_id = #{userId}
+    </select>
 </mapper>

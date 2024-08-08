@@ -5,6 +5,7 @@ import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import com.quiz.constant.Constants;
 import com.quiz.entity.User;
 import com.quiz.mapper.UserMapper;
+import com.quiz.service.IPropService;
 import com.quiz.service.IUserService;
 import com.quiz.service.IWxUserService;
 import com.quiz.utils.Assert;
@@ -41,6 +42,7 @@ public class WxUserServiceImpl implements IWxUserService {
     private final UserMapper userMapper;
     private final RedisTemplate<String, Object> redisTemplate;
     private final IUserService userService;
+    private final IPropService propService;
 
     @Override
     public Result<Object> login(String miniappId, String code) throws WxErrorException {
@@ -59,6 +61,7 @@ public class WxUserServiceImpl implements IWxUserService {
         final String jwtToken = JWTUtils.getJwtToken(user.getUserId().toString(), user.getUsername());
         map.put(JWTUtils.TOKEN_KEY, jwtToken);
         map.put("userInfo", user);
+        map.put("props", propService.getPropsByUserId(user.getUserId()));
         return Result.success(map);
     }
 

@@ -1,7 +1,10 @@
 package com.quiz.service;
 
-import com.quiz.entity.Prop;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.quiz.dto.PropDTO;
+import com.quiz.entity.Prop;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IPropService extends IService<Prop> {
 
+    /**
+     * 获取用户道具
+     * @param userId 用户id
+     */
+    List<PropDTO> getPropsByUserId(Integer userId);
 }

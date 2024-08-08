@@ -9,6 +9,8 @@
 		globalData: {
 			userInfo: null,
 			token: "",
+			/** 用户道具信息 */
+			props,
 			/** 除去导航栏的高度 */
 			mainHeight: 700,
 			/** 头部导航栏高度 */
@@ -43,6 +45,7 @@
 						// login('wx0f4e873ad758a586', loginRes.code).then((res) => {
 						this.globalData.userInfo = res.data.userInfo
 						this.globalData.token = res.data.token
+						this.globalData.props = res.data.props
 
 						// 获取第一个页面,判断是不是通过分享进来的
 						let route = getCurrentPages()[0].route
