@@ -118,6 +118,7 @@ create table if not exists quiz.q_answers
     paper_id          int comment '关联试卷id',
     responder_user_id int comment '答题用户id',
     selects           varchar(63) comment '选择下标集合,以@@分隔',
+    score             int comment '得分',
     created_at        datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     primary key (answer_id),
     INDEX paper_id (paper_id),

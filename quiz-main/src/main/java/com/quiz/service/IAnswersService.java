@@ -1,7 +1,7 @@
 package com.quiz.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.quiz.entity.Answers;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
@@ -9,7 +9,7 @@ import com.quiz.entity.Answers;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-24
+ * @since 2024-08-08
  */
 public interface IAnswersService extends IService<Answers> {
     /**

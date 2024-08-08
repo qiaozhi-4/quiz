@@ -4,11 +4,12 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.quiz.entity.Answers">
-        <id column="answer_id" property="answerId"/>
-        <result column="paper_id" property="paperId"/>
-        <result column="responder_user_id" property="responderUserId"/>
-        <result column="selects" property="selects"/>
-        <result column="created_at" property="createdAt"/>
+        <id column="answer_id" property="answerId" />
+        <result column="paper_id" property="paperId" />
+        <result column="responder_user_id" property="responderUserId" />
+        <result column="selects" property="selects" />
+        <result column="score" property="score" />
+        <result column="created_at" property="createdAt" />
     </resultMap>
 
 </mapper>

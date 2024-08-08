@@ -5,13 +5,16 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
-import lombok.experimental.Accessors;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -19,7 +22,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-26
+ * @since 2024-08-08
  */
 @Getter
 @Setter
@@ -48,6 +51,10 @@ public class Answers extends Model<Answers> {
     @ApiModelProperty("选择下标集合,以@@分隔")
     @TableField("selects")
     private String selects;
+
+    @ApiModelProperty("得分")
+    @TableField("score")
+    private Integer score;
 
     @ApiModelProperty("创建时间")
     @TableField("created_at")

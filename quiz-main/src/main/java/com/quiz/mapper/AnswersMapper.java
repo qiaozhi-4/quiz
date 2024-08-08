@@ -1,7 +1,7 @@
 package com.quiz.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.quiz.entity.Answers;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
@@ -9,7 +9,8 @@ import com.quiz.entity.Answers;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-22  1124:07:48
+ * @since 2024-08-08
  */
 public interface AnswersMapper extends BaseMapper<Answers> {
+
 }
