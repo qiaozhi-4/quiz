@@ -52,7 +52,7 @@ declare namespace Quiz {
 		/** 创建时间 */
 		createdAt : string
 		/** 选项字符串,以 @@ 切割 */
-		options : string
+		options : string | string[]
 		/** 题目id */
 		questionId : number
 		/** 题目 */
@@ -64,35 +64,38 @@ declare namespace Quiz {
 	interface Paper {
 		/** 唯一主键 */
 		paperId : number
-
 		/** 出题用户id */
 		creatorUserId : number
-
 		/** 序号 */
 		order : number
-
 		/** 状态 */
 		state : number
-
 		/** 封面url */
 		coverUrl : string
-
 		/** 标题 */
 		title : string
-
 		/** 描述 */
 		describe : string
-
 		/** 答案下标集合,以@@分隔 */
-		answers : string
-
+		answers : string | string[]
 		/** 创建时间 */
 		createdAt : string
-
 		/** 试卷题目集合 */
 		questions : Quiz.Question[]
-
 		/** 用户答题总数,被多少人做过 */
 		answersTotal : number
+	}
+	/** 题目答卷 */
+	interface Answers {
+		/** 唯一主键 */
+		answerId : number
+		/** 关联试卷id */
+		paperId : number
+		/** 答题用户id */
+		responderUserId : number
+		/** 选择下标集合,以@@分隔 */
+		selects : string | string[]
+		/** 创建时间 */
+		createdAt : string
 	}
 }
