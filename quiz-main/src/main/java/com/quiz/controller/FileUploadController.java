@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * <p>
@@ -33,7 +35,7 @@ public class FileUploadController {
 
     /**
      * 从配置文件中读取文件存储路径
-      */
+     */
     @Value("${file.dir}")
     private String dir;
 
@@ -48,7 +50,7 @@ public class FileUploadController {
         // 构建目标文件路径
         String fileName = file.getOriginalFilename();
         Assert.isNotNull(fileName, "文件名不能为空");
-        File dest = new File(dir, fileName);
+        File dest = new File(dir, fileName + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
 
         try {
             // 保存文件到目标路径
