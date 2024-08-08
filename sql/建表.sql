@@ -78,6 +78,24 @@ create table if not exists quiz.t_role_permissions
     INDEX role_id_permission_id (role_id, permission_id)
 ) comment '角色权限关联表';
 
+create table if not exists quiz.q_prop
+(
+    prop_id   int auto_increment comment '道具id。',
+    prop_name varchar(127) not null comment '道具名称',
+    primary key (prop_id)
+) comment '道具表';
+
+create table if not exists quiz.q_user_prop
+(
+    id      int auto_increment comment '主键，权限ID。',
+    user_id int not null comment '用户id。',
+    prop_id int not null comment '道具id。',
+    number  int default 0 comment '道具数量',
+    primary key (id),
+    INDEX user_id (user_id),
+    INDEX prop_id (prop_id)
+) comment '道具表';
+
 drop table quiz.q_paper;# 删除
 create table if not exists quiz.q_paper
 (
