@@ -15,8 +15,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.attribute.PosixFilePermission;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 
 /**
  * <p>
@@ -50,11 +55,16 @@ public class FileUploadController {
         // 构建目标文件路径
         String fileName = file.getOriginalFilename();
         Assert.isNotNull(fileName, "文件名不能为空");
-        File dest = new File(dir, fileName + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
+        fileName += LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+        File dest = new File(dir, fileName);
 
         try {
             // 保存文件到目标路径
             file.transferTo(dest);
+
+            // 设置文件权限为777
+            Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxrwxrwx");
+            Files.setPosixFilePermissions(Paths.get(dest.getPath()), perms);
             return "文件上传成功: " + fileName;
         } catch (IOException e) {
             e.printStackTrace();
