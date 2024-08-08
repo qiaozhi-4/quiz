@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.quiz.constant.Constants;
 import com.quiz.entity.Answers;
 import com.quiz.mapper.AnswersMapper;
+import com.quiz.mapper.PaperMapper;
 import com.quiz.service.IAnswersService;
-import com.quiz.service.IPaperService;
 import com.quiz.service.IPropService;
 import com.quiz.utils.Assert;
 import lombok.AllArgsConstructor;
@@ -25,14 +25,15 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class AnswersServiceImpl extends ServiceImpl<AnswersMapper, Answers> implements IAnswersService {
     private final IPropService propService;
-    private final IPaperService paperService;
+    private final PaperMapper paperMapper;
 
     @Override
     public Answers saveAnswers(Answers answers) {
         /* 计算分数 */
-        val ans = paperService.getById(answers.getPaperId()).getAnswers().split(Constants.SPACE_MARK);
+        val ans = paperMapper.selectById(answers.getPaperId()).getAnswers().split(Constants.SPACE_MARK);
         val sel = answers.getSelects().split(Constants.SPACE_MARK);
         Assert.isTrue(ans.length == sel.length, "答案数量不匹配");
+        answers.setScore(0);
         for (int i = 0; i < ans.length; i++) {
             if (ans[i].equals(sel[i])) {
                 answers.setScore(answers.getScore() + 10);

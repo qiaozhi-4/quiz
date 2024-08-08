@@ -15,5 +15,9 @@ import java.util.List;
  * @since 2024-08-08
  */
 public interface PropMapper extends BaseMapper<Prop> {
+    /**
+     * 根据用户id查询道具列表
+     * @param userId 用户id
+     */
     List<PropDTO> selectPropsByUserId(Integer userId);
 }
