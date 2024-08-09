@@ -71,6 +71,9 @@ public class UserDTO implements Serializable {
     @ApiModelProperty("用户权限集合")
     private List<String> permissions;
 
+    @ApiModelProperty("排行榜分数")
+    private int totalScore;
+
     /**
      * 生成随机 username
      */

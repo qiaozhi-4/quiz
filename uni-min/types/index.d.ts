@@ -33,6 +33,8 @@ declare namespace Quiz {
 		userId : number
 		/** 用户名 */
 		username : string
+		/** 排行榜分数 */
+		totalScore : number
 	}
 	interface Device {
 		/** 安卓设备ID */

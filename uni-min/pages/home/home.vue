@@ -782,13 +782,13 @@
 							</view>
 						</view>
 						<view v-show="activeTag==0" class="table-content flex-column">
-							<template v-if="friends.length!=0">
+							<template v-if="friends?.length!=0">
 								<view class="table-item" v-for="(friend, index) in friends" :key="index"
-									@click="goFriendHome(friend.id)">
+									@click="goFriendHome(friend.userId)">
 									<view class="ranking" :class="`no${index+1}`">{{index+1}}</view>
 									<q-avatar :src="friend.avatarUrl" size="42" />
 									<view class="nickname" :class="`no${index+1}`">{{friend.nickname}}</view>
-									<view class="score" :class="`no${index+1}`">{{friend.score}}</view>
+									<view class="score" :class="`no${index+1}`">{{friend.totalScore}}</view>
 									<q-svg class="svg" icon="个人主页-排行-转到好友" size="22" />
 								</view>
 							</template>
@@ -871,7 +871,8 @@
 											@click="onRemorPafer(question?.paperId,index)">删除</button>
 									</view>
 									<button class="button" @click="onParticulars(question?.paperId)">查看详情</button>
-									<button class="button" open-type="share" :data-paperId="question?.paperId" >分享给朋友</button>
+									<button class="button" open-type="share"
+										:data-paperId="question?.paperId">分享给朋友</button>
 								</view>
 							</view>
 						</view>
@@ -891,6 +892,7 @@
 	import { ref, onMounted } from 'vue'
 	import { onLoad, onShareAppMessage } from '@dcloudio/uni-app'
 	import * as paper from '../../utils/api/paper';
+	import { getIntimateRanking } from '../../utils/api/user';
 	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
 	/** 头部样式 */
@@ -908,7 +910,7 @@
 	/** 标签触发粘性定位的上边距 */
 	const tagPaddingTop = ref(0)
 	/** 亲密排行榜数据 */
-	const friends = ref([])
+	const friends = ref<Quiz.UserInfo[]>()
 	/** 测试信息数据 */
 	const testInfo = ref([
 		{
@@ -1106,14 +1108,9 @@
 	}
 	onMounted(() => {
 		userInfo.value = getApp().globalData.userInfo
-		for (var i = 0; i < 20; i++) {
-			friends.value.push({
-				nickname: `用户${i + 1}`,
-				score: (20 - i) * 1000,
-				avatarUrl: '',
-				id: i
-			})
-		}
+		getIntimateRanking(userInfo.value.userId).then(res => {
+			friends.value = res.data
+		})
 		paper.getAll().then((res) => {
 			questionBank.value = res.data
 		})

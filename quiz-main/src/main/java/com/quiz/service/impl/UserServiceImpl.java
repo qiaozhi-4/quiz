@@ -13,6 +13,8 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户信息表 服务实现类
@@ -63,7 +65,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public User getUserById(Integer id) {
-        return this.getById(id);
+    public User getUserById(Integer userId) {
+        return this.getById(userId);
+    }
+
+    @Override
+    public List<UserDTO> getIntimateRanking(Integer userId) {
+        return this.baseMapper.getIntimateRanking(userId);
     }
 }

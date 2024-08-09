@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.quiz.dto.UserDTO;
 import com.quiz.entity.User;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户信息表 服务类
@@ -33,5 +35,15 @@ public interface IUserService extends IService<User> {
      */
     User registerUserTP( String tPName, String providerId);
 
-    User getUserById(Integer id);
+    /**
+     * 根据id获取用户信息
+     * @param userId 用户id
+     */
+    User getUserById(Integer userId);
+
+    /**
+     * 获取亲密排行榜数据
+     * @param userId 用户id
+     */
+    List<UserDTO> getIntimateRanking(Integer userId);
 }

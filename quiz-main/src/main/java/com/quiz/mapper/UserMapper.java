@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.quiz.dto.UserDTO;
 import com.quiz.entity.User;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户信息表 Mapper 接口
@@ -26,4 +28,10 @@ public interface UserMapper extends BaseMapper<User> {
      * @param providerId 第三方提供的唯一标识符。比如微信的openId
      */
     User selectUserByProviderId(String providerId);
+
+    /**
+     * 根据用户id获取亲密排行榜
+     * @param userId 用户id
+     */
+    List<UserDTO> getIntimateRanking(Integer userId);
 }

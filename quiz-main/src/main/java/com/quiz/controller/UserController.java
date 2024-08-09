@@ -2,6 +2,7 @@ package com.quiz.controller;
 
 
 import com.quiz.annotation.PathPermission;
+import com.quiz.dto.UserDTO;
 import com.quiz.entity.User;
 import com.quiz.enumerate.PermissionEnum;
 import com.quiz.service.IUserService;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -33,5 +36,11 @@ public class UserController {
     @GetMapping("get/{userId:\\d+}")
     public User get(@PathVariable Integer userId) {
         return userService.getUserById(userId);
+    }
+    @PathPermission(PermissionEnum.READ)
+    @ApiOperation("通过用户ID,获取用户排行榜信息")
+    @GetMapping("get-intimate-ranking/{userId:\\d+}")
+    public List<UserDTO> getIntimateRanking(@PathVariable Integer userId) {
+        return userService.getIntimateRanking(userId);
     }
 }
