@@ -46,6 +46,7 @@
 			}
 
 			.question-wrap {
+				position: relative;
 				flex-grow: 1;
 				width: 100%;
 
@@ -296,7 +297,7 @@
 					</swiper-item>
 				</swiper>
 				<!-- 指示点 -->
-				<!-- <view class="dot-wrap"></view> -->
+				<q-indicator-position :current="questionIndex" :amount="questions.length"></q-indicator-position>
 			</view>
 		</view>
 		<view class="footer flex-column">

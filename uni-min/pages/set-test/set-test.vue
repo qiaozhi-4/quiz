@@ -46,6 +46,7 @@
 			}
 
 			.question-wrap {
+				position: relative;
 				flex-grow: 1;
 				width: 100%;
 
@@ -284,7 +285,7 @@
 			<view class="progress-wrap">
 				<view class="progress" :style="{width: `${((questionIndex + 1) / questions?.length * 100)}%`}"></view>
 			</view>
-			<view class="question-wrap">
+			<view class="question-wrap flex-column">
 				<swiper class="swiper" :current="questionIndex" @change="onChange">
 					<swiper-item class="swiper-item flex-column" v-for="question in questions"
 						:key="question.questionId">
@@ -296,7 +297,7 @@
 					</swiper-item>
 				</swiper>
 				<!-- 指示点 -->
-				<!-- <view class="dot-wrap"></view> -->
+				<q-indicator-position :current="questionIndex" :amount="questions.length"></q-indicator-position>
 			</view>
 		</view>
 		<view class="footer flex-column">
