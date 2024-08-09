@@ -2,7 +2,7 @@ create database quiz;
 
 create table if not exists quiz.t_user
 (
-    user_id       int unsigned auto_increment comment '主键，用户ID。',
+    user_id       int unsigned auto_increment comment '主键，用户ID',
     nickname      varchar(63)                        null comment '用户昵称',
     avatar_url    varchar(255)                       null comment '头像地址',
     username      varchar(63)                        null comment '用户账号',
@@ -22,10 +22,10 @@ create table if not exists quiz.t_user
 
 create table if not exists quiz.t_user_auth
 (
-    auth_id     int unsigned auto_increment comment '主键，ID。',
-    user_id     int unsigned not null comment '用户ID。',
-    provider    varchar(31)  not null comment '第三方服务的名称（如Google、Facebook等）。',
-    provider_id varchar(63)  not null comment '第三方提供的唯一标识符。比如微信的openId',
+    auth_id     int unsigned auto_increment comment '主键，ID',
+    user_id     int unsigned not null comment '用户ID',
+    provider    varchar(31)  not null comment '第三方服务的名称（如Google、Facebook等）',
+    provider_id varchar(63)  not null comment '第三方提供的唯一标识符比如微信的openId',
     primary key (auth_id),
     INDEX user_id (user_id),
     INDEX provider_id (provider_id)
@@ -34,8 +34,8 @@ create table if not exists quiz.t_user_auth
 drop table quiz.t_role;# 删除
 create table if not exists quiz.t_role
 (
-    role_id   int auto_increment comment '主键，角色ID。',
-    role_name varchar(255) not null comment '角色名称，如ROLE_ADMIN、ROLE_USER。',
+    role_id   int auto_increment comment '主键，角色ID',
+    role_name varchar(255) not null comment '角色名称，如ROLE_ADMIN、ROLE_USER',
     describe_ varchar(511) comment '描述',
     primary key (role_id)
 ) comment '角色表';
@@ -43,8 +43,8 @@ create table if not exists quiz.t_role
 drop table quiz.t_permission;# 删除
 create table if not exists quiz.t_permission
 (
-    permission_id   int auto_increment comment '主键，权限ID。',
-    permission_name varchar(255) not null comment '权限名称，如read、write。',
+    permission_id   int auto_increment comment '主键，权限ID',
+    permission_name varchar(255) not null comment '权限名称，如read、write',
     describe_       varchar(511) comment '描述',
     primary key (permission_id)
 ) comment '权限表';
@@ -52,10 +52,10 @@ create table if not exists quiz.t_permission
 drop table quiz.t_path;# 删除
 create table if not exists quiz.t_path
 (
-    path_id         int auto_increment comment '主键，路径ID。',
-    pattern         varchar(255) not null comment '路径模式，如/api/users/**，/device/list/{current:\d+}/{size:\d+}。',
+    path_id         int auto_increment comment '主键，路径ID',
+    pattern         varchar(255) not null comment '路径模式，如/api/users/**，/device/list/{current:\d+}/{size:\d+}',
     http_method     varchar(255) null comment 'HTTP 方法,如 POST, GET',
-    describe_       varchar(255) null comment '路径描述。',
+    describe_       varchar(255) null comment '路径描述',
     permission_name varchar(255) null comment '路径权限名称',
     primary key (path_id)
 ) comment '路径表';
@@ -64,6 +64,8 @@ create table if not exists quiz.t_user_roles
 (
     user_id int not null comment '关联用户ID。',
     role_id int not null comment '关联角色ID。',
+    user_id int not null comment '关联用户ID',
+    role_id int not null comment '关联角色ID',
     INDEX user_id (user_id),
     INDEX role_id (role_id),
     INDEX user_id_role_id (user_id, role_id)
@@ -73,6 +75,8 @@ create table if not exists quiz.t_role_permissions
 (
     role_id       int not null comment '关联角色ID。',
     permission_id int not null comment '关联权限ID。',
+    role_id       int not null comment '关联角色ID',
+    permission_id int not null comment '关联权限ID',
     INDEX role_id (role_id),
     INDEX permission_id (permission_id),
     INDEX role_id_permission_id (role_id, permission_id)
@@ -80,7 +84,7 @@ create table if not exists quiz.t_role_permissions
 
 create table if not exists quiz.q_prop
 (
-    prop_id   int auto_increment comment '道具id。',
+    prop_id   int auto_increment comment '道具id',
     prop_name varchar(127) not null comment '道具名称',
     primary key (prop_id)
 ) comment '道具表';
@@ -90,6 +94,9 @@ create table if not exists quiz.q_user_prop
     id      int auto_increment comment '主键，权限ID。',
     user_id int not null comment '用户id。',
     prop_id int not null comment '道具id。',
+    id      int auto_increment comment '主键',
+    user_id int not null comment '用户id',
+    prop_id int not null comment '道具id',
     number  int default 0 comment '道具数量',
     primary key (id),
     INDEX user_id (user_id),
@@ -160,7 +167,7 @@ create table if not exists quiz.q_tag
     tag_id   int auto_increment comment '唯一主键',
     tag_name varchar(127) null comment '标签名称',
     primary key (tag_id)
-) comment '题目标签';
+) comment '标签';
 
 create table if not exists quiz.q_classes
 (
@@ -178,6 +185,8 @@ create table if not exists quiz.q_paper_classes
 (
     paper_id int not null comment '试卷ID。',
     class_id int not null comment '分类ID。',
+    paper_id int not null comment '试卷ID',
+    class_id int not null comment '分类ID',
     INDEX paper_id (paper_id),
     INDEX question_id (class_id),
     INDEX paper_id_question_id (paper_id, class_id)
@@ -185,7 +194,7 @@ create table if not exists quiz.q_paper_classes
 
 
 # 勇者相关
-create table yz_device
+create table if not exists yz_device
 (
     device_id varchar(18)    not null comment '安卓设备ID',
     username  varchar(255)   not null comment '用户名',
@@ -195,7 +204,7 @@ create table yz_device
     INDEX username (username)
 ) comment '设备卡密信息';
 
-create table yz_use_info
+create table if not exists yz_use_info
 (
     use_id        int auto_increment comment '唯一主键',
     username      varchar(64)  not null comment '卡号',
