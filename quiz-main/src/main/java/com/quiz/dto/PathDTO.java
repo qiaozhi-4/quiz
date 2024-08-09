@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * PathDto
+ * PathDTO
  * </p>
  *
  * @author XGeorge
@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @ApiModel(value = "PathDto对象", description = "请求路径信息以及把权限id替换为权限名称")
-public class PathDto extends Path {
+public class PathDTO extends Path {
 
     @ApiModelProperty("权限名称，如read、write。")
     @TableField("permission_name")
