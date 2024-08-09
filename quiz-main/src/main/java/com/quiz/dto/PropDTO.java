@@ -33,5 +33,5 @@ public class PropDTO implements Serializable {
     private String propName;
 
     @ApiModelProperty("道具数量")
-    private int number;
+    private Long number;
 }
