@@ -101,5 +101,13 @@ declare namespace Quiz {
 		score : number
 		/** 创建时间 */
 		createdAt : string
+		/** 试卷题目集合 */
+		questions : Quiz.Question[]
+		/** 出题用户id */
+		creatorUserId : number
+		/** 出题用户昵称 */
+		creatorUserNickname : string
+		/** 出题用户头像 */
+		creatorUserAvatarUrl : string
 	}
 }

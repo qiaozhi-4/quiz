@@ -71,4 +71,9 @@ public class AnswersServiceImpl extends ServiceImpl<AnswersMapper, Answers> impl
     public List<AnswersDTO> getAnswersListByUserId(Integer userId) {
         return this.baseMapper.selectAnswersListByUserId(userId);
     }
+
+    @Override
+    public List<AnswersDTO> getBadgeListByUserId(Integer userId) {
+        return this.baseMapper.selectBadgeListByUserId(userId);
+    }
 }

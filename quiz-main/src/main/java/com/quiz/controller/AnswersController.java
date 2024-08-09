@@ -50,4 +50,11 @@ public class AnswersController {
         return answersService.getAnswersListByUserId(userId);
     }
 
+    @PathPermission(PermissionEnum.READ)
+    @ApiOperation("查询徽章列表")
+    @GetMapping("get-badge-list/{userId:\\d+}")
+    public List<AnswersDTO> getBadgeList(@PathVariable Integer userId) {
+        return answersService.getBadgeListByUserId(userId);
+    }
+
 }

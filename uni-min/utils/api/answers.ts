@@ -24,3 +24,11 @@ export function getAnswersList(userId : number) {
 		method: 'GET',
 	})
 }
+
+/** 查询徽章列表 */
+export function getBadgeList(userId : number) {
+	return request({
+		url: `/answers/get-badge-list/${userId}`,
+		method: 'GET',
+	})
+}

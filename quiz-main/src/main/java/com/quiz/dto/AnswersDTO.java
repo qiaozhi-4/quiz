@@ -49,4 +49,13 @@ public class AnswersDTO implements Serializable {
 
     @ApiModelProperty("试卷题目集合")
     private List<Question> questions;
+
+    @ApiModelProperty("出题用户id")
+    private Integer creatorUserId;
+
+    @ApiModelProperty("出题用户昵称")
+    private String creatorUserNickname;
+
+    @ApiModelProperty("出题用户头像")
+    private String creatorUserAvatarUrl;
 }

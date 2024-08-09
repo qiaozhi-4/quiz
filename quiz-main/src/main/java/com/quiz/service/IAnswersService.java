@@ -42,4 +42,11 @@ public interface IAnswersService extends IService<Answers> {
      * @param userId 用户id
      */
     List<AnswersDTO> getAnswersListByUserId(Integer userId);
+
+    /**
+     * 根据用户id查询徽章列表
+     *
+     * @param userId 用户id
+     */
+    List<AnswersDTO> getBadgeListByUserId(Integer userId);
 }

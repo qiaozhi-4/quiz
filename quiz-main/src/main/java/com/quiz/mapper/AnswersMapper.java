@@ -35,4 +35,11 @@ public interface AnswersMapper extends BaseMapper<Answers> {
      * @param userId 用户id
      */
     List<AnswersDTO> selectAnswersListByUserId(Integer userId);
+
+    /**
+     * 根据用户id查询徽章列表
+     *
+     * @param userId 用户id
+     */
+    List<AnswersDTO> selectBadgeListByUserId(Integer userId);
 }
