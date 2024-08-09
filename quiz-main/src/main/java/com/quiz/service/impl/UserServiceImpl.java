@@ -13,7 +13,6 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -77,6 +76,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public List<User> getIntimateFriends(Integer userId) {
-        return Collections.emptyList();
+        return this.baseMapper.selectIntimateFriends(userId);
     }
 }
