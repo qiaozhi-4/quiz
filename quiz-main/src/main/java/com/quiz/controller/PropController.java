@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * </p>
  *
  * @author XGeorge
- * @since 2024-08-08
+ * @since 2024-08-09
  */
 @RestController
 @RequestMapping("/prop")

@@ -86,6 +86,7 @@ create table if not exists quiz.q_prop
 (
     prop_id   int auto_increment comment '道具id',
     prop_name varchar(127) not null comment '道具名称',
+    prop_describe varchar(511) not null comment '道具描述',
     primary key (prop_id)
 ) comment '道具表';
 

@@ -18,8 +18,8 @@ VALUES (1, 1),
        (1, 3),
        (1, 4),
        (2, 2);
-       (2, 6);
-       (3, 5);
+    (2, 6);
+    (3, 5);
 
 -- 添加测试用户
 INSERT INTO quiz.t_user (username, password, created_at)
@@ -50,7 +50,7 @@ VALUES ('1', '测试标签1'),
        ('5', '测试标签5');
 
 -- 添加道具
-INSERT INTO quiz.q_prop (prop_id, prop_name)
-VALUES ('1', '成就分数'),
-       ('2', '复活宝石'),
-       ('3', '提示宝石');
+INSERT INTO quiz.q_prop (prop_id, prop_name, prop_describe)
+VALUES ('1', '成就分数', '所有答题的统计分'),
+       ('2', '复活宝石', '复活宝石让尊贵的您获得重新再次答题的机会！'),
+       ('3', '提示宝石', '提示宝石让尊贵的您答题时获得答案相关的提示！');

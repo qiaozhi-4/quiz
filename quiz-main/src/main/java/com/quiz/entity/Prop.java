@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author XGeorge
- * @since 2024-08-08
+ * @since 2024-08-09
  */
 @Getter
 @Setter
@@ -35,13 +35,17 @@ public class Prop extends Model<Prop> {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("道具id。")
+    @ApiModelProperty("道具id")
     @TableId(value = "prop_id", type = IdType.AUTO)
     private Integer propId;
 
     @ApiModelProperty("道具名称")
     @TableField("prop_name")
     private String propName;
+
+    @ApiModelProperty("道具描述")
+    @TableField("prop_describe")
+    private String propDescribe;
 
 
     @Override

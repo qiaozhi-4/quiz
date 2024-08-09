@@ -32,6 +32,9 @@ public class PropDTO implements Serializable {
     @ApiModelProperty("道具名称")
     private String propName;
 
+    @ApiModelProperty("道具描述")
+    private String propDescribe;
+
     @ApiModelProperty("道具数量")
     private Long number;
 }
