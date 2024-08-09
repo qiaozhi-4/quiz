@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * DeviceDto
+ * DeviceDTO
  * </p>
  *
  * @author XGeorge
@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @ApiModel(value = "DeviceDto对象", description = "设备相关信息")
-public class DeviceDto  extends Device {
+public class DeviceDTO extends Device {
 
     @ApiModelProperty("要添加到结果中的单位数量，可能是负数")
     private Long amountToAdd;
@@ -29,7 +29,7 @@ public class DeviceDto  extends Device {
 
     @Override
     public String toString() {
-        return "DeviceDto{" +
+        return "DeviceDTO{" +
                 "deviceId='" + getDeviceId() + '\'' +
                 ", username='" + getUsername() + '\'' +
                 ", endTime=" + getEndTime() +
