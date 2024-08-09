@@ -110,4 +110,15 @@ declare namespace Quiz {
 		/** 出题用户头像 */
 		creatorUserAvatarUrl : string
 	}
+	/** 道具 */
+	interface Prop {
+		/** 道具id */
+		propId : number
+		/** 道具名称 */
+		propName : string
+		/** 道具描述 */
+		propDescribe : string
+		/** 道具数量 */
+		number : number
+	}
 }

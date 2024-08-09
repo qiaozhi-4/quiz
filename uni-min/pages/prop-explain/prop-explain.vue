@@ -129,11 +129,11 @@
 	<view class="page">
 		<q-nav-bar leftIcon="头部导航-返回" />
 		<view class="main flex-column">
-			<text class="t1">{{prop?.explain}}</text>
-			<text class="t2">{{prop?.name}}</text>
-			<q-image :src="prop?.icon" width="170" height="170"></q-image>
+			<text class="t1">{{prop?.propDescribe}}</text>
+			<text class="t2">{{prop?.propName}}</text>
+			<q-image :src="prop?.propName" width="170" height="170"></q-image>
 			<view>
-				<text class="count">{{prop?.count}}</text>
+				<text class="count">{{prop?.number}}</text>
 				<text class="unit">颗</text>
 			</view>
 		</view>
@@ -149,35 +149,38 @@
 	import { ref, onMounted } from 'vue'
 	import { onLoad } from '@dcloudio/uni-app'
 	/** 道具信息 */
-	const prop = ref()
+	const prop = ref<Quiz.Prop>()
+
 	onLoad((option) => {
 		console.log(option);
+		prop.value = getApp().globalData.props.filter((e : Quiz.Prop) => option.id == e.propId)[0]
+		console.log(prop.value);
 		/** 页面跳转过来的参数 */
-		switch (option.id) {
-			case '1':
-				prop.value = {
-					name: '复活宝石',
-					icon: '复活宝石',
-					count: 1,
-					explain: '复活宝石让尊贵的您获得重新再次答题的机会！'
-				}
-				break;
-			case '2':
-				prop.value = {
-					name: '提示宝石',
-					icon: '提示宝石',
-					count: 1,
-					explain: '提示宝石让尊贵的您答题时获得答案相关的提示！'
-				}
-				break;
-			default:
-				prop.value = {
-					name: '复活宝石',
-					icon: '复活宝石',
-					count: 1,
-					explain: '复活宝石让尊贵的您获得重新再次答题的机会！'
-				}
-				break;
-		}
+		// switch (option.id) {
+		// 	case '1':
+		// 		prop.value = {
+		// 			name: '复活宝石',
+		// 			icon: '复活宝石',
+		// 			count: 1,
+		// 			explain: '复活宝石让尊贵的您获得重新再次答题的机会！'
+		// 		}
+		// 		break;
+		// 	case '2':
+		// 		prop.value = {
+		// 			name: '提示宝石',
+		// 			icon: '提示宝石',
+		// 			count: 1,
+		// 			explain: '提示宝石让尊贵的您答题时获得答案相关的提示！'
+		// 		}
+		// 		break;
+		// 	default:
+		// 		prop.value = {
+		// 			name: '复活宝石',
+		// 			icon: '复活宝石',
+		// 			count: 1,
+		// 			explain: '复活宝石让尊贵的您获得重新再次答题的机会！'
+		// 		}
+		// 		break;
+		// }
 	})
 </script>

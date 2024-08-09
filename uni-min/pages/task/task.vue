@@ -289,11 +289,11 @@
 					<text class="t1">目前成就</text>
 					<text class="t2">{{prop[0]?.number}}分</text>
 				</view>
-				<view class="v-global gem" @click="onProp(1)">
+				<view class="v-global gem" @click="onProp(prop[1]?.propId)">
 					<q-svg icon="复活宝石" size="33" />
 					<text class="count">{{prop[1]?.number}}</text>
 				</view>
-				<view class="v-global gem" @click="onProp(2)">
+				<view class="v-global gem" @click="onProp(prop[2]?.propId)">
 					<q-svg icon="提示宝石" size="33" />
 					<text class="count">{{prop[2]?.number}}</text>
 				</view>
