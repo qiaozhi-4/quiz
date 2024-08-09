@@ -1,9 +1,9 @@
 package com.quiz.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.quiz.entity.PaperQuestions;
 import com.quiz.mapper.PaperQuestionsMapper;
 import com.quiz.service.IPaperQuestionsService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-24
+ * @since 2024-08-09
  */
 @Service
 public class PaperQuestionsServiceImpl extends ServiceImpl<PaperQuestionsMapper, PaperQuestions> implements IPaperQuestionsService {

@@ -4,8 +4,9 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.quiz.entity.PaperQuestions">
-        <result column="paper_id" property="paperId"/>
-        <result column="question_id" property="questionId"/>
+        <id column="id" property="id" />
+        <result column="paper_id" property="paperId" />
+        <result column="question_id" property="questionId" />
     </resultMap>
 
 </mapper>

@@ -127,8 +127,10 @@ create table if not exists quiz.q_answers
 
 create table if not exists quiz.q_paper_questions
 (
-    paper_id    int not null comment '试卷ID。',
-    question_id int not null comment '题目ID。',
+    id          int auto_increment comment '主键',
+    paper_id    int not null comment '试卷ID',
+    question_id int not null comment '题目ID',
+    primary key (id),
     INDEX paper_id (paper_id),
     INDEX question_id (question_id),
     INDEX paper_id_question_id (paper_id, question_id)
@@ -146,8 +148,8 @@ create table if not exists quiz.q_question
 
 create table if not exists quiz.q_question_tags
 (
-    question_id int not null comment '题目ID。',
-    tag_id      int not null comment '标签ID。',
+    question_id int not null comment '题目ID',
+    tag_id      int not null comment '标签ID',
     INDEX question_id (question_id),
     INDEX tag_id (tag_id),
     INDEX paper_id_tag_id (question_id, tag_id)
