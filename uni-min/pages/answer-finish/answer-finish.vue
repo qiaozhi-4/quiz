@@ -275,10 +275,10 @@
 				<q-avatar :src="friendInfo?.avatarUrl" size="97" borderWidth="4"></q-avatar>
 			</view>
 			<text class="t1">恭喜你,你和{{friendInfo?.nickname}}是：</text>
-			<text class="t1">{{data[statistics?.correct]?.englishName}}</text>
-			<text class="t2">{{data[statistics?.correct]?.name}}</text>
-			<q-image v-if="data[statistics?.correct]?.badgeName" width="115" height="115"
-				:src="data[statistics?.correct]?.badgeName"></q-image>
+			<text class="t1">{{scoreInfo[statistics?.correct]?.englishName}}</text>
+			<text class="t2">{{scoreInfo[statistics?.correct]?.name}}</text>
+			<q-image v-if="scoreInfo[statistics?.correct]?.badgeName" width="115" height="115"
+				:src="scoreInfo[statistics?.correct]?.badgeName"></q-image>
 			<view v-else style="width: 115px; height: 115px;"></view>
 			<q-image :src="`加${statistics?.correct/statistics?.total*100}分`" width="195" height="40"></q-image>
 			<text>最新亲密值将更新入排行榜中......</text>
@@ -310,6 +310,7 @@
 	import { ref } from 'vue';
 	import { onLoad } from '@dcloudio/uni-app'
 	import { getUserById } from '../../utils/api/user';
+	import { scoreInfo } from '../../utils/constant';
 	const message = ref()
 	/** 路径参数 */
 	type Option = {
@@ -331,56 +332,6 @@
 	const userInfo = ref<Quiz.UserInfo>()
 	/** 获取道具信息 */
 	const props = ref()
-	/** 相似数据 */
-	const data = [
-		{
-			englishName: 'Totally different',
-			name: '截然不同',
-		},
-		{
-			englishName: 'poles apart',
-			name: '南辕北辙',
-		},
-		{
-			englishName: 'Vastly different',
-			name: '大相径庭',
-		},
-		{
-			englishName: 'Each is unique',
-			name: '各自独特',
-		},
-		{
-			englishName: 'Different factions',
-			name: '各持己见',
-		},
-		{
-			englishName: 'Hold different views',
-			name: '一面之交',
-		},
-		{
-			englishName: 'Understand',
-			name: '心领神会',
-		},
-		{
-			englishName: 'Congenial',
-			name: '如出一辙',
-		},
-		{
-			englishName: 'Congenial',
-			name: '意气相投',
-			badgeName: '铜徽章',
-		},
-		{
-			englishName: 'blue Bosom friend',
-			name: '蓝颜知己',
-			badgeName: '银徽章',
-		},
-		{
-			englishName: 'soulmate',
-			name: '灵魂之友',
-			badgeName: '金徽章',
-		},
-	]
 	/** 显示底部 */
 	const showFooter = ref(false)
 	/** 查看排行榜 */
