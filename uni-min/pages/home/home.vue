@@ -867,7 +867,7 @@
 								<view class="v2">
 									<view class="extra">
 										<q-popover>
-											<text class="text" >...</text>
+											<text class="text">...</text>
 											<!-- 插入气泡内容 -->
 											<template #bubble-content>
 												<button class="button"
