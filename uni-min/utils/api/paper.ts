@@ -34,7 +34,7 @@ export function getAll() {
 	})
 }
 
-/** 获取用户试卷总数(包括已删除) */
+/** 获取用户试卷总数(包括已删除),判断是否出过题 */
 export function getPaperTotal() {
 	return request({
 		url: `/paper/get-total`,

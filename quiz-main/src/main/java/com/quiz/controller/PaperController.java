@@ -61,7 +61,7 @@ public class PaperController {
     }
 
     @PathPermission(PermissionEnum.READ)
-    @ApiOperation("获取用户试卷总数(包括已删除)")
+    @ApiOperation("获取用户试卷总数(包括已删除),判断是否出过题")
     @GetMapping("get-total")
     public Long getTotal(@RequestHeader String token) {
         val userId = Integer.parseInt(JWTUtils.getMemberIdByJwtToken(token));
