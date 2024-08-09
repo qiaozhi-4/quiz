@@ -759,7 +759,7 @@
 						<text class="text2">出题</text>
 					</view>
 					<view class="statistics">
-						<text class="text1">0</text>
+						<text class="text1">{{testBank?.length}}</text>
 						<text class="text2">答题</text>
 					</view>
 					<view class="statistics">
@@ -901,6 +901,7 @@
 	import { onLoad, onShareAppMessage } from '@dcloudio/uni-app'
 	import * as paper from '../../utils/api/paper';
 	import { getIntimateRanking } from '../../utils/api/user';
+	import { getAnswersList } from '../../utils/api/answers';
 	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
 	/** 头部样式 */
@@ -1006,6 +1007,8 @@
 	const input = ref('')
 	/** 题库数据 */
 	const questionBank = ref([])
+	/** 测试记录 */
+	const testBank = ref([])
 	/** 获取微信头像触发 */
 	function onChooseAvatar(e) {
 		console.log("获取微信头像触发", e);
@@ -1083,9 +1086,9 @@
 	/** 删除试卷 */
 	function onRemorPafer(paperId : number, index : number) {
 		paper.remove(paperId).then(res => {
-			questionBank.value.splice(index, 1)
+			if (res.data)
+				questionBank.value.splice(index, 1)
 		})
-
 	}
 	/** 跳转题库的试卷详情 */
 	function onParticulars(paperId : number) {
@@ -1121,6 +1124,9 @@
 		})
 		paper.getAll().then((res) => {
 			questionBank.value = res.data
+		})
+		getAnswersList(userInfo.value.userId).then(res => {
+			testBank.value = res.data
 		})
 	})
 	onLoad((option) => {
