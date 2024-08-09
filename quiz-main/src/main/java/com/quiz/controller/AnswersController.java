@@ -2,16 +2,16 @@ package com.quiz.controller;
 
 
 import com.quiz.annotation.PathPermission;
+import com.quiz.dto.AnswersDTO;
 import com.quiz.entity.Answers;
 import com.quiz.enumerate.PermissionEnum;
 import com.quiz.service.IAnswersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -34,6 +34,20 @@ public class AnswersController {
     @PostMapping("save")
     public Answers save(@RequestBody Answers answers) {
         return answersService.saveAnswers(answers);
+    }
+
+    @PathPermission(PermissionEnum.READ)
+    @ApiOperation("查询答卷详情")
+    @GetMapping("get-answers/{answerId:\\d+}")
+    public AnswersDTO getAnswers(@PathVariable Integer answerId) {
+        return answersService.getAnswersById(answerId);
+    }
+
+    @PathPermission(PermissionEnum.READ)
+    @ApiOperation("查询答卷列表")
+    @GetMapping("get-answers-list/{userId:\\d+}")
+    public List<AnswersDTO> getAnswersList(@PathVariable Integer userId) {
+        return answersService.getAnswersListByUserId(userId);
     }
 
 }

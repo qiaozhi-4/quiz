@@ -8,3 +8,19 @@ export function saveAnswers(answers : Quiz.Answers) {
 		data: answers,
 	})
 }
+
+/** 查询答卷详情 */
+export function getAnswers(answerId : number) {
+	return request({
+		url: `/answers/get-answers/${answerId}`,
+		method: 'GET',
+	})
+}
+
+/** 查询答卷列表 */
+export function getAnswersList(userId : number) {
+	return request({
+		url: `/answers/get-answers-list/${userId}`,
+		method: 'GET',
+	})
+}

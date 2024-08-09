@@ -3,6 +3,7 @@ package com.quiz.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.quiz.constant.Constants;
+import com.quiz.dto.AnswersDTO;
 import com.quiz.entity.Answers;
 import com.quiz.mapper.AnswersMapper;
 import com.quiz.mapper.PaperMapper;
@@ -12,6 +13,8 @@ import com.quiz.utils.Assert;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -57,5 +60,15 @@ public class AnswersServiceImpl extends ServiceImpl<AnswersMapper, Answers> impl
     @Override
     public Integer getScoreByUserId(Integer userId) {
         return this.baseMapper.selectScoreByUserId(userId);
+    }
+
+    @Override
+    public AnswersDTO getAnswersById(Integer answerId) {
+        return this.baseMapper.selectAnswersById(answerId);
+    }
+
+    @Override
+    public List<AnswersDTO> getAnswersListByUserId(Integer userId) {
+        return this.baseMapper.selectAnswersListByUserId(userId);
     }
 }

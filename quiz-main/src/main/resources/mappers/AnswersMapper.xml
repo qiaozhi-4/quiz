@@ -4,20 +4,50 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.quiz.entity.Answers">
-        <id column="answer_id" property="answerId" />
-        <result column="paper_id" property="paperId" />
-        <result column="responder_user_id" property="responderUserId" />
-        <result column="selects" property="selects" />
-        <result column="score" property="score" />
-        <result column="created_at" property="createdAt" />
+        <id column="answer_id" property="answerId"/>
+        <result column="paper_id" property="paperId"/>
+        <result column="responder_user_id" property="responderUserId"/>
+        <result column="selects" property="selects"/>
+        <result column="score" property="score"/>
+        <result column="created_at" property="createdAt"/>
+    </resultMap>
+    <!-- Dto查询映射结果 -->
+    <resultMap id="AnswersDtoResultMap" extends="BaseResultMap" type="com.quiz.dto.AnswersDTO">
+        <collection property="questions" autoMapping="true" ofType="com.quiz.entity.Question"/>
     </resultMap>
 
-     <select id="selectScoreByUserId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
-         select sum(a.score) as total_score
-         from quiz.q_answers a
-                  left join quiz.q_paper b
-                            on a.paper_id = b.paper_id
-         where a.responder_user_id = #{userId}
-           and b.state != -1;
-     </select>
+    <select id="selectScoreByUserId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select sum(a.score) as total_score
+        from quiz.q_answers a
+                 left join quiz.q_paper b
+                           on a.paper_id = b.paper_id
+        where a.responder_user_id = #{userId}
+          and b.state != -1;
+    </select>
+    <select id="selectAnswersById" resultMap="AnswersDtoResultMap">
+        select a.*, c.*
+        from quiz.q_answers a
+                 left join quiz.q_paper aa
+                           on a.paper_id = aa.paper_id
+                 left join quiz.q_paper_questions b
+                           on a.paper_id = b.paper_id
+                 left join quiz.q_question c
+                           on b.question_id = c.question_id
+        where a.answer_id = #{answerId}
+          and aa.state != -1
+        order by b.id;
+    </select>
+    <select id="selectAnswersListByUserId"  resultMap="AnswersDtoResultMap">
+        select a.*, c.*
+        from quiz.q_answers a
+                 left join quiz.q_paper aa
+                           on a.paper_id = aa.paper_id
+                 left join quiz.q_paper_questions b
+                           on a.paper_id = b.paper_id
+                 left join quiz.q_question c
+                           on b.question_id = c.question_id
+        where a.responder_user_id = #{userId}
+          and aa.state != -1
+        order by a.answer_id, b.id;
+    </select>
 </mapper>
