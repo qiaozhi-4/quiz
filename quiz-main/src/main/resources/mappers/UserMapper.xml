@@ -46,7 +46,7 @@
                            on tua.user_id = u.user_id
         where tua.provider_id = #{providerId}
     </select>
-    <select id="getIntimateRanking" resultType="com.quiz.dto.UserDTO">
+    <select id="selectIntimateRanking" resultType="com.quiz.dto.UserDTO">
         select c.*, sum(b.score) as total_score
         from quiz.q_paper a
                  left join quiz.q_answers b
@@ -59,6 +59,17 @@
           and b.responder_user_id is not null
         group by c.user_id
         order by total_score desc;
+    </select>
+    <select id="selectIntimateFriends" resultType="com.quiz.entity.User">
+        select us.*
+        from quiz.q_paper a
+                 left join quiz.q_answers b on a.paper_id = b.paper_id
+                 left join quiz.t_user us on a.creator_user_id = us.user_id
+        where a.state != -1
+          and us.user_id != #{userId}
+          and a.creator_user_id = #{userId}
+          and b.score = 100
+        group by us.user_id
     </select>
 
 </mapper>

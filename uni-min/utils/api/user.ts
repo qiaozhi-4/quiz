@@ -29,3 +29,10 @@ export function getIntimateRanking(userId : number) {
 		method: 'GET',
 	})
 }
+/** 通过用户ID,获取用户排行榜信息 */
+export function getIntimateFriends(userId : number) {
+	return request({
+		url: `/user/get-intimate-friends/${userId}`,
+		method: 'GET',
+	})
+}

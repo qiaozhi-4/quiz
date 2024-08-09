@@ -763,7 +763,7 @@
 						<text class="text2">答题</text>
 					</view>
 					<view class="statistics">
-						<text class="text1">0</text>
+						<text class="text1">{{intimateFriends?.length}}</text>
 						<text class="text2">密友</text>
 					</view>
 				</view>
@@ -782,8 +782,8 @@
 							</view>
 						</view>
 						<view v-show="activeTag==0" class="table-content flex-column">
-							<template v-if="friends?.length!=0">
-								<view class="table-item" v-for="(friend, index) in friends" :key="index"
+							<template v-if="intimateRanking?.length!=0">
+								<view class="table-item" v-for="(friend, index) in intimateRanking" :key="index"
 									@click="goFriendHome(friend.userId)">
 									<view class="ranking" :class="`no${index+1}`">{{index+1}}</view>
 									<q-avatar :src="friend.avatarUrl" size="42" />
@@ -900,7 +900,7 @@
 	import { ref, onMounted } from 'vue'
 	import { onLoad, onShareAppMessage } from '@dcloudio/uni-app'
 	import * as paper from '../../utils/api/paper';
-	import { getIntimateRanking } from '../../utils/api/user';
+	import { getIntimateFriends, getIntimateRanking } from '../../utils/api/user';
 	import { getAnswersList } from '../../utils/api/answers';
 	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
@@ -919,7 +919,9 @@
 	/** 标签触发粘性定位的上边距 */
 	const tagPaddingTop = ref(0)
 	/** 亲密排行榜数据 */
-	const friends = ref<Quiz.UserInfo[]>()
+	const intimateRanking = ref<Quiz.UserInfo[]>()
+	/** 密友数据 */
+	const intimateFriends = ref<Quiz.UserInfo[]>()
 	/** 测试信息数据 */
 	const testInfo = ref([
 		{
@@ -1120,7 +1122,10 @@
 	onMounted(() => {
 		userInfo.value = getApp().globalData.userInfo
 		getIntimateRanking(userInfo.value.userId).then(res => {
-			friends.value = res.data
+			intimateRanking.value = res.data
+		})
+		getIntimateFriends(userInfo.value.userId).then(res => {
+			intimateFriends.value = res.data
 		})
 		paper.getAll().then((res) => {
 			questionBank.value = res.data

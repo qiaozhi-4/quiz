@@ -43,4 +43,10 @@ public class UserController {
     public List<UserDTO> getIntimateRanking(@PathVariable Integer userId) {
         return userService.getIntimateRanking(userId);
     }
+    @PathPermission(PermissionEnum.READ)
+    @ApiOperation("通过用户ID,获取用户密友信息")
+    @GetMapping("get-intimate-friends/{userId:\\d+}")
+    public List<User> getIntimateFriends(@PathVariable Integer userId) {
+        return userService.getIntimateFriends(userId);
+    }
 }

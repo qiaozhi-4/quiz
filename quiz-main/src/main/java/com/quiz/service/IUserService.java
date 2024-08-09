@@ -33,17 +33,26 @@ public interface IUserService extends IService<User> {
      * @param tPName     第三方平台的名称
      * @param providerId 用户在第三方平台相对当前应用的唯一id
      */
-    User registerUserTP( String tPName, String providerId);
+    User registerUserTP(String tPName, String providerId);
 
     /**
      * 根据id获取用户信息
+     *
      * @param userId 用户id
      */
     User getUserById(Integer userId);
 
     /**
      * 获取亲密排行榜数据
+     *
      * @param userId 用户id
      */
     List<UserDTO> getIntimateRanking(Integer userId);
+
+    /**
+     * 根据用户id获取亲密好友列表
+     *
+     * @param userId 用户id
+     */
+    List<User> getIntimateFriends(Integer userId);
 }
