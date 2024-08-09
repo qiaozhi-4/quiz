@@ -54,7 +54,8 @@
                  left join quiz.t_user c
                            on b.responder_user_id = c.user_id
 
-        where a.creator_user_id = #{userId}
+        where a.state != -1
+          and a.creator_user_id = #{userId}
           and b.responder_user_id is not null
         group by c.user_id
         order by total_score desc;
