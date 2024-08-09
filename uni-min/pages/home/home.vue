@@ -866,9 +866,17 @@
 								</view>
 								<view class="v2">
 									<view class="extra">
+										<q-popover>
+											<text class="text" >...</text>
+											<!-- 插入气泡内容 -->
+											<template #bubble-content>
+												<button class="button"
+													@click="onRemorPafer(question?.paperId,index)">删除</button>
+											</template>
+										</q-popover>
 										<!-- <text class="text" @click="">...</text> -->
-										<button class="button"
-											@click="onRemorPafer(question?.paperId,index)">删除</button>
+										<!-- <button class="button"
+											@click="onRemorPafer(question?.paperId,index)">删除</ button>-->
 									</view>
 									<button class="button" @click="onParticulars(question?.paperId)">查看详情</button>
 									<button class="button" open-type="share"
