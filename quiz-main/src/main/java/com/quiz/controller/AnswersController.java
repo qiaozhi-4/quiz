@@ -11,7 +11,6 @@ import com.quiz.utils.JWTUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import lombok.val;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,8 +35,8 @@ public class AnswersController {
     @ApiOperation("保存答卷")
     @PostMapping("save")
     public Answers save(@RequestBody Answers answers, @RequestHeader String token) {
-        val userId = Integer.parseInt(JWTUtils.getMemberIdByJwtToken(token));
-        Assert.isTrue(userId != answers.getResponderUserId(), "不能回答自己出的问题");
+        Integer userId = Integer.parseInt(JWTUtils.getMemberIdByJwtToken(token));
+        Assert.isTrue(!userId.equals(answers.getResponderUserId()), "不能回答自己出的问题");
         return answersService.saveAnswers(answers);
     }
 
