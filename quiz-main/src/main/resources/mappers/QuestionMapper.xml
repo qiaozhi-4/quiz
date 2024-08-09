@@ -13,7 +13,12 @@
 
     <select id="selectRandomQuestions" resultType="com.quiz.entity.Question" parameterType="java.lang.Integer">
         SELECT *
-        FROM quiz.q_question
+        FROM quiz.q_question a
+        WHERE a.question_id NOT IN (select qpq.question_id
+                                    from quiz.q_paper qp
+                                             left join quiz.q_paper_questions qpq on qp.paper_id = qpq.paper_id
+                                    where qp.state != -1
+                                      and qp.creator_user_id = #{userId})
         ORDER BY RAND()
         LIMIT #{num};
     </select>

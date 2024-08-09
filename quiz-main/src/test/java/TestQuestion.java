@@ -22,7 +22,7 @@ public class TestQuestion {
 
     @Test
     public void selectRandomQuestions() {
-        final List<Question> questions = questionMapper.selectRandomQuestions(10);
+        final List<Question> questions = questionMapper.selectRandomQuestions(1,10);
         System.out.println(questions.toString());
     }
 }

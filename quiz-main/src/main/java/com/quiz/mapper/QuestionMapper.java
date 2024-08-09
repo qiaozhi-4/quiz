@@ -16,7 +16,9 @@ import java.util.List;
 public interface QuestionMapper extends BaseMapper<Question> {
     /**
      * 随机返回 num 个题目
-     * @param num 题目数量
+     *
+     * @param userId 用户id
+     * @param num    题目数量
      */
-    List<Question> selectRandomQuestions(Integer num);
+    List<Question> selectRandomQuestions(Integer userId, Integer num);
 }

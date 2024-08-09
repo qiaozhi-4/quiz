@@ -1,10 +1,12 @@
 package com.quiz.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.quiz.entity.Question;
 import com.quiz.mapper.QuestionMapper;
 import com.quiz.service.IQuestionService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> implements IQuestionService {
 
+    @Override
+    public List<Question> getRandomQuestions(Integer userId, Integer num) {
+        return this.baseMapper.selectRandomQuestions(userId, num);
+    }
 }
