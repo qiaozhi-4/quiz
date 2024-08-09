@@ -14,7 +14,7 @@ import java.util.UUID;
 
 /**
  * <p>
- * UserDto
+ * UserDTO
  * </p>
  *
  * @author XGeorge
@@ -27,7 +27,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Accessors(chain = true)
 @ApiModel(value = "UserDto对象", description = "用户基本信息,添加权限列表")
-public class UserDto implements Serializable {
+public class UserDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

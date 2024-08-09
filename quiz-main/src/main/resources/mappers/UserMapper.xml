@@ -18,7 +18,7 @@
     </resultMap>
 
     <!-- Dto查询映射结果 -->
-    <resultMap id="UserDtoResultMap" extends="BaseResultMap" type="com.quiz.dto.UserDto">
+    <resultMap id="UserDtoResultMap" extends="BaseResultMap" type="com.quiz.dto.UserDTO">
         <collection property="permissions" ofType="string">
             <result column="permission_name"/>
         </collection>

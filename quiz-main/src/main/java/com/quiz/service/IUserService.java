@@ -1,7 +1,7 @@
 package com.quiz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.quiz.dto.UserDto;
+import com.quiz.dto.UserDTO;
 import com.quiz.entity.User;
 
 /**
@@ -18,7 +18,7 @@ public interface IUserService extends IService<User> {
      *
      * @param account 用户名 or 邮箱 or 电话号码
      */
-    UserDto getUserDtoByAccount(String account);
+    UserDTO getUserDtoByAccount(String account);
 
     /**
      * 平台注册用户

@@ -1,7 +1,7 @@
 package com.quiz.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.quiz.dto.UserDto;
+import com.quiz.dto.UserDTO;
 import com.quiz.service.IUserService;
 import com.quiz.utils.Assert;
 import com.quiz.utils.JWTUtils;
@@ -40,7 +40,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         // 更新用户表上次登录时间
         User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDto user = userService.getUserDtoByAccount(userDetails.getUsername());
+        UserDTO user = userService.getUserDtoByAccount(userDetails.getUsername());
         user.setLastLoginAt(LocalDateTime.now());
         com.quiz.entity.User quser = com.quiz.entity.User.builder().build();
         BeanUtils.copyProperties(user, quser);

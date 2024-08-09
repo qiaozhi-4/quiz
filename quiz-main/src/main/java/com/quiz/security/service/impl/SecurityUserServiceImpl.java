@@ -1,7 +1,7 @@
 package com.quiz.security.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.quiz.dto.UserDto;
+import com.quiz.dto.UserDTO;
 import com.quiz.security.service.ISecurityUserService;
 import com.quiz.service.IUserService;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ public class SecurityUserServiceImpl implements ISecurityUserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //根据账号获取用信息
-        UserDto user = userService.getUserDtoByAccount(username);
+        UserDTO user = userService.getUserDtoByAccount(username);
 
         // 如果走了缓存,就重新获取密码
         if (StringUtils.isBlank(user.getPassword()))

@@ -1,7 +1,7 @@
 package com.quiz.security.filter;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.quiz.dto.UserDto;
+import com.quiz.dto.UserDTO;
 import com.quiz.service.IUserService;
 import com.quiz.utils.JWTUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -42,7 +42,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         // 判断账户是否为空; 判断 SecurityContext 是否有身份
         if (!StringUtils.isEmpty(account) && SecurityContextHolder.getContext().getAuthentication() == null) {
             // 获取用户信息以及权限
-            final UserDto userDto = userService.getUserDtoByAccount(account);
+            final UserDTO userDto = userService.getUserDtoByAccount(account);
             final UserDetails user = User.builder()
                     .password(userDto.getUsername())
                     .username(userDto.getUsername())

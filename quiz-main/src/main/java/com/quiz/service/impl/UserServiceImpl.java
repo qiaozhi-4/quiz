@@ -1,7 +1,7 @@
 package com.quiz.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.quiz.dto.UserDto;
+import com.quiz.dto.UserDTO;
 import com.quiz.entity.User;
 import com.quiz.entity.UserAuth;
 import com.quiz.entity.UserRoles;
@@ -27,10 +27,10 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
     @Cacheable(key = "#account", unless = "#result == null")
     @Override
-    public UserDto getUserDtoByAccount(String account) {
+    public UserDTO getUserDtoByAccount(String account) {
         Assert.isNotNull(account, "账户不能为空");
         // 用户名必须是唯一的，不允许重复
-        final UserDto userDto = this.baseMapper.selectUserDtoByAccount(account);
+        final UserDTO userDto = this.baseMapper.selectUserDtoByAccount(account);
         Assert.isNotNull(userDto, "根据账户找不到该用户的信息");
         return userDto;
     }
@@ -50,7 +50,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public User registerUserTP(String tPName, String providerId) {
-        User user = UserDto.defUser();
+        User user = UserDTO.defUser();
         this.addUser(user);
         Assert.isTrue(UserAuth.builder()
                         .userId(user.getUserId())

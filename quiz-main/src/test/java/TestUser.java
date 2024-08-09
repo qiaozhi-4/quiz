@@ -1,5 +1,5 @@
 import com.quiz.Main;
-import com.quiz.dto.UserDto;
+import com.quiz.dto.UserDTO;
 import com.quiz.entity.User;
 import com.quiz.entity.UserAuth;
 import com.quiz.mapper.UserMapper;
@@ -36,7 +36,7 @@ public class TestUser {
 
     @Test
     public void testModel() {
-        final User user = UserDto.defUser().setUsername("测试");
+        final User user = UserDTO.defUser().setUsername("测试");
         log.info(user);
 //        user.insert();
         log.info(user);
@@ -48,9 +48,9 @@ public class TestUser {
 
     @Test
     public void selectUserDtoByAccount() {
-        final UserDto admin = userMapper.selectUserDtoByAccount("admin");
+        final UserDTO admin = userMapper.selectUserDtoByAccount("admin");
         System.out.println(admin.toString());
-        final UserDto user = userMapper.selectUserDtoByAccount("user");
+        final UserDTO user = userMapper.selectUserDtoByAccount("user");
         System.out.println(user.toString());
     }
 }
