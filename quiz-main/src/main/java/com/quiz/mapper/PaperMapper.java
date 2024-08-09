@@ -20,12 +20,12 @@ public interface PaperMapper extends BaseMapper<Paper> {
      *
      * @param paperId 试卷id
      */
-    public PaperDTO selectPaperById(Integer paperId);
+    PaperDTO selectPaperById(Integer paperId);
 
     /**
      * 根据用户id查询试卷列表
      *
      * @param userId 用户id
      */
-    public List<PaperDTO> selectPaperListByUserId(Integer userId);
+    List<PaperDTO> selectPaperListByUserId(Integer userId);
 }
