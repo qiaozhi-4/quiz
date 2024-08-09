@@ -15,7 +15,7 @@
         <result column="created_at" property="createdAt"/>
     </resultMap>
     <!-- Dto查询映射结果 -->
-    <resultMap id="PaperDtoResultMap" extends="BaseResultMap" type="com.quiz.dto.PaperDto">
+    <resultMap id="PaperDtoResultMap" extends="BaseResultMap" type="com.quiz.dto.PaperDTO">
         <collection property="questions" autoMapping="true" ofType="com.quiz.entity.Question">
             <result column="question_title" property="title"/>
         </collection>

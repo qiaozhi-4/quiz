@@ -2,7 +2,7 @@ package com.quiz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.quiz.dto.PaperDto;
+import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Answers;
 import com.quiz.entity.Paper;
 import com.quiz.entity.PaperQuestions;
@@ -35,7 +35,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     private final AnswersMapper answersMapper;
 
     @Override
-    public PaperDto savePaper(PaperDto paperDto) {
+    public PaperDTO savePaper(PaperDTO paperDto) {
         // 创建试卷
         Paper paper = Paper.builder().build();
         BeanUtils.copyProperties(paperDto, paper);
@@ -65,15 +65,15 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     }
 
     @Override
-    public PaperDto getPaper(Integer paperId) {
+    public PaperDTO getPaper(Integer paperId) {
         return this.baseMapper.selectPaperById(paperId);
     }
 
     @Override
-    public List<PaperDto> getPaperListByUserId(Integer userId) {
+    public List<PaperDTO> getPaperListByUserId(Integer userId) {
         return this.list(new LambdaQueryWrapper<Paper>().eq(Paper::getCreatorUserId, userId).ne(Paper::getState, -1)).stream()
                 .map(paper -> {
-                    PaperDto paperDto = PaperDto.builder().build();
+                    PaperDTO paperDto = PaperDTO.builder().build();
                     BeanUtils.copyProperties(paper, paperDto);
                     paperDto.setAnswersTotal(answersMapper.selectCount(new LambdaQueryWrapper<Answers>()
                             .eq(Answers::getPaperId, paper.getPaperId())));

@@ -1,7 +1,7 @@
 package com.quiz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.quiz.dto.PaperDto;
+import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Paper;
 
 /**
@@ -18,5 +18,5 @@ public interface PaperMapper extends BaseMapper<Paper> {
      *
      * @param paperId 试卷id
      */
-    public PaperDto selectPaperById(Integer paperId);
+    public PaperDTO selectPaperById(Integer paperId);
 }

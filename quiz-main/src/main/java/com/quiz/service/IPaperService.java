@@ -1,7 +1,7 @@
 package com.quiz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.quiz.dto.PaperDto;
+import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Paper;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public interface IPaperService extends IService<Paper> {
      *
      * @param paperDto 试卷信息
      */
-    PaperDto savePaper(PaperDto paperDto);
+    PaperDTO savePaper(PaperDTO paperDto);
 
     /**
      * 更新试卷
@@ -37,7 +37,7 @@ public interface IPaperService extends IService<Paper> {
      * @param paperId 试卷id
      * @return 试卷信息
      */
-    PaperDto getPaper(Integer paperId);
+    PaperDTO getPaper(Integer paperId);
 
     /**
      * 获取用户试卷列表
@@ -45,7 +45,7 @@ public interface IPaperService extends IService<Paper> {
      * @param userId 用户id
      * @return 试卷列表
      */
-    List<PaperDto> getPaperListByUserId(Integer userId);
+    List<PaperDTO> getPaperListByUserId(Integer userId);
 
     /**
      * 获取用户试卷总数

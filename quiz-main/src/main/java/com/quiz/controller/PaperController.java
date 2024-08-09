@@ -2,7 +2,7 @@ package com.quiz.controller;
 
 
 import com.quiz.annotation.PathPermission;
-import com.quiz.dto.PaperDto;
+import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Paper;
 import com.quiz.enumerate.PermissionEnum;
 import com.quiz.service.IPaperService;
@@ -34,7 +34,7 @@ public class PaperController {
     @PathPermission(PermissionEnum.USER_CREATE)
     @ApiOperation("添加试卷")
     @PostMapping("save")
-    public PaperDto save(@RequestBody PaperDto paperDto) {
+    public PaperDTO save(@RequestBody PaperDTO paperDto) {
         return paperService.savePaper(paperDto);
     }
 
@@ -48,14 +48,14 @@ public class PaperController {
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("通过试卷ID,获取试卷详情")
     @GetMapping("get/{paperId:\\d+}")
-    public PaperDto get(@PathVariable Integer paperId) {
+    public PaperDTO get(@PathVariable Integer paperId) {
         return paperService.getPaper(paperId);
     }
 
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("获取试卷列表")
     @GetMapping("get-all")
-    public List<PaperDto> getAll(@RequestHeader String token) {
+    public List<PaperDTO> getAll(@RequestHeader String token) {
         val userId = Integer.parseInt(JWTUtils.getMemberIdByJwtToken(token));
         return paperService.getPaperListByUserId(userId);
     }

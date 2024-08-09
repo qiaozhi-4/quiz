@@ -1,5 +1,5 @@
 import com.quiz.Main;
-import com.quiz.dto.PaperDto;
+import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Tag;
 import com.quiz.mapper.PaperMapper;
 import com.quiz.mapper.QuestionMapper;
@@ -29,7 +29,7 @@ public class TestPaper {
 
     @Test
     public void selectPaperById() {
-        final PaperDto paperDto = paperMapper.selectPaperById(1);
+        final PaperDTO paperDto = paperMapper.selectPaperById(1);
         System.out.println(paperDto.toString());
     }
 

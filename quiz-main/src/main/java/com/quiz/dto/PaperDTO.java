@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * <p>
- * PaperDto
+ * PaperDTO
  * </p>
  *
  * @author XGeorge
@@ -25,7 +25,7 @@ import java.util.List;
 @AllArgsConstructor
 @Accessors(chain = true)
 @ApiModel(value = "PaperDto对象", description = "试卷所有信息")
-public class PaperDto implements Serializable {
+public class PaperDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
