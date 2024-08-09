@@ -287,19 +287,19 @@
 			<view class="v1">
 				<view class="v-global achievement-score flex-column">
 					<text class="t1">目前成就</text>
-					<text class="t2">{{score}}分</text>
+					<text class="t2">{{prop[0]?.number}}分</text>
 				</view>
 				<view class="v-global gem" @click="onProp(1)">
 					<q-svg icon="复活宝石" size="33" />
-					<text class="count">{{prop.resurgenceGem.count}}</text>
+					<text class="count">{{prop[1]?.number}}</text>
 				</view>
 				<view class="v-global gem" @click="onProp(2)">
 					<q-svg icon="提示宝石" size="33" />
-					<text class="count">{{prop.hintGem.count}}</text>
+					<text class="count">{{prop[2]?.number}}</text>
 				</view>
 				<view class="v-global badge" @click="onBadge()">
 					<q-svg icon="徽章" size="33" />
-					<text class="count">一共获得{{prop.badge.count}}枚徽章</text>
+					<text class="count">一共获得{{badgeList.length}}枚徽章</text>
 					<q-svg icon="空心向右箭头" size="14" />
 				</view>
 			</view>
@@ -334,20 +334,11 @@
 
 <script lang="ts" setup>
 	import { ref, onMounted } from 'vue'
-	/** 成就总分数 */
-	const score = ref()
+	import { getBadgeList } from '../../utils/api/answers';
 	/** 道具信息 */
-	const prop = ref({
-		resurgenceGem: {
-			count: 12,
-		},
-		hintGem: {
-			count: 12,
-		},
-		badge: {
-			count: 17,
-		},
-	})
+	const prop = ref([])
+	/** 徽章信息 */
+	const badgeList = ref([])
 	/** 任务数据 */
 	const tasks = ref([
 		{
@@ -420,7 +411,10 @@
 		});
 	}
 	onMounted(() => {
-		score.value = 545120
+		prop.value = getApp().globalData.props
+		getBadgeList(getApp().globalData.userInfo.userId).then(res => {
+			badgeList.value = res.data
+		})
 		for (var i = 0; i < 8; i++) {
 			rankingList.value.push({
 				avatarUrl: '',
