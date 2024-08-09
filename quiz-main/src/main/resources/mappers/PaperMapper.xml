@@ -32,5 +32,13 @@
           and a.state != -1
         order by b.id
     </select>
+    <select id="selectPaperListByUserId" resultType="com.quiz.dto.PaperDTO">
+        select a.*, count(*) as answers_total
+        from quiz.q_paper a
+                 left join quiz.q_answers b on a.paper_id = b.paper_id
+        where a.state != -1
+          and a.creator_user_id = #{userId}
+        group by a.paper_id
+    </select>
 
 </mapper>

@@ -3,10 +3,8 @@ package com.quiz.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.quiz.dto.PaperDTO;
-import com.quiz.entity.Answers;
 import com.quiz.entity.Paper;
 import com.quiz.entity.PaperQuestions;
-import com.quiz.mapper.AnswersMapper;
 import com.quiz.mapper.PaperMapper;
 import com.quiz.service.IPaperQuestionsService;
 import com.quiz.service.IPaperService;
@@ -32,7 +30,6 @@ import java.util.stream.Collectors;
 public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements IPaperService {
 
     private final IPaperQuestionsService paperQuestionsService;
-    private final AnswersMapper answersMapper;
 
     @Override
     public PaperDTO savePaper(PaperDTO paperDto) {
@@ -71,14 +68,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
 
     @Override
     public List<PaperDTO> getPaperListByUserId(Integer userId) {
-        return this.list(new LambdaQueryWrapper<Paper>().eq(Paper::getCreatorUserId, userId).ne(Paper::getState, -1)).stream()
-                .map(paper -> {
-                    PaperDTO paperDto = PaperDTO.builder().build();
-                    BeanUtils.copyProperties(paper, paperDto);
-                    paperDto.setAnswersTotal(answersMapper.selectCount(new LambdaQueryWrapper<Answers>()
-                            .eq(Answers::getPaperId, paper.getPaperId())));
-                    return paperDto;
-                }).collect(Collectors.toList());
+        return this.baseMapper.selectPaperListByUserId(userId);
     }
 
     @Override

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Paper;
 
+import java.util.List;
+
 /**
  * <p>
  * 题目试卷 Mapper 接口
@@ -19,4 +21,11 @@ public interface PaperMapper extends BaseMapper<Paper> {
      * @param paperId 试卷id
      */
     public PaperDTO selectPaperById(Integer paperId);
+
+    /**
+     * 根据用户id查询试卷列表
+     *
+     * @param userId 用户id
+     */
+    public List<PaperDTO> selectPaperListByUserId(Integer userId);
 }
