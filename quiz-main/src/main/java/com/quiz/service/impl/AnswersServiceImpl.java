@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.quiz.constant.Constants;
 import com.quiz.dto.AnswersDTO;
 import com.quiz.entity.Answers;
+import com.quiz.entity.Paper;
 import com.quiz.mapper.AnswersMapper;
 import com.quiz.mapper.PaperMapper;
 import com.quiz.service.IAnswersService;
@@ -32,8 +33,10 @@ public class AnswersServiceImpl extends ServiceImpl<AnswersMapper, Answers> impl
 
     @Override
     public Answers saveAnswers(Answers answers) {
+        Paper paper = paperMapper.selectById(answers.getPaperId());
+        Assert.isTrue(!paper.getCreatorUserId().equals(answers.getResponderUserId()), "不能回答自己出的问题");
         /* 计算分数 */
-        val ans = paperMapper.selectById(answers.getPaperId()).getAnswers().split(Constants.SPACE_MARK);
+        val ans = paper.getAnswers().split(Constants.SPACE_MARK);
         val sel = answers.getSelects().split(Constants.SPACE_MARK);
         Assert.isTrue(ans.length == sel.length, "答案数量不匹配");
         answers.setScore(0);

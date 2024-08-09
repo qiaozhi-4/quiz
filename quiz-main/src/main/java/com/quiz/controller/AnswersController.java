@@ -6,8 +6,6 @@ import com.quiz.dto.AnswersDTO;
 import com.quiz.entity.Answers;
 import com.quiz.enumerate.PermissionEnum;
 import com.quiz.service.IAnswersService;
-import com.quiz.utils.Assert;
-import com.quiz.utils.JWTUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -34,9 +32,7 @@ public class AnswersController {
     @PathPermission(PermissionEnum.USER_CREATE)
     @ApiOperation("保存答卷")
     @PostMapping("save")
-    public Answers save(@RequestBody Answers answers, @RequestHeader String token) {
-        Integer userId = Integer.parseInt(JWTUtils.getMemberIdByJwtToken(token));
-        Assert.isTrue(!userId.equals(answers.getResponderUserId()), "不能回答自己出的问题");
+    public Answers save(@RequestBody Answers answers) {
         return answersService.saveAnswers(answers);
     }
 
