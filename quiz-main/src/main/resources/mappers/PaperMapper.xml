@@ -28,7 +28,7 @@
                            on a.paper_id = b.paper_id
                  left join quiz.q_question c
                            on b.question_id = c.question_id
-        where a.paper_id = #{paperId}
+        where a.paper_id = #{paperId} order by b.id
     </select>
 
 </mapper>
