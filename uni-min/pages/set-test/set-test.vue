@@ -297,7 +297,7 @@
 					</swiper-item>
 				</swiper>
 				<!-- 指示点 -->
-				<q-indicator-position :current="questionIndex" :amount="questions.length"></q-indicator-position>
+				<q-indicator-position :current="questionIndex" :amount="questions?.length"></q-indicator-position>
 			</view>
 		</view>
 		<view class="footer flex-column">
