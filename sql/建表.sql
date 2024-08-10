@@ -73,10 +73,10 @@ create table if not exists quiz.t_user_roles
 
 create table if not exists quiz.t_role_permissions
 (
-    role_id       int not null comment '关联角色ID。',
-    permission_id int not null comment '关联权限ID。',
+    id            int auto_increment comment '主键',
     role_id       int not null comment '关联角色ID',
     permission_id int not null comment '关联权限ID',
+    primary key (id),
     INDEX role_id (role_id),
     INDEX permission_id (permission_id),
     INDEX role_id_permission_id (role_id, permission_id)
@@ -84,8 +84,8 @@ create table if not exists quiz.t_role_permissions
 
 create table if not exists quiz.q_prop
 (
-    prop_id   int auto_increment comment '道具id',
-    prop_name varchar(127) not null comment '道具名称',
+    prop_id       int auto_increment comment '道具id',
+    prop_name     varchar(127) not null comment '道具名称',
     prop_describe varchar(511) not null comment '道具描述',
     primary key (prop_id)
 ) comment '道具表';

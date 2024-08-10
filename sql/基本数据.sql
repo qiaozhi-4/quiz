@@ -17,9 +17,11 @@ VALUES (1, 1),
        (1, 2),
        (1, 3),
        (1, 4),
-       (2, 2);
-    (2, 6);
-    (3, 5);
+       (2, 2),
+       (2, 6),
+       (2, 7),
+       (2, 8),
+       (3, 5);
 
 -- 添加测试用户
 INSERT INTO quiz.t_user (username, password, created_at)
