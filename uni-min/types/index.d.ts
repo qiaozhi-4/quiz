@@ -121,4 +121,29 @@ declare namespace Quiz {
 		/** 道具数量 */
 		number : number
 	}
+	/** 任务数据 */
+	interface Task {
+		/** 任务ID */
+		taskId : number
+		/** 奖励id */
+		awardId : number
+		/** 奖励数量 */
+		awardNumber : number
+		/** 任务描述 */
+		describe : string
+		/** 任务条件类型,1:出题:string2:答题 */
+		conditionType : number
+		/** 任务条件计数 */
+		conditionNumber : number
+		/** 创建时间 */
+		createdAt : string
+		/** 更新时间 */
+		updatedAt : string
+		/** 奖励名称 */
+		awardName : string
+		/** 任务完成计数 */
+		finishNumber : number
+		/** 是否领取奖励 */
+		isReceiveAward : boolean
+	}
 }

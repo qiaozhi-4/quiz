@@ -13,5 +13,13 @@
         <result column="created_at" property="createdAt" />
         <result column="updated_at" property="updatedAt" />
     </resultMap>
+    <select id="selectTaskList" resultType="com.quiz.dto.TaskDTO">
+        select a.*, b.finish_number, b.is_receive_award, c.prop_name as award_name
+        from quiz.q_task a
+                 left join quiz.q_task_record b on a.task_id = b.task_id
+                 left join quiz.q_prop c on a.award_id = c.prop_id
+        where b.user_id = #{userId}
+          and b.created_at &gt;= #{mondayDateTime}
+    </select>
 
 </mapper>

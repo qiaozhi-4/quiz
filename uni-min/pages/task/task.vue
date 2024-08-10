@@ -307,18 +307,19 @@
 			<view class="v-global tasks flex-column" v-for="(item ,index) in tasks" :key="index">
 				<text class="title">{{item.title}}</text>
 				<view class="task-global" :class="`task${item.type}`" v-for="(task,i) in item.list" :key="i">
-					<view class="progress"
-						:style="{width:`${task.finish < task.total ? task.finish/task.total*100 : 100}%`}"></view>
+					<view class="progress" :style="{width:`${task.finishNumber/task.conditionNumber*100 }%`}"></view>
 					<view class="svg-grap">
 						<q-svg :icon="task.awardName" size="33" />
-						<text class="count">{{task.awardCount}}</text>
+						<text class="count">{{task.awardNumber}}</text>
 					</view>
-					<text class="title">{{task.title}}</text>
-					<button class="but-unfinished" v-if="task.finish < task.total">还差{{task.total-task.finish}}</button>
+					<text class="title">{{task.describe}}</text>
+					<button class="but-unfinished"
+						v-if="task.finishNumber < task.conditionNumber">还差{{task.conditionNumber - task.finishNumber}}</button>
+					<button class="but-unfinished" v-else-if="task.isReceiveAward">已领取</button>
 					<button class="but" v-else>领取奖励</button>
 				</view>
 			</view>
-			<text class="class">本月我最关注的朋友🤩</text>
+			<!-- 	<text class="class">本月我最关注的朋友🤩</text>
 			<view class="v-global ranking-list flex-column">
 				<text class="title">答题数量排行：</text>
 				<view class="user" v-for="(item, index) in rankingList" :key="index">
@@ -327,7 +328,7 @@
 					<text class="t1">{{item.count}}答</text>
 					<view class="nickname">{{item?.nickname}}</view>
 				</view>
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -335,6 +336,7 @@
 <script lang="ts" setup>
 	import { ref, onMounted } from 'vue'
 	import { getBadgeList } from '../../utils/api/answers';
+	import { getAllTask } from '../../utils/api/task';
 	/** 道具信息 */
 	const prop = ref([])
 	/** 徽章信息 */
@@ -344,56 +346,11 @@
 		{
 			title: '测测对朋友的了解😊',
 			type: 1,
-			list: [
-				{
-					title: '做1位朋友的测试！',
-					awardName: '提示宝石',
-					awardCount: 1,
-					finish: 3,
-					total: 1,
-				},
-				{
-					title: '做7位朋友的测试！',
-					awardName: '复活宝石',
-					awardCount: 2,
-					finish: 3,
-					total: 7,
-				},
-				{
-					title: '做15位朋友的测试！',
-					awardName: '提示宝石',
-					awardCount: 2,
-					finish: 3,
-					total: 15,
-				},
-			]
+			list: null
 		}, {
 			title: '出题给朋友们～ 😆',
 			type: 2,
-			list: [
-				{
-					title: '出题1次！',
-					awardName: '提示宝石',
-					awardCount: 1,
-					finish: 6,
-					total: 1,
-				},
-				{
-					title: '出题5次！',
-					awardName: '复活宝石',
-					awardCount: 2,
-					finish: 6,
-					total: 5,
-				},
-				{
-					title: '出题10次！',
-					awardName: '复活宝石',
-					awardCount: 2,
-					finish: 6,
-					total: 10,
-				},
-			]
-
+			list: null
 		}
 	])
 	/** 答题数据 */
@@ -414,6 +371,15 @@
 		prop.value = getApp().globalData.props
 		getBadgeList(getApp().globalData.userInfo.userId).then(res => {
 			badgeList.value = res.data
+		})
+		getAllTask().then(res => {
+			console.log(res.data);
+			tasks.value.forEach(e => {
+				console.log(e);
+				e.list = res.data.filter(task => task.conditionType == e.type
+				)
+				console.log(e.list);
+			})
 		})
 		for (var i = 0; i < 8; i++) {
 			rankingList.value.push({

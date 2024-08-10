@@ -1,7 +1,12 @@
 package com.quiz.mapper;
 
-import com.quiz.entity.Task;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.quiz.dto.TaskDTO;
+import com.quiz.entity.Task;
+import org.apache.ibatis.annotations.Param;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +17,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2024-08-10
  */
 public interface TaskMapper extends BaseMapper<Task> {
-
+    /**
+     * 查询用户本周任务列表
+     *
+     * @param userId         用户id
+     * @param mondayDateTime 周一日期
+     */
+    List<TaskDTO> selectTaskList(@Param("userId") Integer userId, @Param("mondayDateTime") LocalDateTime mondayDateTime);
 }
