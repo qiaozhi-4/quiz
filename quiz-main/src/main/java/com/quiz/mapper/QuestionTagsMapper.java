@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author XGeorge
- * @since 2024-08-05
+ * @since 2024-08-10
  */
 public interface QuestionTagsMapper extends BaseMapper<QuestionTags> {
 

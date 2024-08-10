@@ -153,8 +153,10 @@ create table if not exists quiz.q_question
 
 create table if not exists quiz.q_question_tags
 (
+    id          int auto_increment comment '主键',
     question_id int not null comment '题目ID',
     tag_id      int not null comment '标签ID',
+    primary key (id),
     INDEX question_id (question_id),
     INDEX tag_id (tag_id),
     INDEX paper_id_tag_id (question_id, tag_id)
