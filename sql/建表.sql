@@ -92,9 +92,6 @@ create table if not exists quiz.q_prop
 
 create table if not exists quiz.q_user_prop
 (
-    id      int auto_increment comment '主键，权限ID。',
-    user_id int not null comment '用户id。',
-    prop_id int not null comment '道具id。',
     id      int auto_increment comment '主键',
     user_id int not null comment '用户id',
     prop_id int not null comment '道具id',
