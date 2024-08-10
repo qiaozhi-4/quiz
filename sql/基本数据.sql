@@ -56,3 +56,12 @@ INSERT INTO quiz.q_prop (prop_id, prop_name, prop_describe)
 VALUES ('1', '成就分数', '所有答题的统计分'),
        ('2', '复活宝石', '复活宝石让尊贵的您获得重新再次答题的机会！'),
        ('3', '提示宝石', '提示宝石让尊贵的您答题时获得答案相关的提示！');
+
+-- 添加任务
+INSERT INTO quiz.q_task (award_id, award_number, describe_, condition_type, condition_number)
+VALUES (3, 1, '做1位朋友的测试！', 1, 1),
+       (2, 2, '做7位朋友的测试！', 1, 7),
+       (3, 2, '做15位朋友的测试！', 1, 15),
+       (3, 1, '出题1次！', 2, 1),
+       (2, 2, '出题5次！', 2, 5),
+       (2, 2, '出题10次！', 2, 10);

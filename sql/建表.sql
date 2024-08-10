@@ -190,8 +190,33 @@ create table if not exists quiz.q_paper_classes
     INDEX paper_id (paper_id),
     INDEX question_id (class_id),
     INDEX paper_id_question_id (paper_id, class_id)
-) comment '试卷关联试卷分类';
 ) comment '试卷关联分类';
+
+create table if not exists quiz.q_task
+(
+    task_id          int auto_increment comment '任务ID',
+    award_id         int not null comment '奖励id',
+    award_number     int      default 1 comment '奖励数量',
+    describe_        varchar(511) comment '任务描述',
+    condition_type   int not null comment '任务条件类型,1:出题;2:答题',
+    condition_number int      default 1 comment '任务条件计数',
+    created_at       datetime default CURRENT_TIMESTAMP comment '创建时间',
+    updated_at       datetime comment '更新时间',
+    primary key (task_id),
+    INDEX award_id (award_id)
+) comment '任务数据';
+
+create table if not exists quiz.q_task_finish_record
+(
+    id         int auto_increment comment '主键',
+    task_id    int not null comment '任务ID',
+    user_id    int not null comment '用户id',
+    created_at datetime default CURRENT_TIMESTAMP comment '创建时间',
+    updated_at datetime comment '更新时间',
+    primary key (id),
+    INDEX task_id (task_id),
+    INDEX user_id (user_id)
+) comment '任务完成记录';
 
 
 # 勇者相关
