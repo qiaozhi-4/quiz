@@ -198,7 +198,7 @@ create table if not exists quiz.q_task
     award_id         int not null comment '奖励id',
     award_number     int      default 1 comment '奖励数量',
     describe_        varchar(511) comment '任务描述',
-    condition_type   int not null comment '任务条件类型,1:出题;2:答题',
+    condition_type   int not null comment '任务条件类型,1:答题;2:出题',
     condition_number int      default 1 comment '任务条件计数',
     created_at       datetime default CURRENT_TIMESTAMP comment '创建时间',
     updated_at       datetime comment '更新时间',
