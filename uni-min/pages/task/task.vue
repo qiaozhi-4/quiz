@@ -316,7 +316,7 @@
 					<button class="but-unfinished"
 						v-if="task.finishNumber < task.conditionNumber">还差{{task.conditionNumber - task.finishNumber}}</button>
 					<button class="but-unfinished" v-else-if="task.isReceiveAward">已领取</button>
-					<button class="but" v-else>领取奖励</button>
+					<button class="but" v-else @click="receiveAward(task.taskId,index,i)">领取奖励</button>
 				</view>
 			</view>
 			<!-- 	<text class="class">本月我最关注的朋友🤩</text>
@@ -336,7 +336,7 @@
 <script lang="ts" setup>
 	import { ref, onMounted } from 'vue'
 	import { getBadgeList } from '../../utils/api/answers';
-	import { getAllTask } from '../../utils/api/task';
+	import { finishTask, getAllTask } from '../../utils/api/task';
 	/** 道具信息 */
 	const prop = ref([])
 	/** 徽章信息 */
@@ -346,11 +346,11 @@
 		{
 			title: '测测对朋友的了解😊',
 			type: 1,
-			list: null
+			list: []
 		}, {
 			title: '出题给朋友们～ 😆',
 			type: 2,
-			list: null
+			list: []
 		}
 	])
 	/** 答题数据 */
@@ -367,18 +367,22 @@
 			url: `/pages/badge/badge`
 		});
 	}
+	/** 领取奖励 */
+	function receiveAward(taskId : number, index, i) {
+		finishTask(taskId).then(res => {
+			tasks.value[index].list[i] = res.data
+			prop.value.filter(e => e.propId == res.data.awardId)[0].number += res.data.awardNumber
+		})
+	}
 	onMounted(() => {
 		prop.value = getApp().globalData.props
 		getBadgeList(getApp().globalData.userInfo.userId).then(res => {
 			badgeList.value = res.data
 		})
 		getAllTask().then(res => {
-			console.log(res.data);
 			tasks.value.forEach(e => {
-				console.log(e);
 				e.list = res.data.filter(task => task.conditionType == e.type
 				)
-				console.log(e.list);
 			})
 		})
 		for (var i = 0; i < 8; i++) {

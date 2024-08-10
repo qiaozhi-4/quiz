@@ -27,17 +27,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TaskController {
     private final ITaskService taskService;
+
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("获取全部任务")
     @GetMapping("get-all")
     public List<TaskDTO> getAll(@RequestHeader String token) {
         Integer userId = Integer.parseInt(JWTUtils.getMemberIdByJwtToken(token));
-        return taskService.getAll(userId);
+        return taskService.getAllTaskAndUpdateOrSaveTaskRecord(userId);
     }
+
     @PathPermission(PermissionEnum.USER_CREATE)
     @ApiOperation("完成任务,并获取奖励")
     @PostMapping("finish/{taskId:\\d+}")
-    public TaskDTO finish(@PathVariable Integer taskId) {
-        return null;
+    public TaskDTO finishTask(@PathVariable Integer taskId, @RequestHeader String token) {
+        Integer userId = Integer.parseInt(JWTUtils.getMemberIdByJwtToken(token));
+        return taskService.finishTask(userId, taskId);
     }
 }

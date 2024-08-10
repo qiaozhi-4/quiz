@@ -16,9 +16,16 @@ import java.util.List;
  */
 public interface ITaskService extends IService<Task> {
     /**
-     * 查询用户本周任务列表
+     * 查询用户本周任务列表,如果本周任务未初始化,则插入,如果已初始化,则更新
      *
      * @param userId 用户id
      */
-    List<TaskDTO> getAll(Integer userId);
+    List<TaskDTO> getAllTaskAndUpdateOrSaveTaskRecord(Integer userId);
+
+    /**
+     * 完成任务
+     * @param userId 用户id
+     * @param taskId 任务id
+     */
+    TaskDTO finishTask(Integer userId, Integer taskId);
 }

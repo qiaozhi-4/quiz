@@ -21,7 +21,15 @@ public interface TaskMapper extends BaseMapper<Task> {
      * 查询用户本周任务列表
      *
      * @param userId         用户id
-     * @param mondayDateTime 周一日期
+     * @param earliestDateTime 最早时间
      */
-    List<TaskDTO> selectTaskList(@Param("userId") Integer userId, @Param("mondayDateTime") LocalDateTime mondayDateTime);
+    List<TaskDTO> selectTaskList(@Param("userId") Integer userId, @Param("earliestDateTime") LocalDateTime earliestDateTime);
+    /**
+     * 查询用户本周任务列表
+     *
+     * @param taskId         任务id
+     * @param userId         用户id
+     * @param earliestDateTime 最早时间
+     */
+    TaskDTO selectTask(@Param("userId") Integer userId, @Param("taskId") Integer taskId, @Param("earliestDateTime") LocalDateTime earliestDateTime);
 }
