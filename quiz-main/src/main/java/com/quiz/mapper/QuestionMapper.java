@@ -2,6 +2,7 @@ package com.quiz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.quiz.entity.Question;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,5 +21,5 @@ public interface QuestionMapper extends BaseMapper<Question> {
      * @param userId 用户id
      * @param num    题目数量
      */
-    List<Question> selectRandomQuestions(Integer userId, Integer num);
+    List<Question> selectRandomQuestions(@Param("userId") Integer userId, @Param("num") Integer num);
 }
