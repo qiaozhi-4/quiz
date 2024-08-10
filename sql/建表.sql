@@ -183,14 +183,15 @@ create table if not exists quiz.q_classes
 
 create table if not exists quiz.q_paper_classes
 (
-    paper_id int not null comment '试卷ID。',
-    class_id int not null comment '分类ID。',
+    id       int auto_increment comment '主键',
     paper_id int not null comment '试卷ID',
     class_id int not null comment '分类ID',
+    primary key (id),
     INDEX paper_id (paper_id),
     INDEX question_id (class_id),
     INDEX paper_id_question_id (paper_id, class_id)
 ) comment '试卷关联试卷分类';
+) comment '试卷关联分类';
 
 
 # 勇者相关
