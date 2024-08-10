@@ -1,7 +1,7 @@
 package com.quiz.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.quiz.entity.UserRoles;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
@@ -9,7 +9,7 @@ import com.quiz.entity.UserRoles;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-24
+ * @since 2024-08-10
  */
 public interface IUserRolesService extends IService<UserRoles> {
 

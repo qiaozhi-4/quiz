@@ -62,10 +62,10 @@ create table if not exists quiz.t_path
 
 create table if not exists quiz.t_user_roles
 (
-    user_id int not null comment '关联用户ID。',
-    role_id int not null comment '关联角色ID。',
+    id      int auto_increment comment '主键',
     user_id int not null comment '关联用户ID',
     role_id int not null comment '关联角色ID',
+    primary key (id),
     INDEX user_id (user_id),
     INDEX role_id (role_id),
     INDEX user_id_role_id (user_id, role_id)
