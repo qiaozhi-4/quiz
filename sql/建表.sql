@@ -206,17 +206,19 @@ create table if not exists quiz.q_task
     INDEX award_id (award_id)
 ) comment '任务数据';
 
-create table if not exists quiz.q_task_finish_record
+create table if not exists quiz.q_task_record
 (
-    id         int auto_increment comment '主键',
-    task_id    int not null comment '任务ID',
-    user_id    int not null comment '用户id',
-    created_at datetime default CURRENT_TIMESTAMP comment '创建时间',
-    updated_at datetime comment '更新时间',
+    id               int auto_increment comment '主键',
+    task_id          int not null comment '任务ID',
+    user_id          int not null comment '用户id',
+    finish_number    int      default 0 comment '任务完成计数',
+    is_receive_award boolean  default false comment '任务奖励是否领取',
+    created_at       datetime default CURRENT_TIMESTAMP comment '创建时间',
+    updated_at       datetime comment '更新时间',
     primary key (id),
     INDEX task_id (task_id),
     INDEX user_id (user_id)
-) comment '任务完成记录';
+) comment '任务记录';
 
 
 # 勇者相关
