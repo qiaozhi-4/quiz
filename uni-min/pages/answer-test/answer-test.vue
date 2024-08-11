@@ -341,13 +341,13 @@
 </template>
 
 <script lang="ts" setup>
-	import { ref, onMounted } from 'vue'
-	import { onLoad } from '@dcloudio/uni-app'
-	import * as paper from '../../utils/api/paper'
-	import { getUserById } from '../../utils/api/user';
-	import { saveAnswers } from '../../utils/api/answers';
+import {onMounted, ref} from 'vue'
+import {onLoad} from '@dcloudio/uni-app'
+import {getPaper} from '../../utils/api/paper'
+import {getUserById} from '../../utils/api/user';
+import {saveAnswers} from '../../utils/api/answers';
 
-	/** 获取登录信息 */
+/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
 	/** 朋友信息 */
 	const friendInfo = ref<Quiz.UserInfo>()
@@ -443,7 +443,7 @@
 		}
 	})
 	onLoad((option) => {
-		paper.get(option.paperId).then(res => {
+    getPaper(option.paperId).then(res => {
 			paperInfo.value = res.data
 			paperInfo.value.answers = res.data.answers.split('@@')
 			questions.value = res.data.questions

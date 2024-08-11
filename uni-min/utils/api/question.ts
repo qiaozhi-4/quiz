@@ -1,9 +1,9 @@
-import { request } from "../request"
+import {request} from "../request"
 
 /** 获取随机10个题目 */
-export function getRandomQuestions() {
+export function getRandomQuestions(userId: number) {
 	return request({
-		url: '/question/get-random-questions',
+        url: '/question/get-random/${userId}',
 		method: 'GET'
 	})
 }
@@ -11,7 +11,7 @@ export function getRandomQuestions() {
 /** 获取随机10个题目 */
 export function getRandomQuestionsTest() {
 	return request({
-		url: '/question/get-random-questions-test',
+        url: '/question/get-random-test',
 		method: 'GET'
 	})
 }

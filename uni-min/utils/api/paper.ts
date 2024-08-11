@@ -1,7 +1,7 @@
-import { request } from "../request"
+import {request} from "../request"
 
 /** 保存试卷 */
-export function save(paperDto : Quiz.Paper) {
+export function savePaper(paperDto: Quiz.Paper) {
 	return request({
 		url: `/paper/save`,
 		method: 'POST',
@@ -10,7 +10,7 @@ export function save(paperDto : Quiz.Paper) {
 }
 
 /** 更新试卷 */
-export function update(paper : Quiz.Paper) {
+export function updatePaper(paper: Quiz.Paper) {
 	return request({
 		url: `/paper/update`,
 		method: 'PUT',
@@ -19,7 +19,7 @@ export function update(paper : Quiz.Paper) {
 }
 
 /** 通过试卷ID,获取试卷详情 */
-export function get(paperId : number) {
+export function getPaper(paperId: number) {
 	return request({
 		url: `/paper/get/${paperId}`,
 		method: 'GET',
@@ -27,23 +27,23 @@ export function get(paperId : number) {
 }
 
 /** 获取试卷列表 */
-export function getAll() {
+export function getPaperList(userId: number) {
 	return request({
-		url: `/paper/get-all`,
+        url: `/paper/get-list/${userId}`,
 		method: 'GET',
 	})
 }
 
 /** 获取用户试卷总数(包括已删除),判断是否出过题 */
-export function getPaperTotal() {
+export function getPaperTotal(userId: number) {
 	return request({
-		url: `/paper/get-total`,
+        url: `/paper/get-total/${userId}`,
 		method: 'GET',
 	})
 }
 
 /** 删除试卷 */
-export function remove(paperId : number) {
+export function removePaper(paperId: number) {
 	return request({
 		url: `/paper/remove/${paperId}`,
 		method: 'DELETE',

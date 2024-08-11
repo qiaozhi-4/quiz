@@ -5,7 +5,6 @@ import com.quiz.annotation.PathPermission;
 import com.quiz.dto.TaskDTO;
 import com.quiz.enumerate.PermissionEnum;
 import com.quiz.service.ITaskService;
-import com.quiz.utils.JWTUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -30,17 +29,15 @@ public class TaskController {
 
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("获取全部任务")
-    @GetMapping("get-all")
-    public List<TaskDTO> getAll(@RequestHeader String token) {
-        Integer userId = Integer.parseInt(JWTUtils.getMemberIdByJwtToken(token));
+    @GetMapping("get-all/{userId:\\d+}")
+    public List<TaskDTO> getAll(@PathVariable Integer userId) {
         return taskService.getAllTaskAndUpdateOrSaveTaskRecord(userId);
     }
 
     @PathPermission(PermissionEnum.USER_CREATE)
     @ApiOperation("完成任务,并获取奖励")
-    @PostMapping("finish/{taskId:\\d+}")
-    public TaskDTO finishTask(@PathVariable Integer taskId, @RequestHeader String token) {
-        Integer userId = Integer.parseInt(JWTUtils.getMemberIdByJwtToken(token));
+    @PostMapping("finish/{userId:\\d+}/{taskId:\\d+}")
+    public TaskDTO finishTask(@PathVariable Integer userId, @PathVariable Integer taskId) {
         return taskService.finishTask(userId, taskId);
     }
 }

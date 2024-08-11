@@ -334,10 +334,11 @@
 </template>
 
 <script lang="ts" setup>
-	import { ref, onMounted } from 'vue'
-	import { getBadgeList } from '../../utils/api/answers';
-	import { finishTask, getAllTask } from '../../utils/api/task';
-	/** 道具信息 */
+import {onMounted, ref} from 'vue'
+import {getBadgeList} from '../../utils/api/answers';
+import {finishTask, getAllTask} from '../../utils/api/task';
+
+/** 道具信息 */
 	const prop = ref([])
 	/** 徽章信息 */
 	const badgeList = ref([])
@@ -369,7 +370,7 @@
 	}
 	/** 领取奖励 */
 	function receiveAward(taskId : number, index, i) {
-		finishTask(taskId).then(res => {
+    finishTask(getApp().globalData.userInfo.userId, taskId).then(res => {
 			tasks.value[index].list[i] = res.data
 			prop.value.filter(e => e.propId == res.data.awardId)[0].number += res.data.awardNumber
 		})
@@ -379,7 +380,7 @@
 		getBadgeList(getApp().globalData.userInfo.userId).then(res => {
 			badgeList.value = res.data
 		})
-		getAllTask().then(res => {
+    getAllTask(getApp().globalData.userInfo.userId).then(res => {
 			tasks.value.forEach(e => {
 				e.list = res.data.filter(task => task.conditionType == e.type
 				)

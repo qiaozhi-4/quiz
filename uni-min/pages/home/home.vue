@@ -897,12 +897,13 @@
 </template>
 
 <script lang="ts" setup>
-	import { ref, onMounted } from 'vue'
-	import { onLoad, onShareAppMessage } from '@dcloudio/uni-app'
-	import * as paper from '../../utils/api/paper';
-	import { getIntimateFriends, getIntimateRanking } from '../../utils/api/user';
-	import { getAnswersList } from '../../utils/api/answers';
-	/** 获取登录信息 */
+import {ref} from 'vue'
+import {onLoad, onShareAppMessage} from '@dcloudio/uni-app'
+import {getPaperList, removePaper} from '../../utils/api/paper';
+import {getIntimateFriends, getIntimateRanking} from '../../utils/api/user';
+import {getAnswersList} from '../../utils/api/answers';
+
+/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
 	/** 头部样式 */
 	const headStyle = getApp().globalData.headStyle
@@ -1087,7 +1088,7 @@
 	}
 	/** 删除试卷 */
 	function onRemorPafer(paperId : number, index : number) {
-		paper.remove(paperId).then(res => {
+    removePaper(paperId).then(res => {
 			if (res.data)
 				questionBank.value.splice(index, 1)
 		})
@@ -1119,21 +1120,6 @@
 			url: `/pages/start-test/start-test?isAnswer=false`
 		});
 	}
-	onMounted(() => {
-		userInfo.value = getApp().globalData.userInfo
-		getIntimateRanking(userInfo.value.userId).then(res => {
-			intimateRanking.value = res.data
-		})
-		getIntimateFriends(userInfo.value.userId).then(res => {
-			intimateFriends.value = res.data
-		})
-		paper.getAll().then((res) => {
-			questionBank.value = res.data
-		})
-		getAnswersList(userInfo.value.userId).then(res => {
-			testBank.value = res.data
-		})
-	})
 	onLoad((option) => {
 		if (option.topicId) {
 			activeTag.value = 1
@@ -1153,5 +1139,23 @@
 				select: '喜欢不冷不热不雨不晴，阴天最好',
 			})
 		}
+
+    userInfo.value = getApp().globalData.userInfo
+    getIntimateRanking(userInfo.value.userId).then(res => {
+      intimateRanking.value = res.data
+    })
+    getIntimateFriends(userInfo.value.userId).then(res => {
+      intimateFriends.value = res.data
+    })
+    getPaperList(userInfo.value.userId).then((res) => {
+      questionBank.value = res.data
+    })
+    getAnswersList(userInfo.value.userId).then(res => {
+      testBank.value = res.data
+    })
+    /* 如果是朋友主页 */
+    if (option.isFriendHome) {
+
+    }
 	})
 </script>

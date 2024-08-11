@@ -153,10 +153,11 @@
 </template>
 
 <script lang="ts" setup>
-	import { ref } from 'vue'
-	import { onLoad } from '@dcloudio/uni-app'
-	import { get } from '../../utils/api/paper';
-	/** 获取登录信息 */
+import {ref} from 'vue'
+import {onLoad} from '@dcloudio/uni-app'
+import {getPaper} from '../../utils/api/paper';
+
+/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
 	/** 页面跳转过来的参数 */
 	const pageArg = ref()
@@ -169,7 +170,7 @@
 	onLoad((option) => {
 		userInfo.value = getApp().globalData.userInfo
 		pageArg.value = option
-		get(pageArg.value.paperId).then(res => {
+    getPaper(pageArg.value.paperId).then(res => {
 			paper.value = res.data
 		})
 	})

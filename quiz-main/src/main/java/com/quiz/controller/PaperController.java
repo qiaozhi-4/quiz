@@ -6,11 +6,9 @@ import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Paper;
 import com.quiz.enumerate.PermissionEnum;
 import com.quiz.service.IPaperService;
-import com.quiz.utils.JWTUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import lombok.val;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,17 +52,15 @@ public class PaperController {
 
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("获取试卷列表")
-    @GetMapping("get-all")
-    public List<PaperDTO> getAll(@RequestHeader String token) {
-        val userId = Integer.parseInt(JWTUtils.getMemberIdByJwtToken(token));
+    @GetMapping("get-list/{userId:\\d+}")
+    public List<PaperDTO> getPaperListByUserId(@PathVariable Integer userId) {
         return paperService.getPaperListByUserId(userId);
     }
 
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("获取用户试卷总数(包括已删除),判断是否出过题")
-    @GetMapping("get-total")
-    public Long getTotal(@RequestHeader String token) {
-        val userId = Integer.parseInt(JWTUtils.getMemberIdByJwtToken(token));
+    @GetMapping("get-total/{userId:\\d+}")
+    public Long getTotal(@PathVariable Integer userId) {
         return paperService.getTotalByUserId(userId, false);
     }
 

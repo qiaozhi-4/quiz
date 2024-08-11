@@ -1,11 +1,8 @@
 <script>
-	import {
-		login
-	} from './utils/api/user';
-	import {
-		getPaperTotal
-	} from './utils/api/paper';
-	export default {
+import {login} from './utils/api/user';
+import {getPaperTotal} from './utils/api/paper';
+
+export default {
 		globalData: {
 			userInfo: null,
 			token: "",
@@ -65,7 +62,7 @@
 							}
 						} else {
 							console.log('已设置头像和用户名')
-							getPaperTotal().then((res) => {
+              getPaperTotal(res.data.userInfo.userId).then((res) => {
 								if ('pages/index/index' == route) {// 不是分享进来的就跳转
 									if (res.data == 0) {
 										uni.redirectTo({

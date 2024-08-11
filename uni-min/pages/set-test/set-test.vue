@@ -341,11 +341,11 @@
 </template>
 
 <script lang="ts" setup>
-	import { ref, onMounted } from 'vue'
-	import { getRandomQuestions } from '../../utils/api/question';
-	import { save } from '../../utils/api/paper';
+import {onMounted, ref} from 'vue'
+import {getRandomQuestions} from '../../utils/api/question';
+import {savePaper} from '../../utils/api/paper';
 
-	/** 获取登录信息 */
+/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
 	/** 题目 */
 	const paper = ref<Quiz.Paper>({} as Quiz.Paper)
@@ -385,7 +385,7 @@
 			paper.value.creatorUserId = userInfo.value.userId
 			paper.value.answers = options.value.join('@@')
 			paper.value.questions = questions.value
-			save(paper.value).then((res) => {
+      savePaper(paper.value).then((res) => {
 				paper.value = res.data
 				uni.navigateTo({
 					url: `/pages/set-test-finish/set-test-finish?paperId=${res.data.paperId}&userId=${userInfo.value.userId}`
@@ -429,7 +429,7 @@
 	}
 	onMounted(() => {
 		userInfo.value = getApp().globalData.userInfo
-		getRandomQuestions().then(res => {
+    getRandomQuestions(userInfo.value.userId).then(res => {
 			questions.value = res.data
 			options.value = new Array(res.data.length).fill(-1)
 			inputValues.value = new Array(res.data.length).fill('')
