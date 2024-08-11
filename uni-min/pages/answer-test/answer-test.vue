@@ -394,6 +394,7 @@
 			answers.value.selects = options.value.join('@@')
 			answers.value.responderUserId = userInfo.value.userId
 			saveAnswers(answers.value).then((res) => {
+				getApp().globalData.props.filter(e => e.propId == 1)[0].number += (res.data.score - answers.value.score)
 				answers.value = res.data
 				uni.redirectTo({
 					url: `/pages/answer-finish/answer-finish?total=${paperInfo.value.questions.length}&correct=${correct}&userId=${friendInfo.value.userId}&paperId=${answers.value.paperId}`
