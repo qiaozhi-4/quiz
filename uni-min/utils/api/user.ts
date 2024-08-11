@@ -36,3 +36,10 @@ export function getIntimateFriends(userId : number) {
 		method: 'GET',
 	})
 }
+/** 验证试卷是不是自己的,或者已经答过的 */
+export function verifyPaper(userId : number, paperId : number) {
+	return request({
+		url: `/user/verify-paper/${userId}/${paperId}`,
+		method: 'GET',
+	})
+}

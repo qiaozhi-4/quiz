@@ -140,7 +140,7 @@
 	import { ref, onMounted } from 'vue'
 	import { formatDate } from '../../utils/utils';
 	import { onLoad } from '@dcloudio/uni-app'
-	import { getUserById } from '../../utils/api/user';
+	import { getUserById, verifyPaper } from '../../utils/api/user';
 	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
 	/** 朋友信息 */
@@ -167,14 +167,6 @@
 	}
 
 	onMounted(() => {
-		/** 获取登录信息,直到获取成功 */
-		let intervalId = setInterval(() => {
-			console.log(userInfo.value);
-			userInfo.value = getApp().globalData.userInfo
-			if (userInfo.value) {
-				clearInterval(intervalId);
-			}
-		}, 200)
 	})
 	onLoad((option) => {
 		isAnswer.value = option.isAnswer === 'true'
@@ -184,5 +176,29 @@
 				friendInfo.value = res.data
 			})
 		}
+		/** 获取登录信息,直到获取成功 */
+		let intervalId = setInterval(() => {
+			userInfo.value = getApp().globalData.userInfo
+			if (userInfo.value) {
+				clearInterval(intervalId);
+				verifyPaper(userInfo.value.userId, paperId.value).then(res => {
+					if (res.data.isMyPaper) {
+						uni.showToast({
+							title: '不能回答自己的出题,2秒后返回主页',
+							icon: 'error',
+							duration: 2000
+						})
+						setTimeout(() => uni.redirectTo({ url: `/pages/home/home` }), 2000)
+					} else if (res.data.isRepeatAnswers && getApp().globalData.props.filter(e => e.propName == "复活宝石")[0].number < 1) {
+						uni.showToast({
+							title: '复活宝石不足,重新答题失败',
+							icon: 'error',
+							duration: 2000
+						})
+						setTimeout(() => uni.redirectTo({ url: `/pages/home/home` }), 2000)
+					}
+				})
+			}
+		}, 200)
 	})
 </script>
