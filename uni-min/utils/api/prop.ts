@@ -1,5 +1,13 @@
 import {request} from "../request"
 
+/** 获取用户道具信息 */
+export function getProps(userId: number) {
+    return request({
+        url: `/prop/get-props/${userId}`,
+        method: 'GET',
+    })
+}
+
 /** 使用道具 */
 export function useProp(userId: number, propId: number, num: number) {
 	return request({
