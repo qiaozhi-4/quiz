@@ -30,7 +30,7 @@
 
   color: #FFFFFF;
 
-  animation: slideDown 0.5s ease-out, fadeOut 1s ease-out 1.5s forwards;
+  animation: slideDown 0.5s ease-out, fadeOut 1s ease-out 2s forwards;
 
   /* 应用动画 */
   @keyframes slideDown {
@@ -66,7 +66,7 @@
 
 <template>
   <view v-if="showAlert" :style="styleAlert" class="q-alert absolute-center ">
-    <slot></slot>
+    <slot>{{ message }}</slot>
   </view>
 </template>
 
@@ -74,12 +74,14 @@
 import {ref} from 'vue'
 
 /** 显示提示框 */
-const showAlert = ref(false)
+const showAlert = ref<boolean>(false)
 /** 提示框样式(控制停留时间) */
 const styleAlert = ref(null)
+const message = ref<string>(null)
 let timerId: NodeJS.Timeout
-const show = (showTime = 1500) => {
-  styleAlert.value = {animation: `slideDown 0.5s ease- out, fadeOut 1s ease - out ${showTime}ms forwards`}
+const show = ({msg = '', showTime = 2000}) => {
+  styleAlert.value = {animation: `slideDown 0.5s ease- out, fadeOut 1s ease - out ${showTime}ms forwards`};
+  message.value = msg;
   if (showAlert.value) {
     clearTimeout(timerId);
     showAlert.value = false
