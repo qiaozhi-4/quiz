@@ -19,7 +19,7 @@
   backdrop-filter: blur(7.5px);
   border-radius: 15px;
 
-  z-index: 101;
+  z-index: 199;
 
 
   font-family: 'Manrope';
