@@ -7,7 +7,7 @@ export default {
 			userInfo: null,
 			token: "",
 			/** 用户道具信息 */
-			props:null,
+      props: null,
 			/** 除去导航栏的高度 */
 			mainHeight: 700,
 			/** 头部导航栏高度 */
@@ -55,7 +55,7 @@ export default {
 								uni.redirectTo({
 									url: `/pages/set-user-info/set-user-info`
 								});
-							} else {// 分享进来的要保留分享页
+              } else { // 分享进来的要保留分享页
 								uni.navigateTo({
 									url: `/pages/set-user-info/set-user-info`
 								});
@@ -63,7 +63,7 @@ export default {
 						} else {
 							console.log('已设置头像和用户名')
               getPaperTotal(res.data.userInfo.userId).then((res) => {
-								if ('pages/index/index' == route) {// 不是分享进来的就跳转
+                if ('pages/index/index' == route) { // 不是分享进来的就跳转
 									if (res.data == 0) {
 										uni.redirectTo({
 											url: `/pages/start-test/start-test?isAnswer=${false}`
@@ -141,6 +141,18 @@ export default {
 		top: 0;
 		z-index: 1;
 	}
+
+  /** 绝对定位居中 */
+  .absolute-center {
+    position: absolute;
+    /* 子元素设置为绝对定位 */
+    top: 50%;
+    /* 距顶部50% */
+    left: 50%;
+    /* 距左侧50% */
+    transform: translate(-50%, -50%);
+    /* 通过平移实现真正居中 */
+  }
 
 	/** flex布局元素横向排列 */
 	.flex-row {
