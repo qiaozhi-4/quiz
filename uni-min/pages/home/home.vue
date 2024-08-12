@@ -737,6 +737,7 @@
 			}
 		}
 	}
+
 </style>
 
 <template>
