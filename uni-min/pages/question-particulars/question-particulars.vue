@@ -138,7 +138,8 @@
 						<view class="title text-overflow">{{question?.title}}</view>
 					</view>
 					<view class="question-info">
-						<view v-if="paper?.answers[index] == pageArg.selects[index] || (!pageArg.isFriendHome)" class="option text-overflow">
+						<view v-if="paper?.answers[index] == pageArg.selects[index] || (!pageArg.isFriendHome)"
+							class="option text-overflow">
 							{{question?.options[paper?.answers[index]]}}
 						</view>
 						<view v-else class="option text-overflow">???????</view>
@@ -147,7 +148,8 @@
 			</view>
 		</view>
 
-		<view v-if="pageArg?.isFriendHome" class="footer flex-column">
+		<view v-if="pageArg?.isFriendHome&&pageArg?.selects.join('') != paper?.answers.join('')"
+			class="footer flex-column">
 			<text class="text">意外错失正确答案？再答一次试试看！</text>
 			<button class="button flex-row text-overflow" @click="anewTast"><q-svg icon="复活宝石"
 					size="34" />使用复活宝石再测一次！</button>
@@ -180,8 +182,8 @@ import {getUserById} from '../../utils/api/user';
 
 			pageArg.value.selects = option.selects.split("@@")
 			getUserById(pageArg.value.userId).then(res => userInfo.value = res.data)
-		}else{
-			 userInfo.value = getApp().globalData.userInfo
+		} else {
+			userInfo.value = getApp().globalData.userInfo
 		}
 		getPaper(pageArg.value.paperId).then(res => {
 			paper.value = res.data
