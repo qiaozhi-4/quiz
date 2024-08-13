@@ -138,13 +138,16 @@
 						<view class="title text-overflow">{{question?.title}}</view>
 					</view>
 					<view class="question-info">
-						<view class="option text-overflow">{{question?.options.split('@@')[paper?.answers.split('@@')[index]]}}</view>
+						<view v-if="paper?.answers[index] == pageArg.selects[index]" class="option text-overflow">
+							{{question?.options[paper?.answers[index]]}}
+						</view>
+						<view v-else class="option text-overflow">???????</view>
 					</view>
 				</view>
 			</view>
 		</view>
 
-		<view class="footer flex-column" v-show="pageArg?.from == 'friend-home'">
+		<view v-if="pageArg?.isFriendHome" class="footer flex-column">
 			<text class="text">意外错失正确答案？再答一次试试看！</text>
 			<button class="button flex-row text-overflow" @click="anewTast"><q-svg icon="复活宝石"
 					size="34" />使用复活宝石再测一次！</button>
@@ -156,6 +159,7 @@
 import {ref} from 'vue'
 import {onLoad} from '@dcloudio/uni-app'
 import {getPaper} from '../../utils/api/paper';
+import {getUserById} from '../../utils/api/user';
 
 /** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
@@ -165,13 +169,21 @@ import {getPaper} from '../../utils/api/paper';
 	const paper = ref<Quiz.Paper>()
 	/** 重新答题 */
 	function anewTast() {
-
+		uni.redirectTo({
+			url: `/pages/start-test/start-test?isAnswer=true&paperId=${pageArg.value.paperId}&userId=${pageArg.value.userId}`
+		});
 	}
 	onLoad((option) => {
-		userInfo.value = getApp().globalData.userInfo
 		pageArg.value = option
-    getPaper(pageArg.value.paperId).then(res => {
+		pageArg.value.isFriendHome = option.isFriendHome == 'true'
+		pageArg.value.selects = option.selects.split("@@")
+		getPaper(pageArg.value.paperId).then(res => {
 			paper.value = res.data
+			paper.value.questions.forEach(e => {
+				e.options = e.options.split('@@')
+			})
+			paper.value.answers = paper.value.answers.split("@@")
 		})
+		getUserById(pageArg.value.userId).then(res => userInfo.value = res.data)
 	})
 </script>
