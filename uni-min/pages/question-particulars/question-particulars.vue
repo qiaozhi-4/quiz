@@ -138,7 +138,7 @@
 						<view class="title text-overflow">{{question?.title}}</view>
 					</view>
 					<view class="question-info">
-						<view v-if="paper?.answers[index] == pageArg.selects[index]" class="option text-overflow">
+						<view v-if="paper?.answers[index] == pageArg.selects[index] || (!pageArg.isFriendHome)" class="option text-overflow">
 							{{question?.options[paper?.answers[index]]}}
 						</view>
 						<view v-else class="option text-overflow">???????</view>
@@ -176,7 +176,13 @@ import {getUserById} from '../../utils/api/user';
 	onLoad((option) => {
 		pageArg.value = option
 		pageArg.value.isFriendHome = option.isFriendHome == 'true'
-		pageArg.value.selects = option.selects.split("@@")
+		if (pageArg.value.isFriendHome) {
+
+			pageArg.value.selects = option.selects.split("@@")
+			getUserById(pageArg.value.userId).then(res => userInfo.value = res.data)
+		}else{
+			 userInfo.value = getApp().globalData.userInfo
+		}
 		getPaper(pageArg.value.paperId).then(res => {
 			paper.value = res.data
 			paper.value.questions.forEach(e => {
@@ -184,6 +190,5 @@ import {getUserById} from '../../utils/api/user';
 			})
 			paper.value.answers = paper.value.answers.split("@@")
 		})
-		getUserById(pageArg.value.userId).then(res => userInfo.value = res.data)
 	})
 </script>

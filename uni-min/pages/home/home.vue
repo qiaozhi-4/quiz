@@ -964,9 +964,8 @@
 									</view>
 									<view class="ranking">位于第{{myRanking?.ranking}}名</view>
 								</view>
-								<view v-for="(friend, index) in intimateRanking" :key="index"
-									class="table-item" style="position: relative;"
-									@click="goFriendHome(friend.userId)">
+								<view v-for="(friend, index) in intimateRanking" :key="index" class="table-item"
+									style="position: relative;" @click="goFriendHome(friend.userId)">
 									<view
 										style="position: absolute;top: 0;right: 0;width: 76vw; height: 1px;background-color: rgba(121, 109, 255, 0.5);">
 									</view>
@@ -1340,9 +1339,17 @@ import {getAnswersList} from '../../utils/api/answers';
 	}
 	/** 跳转题库的试卷详情 */
 	function onParticulars(paperId : number, selects : string) {
-		uni.navigateTo({
-			url: `/pages/question-particulars/question-particulars?isFriendHome=${isFriendHome}&paperId=${paperId}&selects=${selects}&userId=${userInfo.value.userId}`
-		});
+		if (isFriendHome.value) {
+			uni.navigateTo({
+				url: `/pages/question-particulars/question-particulars?isFriendHome=${true}&paperId=${paperId}&selects=${selects}&userId=${userInfo.value.userId}`
+			});
+
+		}
+		else {
+			uni.navigateTo({
+				url: `/pages/question-particulars/question-particulars?isFriendHome=${false}&paperId=${paperId}&selects=${selects}&userId=${userInfo.value.userId}`
+			});
+		}
 	}
 	/** 从朋友题库开始答题 */
 	function goTest(paperId : number) {
