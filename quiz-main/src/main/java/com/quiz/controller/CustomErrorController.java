@@ -2,6 +2,7 @@ package com.quiz.controller;
 
 import com.quiz.enumerate.ResultEnum;
 import com.quiz.utils.Result;
+import io.swagger.annotations.Api;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/error")
 @Log4j2
+@Api(tags = "未知异常处理")
 public class CustomErrorController implements ErrorController {
     @ResponseBody
     @RequestMapping
