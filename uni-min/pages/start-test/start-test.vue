@@ -336,7 +336,7 @@ import {gainProp} from '../../utils/api/prop';
 		/** 获取登录信息,直到获取成功 */
 		let intervalId = setInterval(() => {
 			userInfo.value = getApp().globalData.userInfo
-			if (userInfo.value) {
+			if (userInfo.value && isAnswer.value) {
 				resurrectionGem.value = getApp().globalData.props.filter(e => e.propName == "复活宝石")[0].number
 				clearInterval(intervalId);
 				verifyPaper(userInfo.value.userId, paperId.value).then(res => {
