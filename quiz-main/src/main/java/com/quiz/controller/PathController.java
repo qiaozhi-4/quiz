@@ -31,13 +31,13 @@ public class PathController {
 
     @PathPermission(PermissionEnum.UPDATE)
     @ApiOperation("更新所有接口路径")
-    @GetMapping("update-all-path")
+    @GetMapping("update-all")
     public List<Path> updateAllPath() {
         return pathService.updateAllPath();
     }
 
     @ApiOperation(value = "更新所有接口路径(不要权限)")
-    @GetMapping("update-all-path-test")
+    @GetMapping("update-all-test")
     public List<Path> updateAllPathTest() {
         return pathService.updateAllPath();
     }

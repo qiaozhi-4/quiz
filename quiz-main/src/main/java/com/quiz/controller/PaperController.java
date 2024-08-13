@@ -32,43 +32,43 @@ public class PaperController {
     @PathPermission(PermissionEnum.USER_CREATE)
     @ApiOperation("添加试卷")
     @PostMapping("save")
-    public PaperDTO save(@RequestBody PaperDTO paperDto) {
+    public PaperDTO savePaper(@RequestBody PaperDTO paperDto) {
         return paperService.savePaper(paperDto);
     }
 
     @PathPermission(PermissionEnum.USER_UPDATE)
     @ApiOperation("更新试卷")
     @PutMapping("update")
-    public Boolean update(@RequestBody Paper paper) {
+    public Boolean updatePaper(@RequestBody Paper paper) {
         return paperService.updatePaper(paper);
     }
 
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("通过试卷ID,获取试卷详情")
     @GetMapping("get/{paperId:\\d+}")
-    public PaperDTO get(@PathVariable Integer paperId) {
+    public PaperDTO getPaper(@PathVariable Integer paperId) {
         return paperService.getPaper(paperId);
     }
 
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("获取试卷列表")
     @GetMapping("get-list/{userId:\\d+}")
-    public List<PaperDTO> getPaperListByUserId(@PathVariable Integer userId) {
+    public List<PaperDTO> getPaperList(@PathVariable Integer userId) {
         return paperService.getPaperListByUserId(userId);
     }
 
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("获取用户试卷总数(包括已删除),判断是否出过题")
     @GetMapping("get-total/{userId:\\d+}")
-    public Long getTotal(@PathVariable Integer userId) {
-        return paperService.getTotalByUserId(userId, false);
+    public Long getPaperTotal(@PathVariable Integer userId) {
+        return paperService.getPaperTotalByUserId(userId, false);
     }
 
 
     @PathPermission(PermissionEnum.USER_DELETE)
     @ApiOperation("删除试卷")
     @DeleteMapping("remove/{paperId:\\d+}")
-    public Boolean remove(@PathVariable Integer paperId) {
+    public Boolean removePaper(@PathVariable Integer paperId) {
         return paperService.removePaperByPaperId(paperId);
     }
 

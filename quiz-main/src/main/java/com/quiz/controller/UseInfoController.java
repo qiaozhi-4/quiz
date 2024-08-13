@@ -29,7 +29,7 @@ public class UseInfoController {
 
     @PostMapping("send-log")
     @ApiOperation(value = "保存用户使用功能日志")
-    public String sendLog(@RequestBody UseInfo useInfo) {
+    public String saveLog(@RequestBody UseInfo useInfo) {
         useInfoService.save(useInfo);
         return "保存日志成功!";
     }

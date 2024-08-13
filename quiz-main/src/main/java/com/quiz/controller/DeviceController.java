@@ -44,12 +44,13 @@ public class DeviceController {
             @ApiImplicitParam(name = "current", value = "第几页", required = true, paramType = "path", dataTypeClass = Integer.class),
             @ApiImplicitParam(name = "size", value = "每页多少条", required = true, paramType = "path", dataTypeClass = Integer.class)
     })
-    public Map<String, Object> list(@PathVariable("current") Integer current, @PathVariable("size") Integer size) {
+    public Map<String, Object> getDeviceList(@PathVariable("current") Integer current, @PathVariable("size") Integer size) {
         return deviceService.paging(current, size);
     }
 
     @PathPermission(PermissionEnum.DD_CHANGE)
     @PutMapping("update-device")
+//    @PutMapping("update")
     @ApiOperation("更新设备信息,是否被封和过期时间")
     public Device updateDevice(@RequestParam String nickname, @RequestBody DeviceDTO deviceDto) {
         Assert.isNotNull(nickname, "修改人昵称不能为空!!");
@@ -65,6 +66,7 @@ public class DeviceController {
 
     @PathPermission(PermissionEnum.DELETE)
     @DeleteMapping("delete-device")
+//    @DeleteMapping("delete")
     @ApiOperation("批量删除设备!")
     public Boolean deleteDevices(@RequestBody List<String> deviceIds) {
         return deviceService.removeBatchByIds(deviceIds);
@@ -72,7 +74,7 @@ public class DeviceController {
 
     @PostMapping("verify")
     @ApiOperation(value = "验证设备是否授权(无需操作)") //方法介绍
-    public Device verify(@RequestBody Map<String, Object> data) {
+    public Device verifyDevice(@RequestBody Map<String, Object> data) {
         final String key = "ding-dong:device";
         Assert.isTrue(Boolean.TRUE.equals(redisTemplate.hasKey(key)), "脚本不存在!!");
         Assert.isTrue(data.get("versions").equals(redisTemplate.opsForHash().get(key, "versions")), "脚本版本以过期!!请联系作者!");

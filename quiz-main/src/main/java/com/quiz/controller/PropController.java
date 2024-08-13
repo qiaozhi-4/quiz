@@ -33,7 +33,7 @@ public class PropController {
 
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("获取用户道具信息")
-    @GetMapping("get-props/{userId:\\d+}")
+    @GetMapping("get/{userId:\\d+}")
     public List<PropDTO> getProps(@PathVariable Integer userId) {
         return propService.getPropsByUserId(userId);
     }
@@ -41,14 +41,14 @@ public class PropController {
     @PathPermission(PermissionEnum.USER_UPDATE)
     @ApiOperation("使用道具")
     @PutMapping("use/{userId:\\d+}/{propId:\\d+}/{num:\\d+}")
-    public UserProp use(@PathVariable Integer userId, @PathVariable Integer propId, @PathVariable Integer num) {
+    public UserProp useProp(@PathVariable Integer userId, @PathVariable Integer propId, @PathVariable Integer num) {
         return userPropService.useProp(userId, propId, num);
     }
 
     @PathPermission(PermissionEnum.USER_UPDATE)
     @ApiOperation("获取道具")
     @PutMapping("gain/{userId:\\d+}/{propId:\\d+}/{num:\\d+}")
-    public UserProp gain(@PathVariable Integer userId, @PathVariable Integer propId, @PathVariable Integer num) {
+    public UserProp gainProp(@PathVariable Integer userId, @PathVariable Integer propId, @PathVariable Integer num) {
         return userPropService.gainProp(userId, propId, num);
     }
 }

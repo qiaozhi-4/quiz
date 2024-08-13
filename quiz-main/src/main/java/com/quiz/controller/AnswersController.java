@@ -32,7 +32,7 @@ public class AnswersController {
     @PathPermission(PermissionEnum.USER_CREATE)
     @ApiOperation("保存答卷")
     @PostMapping("save")
-    public Answers save(@RequestBody Answers answers) {
+    public Answers saveAnswers(@RequestBody Answers answers) {
         return answersService.saveAnswers(answers);
     }
 

@@ -30,7 +30,7 @@ public class TaskController {
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("获取全部任务")
     @GetMapping("get-all/{userId:\\d+}")
-    public List<TaskDTO> getAll(@PathVariable Integer userId) {
+    public List<TaskDTO> getAllTask(@PathVariable Integer userId) {
         return taskService.getAllTaskAndUpdateOrSaveTaskRecord(userId);
     }
 

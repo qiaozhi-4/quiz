@@ -35,7 +35,7 @@ public class WxUserController {
     @PathPermission(PermissionEnum.USER_UPDATE)
     @ApiOperation(value = "修改微信小程序用户信息")
     @PostMapping("update")
-    public User update(@RequestBody User user) {
+    public User updateUser(@RequestBody User user) {
         return wxUserService.updateUserInfo(user);
     }
 
