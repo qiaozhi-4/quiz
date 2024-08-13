@@ -3,7 +3,7 @@ import {request} from "../request"
 /** 获取随机10个题目 */
 export function getRandomQuestions(userId: number) {
 	return request({
-        url: '/question/get-random/${userId}',
+        url: `/question/get-random/${userId}`,
 		method: 'GET'
 	})
 }
