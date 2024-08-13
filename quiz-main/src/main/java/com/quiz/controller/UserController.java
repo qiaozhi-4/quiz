@@ -44,7 +44,7 @@ public class UserController {
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("通过用户ID,获取用户信息")
     @GetMapping("get/{userId:\\d+}")
-    public User getUse(@PathVariable Integer userId) {
+    public User getUser(@PathVariable Integer userId) {
         return userService.getUserById(userId);
     }
 
