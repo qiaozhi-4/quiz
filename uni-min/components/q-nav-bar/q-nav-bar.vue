@@ -38,14 +38,15 @@
 		<view class="q-nav-bar-left" :style="`width: ${menuButtonInfo.width}px`">
 			<q-svg @click="handlerReverseBack" :icon="props.leftIcon" size="32" />
 		</view>
-		<view class="q-nav-bar-middle"  :style="`font-size: ${props.titleSize}px;`">{{props.title}}</view>
+		<view :style="`font-size: ${props.titleSize}px;`"  class="q-nav-bar-middle text-overflow">{{props.title}}</view>
 		<view class="q-nav-bar-right" :style="`width: ${menuButtonInfo.width}px`"></view>
 	</view>
 </template>
 
 <script lang="ts" setup>
-	import { ref, computed } from 'vue'
-	const props = defineProps({
+import {computed} from 'vue'
+
+const props = defineProps({
 		/** 标题文字 */
 		title: { type: String, default: '' },
 		/** 标题文字大小 */
