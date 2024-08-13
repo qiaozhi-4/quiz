@@ -38,14 +38,14 @@ public class AnswersController {
 
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("查询答卷详情")
-    @GetMapping("get-answers/{answerId:\\d+}")
+    @GetMapping("get/{answerId:\\d+}")
     public AnswersDTO getAnswers(@PathVariable Integer answerId) {
         return answersService.getAnswersById(answerId);
     }
 
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("查询答卷列表")
-    @GetMapping("get-answers-list/{userId:\\d+}")
+    @GetMapping("get-list/{userId:\\d+}")
     public List<AnswersDTO> getAnswersList(@PathVariable Integer userId) {
         return answersService.getAnswersListByUserId(userId);
     }

@@ -1,4 +1,4 @@
-import { request } from "../request"
+import {request} from "../request"
 
 /** 保存试卷 */
 export function saveAnswers(answers : Quiz.Answers) {
@@ -12,7 +12,7 @@ export function saveAnswers(answers : Quiz.Answers) {
 /** 查询答卷详情 */
 export function getAnswers(answerId : number) {
 	return request({
-		url: `/answers/get-answers/${answerId}`,
+		url: `/answers/get/${answerId}`,
 		method: 'GET',
 	})
 }
@@ -20,7 +20,7 @@ export function getAnswers(answerId : number) {
 /** 查询答卷列表 */
 export function getAnswersList(userId : number) {
 	return request({
-		url: `/answers/get-answers-list/${userId}`,
+		url: `/answers/get-list/${userId}`,
 		method: 'GET',
 	})
 }
