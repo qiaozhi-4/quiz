@@ -18,3 +18,18 @@ export function formatDate(date : Date, format = 'YYYY-MM-DD HH:mm:ss') {
 		.replace('ss', seconds);
 	return formattedDate; // 返回格式化后的字符串
 }
+/** 判断字符串是否是纯数字,如果是就加上单位:'px' */
+export function addPxIfNumeric(value : string | number) {
+	// 如果值本身就是一个数字类型，直接返回添加 "px"
+	if (typeof value === 'number') {
+		return value + 'px';
+	}
+	// 尝试将字符串转换为数字
+	const number = parseFloat(value);
+	// 判断字符串是否可以转换为有效数字（非NaN且是有限数）
+	if (!isNaN(number) && isFinite(number)) {
+		return number + 'px';
+	} else {
+		return value; // 如果不是数字，则返回原始值
+	}
+}
