@@ -1,5 +1,4 @@
-import {api} from "../service"
-
+import { api } from "../service"
 /** 题目试卷 前端控制器 */
 
 /** 获取试卷列表 */

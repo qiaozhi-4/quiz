@@ -1,5 +1,4 @@
-import {api} from "../service"
-
+import { api } from "../service"
 /** 路径表 前端控制器 */
 
 /** 更新所有接口路径 */

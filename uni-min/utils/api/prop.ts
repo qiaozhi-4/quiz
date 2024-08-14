@@ -1,5 +1,4 @@
-import {api} from "../service"
-
+import { api } from "../service"
 /** 道具表 前端控制器 */
 
 /** 获取道具 */

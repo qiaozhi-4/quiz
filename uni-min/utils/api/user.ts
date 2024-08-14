@@ -1,5 +1,4 @@
-import {api} from "../service"
-
+import { api } from "../service"
 /** 用户信息表 前端控制器 */
 
 /** 通过用户ID,获取用户密友信息 */

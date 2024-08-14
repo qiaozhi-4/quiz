@@ -1,5 +1,4 @@
-import {api} from "../service"
-
+import { api } from "../service"
 /** 题目答卷 前端控制器 */
 
 /** 查询徽章列表 */

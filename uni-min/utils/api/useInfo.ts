@@ -1,5 +1,4 @@
-import {api} from "../service"
-
+import { api } from "../service"
 /** 脚本使用信息 前端控制器 */
 
 /** 保存用户使用功能日志 */

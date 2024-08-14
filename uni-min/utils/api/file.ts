@@ -1,5 +1,4 @@
-import {api} from "../service"
-
+import { api } from "../service"
 /** 文件上传下载相关 */
 
 /** 文件上传 */

@@ -1,5 +1,4 @@
-import {api} from "../service"
-
+import { api } from "../service"
 /** 微信相关接口 */
 
 /** 微信小程序登录 */

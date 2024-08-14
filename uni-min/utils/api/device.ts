@@ -1,5 +1,4 @@
-import {api} from "../service"
-
+import { api } from "../service"
 /** 设备卡密信息 前端控制器 */
 
 /** 批量删除设备! */

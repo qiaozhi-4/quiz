@@ -1,5 +1,4 @@
-import {api} from "../service"
-
+import { api } from "../service"
 /** 题目表 前端控制器 */
 
 /** 随机获取10个题目(不要权限) */

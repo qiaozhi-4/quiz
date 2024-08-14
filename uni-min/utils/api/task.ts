@@ -1,5 +1,4 @@
-import {api} from "../service"
-
+import { api } from "../service"
 /** 任务数据 前端控制器 */
 
 /** 完成任务,并获取奖励 */
