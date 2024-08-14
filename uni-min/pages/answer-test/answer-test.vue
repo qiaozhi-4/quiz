@@ -344,7 +344,7 @@
 import {onMounted, ref} from 'vue'
 import {onLoad} from '@dcloudio/uni-app'
 import {getPaper} from '../../utils/api/paper'
-import {getUserById} from '../../utils/api/user';
+import {getUser} from '../../utils/api/user';
 import {saveAnswers} from '../../utils/api/answers';
 
 /** 获取登录信息 */
@@ -450,7 +450,7 @@ import {saveAnswers} from '../../utils/api/answers';
 			options.value = new Array(res.data.questions.length).fill(-1)
 			inputValues.value = new Array(res.data.questions.length).fill('')
 		})
-		getUserById(option.userId).then(res => {
+		getUser(option.userId).then(res => {
 			friendInfo.value = res.data
 		})
 	})

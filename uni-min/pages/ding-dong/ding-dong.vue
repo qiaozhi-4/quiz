@@ -40,12 +40,12 @@
 </template>
 
 <script lang="ts" setup>
-	import { ref } from 'vue'
-	import { onLoad } from '@dcloudio/uni-app'
-	import { getDevices, updateDevice } from '../../utils/api/device';
-	import { Lv, DateUnit } from '../../utils/dindong';
+import {ref} from 'vue'
+import {onLoad} from '@dcloudio/uni-app'
+import {getDeviceList, updateDevice} from '../../utils/api/device';
+import {DateUnit, Lv} from '../../utils/dindong';
 
-	/** 计算滚动框的高度 */
+/** 计算滚动框的高度 */
 	const height = `height: ${getApp().globalData.mainHeight}px;`
 
 	/** 页面跳转过来的参数 */
@@ -116,7 +116,7 @@
 	function handleGetDevices() {
 		status.value = 'loading'
 		console.log(`加载第${page.value.current}页`);
-		getDevices(page.value.current, page.value.size).then(rse => {
+		getDeviceList(page.value.current, page.value.size).then(rse => {
 			if (rse.code == 200) {
 				rse.data.records.forEach((e : any) => {
 					e.amountUnit = 'MONTHS';

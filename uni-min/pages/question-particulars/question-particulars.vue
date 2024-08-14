@@ -161,7 +161,7 @@
 import {ref} from 'vue'
 import {onLoad} from '@dcloudio/uni-app'
 import {getPaper} from '../../utils/api/paper';
-import {getUserById} from '../../utils/api/user';
+import {getUser} from '../../utils/api/user';
 
 /** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
@@ -181,7 +181,7 @@ import {getUserById} from '../../utils/api/user';
 		if (pageArg.value.isFriendHome) {
 
 			pageArg.value.selects = option.selects.split("@@")
-			getUserById(pageArg.value.userId).then(res => userInfo.value = res.data)
+			getUser(pageArg.value.userId).then(res => userInfo.value = res.data)
 		} else {
 			userInfo.value = getApp().globalData.userInfo
 		}

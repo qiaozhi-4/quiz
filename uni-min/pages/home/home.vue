@@ -1125,7 +1125,7 @@
 import {ref} from 'vue'
 import {onLoad, onShareAppMessage} from '@dcloudio/uni-app'
 import {getPaperList, removePaper} from '../../utils/api/paper';
-import {getIntimateFriends, getIntimateRanking, getUserById} from '../../utils/api/user';
+import {getIntimateFriends, getIntimateRanking, getUser} from '../../utils/api/user';
 import {getAnswersList} from '../../utils/api/answers';
 
 /** 提示消息ref */
@@ -1401,7 +1401,7 @@ import {getAnswersList} from '../../utils/api/answers';
 		/* 如果是朋友主页 */
 		if (option.isFriendHome == 'true') {
 			isFriendHome.value = true
-			getUserById(option.userId).then(res => {
+			getUser(option.userId).then(res => {
 				userInfo.value = res.data
 				getIntimateRanking(userInfo.value.userId).then(res => {
 					intimateRanking.value = res.data

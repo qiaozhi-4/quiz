@@ -269,7 +269,7 @@
 import {onMounted, ref} from 'vue'
 import {formatDate} from '../../utils/utils';
 import {onLoad} from '@dcloudio/uni-app'
-import {getUserById, verifyPaper} from '../../utils/api/user';
+import {getUser, verifyPaper} from '../../utils/api/user';
 import {gainProp} from '../../utils/api/prop';
 
 /** 对话框ref */
@@ -329,7 +329,7 @@ import {gainProp} from '../../utils/api/prop';
 		isAnswer.value = option.isAnswer === 'true'
 		if (isAnswer.value) {
 			paperId.value = option.paperId
-			getUserById(option.userId).then(res => {
+			getUser(option.userId).then(res => {
 				friendInfo.value = res.data
 			})
 		}

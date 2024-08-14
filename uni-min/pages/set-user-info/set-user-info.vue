@@ -149,9 +149,10 @@
 </template>
 
 <script lang="ts" setup>
-	import { ref, onMounted } from 'vue'
-	import { userUpdate } from '../../utils/api/user';
-	/** 获取登录信息 */
+import {onMounted, ref} from 'vue'
+import {updateUser} from '../../utils/api/wxUser';
+
+/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
 	/** 是否需要动画 */
 	const avatarShake = ref<boolean>(false)
@@ -191,7 +192,7 @@
 			}, 500); // 动画持续时间应与CSS中定义的相同
 		}
 		if (userInfo.value.avatarUrl && userInfo.value.nickname) {
-			userUpdate(userInfo.value).then(e => {
+			updateUser(userInfo.value).then(e => {
 				console.log("第一次设置个人信息");
 				// 判断是不是通过分享进来的
 				let route = getCurrentPages()[0].route

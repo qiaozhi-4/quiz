@@ -307,11 +307,12 @@
 </template>
 
 <script lang="ts" setup>
-	import { ref } from 'vue';
-	import { onLoad } from '@dcloudio/uni-app'
-	import { getUserById } from '../../utils/api/user';
-	import { scoreInfo } from '../../utils/constant';
-	const message = ref()
+import {ref} from 'vue';
+import {onLoad} from '@dcloudio/uni-app'
+import {getUser} from '../../utils/api/user';
+import {scoreInfo} from '../../utils/constant';
+
+const message = ref()
 	/** 路径参数 */
 	type Option = {
 		/** 题目总数 */
@@ -362,7 +363,7 @@
 		props.value = getApp().globalData.props
 		statistics.value = option
 		showFooter.value = statistics.value.correct / statistics.value.total * 100 <= 30
-		getUserById(option.userId).then(res => {
+		getUser(option.userId).then(res => {
 			friendInfo.value = res.data
 		})
 	})

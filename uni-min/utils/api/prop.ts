@@ -1,24 +1,38 @@
-import {request} from "../request"
+import {api} from "../service"
 
-/** 获取用户道具信息 */
-export function getProps(userId: number) {
-    return request({
-        url: `/prop/get-props/${userId}`,
-        method: 'GET',
-    })
-}
+/** 道具表 前端控制器 */
 
-/** 使用道具 */
-export function useProp(userId: number, propId: number, num: number) {
-	return request({
-        url: `/prop/use/${userId}/${propId}/${num}`,
+/** 获取道具 */
+export function gainProp(num : number, propId : number, userId : number) {
+	return api.request({
+		url: `/prop/gain/{userId}/{propId}/{num}`,
 		method: 'PUT',
+		path: {
+			num: num,
+			propId: propId,
+			userId: userId,
+		},
 	})
 }
-/** 获取道具 */
-export function gainProp(userId: number, propId: number, num: number) {
-	return request({
-        url: `/prop/gain/${userId}/${propId}/${num}`,
+/** 获取用户道具信息 */
+export function getProps(userId : number) {
+	return api.request({
+		url: `/prop/get/{userId}`,
+		method: 'GET',
+		path: {
+			userId: userId,
+		},
+	})
+}
+/** 使用道具 */
+export function useProp(num : number, propId : number, userId : number) {
+	return api.request({
+		url: `/prop/use/{userId}/{propId}/{num}`,
 		method: 'PUT',
+		path: {
+			num: num,
+			propId: propId,
+			userId: userId,
+		},
 	})
 }

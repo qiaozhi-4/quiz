@@ -1,5 +1,5 @@
 <script>
-import {login} from './utils/api/user';
+import {login} from './utils/api/wxUser';
 import {getPaperTotal} from './utils/api/paper';
 
 export default {
@@ -38,7 +38,7 @@ export default {
 				provider: 'weixin', //使用微信登录
 				success: loginRes => {
 					console.log("微信登录信息:", loginRes);
-					login('wxf2f9d21291120320', loginRes.code).then((res) => {
+					login(loginRes.code, 'wxf2f9d21291120320').then((res) => {
 						// login('wx0f4e873ad758a586', loginRes.code).then((res) => {
 						this.globalData.userInfo = res.data.userInfo
 						this.globalData.token = res.data.token
