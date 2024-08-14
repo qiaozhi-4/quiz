@@ -266,13 +266,13 @@
 </template>
 
 <script lang="ts" setup>
-import {onMounted, ref} from 'vue'
-import {formatDate} from '../../utils/utils';
-import {onLoad} from '@dcloudio/uni-app'
-import {getUser, verifyPaper} from '../../utils/api/user';
-import {gainProp} from '../../utils/api/prop';
+	import { onMounted, ref } from 'vue'
+	import { formatDate } from '../../utils/utils';
+	import { onLoad } from '@dcloudio/uni-app'
+	import { getUser, verifyPaper } from '../../utils/api/user';
+	import { gainProp } from '../../utils/api/prop';
 
-/** 对话框ref */
+	/** 对话框ref */
 	const refDialog = ref()
 	/** 提示消息ref */
 	const refAlert = ref()
@@ -291,7 +291,7 @@ import {gainProp} from '../../utils/api/prop';
 	/** 使用复活宝石 */
 	const onResurrection = () => {
 		if (resurrectionGem.value < 1) {
-			gainProp(userInfo.value.userId, 2, 1).then(res => {
+			gainProp(1, 2, userInfo.value.userId).then(res => {
 				refAlert.value.show({ msg: '假装你看完了视频,然后获取了宝石,并开始答题' })
 				setTimeout(() => {
 					uni.redirectTo({
@@ -336,17 +336,21 @@ import {gainProp} from '../../utils/api/prop';
 		/** 获取登录信息,直到获取成功 */
 		let intervalId = setInterval(() => {
 			userInfo.value = getApp().globalData.userInfo
-			if (userInfo.value && isAnswer.value) {
-				resurrectionGem.value = getApp().globalData.props.filter(e => e.propName == "复活宝石")[0].number
+
+			if (userInfo.value) {
+				console.log('-------------------------', userInfo.value, isAnswer.value);
+				if (isAnswer.value) {
+					resurrectionGem.value = getApp().globalData.props.filter(e => e.propName == "复活宝石")[0].number
+					verifyPaper(paperId.value, userInfo.value.userId).then(res => {
+						if (res.data.isMyPaper) {
+							refAlert.value.show({ msg: '不能回答自己的出题,2秒后返回主页' })
+							setTimeout(() => uni.redirectTo({ url: `/pages/home/home` }), 2000)
+						} else if (res.data.isRepeatAnswers) {
+							refDialog.value.show()
+						}
+					})
+				}
 				clearInterval(intervalId);
-				verifyPaper(userInfo.value.userId, paperId.value).then(res => {
-					if (res.data.isMyPaper) {
-						refAlert.value.show({ msg: '不能回答自己的出题,2秒后返回主页' })
-						setTimeout(() => uni.redirectTo({ url: `/pages/home/home` }), 2000)
-					} else if (res.data.isRepeatAnswers) {
-						refDialog.value.show()
-					}
-				})
 			}
 		}, 200)
 	})
