@@ -1,44 +1,54 @@
 <style lang="scss" scoped>
+	.q-image-wrap {
 
+		.q-image-fail {
+			align-items: center;
+			justify-content: center;
+			background-color: #f5f7fa;
+		}
+	}
 </style>
 
 <template>
-	<view>
-		<image v-if="props.src" :src="src" :mode="props?.mode" :style="style" />
+	<view class="q-image-wrap">
+		<image v-if="succeed" class="q-image" :src="src" :mode="mode"
+			:style="style" @error="binderror" @load="bindload" />
+		<view v-else class="q-image-fail" :style="style">
+			<q-svg :icon="icon" :size="size"></q-svg>
+		</view>
 	</view>
 </template>
 
 <script lang="ts" setup>
-	import { ref, onMounted, watch } from 'vue'
+	import { ref, computed } from 'vue'
+	import { addPxIfNumeric } from '../../utils/utils';
 	/** 传递的属性 */
 	const props = defineProps({
 		/** 图片源地址，同原生属性一致 */
 		src: { type: String, default: '' },
-		width: { type: String, default: '' },
-		height: { type: String, default: '' },
+		/** 加载失败显示图标 */
+		icon: { type: String, default: '图片加载失败', },
+		/** 宽度 */
+		width: { type: [String, Number], default: '320' },
+		/** 高度 */
+		height: { type: [String, Number], default: '240' },
+		/** 加载失败图标大小 */
+		size: { type: [String, Number], default: '32' },
 		/** 图片裁剪、缩放的模式 */
 		mode: { type: String, default: 'aspectFit' },
 	})
-	/** 图片样式 */
-	const style = ref({})
-	/** 图片源地址 */
-	const src = ref('')
-
-	function setImg(width_, height_, src_) {
-
-		if (width_) {
-			style.value.width = isNaN(width_) ? width_ : `${width_}px`
-		}
-		if (height_) {
-			style.value.height = isNaN(height_) ? height_ : `${height_}px`
-		}
-		src.value = /http/i.test(src_) ? src_ : `/static/img/${src_}.png`
+	/** 加载是否成功 */
+	const succeed = ref<boolean>(true)
+	/** 计算样式 */
+	const style = computed(() => {
+		return { width: addPxIfNumeric(props.width), height: addPxIfNumeric(props.height), }
+	})
+	/** 图片加载失败 */
+	function binderror() {
+		succeed.value = false
 	}
-
-	watch(props, (newValue, oldValue) => {
-		setImg(newValue.width, newValue.height, props.src)
-	})
-	onMounted(() => {
-		setImg(props.width, props.height, props.src)
-	})
+	/** 图片加载成功 */
+	function bindload() {
+		succeed.value = true
+	}
 </script>

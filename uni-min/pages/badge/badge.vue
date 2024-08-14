@@ -150,14 +150,14 @@
 					<template v-if="item?.badges.length == 0">
 						<swiper-item class="swiper-item flex-column">
 							<text class="unknown">?</text>
-							<q-image src="加0分" width="100vw" height="100"></q-image>
+							<q-image src="/static/img/加0分.png" width="100vw" height="100"></q-image>
 							<text class="text">您目前还没有解锁过该徽章呢！</text>
 						</swiper-item>
 					</template>
 					<template v-else>
 						<swiper-item class="swiper-item flex-column" v-for="(badge,index) in item?.badges" :key="index">
-							<q-image :src="item?.badgeName" width="180" height="180"></q-image>
-							<q-image :src="`加${badge.score}分`" width="100vw" height="100"></q-image>
+							<q-image :src="'/static/img/' +item?.badgeName+'.png'" width="180" height="180"></q-image>
+							<q-image :src="`/static/img/加${badge.score}分.png`" width="100vw" height="100"></q-image>
 							<text class="text">{{badge.createdAt}}</text>
 							<text class="text">您获得了{{badge.creatorUserNickname}}的 “{{item?.name}}”徽章。</text>
 						</swiper-item>
@@ -171,7 +171,7 @@
 			<view class="list">
 				<template v-for="(item,index) in badgeData" :key="index">
 					<view class="item flex-column" v-if="item?.badges.length > 0" @click="onBadge(index)">
-						<q-image :src="item?.badgeName" width="90" height="90"></q-image>
+						<q-image :src="'/static/img/' +item?.badgeName+'.png'" width="90" height="90"></q-image>
 						<text class="text">{{item?.badges.length}}枚</text>
 						<text class="text">{{item?.badges.creatorUserNickname}}徽章</text>
 					</view>

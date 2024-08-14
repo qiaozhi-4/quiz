@@ -278,9 +278,10 @@
 			<text class="t1">{{scoreInfo[statistics?.correct]?.englishName}}</text>
 			<text class="t2">{{scoreInfo[statistics?.correct]?.name}}</text>
 			<q-image v-if="scoreInfo[statistics?.correct]?.badgeName" width="115" height="115"
-				:src="scoreInfo[statistics?.correct]?.badgeName"></q-image>
+				:src="`/static/img/${scoreInfo[statistics?.correct]?.badgeName}.png`"></q-image>
 			<view v-else style="width: 115px; height: 115px;"></view>
-			<q-image :src="`加${statistics?.correct/statistics?.total*100}分`" width="195" height="40"></q-image>
+			<q-image :src="`/static/img/加${statistics?.correct/statistics?.total*100}分.png`" width="195"
+				height="40"></q-image>
 			<text>最新亲密值将更新入排行榜中......</text>
 
 			<view class="but-group flex-column">
@@ -307,12 +308,12 @@
 </template>
 
 <script lang="ts" setup>
-import {ref} from 'vue';
-import {onLoad} from '@dcloudio/uni-app'
-import {getUser} from '../../utils/api/user';
-import {scoreInfo} from '../../utils/constant';
+	import { ref } from 'vue';
+	import { onLoad } from '@dcloudio/uni-app'
+	import { getUser } from '../../utils/api/user';
+	import { scoreInfo } from '../../utils/constant';
 
-const message = ref()
+	const message = ref()
 	/** 路径参数 */
 	type Option = {
 		/** 题目总数 */

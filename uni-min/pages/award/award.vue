@@ -97,7 +97,7 @@
 		<view class="main flex-column">
 			<view class="v1">{{items[itemIndex].describe}}</view>
 			<view class="v2">{{items[itemIndex].name}}</view>
-			<q-image  class="v3" :src="items[itemIndex].name" height="161" width="161"></q-image>
+			<q-image  class="v3" :src="'/static/img/' + items[itemIndex].name+'.png'" height="161" width="161"></q-image>
 			<view class="v4">{{items[itemIndex].count}}</view>
 			<view class="v5 flex-column">
 				<text class="text">

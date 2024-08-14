@@ -210,7 +210,7 @@
 		<view class="dialog flex-column">
 			<text class="dialog-t1">复活宝石让尊贵的您获得重新再次答题的机会</text>
 			<text class="dialog-t2">复活宝石</text>
-			<q-image height="170" src="复活宝石" width="170"></q-image>
+			<q-image height="170" src="/static/img/复活宝石.png" width="170"></q-image>
 			<text class="dialog-t3">失手选太快了吗？评分不满意？再答一次试试看！</text>
 			<button class="dialog-b1" @click="onResurrection">
 				<view class="dialog-b1-svg">

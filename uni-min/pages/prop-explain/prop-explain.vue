@@ -131,7 +131,7 @@
 		<view class="main flex-column">
 			<text class="t1">{{prop?.propDescribe}}</text>
 			<text class="t2">{{prop?.propName}}</text>
-			<q-image :src="prop?.propName" width="170" height="170"></q-image>
+			<q-image :src="'/static/img/' +prop?.propName+'.png'" width="170" height="170"></q-image>
 			<view>
 				<text class="count">{{prop?.number}}</text>
 				<text class="unit">颗</text>
