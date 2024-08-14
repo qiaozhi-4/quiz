@@ -13,7 +13,8 @@
 </template>
 
 <script lang="ts" setup>
-	import { ref, onMounted, watch } from 'vue'
+	import { ref, onMounted, watch  } from 'vue'
+	import { addPxIfNumeric } from '../../utils/utils';
 	/** 传递的属性 */
 	const props = defineProps({
 		/** svg文件名称 */
@@ -28,7 +29,7 @@
 	/** svg样式 */
 	const style = ref()
 	/** 读取svg并设置样式 */
-	function redSvg(icon, size, colors, opacitys) {
+	function redSvg(icon: string, size: string | number, colors:  any[], opacitys:  any[]) {
 		uni.getFileSystemManager().readFile({
 			filePath: `/static/svg/${icon}.svg`,
 			encoding: 'binary',
@@ -53,8 +54,8 @@
 				basestr = encodeURIComponent(basestr)
 				style.value = {
 					backgroundImage: `url("data:image/svg+xml,${basestr}")`,
-					width: `${size}px`,
-					height: `${size}px`
+					width: addPxIfNumeric(size),
+					height: addPxIfNumeric(size)
 				}
 			}
 		})
