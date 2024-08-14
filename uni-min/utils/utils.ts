@@ -1,7 +1,7 @@
 /** 格式化时间 */
 export function formatDate(date : Date, format = 'YYYY-MM-DD HH:mm:ss') {
 	// 获取年、月、日、小时、分钟、秒
-	const year = date.getFullYear();  // 获取年份
+	const year = date.getFullYear().toString();  // 获取年份
 	const month = String(date.getMonth() + 1).padStart(2, '0'); // 获取月份，补全两位数
 	const day = String(date.getDate()).padStart(2, '0'); // 获取日期，补全两位数
 	const hours = String(date.getHours()).padStart(2, '0'); // 获取小时，补全两位数
