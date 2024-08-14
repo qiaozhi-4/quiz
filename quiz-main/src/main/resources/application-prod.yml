@@ -1,7 +1,5 @@
 # spring配置
 spring:
-  application:
-    name: quiz
   # 数据源配置
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/quiz

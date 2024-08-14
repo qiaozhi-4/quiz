@@ -8,6 +8,8 @@ server:
 
 # spring配置
 spring:
+  application:
+    name: quiz
   profiles:
     active: @activated.profile@
   # 邮箱配置
