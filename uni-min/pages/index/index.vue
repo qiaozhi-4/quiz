@@ -79,7 +79,7 @@
 				@click="handleTo(page.name)">{{page.name}}</button>
 		</view>
 		<view class="main2 flex-column">
-			<q-svg class="svg" icon="log" size="104"></q-svg>
+			<q-svg class="svg" icon="logo" size="104"></q-svg>
 		</view>
 		<view class="footer flex-column">
 			<view class="progress-wrap">
