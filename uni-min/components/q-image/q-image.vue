@@ -12,7 +12,7 @@
 <template>
 	<view class="q-image-wrap">
 		<image v-if="succeed" class="q-image" :src="src" :mode="mode"
-			:style="style" @error="binderror" @load="bindload" />
+			:style="style" @error="succeed = false" @load="succeed = true" />
 		<view v-else class="q-image-fail" :style="style">
 			<q-svg :icon="icon" :size="size"></q-svg>
 		</view>
@@ -43,12 +43,4 @@
 	const style = computed(() => {
 		return { width: addPxIfNumeric(props.width), height: addPxIfNumeric(props.height), }
 	})
-	/** 图片加载失败 */
-	function binderror() {
-		succeed.value = false
-	}
-	/** 图片加载成功 */
-	function bindload() {
-		succeed.value = true
-	}
 </script>
