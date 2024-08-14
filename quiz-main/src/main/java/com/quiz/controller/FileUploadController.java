@@ -1,27 +1,27 @@
 package com.quiz.controller;
 
+import com.quiz.exception.APIException;
+import com.quiz.service.IWxUserService;
 import com.quiz.utils.Assert;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.PosixFilePermission;
-import java.nio.file.attribute.PosixFilePermissions;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Set;
 
 /**
  * <p>
@@ -37,6 +37,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Log4j2
 public class FileUploadController {
+    private final IWxUserService wxUserService;
 
     /**
      * 从配置文件中读取文件存储路径
@@ -44,52 +45,64 @@ public class FileUploadController {
     @Value("${file.dir}")
     private String dir;
 
-    // 处理文件上传请求
-    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiOperation("文件上传")
     public String handleFileUpload(@RequestParam("file") MultipartFile file) {
-        if (file.isEmpty()) {
-            return "文件为空";
+        return fileUpload(file, "");
+    }
+
+    @PostMapping(value = "upload-avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ApiOperation("用户上传头像")
+    public String uploadAvatar(@RequestParam("file") MultipartFile avatarFile) {
+        return fileUpload(avatarFile, "\\avatar");
+    }
+
+    // 这个方法通过文件名返回图片资源
+    @GetMapping("download-avatar/{filename:.+}")
+    @ApiOperation("获取头像")
+    public ResponseEntity<Resource> downloadAvatar(@PathVariable String filename) {
+        return filDownload(filename, "\\avatar");
+    }
+
+    private ResponseEntity<Resource> filDownload(String filename, String prefix) {
+        try {
+            Path filePath = Paths.get(dir + prefix).resolve(filename).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+
+            if (resource.exists()) {
+                // 设置响应头，以便浏览器显示图片而不是下载
+                return ResponseEntity.ok()
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_JPEG.toString())
+                        .body(resource);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(null);
         }
+    }
+
+    private String fileUpload(MultipartFile file, String prefix) {
+        Assert.isTrue(!file.isEmpty(), "文件为空");
 
         // 构建目标文件路径
         String fileName = file.getOriginalFilename();
         Assert.isNotNull(fileName, "文件名不能为空");
-        fileName += LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        File dest = new File(dir, fileName);
-
+        String[] split = fileName.split("\\.");
+        split[0] += LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+        fileName = String.join(".", split);
+        File dest = new File(dir + prefix, fileName);
         try {
             // 保存文件到目标路径
             file.transferTo(dest);
-
             // 设置文件权限为777
-            Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxrwxrwx");
-            Files.setPosixFilePermissions(Paths.get(dest.getPath()), perms);
-            return "文件上传成功: " + fileName;
+//            Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxrwxrwx");
+//            Files.setPosixFilePermissions(Paths.get(dest.getPath()), perms);
+            return fileName;
         } catch (IOException e) {
-            e.printStackTrace();
-            return "文件上传失败: " + e.getMessage();
+            throw new APIException(e.getMessage());
         }
     }
-    // 处理文件下载请求
-//    @GetMapping("/download/{fileName}")
-//    public ResponseEntity<Resource> handleFileDownload(@PathVariable String fileName) {
-//        // 构建目标文件路径
-//        File file = new File(downloadDir, fileName);
-//        Resource resource = new FileSystemResource(file);
-//
-//        // 检查文件是否存在
-//        if (!file.exists()) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-//        }
-//
-//        // 设置文件下载的HTTP头
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName);
-//
-//        // 返回文件资源
-//        return ResponseEntity.ok()
-//                .headers(headers)
-//                .body(resource);
-//    }
+
 }
