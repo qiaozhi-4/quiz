@@ -276,7 +276,7 @@
 
 <template>
 	<view class="page">
-		<q-nav-bar leftIcon="头部导航-返回" title="Quiz" />
+		<q-nav-bar title="Quiz" />
 		<view class="main flex-column">
 			<q-avatar class="avatar" :src="friendInfo?.avatarUrl" size="62" borderWidth="3"></q-avatar>
 			<view class="statistics-text">
@@ -341,13 +341,13 @@
 </template>
 
 <script lang="ts" setup>
-import {onMounted, ref} from 'vue'
-import {onLoad} from '@dcloudio/uni-app'
-import {getPaper} from '../../utils/api/paper'
-import {getUser} from '../../utils/api/user';
-import {saveAnswers} from '../../utils/api/answers';
+	import { onMounted, ref } from 'vue'
+	import { onLoad } from '@dcloudio/uni-app'
+	import { getPaper } from '../../utils/api/paper'
+	import { getUser } from '../../utils/api/user';
+	import { saveAnswers } from '../../utils/api/answers';
 
-/** 获取登录信息 */
+	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
 	/** 朋友信息 */
 	const friendInfo = ref<Quiz.UserInfo>()
@@ -443,7 +443,7 @@ import {saveAnswers} from '../../utils/api/answers';
 		}
 	})
 	onLoad((option) => {
-    getPaper(option.paperId).then(res => {
+		getPaper(option.paperId).then(res => {
 			paperInfo.value = res.data
 			paperInfo.value.answers = res.data.answers.split('@@')
 			questions.value = res.data.questions
