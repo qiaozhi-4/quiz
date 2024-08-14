@@ -18,10 +18,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.PosixFilePermission;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 
 /**
  * <p>
@@ -47,13 +51,13 @@ public class FileUploadController {
     @PostMapping(value = "upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiOperation("文件上传")
     public String handleFileUpload(@RequestParam("file") MultipartFile file) {
-        return fileUpload(file, "");
+        return fileUpload(file, "/xc");
     }
 
     @PostMapping(value = "upload-avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiOperation("用户上传头像")
     public User uploadAvatar(@RequestParam("file") MultipartFile avatarFile, @RequestParam("userId") Integer userId) {
-        User user = User.builder().avatarUrl(fileUpload(avatarFile, "\\avatar")).userId(userId).build();
+        User user = User.builder().avatarUrl(fileUpload(avatarFile, "/avatar")).userId(userId).build();
         user.updateById();
         return user;
     }
@@ -98,8 +102,10 @@ public class FileUploadController {
             // 保存文件到目标路径
             file.transferTo(dest);
             // 设置文件权限为777
-//            Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxrwxrwx");
-//            Files.setPosixFilePermissions(Paths.get(dest.getPath()), perms);
+            if (dir.equals("/var/tmp/quiz")) {
+                Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxrwxrwx");
+                Files.setPosixFilePermissions(Paths.get(dest.getPath()), perms);
+            }
             return fileName;
         } catch (IOException e) {
             throw new APIException(e.getMessage());
