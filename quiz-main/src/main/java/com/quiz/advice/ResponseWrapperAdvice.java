@@ -6,6 +6,7 @@ import com.quiz.utils.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -42,6 +43,10 @@ public class ResponseWrapperAdvice implements ResponseBodyAdvice<Object> {
                                   @NotNull Class<? extends HttpMessageConverter<?>> selectedConverterType,
                                   @NotNull ServerHttpRequest request,
                                   @NotNull ServerHttpResponse response) {
+
+        if (returnType.getParameterType().isAssignableFrom(ResponseEntity.class)) {
+            return body;
+        }
         /*对字符串类型的响应体进行特殊处理*/
         if (body instanceof String) {
             try {
