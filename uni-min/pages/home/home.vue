@@ -1122,13 +1122,14 @@
 </template>
 
 <script lang="ts" setup>
-import {ref} from 'vue'
-import {onLoad, onShareAppMessage} from '@dcloudio/uni-app'
-import {getPaperList, removePaper} from '../../utils/api/paper';
-import {getIntimateFriends, getIntimateRanking, getUser} from '../../utils/api/user';
-import {getAnswersList} from '../../utils/api/answers';
+	import { ref } from 'vue'
+	import { onLoad, onShareAppMessage } from '@dcloudio/uni-app'
+	import { getPaperList, removePaper } from '../../utils/api/paper';
+	import { getIntimateFriends, getIntimateRanking, getUser } from '../../utils/api/user';
+	import { getAnswersList } from '../../utils/api/answers';
+	import { updateUser } from '../../utils/api/wxUser';
 
-/** 提示消息ref */
+	/** 提示消息ref */
 	const refAlert = ref()
 	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
@@ -1250,6 +1251,9 @@ import {getAnswersList} from '../../utils/api/answers';
 		console.log("获取微信头像触发", e);
 		const { avatarUrl } = e.detail
 		userInfo.value.avatarUrl = avatarUrl
+		updateUser(userInfo.value).then(res => {
+			refAlert.value.show({ msg: '头像修改成功' })
+		})
 	}
 	/** 关闭当前页面,返回上一个页面 */
 	function handlerReverseBack() {
