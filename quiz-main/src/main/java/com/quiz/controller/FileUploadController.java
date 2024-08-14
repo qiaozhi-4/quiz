@@ -1,7 +1,7 @@
 package com.quiz.controller;
 
+import com.quiz.entity.User;
 import com.quiz.exception.APIException;
-import com.quiz.service.IWxUserService;
 import com.quiz.utils.Assert;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -37,7 +37,6 @@ import java.time.format.DateTimeFormatter;
 @RequiredArgsConstructor
 @Log4j2
 public class FileUploadController {
-    private final IWxUserService wxUserService;
 
     /**
      * 从配置文件中读取文件存储路径
@@ -53,8 +52,10 @@ public class FileUploadController {
 
     @PostMapping(value = "upload-avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiOperation("用户上传头像")
-    public String uploadAvatar(@RequestParam("file") MultipartFile avatarFile) {
-        return fileUpload(avatarFile, "\\avatar");
+    public User uploadAvatar(@RequestParam("file") MultipartFile avatarFile, @RequestParam("userId") Integer userId) {
+        User user = User.builder().avatarUrl(fileUpload(avatarFile, "\\avatar")).userId(userId).build();
+        user.updateById();
+        return user;
     }
 
     // 这个方法通过文件名返回图片资源

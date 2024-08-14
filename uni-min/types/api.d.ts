@@ -63,6 +63,42 @@ declare namespace Quiz {
 		/** 用户名 */
 		username:string
 	}
+	/** File */
+	interface File {
+		/**  */
+		absolute:any
+		/**  */
+		absoluteFile:Quiz.File
+		/**  */
+		absolutePath:string
+		/**  */
+		canonicalFile:Quiz.File
+		/**  */
+		canonicalPath:string
+		/**  */
+		directory:any
+		/**  */
+		file:any
+		/**  */
+		freeSpace:number
+		/**  */
+		hidden:any
+		/**  */
+		name:string
+		/**  */
+		parent:string
+		/**  */
+		parentFile:Quiz.File
+		/**  */
+		path:string
+		/**  */
+		totalSpace:number
+		/**  */
+		usableSpace:number
+	}
+	/** InputStream */
+	interface InputStream {
+	}
 	/** PaperDto对象,试卷所有信息 */
 	interface PaperDto {
 		/** 答案下标集合,以@@分隔 */
@@ -146,6 +182,25 @@ declare namespace Quiz {
 		/** 修改时间 */
 		updatedAt:string
 	}
+	/** Resource */
+	interface Resource {
+		/**  */
+		description:string
+		/**  */
+		file:Quiz.File
+		/**  */
+		filename:string
+		/**  */
+		inputStream:Quiz.InputStream
+		/**  */
+		open:any
+		/**  */
+		readable:any
+		/**  */
+		uri:Quiz.URI
+		/**  */
+		url:Quiz.URL
+	}
 	/** Result«object»,统一的响应体 */
 	interface Resultobject {
 		/** 状态码 */
@@ -179,6 +234,68 @@ declare namespace Quiz {
 		taskId:number
 		/** 更新时间 */
 		updatedAt:string
+	}
+	/** URI */
+	interface URI {
+		/**  */
+		absolute:any
+		/**  */
+		authority:string
+		/**  */
+		fragment:string
+		/**  */
+		host:string
+		/**  */
+		opaque:any
+		/**  */
+		path:string
+		/**  */
+		port:number
+		/**  */
+		query:string
+		/**  */
+		rawAuthority:string
+		/**  */
+		rawFragment:string
+		/**  */
+		rawPath:string
+		/**  */
+		rawQuery:string
+		/**  */
+		rawSchemeSpecificPart:string
+		/**  */
+		rawUserInfo:string
+		/**  */
+		scheme:string
+		/**  */
+		schemeSpecificPart:string
+		/**  */
+		userInfo:string
+	}
+	/** URL */
+	interface URL {
+		/**  */
+		authority:string
+		/**  */
+		content:any
+		/**  */
+		defaultPort:number
+		/**  */
+		file:string
+		/**  */
+		host:string
+		/**  */
+		path:string
+		/**  */
+		port:number
+		/**  */
+		protocol:string
+		/**  */
+		query:string
+		/**  */
+		ref:string
+		/**  */
+		userInfo:string
 	}
 	/** UseInfo对象,脚本使用信息 */
 	interface UseInfo {
