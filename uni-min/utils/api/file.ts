@@ -16,7 +16,7 @@ export function handleFileUpload(file : any) {
 	return api.request({
 		url: `/file/upload`,
 		method: 'POST',
-		formData: {
+		data: {
 			file: file,
 		},
 	})
@@ -26,7 +26,7 @@ export function uploadAvatar(file : any, userId : number) {
 	return api.request({
 		url: `/file/upload-avatar`,
 		method: 'POST',
-		formData: {
+		data: {
 			file: file,
 			userId: userId,
 		},
