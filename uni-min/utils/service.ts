@@ -138,5 +138,12 @@ const end = () => {
 	if (ajaxCount == 0)
 		uni.hideLoading();
 }
-// export const api = new Api("https://qzwdyz.top", "quiz");
-export const api = new Api("http://localhost:1888", "");
+/** 封装请求 */
+export const api = new Api("https://qzwdyz.top", "quiz");
+// export const api = new Api("http://localhost:1888", "");
+/** 服务器基础url */
+export const baseUrl = api.baseURL
+/** 传图片名称返回图片在服务器的地址 */
+export const getImgUrl = (fileName : string) => {
+	return baseUrl + '/file/download-avatar/' + fileName
+}
