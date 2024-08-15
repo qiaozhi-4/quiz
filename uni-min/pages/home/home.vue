@@ -20,15 +20,6 @@
 				padding: 10px;
 				gap: 8px;
 
-				.avatar-button::after {
-					border: none;
-				}
-
-				.avatar-button {
-					padding: 0;
-					border-radius: 50%;
-					background-color: transparent;
-				}
 
 				.nickname {
 					font-family: 'Inter';
@@ -917,12 +908,7 @@
 			</view>
 			<view class="main flex-column">
 				<view class="v1 flex-column">
-					<view v-if="isFriendHome" class="avatar-button">
-						<q-avatar :src="userInfo?.avatarUrl" borderWidth="3" size="69"></q-avatar>
-					</view>
-					<button v-else class="avatar-button" open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
-						<q-avatar :src="userInfo?.avatarUrl" size="69" borderWidth="3"></q-avatar>
-					</button>
+					<q-avatar :isChooseAvatar="!isFriendHome" :src="userInfo?.avatarUrl" size="69" borderWidth="3" />
 					<view class="nickname">{{userInfo?.nickname}}</view>
 				</view>
 				<view class="v2">
@@ -1246,15 +1232,6 @@
 	const isFriendHome = ref<boolean>(false)
 	/** 我在排行榜的排名 */
 	const myRanking = ref()
-	/** 获取微信头像触发 */
-	function onChooseAvatar(e) {
-		console.log("获取微信头像触发", e);
-		const { avatarUrl } = e.detail
-		userInfo.value.avatarUrl = avatarUrl
-		updateUser(userInfo.value).then(res => {
-			refAlert.value.show({ msg: '头像修改成功' })
-		})
-	}
 	/** 关闭当前页面,返回上一个页面 */
 	function handlerReverseBack() {
 		uni.navigateBack({
