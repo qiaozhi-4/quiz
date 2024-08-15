@@ -902,10 +902,15 @@
 	<view class="page">
 		<scroll-view class="scroll-view" scroll-y="true" @scroll="onScroll" :scroll-top="scrollTop"
 			scroll-with-animation>
-			<view class="head" :style="headStyle">
+			<!-- <view class="head" :style="headStyle">
 				<q-svg v-if="isFriendHome" icon="头部导航-返回" size="32" @click="handlerReverseBack" />
 				<q-svg v-else icon="设置" size="32" />
-			</view>
+			</view> -->
+			<q-nav-bar>
+				<left v-if="!isFriendHome">
+					<q-svg icon="设置" size="32" />
+				</left>
+			</q-nav-bar>
 			<view class="main flex-column">
 				<view class="v1 flex-column">
 					<q-avatar :isChooseAvatar="!isFriendHome" :src="userInfo?.avatarUrl" size="69" borderWidth="3" />
@@ -1072,17 +1077,12 @@
 									</view>
 									<view class="v2">
 										<view class="extra">
-											<q-popover>
-												<text class="text">...</text>
-												<!-- 插入气泡内容 -->
-												<template #bubble-content>
+											<q-bubble>
+												<reference>
 													<button class="button"
 														@click="onRemorPafer(question?.paperId,index)">删除</button>
-												</template>
-											</q-popover>
-											<!-- <text class="text" @click="">...</text> -->
-											<!-- <button class="button"
-												@click="onRemorPafer(question?.paperId,index)">删除</ button>-->
+												</reference>
+											</q-bubble>
 										</view>
 										<button class="button"
 											@click="onParticulars(question?.paperId,null)">查看详情</button>
