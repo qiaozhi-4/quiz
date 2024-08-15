@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
 .q-dialog-mask {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   background-color: rgba(#000, 0.5);
