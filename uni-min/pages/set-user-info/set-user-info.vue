@@ -5,26 +5,6 @@
 		gap: 5px;
 		padding: 0 36px;
 
-		.avatar-button::after {
-			border: none;
-		}
-
-		.avatar-button {
-			width: 130px;
-			height: 130px;
-			padding: 0;
-			margin-top: 42px;
-			background-color: transparent;
-
-			.change-avatar {
-				width: 37px;
-				height: 37px;
-				position: absolute;
-				bottom: 0;
-				right: 0;
-			}
-
-		}
 
 		.label {
 			justify-self: start;
@@ -133,11 +113,7 @@
 	<view class="page">
 		<q-nav-bar></q-nav-bar>
 		<view class="main">
-			<button class="avatar-button" :class="{shake:avatarShake}" open-type="chooseAvatar"
-				@chooseavatar="onChooseAvatar">
-				<q-avatar :src="userInfo?.avatarUrl" size="130" borderWidth="5"></q-avatar>
-				<q-svg class="change-avatar" v-if="userInfo?.avatarUrl" icon="更换头像" size="37" />
-			</button>
+			<q-avatar :class="{shake:avatarShake}" :src="userInfo?.avatarUrl" size="130" borderWidth="5" :isChooseAvatar="true"/>
 			<view class="label">昵称</view>
 			<input class="nickname-input" :class="{shake:nicknameShake}" placeholder-class="nickname-input-placeholder"
 				type="nickname" placeholder="请输入昵称" :value="userInfo?.nickname" @input="onInput" @blur="onBlur" />
@@ -149,10 +125,11 @@
 </template>
 
 <script lang="ts" setup>
-import {onMounted, ref} from 'vue'
-import {updateUser} from '../../utils/api/wxUser';
+	import { onMounted, ref } from 'vue'
+	import { updateUser } from '../../utils/api/wxUser';
+import { getPaperTotal } from '../../utils/api/paper';
 
-/** 获取登录信息 */
+	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
 	/** 是否需要动画 */
 	const avatarShake = ref<boolean>(false)
@@ -197,8 +174,16 @@ import {updateUser} from '../../utils/api/wxUser';
 				// 判断是不是通过分享进来的
 				let route = getCurrentPages()[0].route
 				if ('pages/set-user-info/set-user-info' == route) {
-					uni.redirectTo({
-						url: `/pages/start-test/start-test?isAnswer=${false}`
+					getPaperTotal(getApp().globalData.userInfo.userId).then(res=>{
+						if(res.data == 0){
+							uni.redirectTo({
+								url: `/pages/start-test/start-test?isAnswer=${false}`
+							})
+						}else{
+							uni.redirectTo({
+								url: `/pages/home/home`
+							})
+						}
 					})
 				} else {
 					uni.navigateBack({
