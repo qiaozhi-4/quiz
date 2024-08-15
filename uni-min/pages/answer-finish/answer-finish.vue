@@ -339,12 +339,12 @@
 	/** 查看排行榜 */
 	function goHome() {
 		uni.redirectTo({
-			url: `/pages/home/home`
+			url: `/pages/home/home?userId=${friendInfo.value.userId}&isFriendHome=${true}`
 		});
 	}
 	/** 跳转到出题页 */
 	function goSetTest() {
-		uni.navigateTo({
+		uni.redirectTo({
 			url: `/pages/start-test/start-test?isAnswer=false`
 		});
 	}
@@ -354,7 +354,7 @@
 			message.value.open()
 			return
 		}
-		uni.navigateTo({
+		uni.redirectTo({
 			url: `/pages/start-test/start-test?isAnswer=true&paperId=${statistics.value.paperId}&userId=${userInfo.value.userId}`
 		});
 	}
