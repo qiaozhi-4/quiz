@@ -147,3 +147,26 @@ export const baseUrl = api.baseURL
 export const getImgUrl = (fileName : string) => {
 	return baseUrl + '/file/download-avatar/' + fileName
 }
+/**
+ * 将一个对象转换为查询参数字符串
+ * @param params 对象，键值对将被转换为查询参数
+ * @returns 转换后的查询参数字符串
+ */
+export function objectToPathParams(params : SwaggerQuery) : string {
+	return '?' + Object.keys(params)
+		.map(key => `${key}=${params[key]}`)
+		.join("&");
+}
+/**
+ * 动态替换URL中的占位符为实际的参数值(替换路径参数)
+ * @param urlTemplate 包含占位符的URL模板
+ * @param params 包含参数名和参数值的对象
+ * @returns 替换后的完整URL
+ */
+export function replaceUrlPlaceholders(urlTemplate : string, params : SwaggerPath) : string {
+
+	return urlTemplate.replace(/{(\w+)}/g, (match, key) => {
+		// 如果params中存在对应的key,则替换为对应的值,否则保留原占位符
+		return params[key] !== undefined ? params[key].toString() : match;
+	});
+}
