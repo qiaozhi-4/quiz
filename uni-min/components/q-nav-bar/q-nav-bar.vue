@@ -35,18 +35,21 @@
 
 <template>
 	<view class="q-nav-bar" :class="{'q-fixed': props.fixed}" :style="style">
-		<view class="q-nav-bar-left" :style="`width: ${menuButtonInfo.width}px`">
-			<q-svg @click="handlerReverseBack" :icon="props.leftIcon" size="32" />
-		</view>
-		<view :style="`font-size: ${props.titleSize}px;`"  class="q-nav-bar-middle text-overflow">{{props.title}}</view>
-		<view class="q-nav-bar-right" :style="`width: ${menuButtonInfo.width}px`"></view>
+		<slot>
+			<view class="q-nav-bar-left" :style="`width: ${menuButtonInfo.width}px`">
+				<q-svg @click="handlerReverseBack" :icon="props.leftIcon" size="32" />
+			</view>
+			<view :style="`font-size: ${props.titleSize}px;`" class="q-nav-bar-middle text-overflow">{{props.title}}
+			</view>
+			<view class="q-nav-bar-right" :style="`width: ${menuButtonInfo.width}px`"></view>
+		</slot>
 	</view>
 </template>
 
 <script lang="ts" setup>
-import {computed} from 'vue'
+	import { computed } from 'vue'
 
-const props = defineProps({
+	const props = defineProps({
 		/** 标题文字 */
 		title: { type: String, default: '' },
 		/** 标题文字大小 */
