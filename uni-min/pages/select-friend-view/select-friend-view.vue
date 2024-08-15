@@ -103,7 +103,7 @@
 
 <template>
 	<view class="page">
-		<q-nav-bar leftIcon="头部导航-返回" title="选择一条朋友的看法" titleSize="16"></q-nav-bar>
+		<q-nav-bar needBack title="选择一条朋友的看法" titleSize="16" fixed></q-nav-bar>
 		<view class="main flex-column">
 			<view class="input-wrap">
 				<q-svg class="svg" icon="搜索" size="14.5" />

@@ -127,7 +127,7 @@
 
 <template>
 	<view class="page">
-		<q-nav-bar leftIcon="头部导航-返回" />
+		<q-nav-bar needBack fixed/>
 		<view class="main flex-column">
 			<text class="t1">{{prop?.propDescribe}}</text>
 			<text class="t2">{{prop?.propName}}</text>

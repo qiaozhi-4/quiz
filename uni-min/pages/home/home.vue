@@ -902,15 +902,12 @@
 	<view class="page">
 		<scroll-view class="scroll-view" scroll-y="true" @scroll="onScroll" :scroll-top="scrollTop"
 			scroll-with-animation>
-			<!-- <view class="head" :style="headStyle">
-				<q-svg v-if="isFriendHome" icon="头部导航-返回" size="32" @click="handlerReverseBack" />
-				<q-svg v-else icon="设置" size="32" />
-			</view> -->
-			<q-nav-bar>
-				<left v-if="!isFriendHome">
+			<q-nav-bar v-if="!isFriendHome" fixed>
+				<template #left>
 					<q-svg icon="设置" size="32" />
-				</left>
+				</template>
 			</q-nav-bar>
+			<q-nav-bar v-else fixed></q-nav-bar>
 			<view class="main flex-column">
 				<view class="v1 flex-column">
 					<q-avatar :isChooseAvatar="!isFriendHome" :src="userInfo?.avatarUrl" size="69" borderWidth="3" />

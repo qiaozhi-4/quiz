@@ -276,7 +276,7 @@
 
 <template>
 	<view class="page">
-		<q-nav-bar leftIcon="头部导航-返回" title="Quiz" />
+		<q-nav-bar needBack title="Quiz" fixed/>
 		<view class="main flex-column">
 			<q-avatar class="avatar" :src="userInfo?.avatarUrl" size="62" borderWidth="3"></q-avatar>
 			<view class="statistics-text">

@@ -142,7 +142,7 @@
 
 <template>
 	<view class="page">
-		<q-nav-bar class="head-sticky" leftIcon="头部导航-返回" title="我的徽章" />
+		<q-nav-bar class="head-sticky" needBack title="我的徽章" fixed/>
 		<view class="main flex-column">
 			<template v-for="(item,index) in badgeData" :key="index">
 				<swiper class="swiper" v-show="index == activateBadge" :current="currentIndex" @change="onChange"

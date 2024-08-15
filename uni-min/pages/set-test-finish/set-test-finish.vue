@@ -145,7 +145,7 @@
 
 <template>
 	<view class="page">
-		<q-nav-bar leftIcon="头部导航-返回" />
+		<q-nav-bar needBack fixed/>
 		<view class="main flex-column">
 			<view class="v1">Done!</view>
 			<view class="v2">完成出题</view>

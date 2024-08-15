@@ -227,7 +227,7 @@
 	<!-- 提示消息 -->
 	<q-alert ref="refAlert"></q-alert>
 	<view class="page">
-		<q-nav-bar></q-nav-bar>
+		<q-nav-bar fixed></q-nav-bar>
 		<view class="main">
 			<view class="avatar-group">
 				<q-avatar :src="userInfo?.avatarUrl" size="97" borderWidth="4"></q-avatar>

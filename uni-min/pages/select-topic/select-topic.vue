@@ -97,7 +97,7 @@
 
 <template>
 	<view class="page">
-		<q-nav-bar leftIcon="头部导航-返回" title="选择一道题" titleSize="16"></q-nav-bar>
+		<q-nav-bar needBack title="选择一道题" titleSize="16" fixed></q-nav-bar>
 		<view class="main flex-column">
 			<view class="input-wrap">
 				<q-svg icon="搜索" size="14.5" />

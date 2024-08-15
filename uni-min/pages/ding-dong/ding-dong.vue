@@ -4,7 +4,7 @@
 
 <template>
 	<view class="page">
-		<q-nav-bar :title="pageArg?.pageName" leftIcon="头部导航-返回"></q-nav-bar>
+		<q-nav-bar :title="pageArg?.pageName" needBack fixed></q-nav-bar>
 		<scroll-view :scroll-y="true" @scrolltolower="scrollBottom" class="main flex-column" :style="height">
 			<uni-card v-for="(device,index) in devices" :key="index">
 				<uni-forms ref="deviceRef" :model="device" :rules="rules" label-width="150">

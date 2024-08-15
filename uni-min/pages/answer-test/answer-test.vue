@@ -276,7 +276,7 @@
 
 <template>
 	<view class="page">
-		<q-nav-bar title="Quiz" />
+		<q-nav-bar title="Quiz" fixed/>
 		<view class="main flex-column">
 			<q-avatar class="avatar" :src="friendInfo?.avatarUrl" size="62" borderWidth="3"></q-avatar>
 			<view class="statistics-text">

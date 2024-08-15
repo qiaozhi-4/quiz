@@ -111,7 +111,7 @@
 
 <template>
 	<view class="page">
-		<q-nav-bar></q-nav-bar>
+		<q-nav-bar fixed></q-nav-bar>
 		<view class="main">
 			<q-avatar :class="{shake:avatarShake}" :src="userInfo?.avatarUrl" size="130" borderWidth="5" :isChooseAvatar="true"/>
 			<view class="label">昵称</view>

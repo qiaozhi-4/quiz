@@ -129,7 +129,7 @@
 
 <template>
 	<view class="page">
-		<q-nav-bar class="head-sticky" leftIcon="头部导航-返回" :title="`${userInfo?.nickname}的${paper?.order}号测试`" />
+		<q-nav-bar fixed class="head-sticky" needBack :title="`${userInfo?.nickname}的${paper?.order}号测试`" />
 		<view class="main">
 			<view class="questions flex-column">
 				<view class="question flex-column" v-for="(question,index) in paper?.questions" :key="index">

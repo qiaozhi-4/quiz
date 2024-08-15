@@ -282,7 +282,7 @@
 
 <template>
 	<view class="page">
-		<q-nav-bar titleExtraClass="head-title" leftIcon="头部导航-返回" title="my Quiz" />
+		<q-nav-bar fixed needBack title="my Quiz" />
 		<view class="main flex-column">
 			<view class="v1">
 				<view class="v-global achievement-score flex-column">

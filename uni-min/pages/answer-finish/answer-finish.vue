@@ -262,7 +262,7 @@
 
 <template>
 	<view class="page">
-		<q-nav-bar />
+		<q-nav-bar fixed/>
 		<view class="main flex-column">
 			<view class="v1">
 				<view class="ball right"></view>

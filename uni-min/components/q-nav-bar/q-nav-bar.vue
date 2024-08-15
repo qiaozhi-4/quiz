@@ -11,6 +11,7 @@
 		display: flex;
 		width: 100vw;
 		justify-content: space-between;
+		align-items: flex-end;
 
 		.q-nav-bar-left {
 			display: grid;
@@ -37,9 +38,14 @@
 	<view class="q-nav-bar" :class="{'q-fixed': props.fixed}" :style="style">
 		<slot>
 			<view class="q-nav-bar-left" :style="`width: ${menuButtonInfo.width}px`">
-				<q-svg @click="handlerReverseBack" :icon="props.leftIcon" size="32" />
+				<slot name="left">
+					<q-navigator mode="navigateBack">
+						<q-svg icon="头部导航-返回" size="32" />
+					</q-navigator>
+				</slot>
 			</view>
-			<view :style="`font-size: ${props.titleSize}px;`" class="q-nav-bar-middle text-overflow">{{props.title}}
+			<view :style="`font-size: ${props.titleSize}px;`" class="q-nav-bar-middle text-overflow">
+				<slot name="middle">{{props.title}} </slot>
 			</view>
 			<view class="q-nav-bar-right" :style="`width: ${menuButtonInfo.width}px`"></view>
 		</slot>
@@ -54,12 +60,12 @@
 		title: { type: String, default: '' },
 		/** 标题文字大小 */
 		titleSize: { type: String, default: '32' },
-		/** 左侧按钮图标 */
-		leftIcon: { type: String, default: '' },
 		/** 文字颜色 */
 		color: { type: String, default: '#ffffff' },
 		/** 是否固定顶部 */
-		fixed: { type: Boolean, default: true },
+		fixed: { type: [Boolean, String], default: false },
+		/** 是否需要返回图标 */
+		needBack: { type: [Boolean, String], default: false },
 	})
 	/** 胶囊信息{width: 87, height: 32, left: 281, top: 51, right: 368} */
 	const menuButtonInfo = uni.getMenuButtonBoundingClientRect()
@@ -75,10 +81,4 @@
 		let padding = systemInfo.screenWidth - menuButtonInfo.right
 		return `min-height: ${10 + menuButtonInfo.bottom}px; padding: 0 ${padding}px 10px ${padding}px; color: ${props.color}`
 	})
-	/** 关闭当前页面,返回上一个页面 */
-	function handlerReverseBack() {
-		uni.navigateBack({
-			delta: 1
-		});
-	}
 </script>

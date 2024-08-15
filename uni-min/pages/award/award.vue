@@ -93,7 +93,7 @@
 
 <template>
 	<view class="page">
-		<q-nav-bar leftIcon="头部导航-返回" />
+		<q-nav-bar needBack fixed/>
 		<view class="main flex-column">
 			<view class="v1">{{items[itemIndex].describe}}</view>
 			<view class="v2">{{items[itemIndex].name}}</view>

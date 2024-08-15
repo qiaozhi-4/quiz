@@ -4,6 +4,7 @@ export const request = (options : WechatMiniprogram.RequestOption<Quiz.Result>) 
 	return new Promise((resolve, reject) => {
 		/** 设置基础请求头 */
 		const baseUrl = "https://qzwdyz.top/quiz"
+		// const baseUrl = "http://localhost:1888"
 		uni.request<Quiz.Result>({
 			url: baseUrl + options.url,
 			data: options.data,
@@ -14,11 +15,11 @@ export const request = (options : WechatMiniprogram.RequestOption<Quiz.Result>) 
 				...options.header
 			},
 			success: (res : { data : Quiz.Result<any> | PromiseLike<Quiz.Result<any>> }) => {
-				console.log(res.data)
+				console.log(`请求路径:${options.url}`, res.data)
 				// 请求成功，就将成功的数据返回出去
 				if (res.data.code == 200) resolve(res.data)
 				else {
-					console.error(res.data.message)
+					console.error(`错误的请求路径:${options.url}`)
 					uni.showToast({
 						title: res.data.message,
 						icon: 'error',
