@@ -66,7 +66,7 @@ public class FileUploadController {
     @GetMapping("download-avatar/{filename:.+}")
     @ApiOperation("获取头像")
     public ResponseEntity<Resource> downloadAvatar(@PathVariable String filename) {
-        return filDownload(filename, "\\avatar");
+        return filDownload(filename, "/avatar");
     }
 
     private ResponseEntity<Resource> filDownload(String filename, String prefix) {
