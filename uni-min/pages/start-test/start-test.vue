@@ -206,7 +206,7 @@
 
 <template>
 	<!-- 弹出框 -->
-	<q-dialog ref="refDialog" :maskHideDialog="false">
+	<q-dialog ref="refDialog">
 		<view class="dialog flex-column">
 			<text class="dialog-t1">复活宝石让尊贵的您获得重新再次答题的机会</text>
 			<text class="dialog-t2">复活宝石</text>
