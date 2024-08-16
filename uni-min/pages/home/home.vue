@@ -894,17 +894,67 @@
 			}
 		}
 	}
+
+	.dialog {
+		padding: 15px;
+		gap: 15px;
+		align-items: center;
+		justify-content: center;
+		background-color: #1f1146 !important;
+
+		.svg {
+			position: absolute;
+			top: 0;
+			right: 0;
+			transform: translate(30%, -30%);
+		}
+
+		.v1 {
+			margin-bottom: 20px;
+		}
+
+		.text {
+			font-family: 'Inter';
+			font-style: normal;
+			font-weight: 700;
+			font-size: 16px;
+			line-height: 19px;
+
+			color: #FFFFFF;
+		}
+
+		.but {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			padding: 10px;
+			gap: 10px;
+
+			width: 100%;
+
+			background: rgba(255, 255, 255, 0.1);
+			border-radius: 15px;
+		}
+	}
 </style>
 
 <template>
 	<!-- 提示消息 -->
 	<q-alert ref="refAlert"></q-alert>
+	<!-- 设置 -->
+	<q-dialog extraClass="dialog" ref="refDialog" maskHideDialog>
+		<q-svg class="svg" icon="home-设置-关闭" size="38" @click="()=> refDialog.hide()"></q-svg>
+		<view class="v1 text">设置</view>
+		<button class="but text" @click="()=>refAlert.show({msg:'该功能未实现哦'})">问题反馈</button>
+		<button class="but text" open-type="contact">联系客服</button>
+	</q-dialog>
 	<view class="page">
 		<scroll-view class="scroll-view" scroll-y="true" @scroll="onScroll" :scroll-top="scrollTop"
 			scroll-with-animation>
 			<q-nav-bar v-if="!isFriendHome" fixed>
 				<template #left>
-					<q-svg icon="设置" size="32" />
+					<q-svg icon="设置" size="32" @click="()=> refDialog.show()" />
 				</template>
 			</q-nav-bar>
 			<q-nav-bar v-else fixed></q-nav-bar>
@@ -1114,6 +1164,8 @@
 
 	/** 提示消息ref */
 	const refAlert = ref()
+	/** 设置 */
+	const refDialog = ref()
 	/** 获取登录信息 */
 	const userInfo = ref<Quiz.UserInfo>()
 	/** 获取道具信息 */
