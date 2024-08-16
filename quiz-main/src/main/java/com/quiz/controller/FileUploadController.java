@@ -89,15 +89,24 @@ public class FileUploadController {
     }
 
     private String fileUpload(MultipartFile file, String prefix) {
+
+        // 目标目录路径
+        File directory = new File(dir + prefix);
+        // 如果目录不存在，创建目录
+        if (!directory.exists()) {
+            Assert.isTrue(directory.mkdirs(),"目标目录创建失败: " + directory.getPath());
+        }
+
         Assert.isTrue(!file.isEmpty(), "文件为空");
 
         // 构建目标文件路径
         String fileName = file.getOriginalFilename();
         Assert.isNotNull(fileName, "文件名不能为空");
+        // 生成新的文件名，避免文件名冲突
         String[] split = fileName.split("\\.");
         split[0] += LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
         fileName = String.join(".", split);
-        File dest = new File(dir + prefix, fileName);
+        File dest = new File(directory, fileName);
         try {
             // 保存文件到目标路径
             file.transferTo(dest);
