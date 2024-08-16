@@ -21,7 +21,7 @@
 
 <template>
 	<view v-if="showDialog">
-		<view class="q-dialog absolute-center ">
+		<view class="q-dialog flex-column absolute-center" :class="extraClass">
 			<slot></slot>
 		</view>
 		<!-- 点击遮罩层是否关闭提示框 -->
@@ -36,7 +36,9 @@
 	/** 传递的属性 */
 	const props = defineProps({
 		/** 点击遮罩层是否关闭提示框 */
-		maskHideDialog: { type: Boolean, default: false },
+		maskHideDialog: { type: [Boolean, String], default: false },
+		/** 容器额外的class */
+		extraClass: { type: String, default: '' },
 	})
 
 	/** 显示提示框 */
