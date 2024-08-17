@@ -1,8 +1,14 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
+    "folders": [
+        {
+            "path": "."
+        }
     ],
-    "settings": {}
+    "settings": {
+        "gutterpreview.showImagePreviewOnGutter": false,
+        "create-uniapp-view.template": "vue3",
+        "create-uniapp-view.style": "scss",
+        "create-uniapp-view.name": "与文件夹同名",
+        "create-uniapp-view.directory": true
+    }
 }
