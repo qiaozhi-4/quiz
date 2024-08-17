@@ -1161,6 +1161,7 @@
 	import { getIntimateFriends, getIntimateRanking, getUser } from '../../utils/api/user';
 	import { getAnswersList } from '../../utils/api/answers';
 	import { updateUser } from '../../utils/api/wxUser';
+import { homeTestInfo } from '../../utils/constant';
 
 	/** 提示消息ref */
 	const refAlert = ref()
@@ -1189,88 +1190,7 @@
 	/** 密友数据 */
 	const intimateFriends = ref<Quiz.UserInfo[]>()
 	/** 测试信息数据 */
-	const testInfo = ref([
-		{
-			name: '关键题',
-			items: [{
-				title: '你最喜欢在周末做什么？',
-				select: '在家进行个人活动',
-				input: '吃饭睡觉游戏代码'
-			}, {
-				title: '你更喜欢哪种类型的电影？',
-				select: '白开水',
-			},],
-			extra: {
-				t1: '选择一道题',
-				t2: '展示你的答案',
-			}
-		},
-		{
-			name: '朋友的看法',
-			items: [],
-			extra: {
-				t1: '选择1条朋友的看法',
-				t2: '展示回答',
-			}
-		},
-		{
-			name: '基础题',
-			spread: false,
-			items: [{
-				title: '你最喜欢在周末做什么？',
-				select: '在家进行个人活动',
-				input: '吃饭睡觉游戏代码'
-			}, {
-				title: '你更喜欢哪种类型的电影？',
-				select: '白开水',
-			}, {
-				title: '你最喜欢在周末做什么？',
-				select: '在家进行个人活动',
-				input: '吃饭睡觉游戏代码'
-			}, {
-				title: '你更喜欢哪种类型的电影？',
-				select: '白开水',
-			},]
-		},
-		{
-			name: '进阶题',
-			spread: false,
-			items: [{
-				title: '你最喜欢在周末做什么？',
-				select: '在家进行个人活动',
-				input: '吃饭睡觉游戏代码'
-			}, {
-				title: '你更喜欢哪种类型的电影？',
-				select: '白开水',
-			}, {
-				title: '你最喜欢在周末做什么？',
-				select: '在家进行个人活动',
-				input: '吃饭睡觉游戏代码'
-			}, {
-				title: '你更喜欢哪种类型的电影？',
-				select: '白开水',
-			},]
-		},
-		{
-			name: '核心题',
-			spread: false,
-			items: [{
-				title: '你最喜欢在周末做什么？',
-				select: '在家进行个人活动',
-				input: '吃饭睡觉游戏代码'
-			}, {
-				title: '你更喜欢哪种类型的电影？',
-				select: '白开水',
-			}, {
-				title: '你最喜欢在周末做什么？',
-				select: '在家进行个人活动',
-				input: '吃饭睡觉游戏代码'
-			}, {
-				title: '你更喜欢哪种类型的电影？',
-				select: '白开水',
-			},]
-		},
-	])
+	const testInfo = ref(homeTestInfo)
 	/** 搜索框输入 */
 	const input = ref('')
 	/** 题库数据 */
