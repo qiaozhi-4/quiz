@@ -1,12 +1,63 @@
 {
-    "entryPagePath": "pages/index/index",
-    "pages": [
-        //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-        {
-            "path": "pages/index/index"
-        }
-    ],
-    "globalStyle": {
-        "navigationStyle": "custom"
-    }
+	"entryPagePath": "pages/home/home",
+	"pages": [
+		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "home"
+			}
+		},
+		{
+			"path": "pages/home/home",
+			"style": {
+				"navigationBarTitleText": "home"
+			}
+		},
+		{
+			"path": "pages/task/task",
+			"style": {
+				"navigationBarTitleText": "task"
+			}
+		},
+		{
+			"path": "pages/paper-start/paper-start",
+			"style": {
+				"navigationBarTitleText": "paper-start"
+			}
+		},
+		{
+			"path": "pages/paper/paper",
+			"style": {
+				"navigationBarTitleText": "paper"
+			}
+		},
+		{
+			"path": "pages/paper-finish/paper-finish",
+			"style": {
+				"navigationBarTitleText": "paper-finish"
+			}
+		},
+		{
+			"path": "pages/user-set/user-set",
+			"style": {
+				"navigationBarTitleText": "user-set"
+			}
+		},
+		{
+			"path": "pages/badge/badge",
+			"style": {
+				"navigationBarTitleText": "badge"
+			}
+		},
+		{
+			"path": "pages/prop/prop",
+			"style": {
+				"navigationBarTitleText": "prop"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationStyle": "custom"
+	}
 }
