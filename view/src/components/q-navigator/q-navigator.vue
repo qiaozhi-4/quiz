@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-import { objectToPathParams } from '../../utils/service';
+import { objectToPathParams } from '@/utils/service';
 
 /** 传递的属性 */
 const props = defineProps({

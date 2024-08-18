@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, watch } from 'vue';
-import { formatValue } from '../../utils/utils';
+import { formatValue } from '@/utils/utils';
 /** 传递的属性 */
 const props = defineProps({
     /** svg文件名称 */

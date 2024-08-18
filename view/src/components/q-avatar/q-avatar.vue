@@ -36,7 +36,7 @@
 
 <script lang="ts" setup>
 import { ref, computed } from "vue";
-import { formatValue } from "../../utils/utils";
+import { formatValue } from "@/utils/utils";
 import { getImgUrl } from "@/utils/utils";
 import { uploadAvatar } from "@/utils/utils";
 

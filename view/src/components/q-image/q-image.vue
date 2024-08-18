@@ -21,7 +21,7 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
-import { formatValue } from '../../utils/utils';
+import { formatValue } from '@/utils/utils';
 /** 传递的属性 */
 const props = defineProps({
     /** 图片源地址，同原生属性一致 */
