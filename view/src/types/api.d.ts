@@ -101,6 +101,8 @@ declare namespace Quiz {
 	}
 	/** PaperDto对象,试卷所有信息 */
 	interface PaperDto {
+		/** 答卷id(自己回答这个试卷的信息) */
+		answerId:number
 		/** 答案下标集合,以@@分隔 */
 		answers:string
 		/** 用户答题总数,被多少人做过 */
@@ -119,6 +121,10 @@ declare namespace Quiz {
 		paperId:number
 		/** 试卷题目集合 */
 		questions:Quiz.Question
+		/** 得分(自己回答这个试卷的信息) */
+		score:number
+		/** 选择下标集合,以@@分隔(自己回答这个试卷的信息) */
+		selects:string
 		/** 状态 */
 		state:number
 		/** 标题 */

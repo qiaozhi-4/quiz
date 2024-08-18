@@ -62,4 +62,13 @@ public class PaperDTO implements Serializable {
     @ApiModelProperty("用户答题总数,被多少人做过")
     private Long answersTotal;
 
+    @ApiModelProperty("答卷id(自己回答这个试卷的信息)")
+    private Integer answerId;
+
+    @ApiModelProperty("选择下标集合,以@@分隔(自己回答这个试卷的信息)")
+    private String selects;
+
+    @ApiModelProperty("得分(自己回答这个试卷的信息)")
+    private Integer score;
+
 }
