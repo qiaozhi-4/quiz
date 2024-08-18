@@ -84,7 +84,7 @@ export class Api implements IApi {
         /** 路径参数处理 */
         options.url = replaceUrlPlaceholders(options.url, options.path);
         /** 查询参数处理 */
-        if (options.query) options.url += `?${objectToPathParams(options.query)}`;
+        if (options.query) options.url += objectToPathParams(options.query);
         return new Promise<Quiz.Result<T>>((resolve, reject) => {
             star();
             uni.request({
