@@ -12,11 +12,11 @@ onLaunch(() => {
             console.log("微信登录信息:", loginRes);
             login(loginRes.code, "wxf2f9d21291120320").then((res) => {
                 // login('wx0f4e873ad758a586', loginRes.code).then((res) => {
-                store.$patch({
-                    user: res.data.userInfo,
-                    token: res.data.token,
-                    props: res.data.props,
-                });
+                store.$patch(partialState =>{
+                    partialState.user = res.data.userInfo
+                    partialState.token = res.data.token
+                    partialState.props = res.data.props
+                })
 
                 /** 获取第一个页面路由信息 */
                 let route = getCurrentPages()[0].route;
