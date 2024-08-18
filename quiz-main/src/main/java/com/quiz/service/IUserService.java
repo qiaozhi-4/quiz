@@ -55,4 +55,11 @@ public interface IUserService extends IService<User> {
      * @param userId 用户id
      */
     List<User> getIntimateFriends(Integer userId);
+
+      /**
+     * 根据用户id获取用户信息
+     *
+     * @param userId 用户id
+     */
+    UserDTO getUserDtoByUserId(Integer userId);
 }

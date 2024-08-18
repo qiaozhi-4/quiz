@@ -60,7 +60,7 @@ public class WxUserServiceImpl implements IWxUserService {
         }
         final String jwtToken = JWTUtils.getJwtToken(user.getUserId().toString(), user.getUsername());
         map.put(JWTUtils.TOKEN_KEY, jwtToken);
-        map.put("userInfo", user);
+        map.put("userInfo", userMapper.selectUserDtoByUserId(user.getUserId()));
         map.put("props", propService.getPropsByUserId(user.getUserId()));
         return Result.success(map);
     }

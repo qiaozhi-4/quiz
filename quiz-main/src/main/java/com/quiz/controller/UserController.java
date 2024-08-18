@@ -44,8 +44,8 @@ public class UserController {
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("通过用户ID,获取用户信息")
     @GetMapping("get/{userId:\\d+}")
-    public User getUser(@PathVariable Integer userId) {
-        return userService.getUserById(userId);
+    public UserDTO getUser(@PathVariable Integer userId) {
+        return userService.getUserDtoByUserId(userId);
     }
 
     @PathPermission(PermissionEnum.READ)
@@ -55,6 +55,7 @@ public class UserController {
         return userService.getIntimateRanking(userId);
     }
 
+    //准备删除
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("通过用户ID,获取用户密友信息")
     @GetMapping("get-intimate-friends/{userId:\\d+}")

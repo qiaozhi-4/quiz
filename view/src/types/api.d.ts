@@ -328,23 +328,29 @@ declare namespace Quiz {
 	}
 	/** UserDto对象,用户基本信息,添加权限列表 */
 	interface UserDto {
+		/** 答题计数(回答试卷数量,包括已删除) */
+		answersTotal:number
 		/** 头像地址 */
 		avatarUrl:string
 		/** 创建时间 */
 		createdAt:string
 		/** 账号是否启用:0=正常,-1=禁用 */
 		enabled:number
+		/** 密友计数(满分回答朋友一张试卷为密友,一个朋友只算一个) */
+		intimateFriendTotal:number
 		/** 用户上次登录时间 */
 		lastLoginAt:string
 		/** 邮箱 */
 		mail:string
 		/** 用户昵称 */
 		nickname:string
+		/** 出题计数(生成试卷数量,包括已删除) */
+		paperTotal:number
 		/** 用户权限集合 */
 		permissions:Array<string>
 		/** 手机号 */
 		phone:string
-		/** 排行榜分数 */
+		/** 排行榜分数(这是相对与好友的,也就是回答好友全部试卷的总分,包括已删除) */
 		totalScore:number
 		/** 更新时间 */
 		updatedAt:string

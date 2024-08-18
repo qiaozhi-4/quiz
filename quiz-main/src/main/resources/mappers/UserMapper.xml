@@ -70,5 +70,16 @@
           and b.score = 100
         group by us.user_id
     </select>
-
+    <select id="selectUserDtoByUserId" resultType="com.quiz.dto.UserDTO">
+        select a.*,
+               count(distinct b.paper_id)          as paper_total,
+               count(distinct c.answer_id)         as answers_total,
+               count(distinct d.responder_user_id) as intimate_friend_total
+        from quiz.t_user a
+                 left join quiz.q_paper b on a.user_id = b.creator_user_id # 我的出题
+                 left join quiz.q_answers c on a.user_id = c.responder_user_id # 我的答题
+                 left join quiz.q_answers d on b.paper_id = d.paper_id and d.score = 100 # 做我的试卷,得分100分的
+        where a.user_id = #{userId}
+        group by a.user_id
+    </select>
 </mapper>

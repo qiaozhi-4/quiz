@@ -71,8 +71,17 @@ public class UserDTO implements Serializable {
     @ApiModelProperty("用户权限集合")
     private List<String> permissions;
 
-    @ApiModelProperty("排行榜分数")
+    @ApiModelProperty("排行榜分数(这是相对与好友的,也就是回答好友全部试卷的总分,包括已删除)")
     private int totalScore;
+
+    @ApiModelProperty("出题计数(生成试卷数量,包括已删除)")
+    private Long paperTotal;
+
+    @ApiModelProperty("答题计数(回答试卷数量,包括已删除)")
+    private Long answersTotal;
+
+    @ApiModelProperty("密友计数(满分回答朋友一张试卷为密友,一个朋友只算一个)")
+    private Long intimateFriendTotal;
 
     /**
      * 生成随机 username
