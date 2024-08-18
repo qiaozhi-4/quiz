@@ -40,5 +40,14 @@
           and a.creator_user_id = #{userId}
         group by a.paper_id
     </select>
+    <select id="selectPaperAndAnswerInfoListByUserId" resultType="com.quiz.dto.PaperDTO">
+        select a.*, count(b.responder_user_id) as answers_total, c.answer_id, c.selects, c.score
+        from quiz.q_paper a
+                 left join quiz.q_answers b on a.paper_id = b.paper_id
+                 left join quiz.q_answers c on a.paper_id = c.paper_id and c.responder_user_id = #{responderUserId}
+        where a.state != -1
+          and a.creator_user_id = #{creatorUserId}
+        group by a.paper_id, c.answer_id
+    </select>
 
 </mapper>

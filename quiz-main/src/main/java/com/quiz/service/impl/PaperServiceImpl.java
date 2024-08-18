@@ -86,4 +86,9 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
         val paper = this.getById(paperId).setState(-1);
         return this.updateById(paper);
     }
+
+    @Override
+    public List<PaperDTO> getPaperAndAnswerInfoListByUserId(Integer creatorUserId, Integer responderUserId) {
+        return this.baseMapper.selectPaperAndAnswerInfoListByUserId(creatorUserId, responderUserId);
+    }
 }

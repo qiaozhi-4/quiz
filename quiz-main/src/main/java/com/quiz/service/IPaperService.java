@@ -62,4 +62,12 @@ public interface IPaperService extends IService<Paper> {
      * @return 删除结果
      */
     Boolean removePaperByPaperId(Integer paperId);
+
+    /**
+     * 查询用户a试卷列表,以及用户b的回答信息
+     *
+     * @param creatorUserId   用户a id
+     * @param responderUserId 用户b id
+     */
+    List<PaperDTO> getPaperAndAnswerInfoListByUserId(Integer creatorUserId, Integer responderUserId);
 }

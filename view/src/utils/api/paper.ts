@@ -1,6 +1,17 @@
 import { api } from "../service"
 /** 题目试卷 前端控制器 */
 
+/** 查询用户a试卷列表,以及用户b的回答信息 */
+export function getPaperAndAnswerInfoList(creatorUserId : number, responderUserId : number) {
+	return api.request({
+		url: `/paper/get-list/{creatorUserId}/{responderUserId}`,
+		method: 'GET',
+		path: {
+			creatorUserId: creatorUserId,
+			responderUserId: responderUserId,
+		},
+	})
+}
 /** 获取试卷列表 */
 export function getPaperList(userId : number) {
 	return api.request({
