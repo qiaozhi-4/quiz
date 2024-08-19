@@ -1,7 +1,11 @@
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.q-navigator {
+    width: 100%;
+}
+</style>
 
 <template>
-    <view class="q-navigator" @click="routeJump">
+    <view class="q-navigator" :class="extraClass" @click="routeJump">
         <slot>路由跳转</slot>
     </view>
 </template>
@@ -19,6 +23,8 @@ const props = defineProps({
     data: { type: Object, default: {} },
     /** 返回的页面数，如果 delta 大于现有页面数，则返回到首页。 */
     delta: { type: [Number, String], default: 1 },
+    /** 容器类名 */
+    extraClass: { type: String, default: '' }
 });
 /** 路由跳转函数 */
 function routeJump() {
