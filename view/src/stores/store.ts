@@ -13,7 +13,7 @@ export const useStore = defineStore("counter", {
     },
     actions: {
         /** 根据道具id获取道具 */
-        getPropById(propId: number) {
+        getPropById(propId: number): Quiz.PropDTO | undefined {
             return this.props.find(e => e.propId === propId);
         },
         /** 根据道具id添加道具数量 */
