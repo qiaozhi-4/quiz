@@ -42,6 +42,17 @@ export function getPaper(paperId : number) {
 		},
 	})
 }
+/** 通过试卷ID,获取试卷详情,以及用户回答信息 */
+export function getPaperAndAnswerInfo(paperId : number, responderUserId : number) {
+	return api.request({
+		url: `/paper/get/{paperId}/{responderUserId}`,
+		method: 'GET',
+		path: {
+			paperId: paperId,
+			responderUserId: responderUserId,
+		},
+	})
+}
 /** 删除试卷 */
 export function removePaper(paperId : number) {
 	return api.request({
