@@ -15,10 +15,7 @@
                 </view>
                 <text class="dialog-b1-t1">使用宝石复活！</text>
             </button>
-            <q-navigator url="/pages/home/home">
-                <button class="dialog-b2">返回排行</button>
-                <!-- <button class="dialog-b2" @click="goHome">返回排行</button> -->
-            </q-navigator>
+            <button class="dialog-b2" @click="backtrack">返回</button>
         </view>
     </q-dialog>
     <!-- 提示消息 -->
@@ -48,41 +45,30 @@
                 <view class="explain-text">点击出题！🌟</view>
                 <view class="explain-text">看看他们对您的了解有多深！</view>
             </template>
-            <!-- 	<view class="date-statistics-text">
-				{{`${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')} Question 10/10`}}
-			</view> -->
             <view class="date-statistics-text">
                 {{ `${now} Question 10/10` }}
             </view>
-            <!-- /pages/set-test/set-test -->
-            <!-- /pages/answer-test/answer-test?paperId=${paperId.value}&userId=${friendInfo.value.userId} -->
-
-            <q-navigator url="/pages/paper/paper"
-                :data="isAnswer ? { paperId: paperId, userId: questionSetterUser.userId } : {}">
-                <button class="start-button">
-                    <text v-if="isAnswer" class="button-text">开始测试</text>
-                    <text v-else class="button-text">开始出题</text>
-                </button></q-navigator>
-            <!-- <button class="start-button" @click="onButton">
+            <button class="start-button" @click="goPaper">
                 <text v-if="isAnswer" class="button-text">开始测试</text>
                 <text v-else class="button-text">开始出题</text>
-            </button> -->
+            </button>
         </view>
     </view>
 </template>
 
 
 <script lang="ts" setup>
-import { onMounted, ref, computed } from 'vue';
+import { ref, computed } from 'vue';
 import { formatDate } from '../../utils/utils';
 import { onLoad } from '@dcloudio/uni-app';
 import { getUser, verifyPaper } from '../../utils/api/user';
 import { gainProp } from '../../utils/api/prop';
 import { useStore } from "@/stores/store";
+import { objectToPathParams } from '@/utils/service';
 const store = useStore();
 /** 本页路径参数 */
 type Option = AnyObject & {
-    /** 好友id */
+    /** 出题人id */
     userId?: number;
     /** 试卷id */
     paperId?: number;
@@ -105,7 +91,6 @@ const paperId = ref<number>(-1);
 /** 当前时间 */
 const now = formatDate(new Date, 'YYYY/MM/DD');
 
-
 /** 使用复活宝石 */
 const onResurrection = () => {
     if (gemCount.value < 1) {
@@ -124,7 +109,17 @@ const onResurrection = () => {
         });
     }
 };
-
+/** 返回 */
+function backtrack() {
+    uni.navigateBack();
+}
+/** 跳转试卷详情 */
+function goPaper() {
+    let path = isAnswer.value ? objectToPathParams({ aperId: paperId, userId: questionSetterUser.value.userId }) : ''
+    uni.reLaunch({
+        url: `/pages/paper/paper` + path
+    });
+}
 onLoad((option: Option) => {
     /** 等待用户登录完成 */
     let tempId = setInterval(() => {
@@ -137,7 +132,7 @@ onLoad((option: Option) => {
                 getUser(option?.userId).then(res => {
                     questionSetterUser.value = res.data;
                 });
-                verifyPaper(option?.paperId, option?.userId).then(res => {
+                verifyPaper(option?.paperId, own.value?.userId).then(res => {
                     if (res.data.isMyPaper) {
                         refAlert.value.show({ msg: '不能回答自己的出题,2秒后返回主页' });
                         setTimeout(() => uni.redirectTo({ url: `/pages/home/home` }), 2000);
