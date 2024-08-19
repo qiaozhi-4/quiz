@@ -14,7 +14,7 @@ declare namespace Quiz {
 		/** 关联试卷id */
 		paperId:number
 		/** 试卷题目集合 */
-		questions:Quiz.Question
+		questions:Array<Quiz.Question>
 		/** 答题用户id */
 		responderUserId:number
 		/** 得分 */
@@ -120,7 +120,7 @@ declare namespace Quiz {
 		/** 唯一主键 */
 		paperId:number
 		/** 试卷题目集合 */
-		questions:Quiz.Question
+		questions:Array<Quiz.Question>
 		/** 得分(自己回答这个试卷的信息) */
 		score:number
 		/** 选择下标集合,以@@分隔(自己回答这个试卷的信息) */
