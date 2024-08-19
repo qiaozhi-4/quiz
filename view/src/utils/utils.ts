@@ -58,9 +58,7 @@ export function uploadAvatar(avatarUrl: string) {
         success(res) {
             let data = JSON.parse(res.data) as Quiz.Result<Quiz.UserDto>;
             // console.log(222, "成功", data);
-            useStore().$patch({
-                user: data.data,
-            });
+            useStore().$patch(store=>{store.user.avatarUrl = data.data.avatarUrl});
         },
         fail(e) {
             // console.log(222, "失败", e);
