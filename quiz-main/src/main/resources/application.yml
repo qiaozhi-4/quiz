@@ -41,6 +41,9 @@ spring:
 mybatis-plus:
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
   mapper-locations: classpath:mappers/**/*.xml
+  configuration:
+    # 全局启用自动映射,这样再xml中没有指定的字段,会通过字段名自动映射
+    auto-mapping-behavior: full
 
 # 微信小程序
 wx:
