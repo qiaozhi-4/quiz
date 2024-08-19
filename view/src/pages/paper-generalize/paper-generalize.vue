@@ -1,7 +1,7 @@
 <template>
 
     <view class="page">
-        <q-nav-bar fixed class="head-sticky" needBack :title="`${pageOption?.nickname}的${paper?.order}号测试`" />
+        <q-nav-bar fixed class="head-sticky" titleSize="20" needBack :title="`${pageOption?.nickname}的${paper?.order}号测试`" />
         <view class="main">
             <view class="questions flex-column">
                 <view class="question flex-column" v-for="(question, index) in paper.questions" :key="index">
@@ -75,9 +75,6 @@ onLoad((option: Option) => {
 .page {
     background: #2F1969;
 
-    .q-nav-bar-middle {
-        font-size: 20px !important;
-    }
 
     .main {
         padding: 0 12.5px;
