@@ -37,4 +37,12 @@ public interface PaperMapper extends BaseMapper<Paper> {
      * @param responderUserId 用户b id
      */
     List<PaperDTO> selectPaperAndAnswerInfoListByUserId(@Param("creatorUserId") Integer creatorUserId, @Param("responderUserId") Integer responderUserId);
+
+    /**
+     * 通过试卷ID,获取试卷详情,以及用户回答信息
+     *
+     * @param paperId   试卷 id
+     * @param responderUserId 用户 id
+     */
+    PaperDTO selectPaperAndAnswerInfoListByPaperIdAndUserId(@Param("paperId") Integer paperId, @Param("responderUserId") Integer responderUserId);
 }

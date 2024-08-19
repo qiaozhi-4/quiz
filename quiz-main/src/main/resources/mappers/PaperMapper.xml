@@ -49,5 +49,14 @@
           and a.creator_user_id = #{creatorUserId}
         group by a.paper_id, c.answer_id
     </select>
+    <select id="selectPaperAndAnswerInfoListByPaperIdAndUserId"  resultMap="PaperDtoResultMap">
+        select a.*, b.answer_id, b.selects, b.score,d.*,d.title as question_title
+        from quiz.q_paper a
+                 left join quiz.q_answers b on a.paper_id = b.paper_id and b.responder_user_id = #{responderUserId}
+                 left join quiz.q_paper_questions c on a.paper_id = c.paper_id
+                 left join quiz.q_question d on c.question_id = d.question_id
+        where a.paper_id = #{paperId}
+        group by a.paper_id, b.answer_id,d.question_id
+    </select>
 
 </mapper>

@@ -91,4 +91,9 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     public List<PaperDTO> getPaperAndAnswerInfoListByUserId(Integer creatorUserId, Integer responderUserId) {
         return this.baseMapper.selectPaperAndAnswerInfoListByUserId(creatorUserId, responderUserId);
     }
+
+    @Override
+    public PaperDTO getPaperAndAnswerInfoByPaperIdAndUserId(Integer paperId, Integer responderUserId) {
+       return this.baseMapper.selectPaperAndAnswerInfoListByPaperIdAndUserId(paperId, responderUserId);
+    }
 }

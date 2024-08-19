@@ -70,4 +70,12 @@ public interface IPaperService extends IService<Paper> {
      * @param responderUserId 用户b id
      */
     List<PaperDTO> getPaperAndAnswerInfoListByUserId(Integer creatorUserId, Integer responderUserId);
+
+    /**
+     * 通过试卷ID,获取试卷详情,以及用户回答信息
+     *
+     * @param paperId   试卷 id
+     * @param responderUserId 用户 id
+     */
+    PaperDTO getPaperAndAnswerInfoByPaperIdAndUserId(Integer paperId, Integer responderUserId);
 }

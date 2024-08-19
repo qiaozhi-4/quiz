@@ -79,4 +79,11 @@ public class PaperController {
         return paperService.getPaperAndAnswerInfoListByUserId(creatorUserId, responderUserId);
     }
 
+    @PathPermission(PermissionEnum.READ)
+    @ApiOperation("通过试卷ID,获取试卷详情,以及用户回答信息")
+    @GetMapping("get/{paperId:\\d+}/{responderUserId:\\d+}")
+    public PaperDTO getPaperAndAnswerInfo(@PathVariable Integer paperId, @PathVariable Integer responderUserId) {
+        return paperService.getPaperAndAnswerInfoByPaperIdAndUserId(paperId,responderUserId);
+    }
+
 }
