@@ -11,35 +11,35 @@
     <view class="page">
         <scroll-view class="scroll-view" scroll-y="true" @scroll="onScroll" :scroll-top="scrollTop"
             scroll-with-animation>
-            <q-nav-bar v-if="!isFriendHome" fixed>
+            <q-nav-bar v-if="isFriendHome" fixed></q-nav-bar>
+            <q-nav-bar v-else fixed>
                 <template #left>
                     <q-svg icon="设置" size="32" @click="() => refDialog.show()" />
                 </template>
             </q-nav-bar>
-            <q-nav-bar v-else fixed></q-nav-bar>
             <view class="main flex-column">
                 <view class="v1 flex-column">
-                    <q-avatar :isChooseAvatar="!isFriendHome" :src="own?.avatarUrl" size="69" borderWidth="3" />
-                    <view class="nickname">{{ own?.nickname }}</view>
+                    <q-avatar :isChooseAvatar="!isFriendHome" :src="userInfo?.avatarUrl" size="69" borderWidth="3" />
+                    <view class="nickname">{{ userInfo?.nickname }}</view>
                 </view>
                 <view class="v2">
                     <view class="statistics">
-                        <text class="text1">{{ questionBank?.length }}</text>
+                        <text class="text1">{{ userInfo.paperTotal }}</text>
                         <text class="text2">出题</text>
                     </view>
                     <view class="statistics">
-                        <text class="text1">{{ testBank?.length }}</text>
+                        <text class="text1">{{ userInfo.answersTotal }}</text>
                         <text class="text2">答题</text>
                     </view>
                     <view class="statistics">
-                        <text class="text1">{{ intimateFriends?.length }}</text>
+                        <text class="text1">{{ userInfo.intimateFriendTotal }}</text>
                         <text class="text2">密友</text>
                     </view>
                 </view>
                 <view class="v3 flex-column">
                     <view v-if="isFriendHome" style="height: 30px;"></view>
                     <view v-else class="task">
-                        <text class="t1">{{ prop[0]?.number }}分</text>
+                        <text class="t1">{{ props[0]?.number }}分</text>
                         <text class="t2">本周连续回答10题</text>
                         <button class="b1" @click="clickTask">领取奖励</button>
                     </view>
@@ -53,16 +53,16 @@
                         </view>
                         <view v-show="activeTag == 0" class="table-content flex-column">
                             <template v-if="intimateRanking?.length != 0">
-                                <view v-if="myRanking?.totalScore" class="my-ranking">
-                                    <view class="nickname">{{ myRanking?.nickname }}</view>
+                                <view v-if="isFriendHome" class="my-ranking">
+                                    <view class="nickname">{{ own?.nickname }}</view>
                                     <view class="score-grou">
-                                        <text class="score">{{ myRanking?.totalScore }}</text>
+                                        <text class="score">{{ own?.totalScore }}</text>
                                         <text class="t1">分</text>
                                     </view>
-                                    <view class="ranking">位于第{{ myRanking?.ranking }}名</view>
+                                    <view class="ranking">位于第{{ myRanking + 1 }}名</view>
                                 </view>
-                                <view v-for="(friend, index) in intimateRanking" :key="index" class="table-item"
-                                    style="position: relative;" @click="goFriendHome(friend.userId)">
+                                <view class="table-item" v-for="(friend, index) in intimateRanking" :key="index"
+                                    @click="goFriendHome(friend.userId)">
                                     <view
                                         style="position: absolute;top: 0;right: 0;width: 76vw; height: 1px;background-color: rgba(121, 109, 255, 0.5);">
                                     </view>
@@ -83,7 +83,7 @@
                             <template v-if="true">
                                 制作中
                             </template>
-                            <template v-else>
+                            <!-- <template v-else>
                                 <view v-for="(e, index) in testInfo" :key="index" class="class flex-column">
                                     <template v-if="index < 2">
                                         <view class="name1">{{ e?.name }}</view>
@@ -136,7 +136,7 @@
                                         <text v-else class="t1" @click="showAll(index)">查看全部</text>
                                     </template>
                                 </view>
-                            </template>
+                            </template> -->
                         </view>
                         <view v-show="activeTag == 2" class="table-record flex-column">
                             <view class="input-wrap">
@@ -145,54 +145,54 @@
                                     :adjust-position="false" @input="onInput" @blur="onBlur" :value="input" />
                             </view>
                             <template v-if="isFriendHome">
-                                <template v-for="(question, index) in questionBank" :key="index">
-                                    <view :style="question?.isAnswer ? '' : 'background-color: #352858;'"
+                                <template v-for="(paper, index) in paperList" :key="index">
+                                    <view :style="paper?.answerId ? '' : 'background-color: #352858;'"
                                         class="test-paper-friend flex-column">
                                         <view class="v1">
-                                            <text class="title">{{ own?.nickname }}的{{ question?.order }}号测试</text>
+                                            <text class="title">{{ friend?.nickname }}的{{ paper?.order }}号测试</text>
                                             <text class="correct"></text>
-                                            <text class="num">{{ question?.isAnswer ? question?.score / 10 : 0 }}</text>
+                                            <text class="num">{{ paper?.answerId ? paper?.score / 10 : 0 }}</text>
                                             <text class="error"></text>
-                                            <text class="num">{{ question?.isAnswer ? 10 - question?.score / 10 : 0 }}</text>
+                                            <text class="num">{{ paper?.answerId ? 10 - paper?.score / 10 : 0
+                                                }}</text>
                                         </view>
                                         <view class="progress-warp">
-                                            <view :style="`width: ${question?.score}%;`" class="progress">
+                                            <view :style="`width: ${paper?.score}%;`" class="progress">
                                             </view>
                                         </view>
                                         <view class="v2">
-                                            <template v-if="question?.isAnswer">
+                                            <template v-if="paper?.answerId">
                                                 <button class="button"
-                                                    @click="onParticulars(question?.paperId, question?.selects)">查看详情</button>
-                                                <button v-show="question?.score != 100" class="button flex-row"
-                                                    @click="goTest(question?.paperId)">
+                                                    @click="onParticulars(paper?.paperId, userInfo.nickname)">查看详情</button>
+                                                <button v-show="paper?.score != 100" class="button flex-row"
+                                                    @click="goTest(paper?.paperId)">
                                                     <q-svg icon="复活宝石" size="16" />使用复活宝石再测一次！
                                                 </button>
                                             </template>
-                                            <button v-else class="button"
-                                                @click="goTest(question?.paperId)">开始测试</button>
+                                            <button v-else class="button" @click="goTest(paper?.paperId)">开始测试</button>
                                         </view>
                                     </view>
                                 </template>
                             </template>
                             <template v-else>
-                                <view v-for="(question, index) in questionBank" :key="index"
+                                <view v-for="(paper, index) in paperList" :key="index"
                                     class="test-paper-my flex-column">
                                     <view class="v1">
-                                        <text class="title">{{ own?.nickname }}的{{ question?.order }}号测试</text>
-                                        <text class="count">{{ question?.answersTotal }}个朋友测过</text>
+                                        <text class="title">{{ own?.nickname }}的{{ paper?.order }}号测试</text>
+                                        <text class="count">{{ paper?.answersTotal }}个朋友测过</text>
                                     </view>
                                     <view class="v2">
                                         <view class="extra">
                                             <q-bubble>
                                                 <reference>
                                                     <button class="button"
-                                                        @click="onRemorPafer(question?.paperId, index)">删除</button>
+                                                        @click="onRemorPafer(paper?.paperId, index)">删除</button>
                                                 </reference>
                                             </q-bubble>
                                         </view>
                                         <button class="button"
-                                            @click="onParticulars(question?.paperId, null)">查看详情</button>
-                                        <button :data-paperId="question?.paperId" class="button"
+                                            @click="onParticulars(paper?.paperId, userInfo.nickname)">查看详情</button>
+                                        <button :data-paperId="paper?.paperId" class="button"
                                             open-type="share">分享给朋友</button>
                                     </view>
                                 </view>
@@ -213,85 +213,111 @@
     </view>
 </template>
 
-<!-- <script lang="ts" setup>
-import { ref } from "vue";
-import { onLoad, onShareAppMessage } from "@dcloudio/uni-app";
-import { useStore } from "@/stores/store";
-/** 获取用户基本信息 */
-const store = useStore();
-/** 提示消息ref */
-const refAlert = ref();
-/** 对话框ref */
-const refDialog = ref();
-/** 自己的信息 */
-const own = ref<Quiz.UserDto>(store.user);
-/** 好友的信息(只有进入好友主页才有值) */
-const friend = ref<Quiz.UserDto>();
-/** 是否是好友主页 */
-const isFriend = ref<boolean>(false);
-onLoad((option) => {
-    isFriend.value = option?.isFriend;
-});
-</script> -->
-
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { onLoad, onShareAppMessage } from '@dcloudio/uni-app';
-import { getPaperList, removePaper } from '@/utils/api/paper';
-import { getIntimateFriends, getIntimateRanking, getUser } from '@/utils/api/user';
-import { getAnswersList } from '@/utils/api/answers';
+import { getPaperAndAnswerInfoList, getPaperList, removePaper } from '@/utils/api/paper';
+import { getIntimateRanking, getUser } from '@/utils/api/user';
 import { useStore } from "@/stores/store";
 import { homeTestInfo } from '@/utils/constant';
-
+import { objectToPathParams } from '@/utils/service';
+const store = useStore();
+/** 本页路径参数 */
+type Option = AnyObject & {
+    /** 好友id */
+    userId?: number;
+} | undefined;
 /** 提示消息ref */
 const refAlert = ref();
 /** 设置 */
 const refDialog = ref();
 /** 自己的信息 */
-const own = ref<Quiz.UserDto>(useStore().user);
-/** 好友的信息(只有进入好友主页才有值) */
-const friend = ref<Quiz.UserDto>();
+const own = computed<Quiz.UserDto>(() => store.user);
 /** 获取道具信息 */
-const prop = ref<any[]>();
-/** 标签 */
-const tags = ref(['亲密排行', '问答展示', '我的题库']);
+const props = computed<Quiz.PropDTO[]>(() => store.props);
+/** 好友的信息(只有进入好友主页才有值) */
+const friend = ref<Quiz.UserDto>({} as Quiz.UserDto);
+/** 是不是好友主页 */
+const isFriendHome = ref<boolean>(false);
+/** 当前主页的个人信息 */
+const userInfo = computed<Quiz.UserDto>(() => isFriendHome.value ? friend.value : own.value);
+/** 我在排行榜的排名 */
+const myRanking = computed<number>(() => {
+    let ranking = intimateRanking.value.findIndex(item => own.value.userId == item.userId);
+    if (ranking != -1) {
+        own.value.totalScore = intimateRanking.value[ranking].totalScore;
+    }
+    return ranking;
+});
+/** 亲密排行榜数据 */
+const intimateRanking = ref<Quiz.UserDto[]>([]);
+/** 试卷记录 */
+const paperList = ref<Quiz.PaperDto[]>([]);
+
+
+/** 切换栏标签 */
+const tags = ref<string[]>(['亲密排行', '问答展示', '我的题库']);
 /** 当前激活的标签 */
 const activeTag = ref(0);
 /** 滚动条位置 */
 const scrollTop = ref(0);
 /** 标签触发粘性定位的上边距 */
 const tagPaddingTop = ref(0);
-/** 亲密排行榜数据 */
-const intimateRanking = ref<Quiz.UserInfo[]>();
-/** 密友数据 */
-const intimateFriends = ref<Quiz.UserInfo[]>();
-/** 测试信息数据 */
-const testInfo = ref(homeTestInfo);
 /** 搜索框输入 */
 const input = ref('');
-/** 题库数据 */
-const questionBank = ref([]);
-/** 测试记录 */
-const testBank = ref([]);
+
+
+/** 分享试卷 */
+onShareAppMessage((res) => {
+    if (res.from === 'button') {// 来自页面内分享按钮
+        return {
+            title: '我们之间有多亲密？',
+            path: `/pages/paper-start/paper-start` + objectToPathParams({ paperId: res.target.dataset.paperid, userId: own.value.userId }),
+            imageUrl: '/static/img/小转发窗.png'
+        };
+    }
+    return {
+        title: '这测试',
+        path: '/pages/paper-start/paper-start',
+        imageUrl: '/static/img/小转发窗.png'
+    };
+});
+
+onLoad((option: Option) => {
+    /** 等待用户登录完成 */
+    let tempId = setInterval(() => {
+        if (own.value.userId) {
+            clearInterval(tempId);
+            /* 如果是朋友主页 */
+            if (option?.userId) {
+                isFriendHome.value = true;
+                //获取朋友信息
+                getUser(option.userId).then(res => {
+                    friend.value = res.data;
+                    getIntimateRanking(friend.value.userId).then(res => intimateRanking.value = res.data);
+                    getPaperAndAnswerInfoList(friend.value.userId, own.value.userId).then(res => paperList.value = res.data);
+                });
+            } else {
+                getIntimateRanking(own.value.userId).then(res => intimateRanking.value = res.data);
+                getPaperList(own.value.userId).then(res => paperList.value = res.data);
+            }
+
+        }
+    }, 1000);
+});
+
+
+
 /** 是否时朋友主页 */
-const isFriendHome = ref<boolean>(false);
-/** 我在排行榜的排名 */
-const myRanking = ref();
-/** 关闭当前页面,返回上一个页面 */
-function handlerReverseBack() {
-    uni.navigateBack({
-        delta: 1
-    });
-}
+// const isFriendHome = ref<boolean>(false);
 /** 点击朋友触发 */
-function goFriendHome(id) {
-    if (id == getApp().globalData.userInfo.userId) {
+function goFriendHome(id: number) {
+    if (id == own.value.userId) {
         refAlert.value.show({ msg: '自己都不认识了吗?' });
         return;
     }
     uni.navigateTo({
-        // url: `/pages/friend-home/friend-home?id=${id}`
-        url: `/pages/home/home?userId=${id}&isFriendHome=${true}`
+        url: `/pages/home/home?userId=${id}`
     });
 }
 /** 点击领取奖励触发,跳转到任务页面 */
@@ -301,7 +327,7 @@ function clickTask() {
     });
 }
 /** 页面滚动触发 */
-function onScroll(e) {
+function onScroll(e: { detail: { scrollTop: number; }; }) {
     if (e.detail.scrollTop > 230) {
         tagPaddingTop.value = 97;
     } else {
@@ -309,44 +335,10 @@ function onScroll(e) {
     }
 }
 /** 点击tag触发 */
-function onTag(index) {
+function onTag(index: number) {
     scrollTop.value = 0;
     scrollTop.value = 325;
     activeTag.value = index;
-}
-/** 删除展示关键题 */
-function remove(infoIindex, itemIndx) {
-    delete testInfo.value[infoIindex].items[itemIndx];
-}
-/** 添加展示关键题 */
-function add(infoIindex) {
-    console.log('添加展示关键题:', infoIindex);
-    if (testInfo.value[infoIindex].name == "关键题") {
-        uni.navigateTo({
-            url: `/pages/select-topic/select-topic?index=${infoIindex}`
-        });
-    } else if (testInfo.value[infoIindex].name == "朋友的看法") {
-        uni.navigateTo({
-            url: `/pages/select-friend-view/select-friend-view?index=${infoIindex}`
-        });
-    }
-}
-/** 展示全部测试信息 */
-function showAll(infoIindex) {
-    if (testInfo.value[infoIindex].items.length < 5) {
-        for (let i = 0; i < 5; i++) {
-            testInfo.value[infoIindex].items.push({
-                title: '你最喜欢在周末做什么？',
-                select: '在家进行个人活动',
-                input: '吃饭睡觉游戏代码'
-            });
-        }
-    }
-    testInfo.value[infoIindex].spread = true;
-}
-/** 收起全部测试信息 */
-function hidden(infoIindex) {
-    testInfo.value[infoIindex].spread = false;
 }
 /** 键盘输入触发 */
 function onInput(e: any) {
@@ -359,123 +351,27 @@ function onBlur(e: any) {
 /** 删除试卷 */
 function onRemorPafer(paperId: number, index: number) {
     removePaper(paperId).then(res => {
-        if (res.data)
-            questionBank.value.splice(index, 1);
+            paperList.value.splice(index, 1);
     });
 }
-/** 跳转题库的试卷详情 */
-function onParticulars(paperId: number, selects: string) {
-    if (isFriendHome.value) {
-        uni.navigateTo({
-            url: `/pages/question-particulars/question-particulars?isFriendHome=${true}&paperId=${paperId}&selects=${selects}&userId=${own.value.userId}`
-        });
-
-    }
-    else {
-        uni.navigateTo({
-            url: `/pages/question-particulars/question-particulars?isFriendHome=${false}&paperId=${paperId}&selects=${selects}&userId=${own.value.userId}`
-        });
-    }
+/** 试卷详情 */
+function onParticulars(paperId: number, nickname: string) {
+    uni.navigateTo({
+        url: `/pages/paper-generalize/paper-generalize` + objectToPathParams({ paperId: paperId, nickname: nickname })
+    });
 }
 /** 从朋友题库开始答题 */
 function goTest(paperId: number) {
-    uni.redirectTo({
-        url: `/pages/start-test/start-test?isAnswer=true&paperId=${paperId}&userId=${own.value.userId}`
+    uni.navigateTo({
+        url: `/pages/paper-start/paper-start` + objectToPathParams({ paperId: paperId, userId: userInfo.value.userId })
     });
 }
-/** 分享试卷 */
-onShareAppMessage((res) => {
-    if (res.from === 'button') {// 来自页面内分享按钮
-        return {
-            title: '我们之间有多亲密？',
-            path: `/pages/start-test/start-test?isAnswer=true&paperId=${res.target.dataset.paperid}&userId=${own.value.userId}`,
-            imageUrl: '/static/img/小转发窗.png'
-        };
-    }
-    return {
-        title: '这测试',
-        path: '/pages/start-test/start-test?isAnswer=true',
-        imageUrl: '/static/img/小转发窗.png'
-    };
-});
 /** 跳转到出题页 */
 function goSetTest() {
     uni.navigateTo({
-        url: `/pages/start-test/start-test?isAnswer=false`
+        url: `/pages/paper-start/paper-start`
     });
 }
-onLoad((option) => {
-    if (option.topicId) {
-        activeTag.value = 1;
-        console.log('这是从选择题目来的参数', option);
-        testInfo.value[0].items.push({
-            title: `题目${option.topicId}`,
-            select: '后续从数据查询',
-            input: '吃饭睡觉游戏代码'
-        });
-    } else if (option.friendId) {
-        activeTag.value = 1;
-        console.log('这是从选择朋友看法来的参数', option);
-        testInfo.value[1].items.push({
-            nickname: `用户${option.friendId}`,
-            avatarUrl: '',
-            title: '后续从数据查询',
-            select: '喜欢不冷不热不雨不晴，阴天最好',
-        });
-    }
-
-    /* 如果是朋友主页 */
-    if (option.isFriendHome == 'true') {
-        isFriendHome.value = true;
-        getUser(option.userId).then(res => {
-            own.value = res.data;
-            getIntimateRanking(own.value.userId).then(res => {
-                intimateRanking.value = res.data;
-                let userId = getApp().globalData.userInfo.userId;
-                for (var i = 0; i < intimateRanking.value.length; i++) {
-                    if (userId == intimateRanking.value[i].userId) {
-                        myRanking.value = intimateRanking.value[i];
-                        myRanking.value.ranking = i + 1;
-                        break;
-                    }
-                }
-            });
-            getIntimateFriends(own.value.userId).then(res => {
-                intimateFriends.value = res.data;
-            });
-            getPaperList(own.value.userId).then((res) => {
-                questionBank.value = res.data;
-                const intervalId = setInterval(() => {
-                    if (testBank.value.length > 0) {
-                        questionBank.value.forEach(el => {
-                            let temp = testBank.value.filter(e => el?.paperId == e.paperId)[0];
-                            if (temp) {
-                                el.score = temp.score;
-                                el.selects = temp.selects;
-                                el.isAnswer = true;
-                            }
-                        });
-                        clearInterval(intervalId); // 停止定时器
-                    }
-                }, 2000); // 2000毫秒，即2秒
-            });
-        });
-    } else {
-        prop.value = getApp().globalData.props;
-        getIntimateRanking(own.value.userId).then(res => {
-            intimateRanking.value = res.data;
-        });
-        getIntimateFriends(own.value.userId).then(res => {
-            intimateFriends.value = res.data;
-        });
-        getPaperList(own.value.userId).then((res) => {
-            questionBank.value = res.data;
-        });
-    }
-    getAnswersList(getApp().globalData.userInfo.userId).then(res => {
-        testBank.value = res.data;
-    });
-});
 </script>
 
 <style lang="scss">
@@ -690,7 +586,7 @@ onLoad((option) => {
                     background: #1F1146;
 
                     justify-content: start;
-                    align-items: center;
+                    // align-items: center;
 
                     padding-top: 10px;
 
@@ -806,6 +702,7 @@ onLoad((option) => {
                     }
 
                     .table-item {
+                        position: relative;
                         display: grid;
                         grid-template-columns: auto auto 1fr auto auto;
                         align-items: center;

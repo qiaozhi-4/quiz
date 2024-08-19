@@ -59,18 +59,18 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
-import { formatDate } from '../../utils/utils';
+import { formatDate } from '@/utils/utils';
 import { onLoad } from '@dcloudio/uni-app';
-import { getUser, verifyPaper } from '../../utils/api/user';
-import { gainProp } from '../../utils/api/prop';
+import { getUser, verifyPaper } from '@/utils/api/user';
+import { gainProp } from '@/utils/api/prop';
 import { useStore } from "@/stores/store";
 import { objectToPathParams } from '@/utils/service';
 const store = useStore();
 /** 本页路径参数 */
 type Option = AnyObject & {
-    /** 出题人id */
+    /** 出题人id(答题才有) */
     userId?: number;
-    /** 试卷id */
+    /** 试卷id(答题才有) */
     paperId?: number;
 } | undefined;
 
@@ -97,16 +97,12 @@ const onResurrection = () => {
         gainProp(1, 2, own.value.userId).then(res => {
             refAlert.value.show({ msg: '假装你看完了视频,然后获取了宝石,并开始答题' });
             setTimeout(() => {
-                uni.redirectTo({
-                    url: `/pages/paper/paper?paperId=${paperId.value}&userId=${questionSetterUser.value.userId}`
-                });
+                goPaper();
             }, 2000);
         });
     } else {
         store.addPropNumberById(2, -1);
-        uni.redirectTo({
-            url: `/pages/paper/paper?paperId=${paperId.value}&userId=${questionSetterUser.value.userId}`
-        });
+        goPaper();
     }
 };
 /** 返回 */
@@ -115,7 +111,7 @@ function backtrack() {
 }
 /** 跳转试卷详情 */
 function goPaper() {
-    let path = isAnswer.value ? objectToPathParams({ aperId: paperId, userId: questionSetterUser.value.userId }) : ''
+    let path = isAnswer.value ? objectToPathParams({ paperId: paperId.value, userId: questionSetterUser.value.userId }) : '';
     uni.reLaunch({
         url: `/pages/paper/paper` + path
     });
