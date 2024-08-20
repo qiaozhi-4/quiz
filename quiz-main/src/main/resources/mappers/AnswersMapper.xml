@@ -56,7 +56,7 @@
                us.avatar_url as creator_user_avatar_url
         from quiz.q_answers a
                  left join quiz.q_paper b on a.paper_id = b.paper_id
-                 left join quiz.t_user us on a.responder_user_id = us.user_id
+                 left join quiz.t_user us on b.creator_user_id = us.user_id
         where a.responder_user_id = #{userId} # 不要过滤掉已删除的试卷,因为只要获得过就行了
           and a.score > 70
     </select>
