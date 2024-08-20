@@ -86,7 +86,7 @@ export class Api implements IApi {
         /** 查询参数处理 */
         if (options.query) options.url += objectToPathParams(options.query);
         return new Promise<Quiz.Result<T>>((resolve, reject) => {
-            star();
+            ajaxStar();
             uni.request({
                 ...options,
                 success: (res: UniNamespace.RequestSuccessCallbackResult) => {
@@ -94,6 +94,7 @@ export class Api implements IApi {
                     let data = res.data as Quiz.Result<T>;
                     // 请求成功，就将成功的数据返回出去
                     if (data.code == 200) {
+                        ajaxEnd();
                         console.log(`请求路径:${options.url}`, data);
                         resolve(data);
                     }
@@ -115,7 +116,7 @@ export class Api implements IApi {
                         duration: 2000
                     });
                 },
-                complete: () => { end(); }
+                // complete: () => { ajaxEnd(); }
             });
         });
     }
@@ -123,7 +124,7 @@ export class Api implements IApi {
 /** 还未完成的请求个数 */
 let ajaxCount = 0;
 /** 请求开始 */
-const star = () => {
+const ajaxStar = () => {
     ajaxCount++;
     // 显示加载中loading效果
     uni.showLoading({
@@ -132,7 +133,7 @@ const star = () => {
     });
 };
 /** 请求结束 */
-const end = () => {
+const ajaxEnd = () => {
     ajaxCount--;
     // 隐藏 loading 提示框。
     if (ajaxCount == 0)
