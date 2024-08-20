@@ -26,21 +26,14 @@ const store = useStore();
 const avatarShake = ref<boolean>(false);
 /** 是否需要动画 */
 const nicknameShake = ref<boolean>(false);
-/** 获取微信头像触发 */
-function onChooseAvatar(e: { detail: { avatarUrl: any; }; }) {
-    console.log("获取微信头像触发", e);
-    const { avatarUrl } = e.detail;
-}
 
 /** 键盘输入触发 */
 function onInput(e: { detail: { value: string; }; }) {
-    console.log("键盘输入触发", e);
     store.$patch(partialState => partialState.user.nickname = e.detail.value);
 }
 
 /** 键盘失去焦点触发 */
 function onBlur(e: { detail: { value: any; }; }) {
-    console.log("键盘失去焦点触发", e);
     store.$patch(partialState => partialState.user.nickname = e.detail.value);
 }
 
@@ -60,7 +53,6 @@ function onSubmit() {
     }
     if (store.user.avatarUrl && store.user.nickname) {
         updateUser(store.user).then(e => {
-            console.log("第一次设置个人信息");
             // 判断是不是通过分享进来的
             let route = getCurrentPages()[0].route;
             if ("pages/paper-start/paper-start" == route) {/** 不是分享进来的 */
