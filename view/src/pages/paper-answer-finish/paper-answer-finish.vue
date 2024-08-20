@@ -4,7 +4,7 @@
         <view class="main flex-column">
             <view class="v1">
                 <view class="ball right"></view>
-                <view>{{ pageOption?.score || 0 / 10 }}</view>
+                <view>{{ (pageOption?.score || 0) / 10 }}</view>
                 <view class="ball wrong"></view>
                 <view>{{ (100 - (pageOption?.score || 0)) / 10 }}</view>
             </view>
@@ -13,10 +13,10 @@
                 <q-avatar :src="pageOption?.avatarUrl" size="97" borderWidth="4"></q-avatar>
             </view>
             <text class="t1">恭喜你,你和{{ pageOption?.nickname }}是：</text>
-            <text class="t1">{{ scoreInfo_[pageOption?.score || 0 / 10]?.englishName }}</text>
-            <text class="t2">{{ scoreInfo_[pageOption?.score || 0 / 10]?.name }}</text>
-            <q-image v-if="scoreInfo_[pageOption?.score || 0 / 10]?.badgeName" width="115" height="115"
-                :src="`/static/img/${scoreInfo_[pageOption?.score || 0 / 10]?.badgeName}.png`"></q-image>
+            <text class="t1">{{ scoreInfo_[(pageOption?.score || 0) / 10]?.englishName }}</text>
+            <text class="t2">{{ scoreInfo_[(pageOption?.score || 0) / 10]?.name }}</text>
+            <q-image v-if="scoreInfo_[(pageOption?.score || 0) / 10]?.badgeName" width="115" height="115"
+                :src="`/static/img/${scoreInfo_[(pageOption?.score || 0) / 10]?.badgeName}.png`"></q-image>
             <view v-else style="width: 115px; height: 115px;"></view>
             <q-image :src="`/static/img/加${pageOption?.score}分.png`" width="195" height="40"></q-image>
             <text>最新亲密值将更新入排行榜中......</text>
