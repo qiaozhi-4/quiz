@@ -21,9 +21,10 @@
                                       where qa.responder_user_id = #{userId}
                                         and qa.created_at &gt;= #{earliestDateTime}), a.condition_number)
                    when 2 then LEAST((select count(1)
-                                      from quiz.q_paper qp
+                                      from quiz.q_answers qa
+                                               left join quiz.q_paper qp on qp.paper_id = qa.paper_id
                                       where qp.creator_user_id = #{userId}
-                                        and qp.created_at &gt;= #{earliestDateTime}), a.condition_number)
+                                        and qa.created_at &gt;= #{earliestDateTime}), a.condition_number)
                    end     as finish_number,
                b.is_receive_award,
                c.prop_name as award_name
