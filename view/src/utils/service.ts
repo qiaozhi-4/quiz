@@ -1,5 +1,5 @@
 import { useStore } from "@/stores/store";
-export type Stringify = string | number | null | undefined | void;
+export type Stringify = string | number | boolean | null | undefined | void;
 /** 路径参数 */
 export type SwaggerPath = Record<string, string | number>;
 /** 查询参数 */
