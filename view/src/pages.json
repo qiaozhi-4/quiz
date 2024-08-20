@@ -1,5 +1,6 @@
 {
-	"entryPagePath": "pages/home/home",
+	// "entryPagePath": "pages/user-set/user-set",
+	"entryPagePath": "pages/index/index",
 	"pages": [
 		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
@@ -33,9 +34,9 @@
 			}
 		},
 		{
-			"path": "pages/paper-finish/paper-finish",
+			"path": "pages/paper-answer-finish/paper-answer-finish",
 			"style": {
-				"navigationBarTitleText": "paper-finish"
+				"navigationBarTitleText": "paper-answer-finish"
 			}
 		},
 		{
@@ -51,9 +52,21 @@
 			}
 		},
 		{
-			"path": "pages/prop/prop",
+			"path": "pages/prop-explain/prop-explain",
 			"style": {
-				"navigationBarTitleText": "prop"
+				"navigationBarTitleText": "prop-explain"
+			}
+		},
+		{
+			"path": "pages/paper-generalize/paper-generalize",
+			"style": {
+				"navigationBarTitleText": "paper-generalize"
+			}
+		},
+		{
+			"path": "pages/paper-set-finish/paper-set-finish",
+			"style": {
+				"navigationBarTitleText": "paper-set-finish"
 			}
 		}
 	],
