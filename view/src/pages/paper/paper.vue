@@ -100,6 +100,35 @@ const selects = ref<number[]>(new Array(10).fill(-1));
 /** 输入框的值 */
 const inputValues = ref<string[]>(new Array(10));
 
+/** 点击选项 */
+function onButtonClick(index: number) {
+    selects.value[questionIndex.value] = index;
+    if (questionIndex.value < questions.value.length - 1) {
+        questionIndex.value++;
+    } else {
+        for (var i = 0; i < options.value.length; i++) {
+            if (selects.value[i] == -1) {
+                questionIndex.value = i;
+                return;
+            }
+        }
+        if (isAnswer.value) {
+            saveAnswers({ paperId: paper.value.paperId, selects: selects.value.join('@@'), responderUserId: store.user.userId, } as Quiz.Answers).then((res) => {
+                store.addPropNumberById(1, res.data.score - paper.value.score);
+                uni.reLaunch({
+                    url: `/pages/paper-answer-finish/paper-answer-finish` + objectToPathParams({ paperId: res.data.paperId, userId: userInfo.value.userId, avatarUrl: userInfo.value.avatarUrl, nickname: userInfo.value.nickname, score: res.data.score })
+                });
+            });
+        } else {
+            savePaper({ creatorUserId: store.user.userId, questions: questions.value, answers: selects.value.join('@@') } as Quiz.PaperDto).then(res => {
+                uni.reLaunch({
+                    url: `/pages/paper-set-finish/paper-set-finish` + objectToPathParams({ paperId: res.data.paperId, userId: userInfo.value.userId })
+                });
+            });
+        }
+    }
+}
+
 onLoad((option: Option) => {
     if (option?.userId && option?.paperId) {
         isAnswer.value = true;
@@ -128,34 +157,6 @@ const popupStyle = ref({ height: `${uni.getMenuButtonBoundingClientRect().bottom
 /** 切换题目 */
 function onChange(e: any) {
     questionIndex.value = e.detail.current;
-}
-/** 点击选项 */
-function onButtonClick(index: number) {
-    selects.value[questionIndex.value] = index;
-    if (questionIndex.value < questions.value.length - 1) {
-        questionIndex.value++;
-    } else {
-        for (var i = 0; i < options.value.length; i++) {
-            if (selects.value[i] == -1) {
-                questionIndex.value = i;
-                return;
-            }
-        }
-        if (isAnswer.value) {
-            saveAnswers({ paperId: paper.value.paperId, selects: selects.value.join('@@'), responderUserId: userInfo.value.userId, } as Quiz.Answers).then((res) => {
-                store.addPropNumberById(1, res.data.score - paper.value.score);
-                uni.reLaunch({
-                    url: `/pages/paper-answer-finish/paper-answer-finish` + objectToPathParams({ paperId: res.data.paperId, userId: userInfo.value.userId, avatarUrl: userInfo.value.avatarUrl, nickname: userInfo.value.nickname, score: res.data.score })
-                });
-            });
-        } else {
-            savePaper({ creatorUserId: store.user.userId, questions: questions.value, answers: selects.value.join('@@') } as Quiz.PaperDto).then(res => {
-                uni.reLaunch({
-                    url: `/pages/paper-set-finish/paper-set-finish` + objectToPathParams({ paperId: res.data.paperId, userId: userInfo.value.userId })
-                });
-            });
-        }
-    }
 }
 /** 键盘输入触发 */
 function onInput(e: any) {
