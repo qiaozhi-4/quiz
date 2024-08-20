@@ -38,7 +38,7 @@ onShareAppMessage((res) => {
     return {
         title: '我们之间有多亲密？',
         path: `/pages/paper-start/paper-start` + objectToPathParams({ paperId: pageOption.value?.paperId, userId: pageOption.value?.userId }),
-        imageUrl: '/static/img/小转发窗.png'
+        imageUrl: '/static/img/分享图.png'
     };
     // }
 });

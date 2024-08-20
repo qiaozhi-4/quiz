@@ -270,18 +270,13 @@ const input = ref('');
 
 /** 分享试卷 */
 onShareAppMessage((res) => {
-    if (res.from === 'button') {// 来自页面内分享按钮
-        return {
-            title: '我们之间有多亲密？',
-            path: `/pages/paper-start/paper-start` + objectToPathParams({ paperId: res.target.dataset.paperid, userId: own.value.userId }),
-            imageUrl: '/static/img/小转发窗.png'
-        };
-    }
+    // if (res.from === 'button') {// 来自页面内分享按钮
     return {
-        title: '这测试',
-        path: '/pages/paper-start/paper-start',
-        imageUrl: '/static/img/小转发窗.png'
+        title: '我们之间有多亲密？',
+        path: `/pages/paper-start/paper-start` + objectToPathParams({ paperId: res.target.dataset.paperid, userId: own.value.userId }),
+        imageUrl: '/static/img/分享图.png'
     };
+    // }
 });
 
 onLoad((option: Option) => {
