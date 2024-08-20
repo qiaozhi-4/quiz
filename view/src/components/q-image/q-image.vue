@@ -11,10 +11,10 @@
 
 <template>
     <view class="q-image-wrap">
-        <image v-if="succeed" class="q-image" :src="src" :mode="mode" :style="style" @error="succeed = false"
-            @load="succeed = true" />
+        <image v-if="succeed" class="q-image" :src="propsComputed.src" :mode="propsComputed.mode" :style="style"
+            @error="succeed = false" @load="succeed = true" />
         <view v-else class="q-image-fail" :style="style">
-            <q-svg :icon="icon" :size="size"></q-svg>
+            <q-svg :icon="propsComputed.icon" :size="propsComputed.size"></q-svg>
         </view>
     </view>
 </template>
@@ -37,6 +37,7 @@ const props = defineProps({
     /** 图片裁剪、缩放的模式 */
     mode: { type: String, default: 'aspectFit' },
 });
+const propsComputed = computed(() => props);
 /** 加载是否成功 */
 const succeed = ref<boolean>(true);
 /** 计算样式 */
