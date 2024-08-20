@@ -35,7 +35,7 @@
         order by b.id
     </select>
     <select id="selectPaperListByUserId" resultMap="PaperDtoResultMap">
-        select a.*, count(b.responder_user_id) as answers_total, d.*, qc.class_name
+        select a.*, count(b.responder_user_id) as answers_total, d.*, d.title as question_title, qc.class_name
         from quiz.q_paper a
                  left join quiz.q_answers b on a.paper_id = b.paper_id
                  left join quiz.q_paper_questions c on a.paper_id = c.paper_id
@@ -45,14 +45,17 @@
           and a.creator_user_id = #{userId}
         group by a.paper_id, d.question_id, qc.class_id
     </select>
-    <select id="selectPaperAndAnswerInfoListByUserId" resultType="com.quiz.dto.PaperDTO">
-        select a.*, count(b.responder_user_id) as answers_total, c.answer_id, c.selects, c.score
-        from quiz.q_paper a
-                 left join quiz.q_answers b on a.paper_id = b.paper_id
-                 left join quiz.q_answers c on a.paper_id = c.paper_id and c.responder_user_id = #{responderUserId}
-        where a.state != -1
-          and a.creator_user_id = #{creatorUserId}
-        group by a.paper_id, c.answer_id
+    <select id="selectPaperAndAnswerInfoListByUserId" resultMap="PaperDtoResultMap">
+        select qp.*, count(b.responder_user_id) as answers_total, c.answer_id, c.selects, c.score, qq.*, qq.title as question_title, qc.class_name
+        from quiz.q_paper qp
+                 left join quiz.q_answers b on qp.paper_id = b.paper_id
+                 left join quiz.q_answers c on qp.paper_id = c.paper_id and c.responder_user_id = #{responderUserId}
+                 left join quiz.q_paper_questions qpq on qpq.paper_id = qp.paper_id
+                 left join quiz.q_question qq on qpq.question_id = qq.question_id
+                 left join quiz.q_classes qc on qq.class_id = qc.class_id
+        where qp.state != -1
+          and qp.creator_user_id = #{creatorUserId}
+        group by qp.paper_id, c.answer_id, qq.question_id, qc.class_id
     </select>
     <select id="selectPaperAndAnswerInfoListByPaperIdAndUserId" resultMap="PaperDtoResultMap">
         select a.*, b.answer_id, b.selects, b.score, d.*, d.title as question_title, qc.class_name
