@@ -81,7 +81,7 @@ const style = computed(() => {
 function back() {
     uni.navigateBack({
         delta: 1,
-        complete: () => {
+        fail: () => {
             uni.reLaunch({
                 url: '/pages/home/home'
             });

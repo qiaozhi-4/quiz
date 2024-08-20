@@ -15,7 +15,7 @@
                 </view>
                 <text class="dialog-b1-t1">使用宝石复活！</text>
             </button>
-            <button class="dialog-b2" @click="backtrack">返回主页</button>
+            <button class="dialog-b2" @click="backtrack">返回</button>
         </view>
     </q-dialog>
     <!-- 提示消息 -->
@@ -109,7 +109,7 @@ const onResurrection = () => {
 function backtrack() {
     uni.navigateBack({
         delta: 1,
-        complete: () => {
+        fail: () => {
             uni.reLaunch({
                 url: '/pages/home/home'
             });
