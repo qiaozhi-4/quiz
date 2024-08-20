@@ -1,5 +1,10 @@
 ///////////////////////////////////////这个文件是全局常量
-
+export type ScoreInfo ={
+    englishName: string,
+    name: string,
+    badgeName: string,
+    badges: Quiz.AnswersDTO[]
+}
 /** 得分描述已经信息 */
 export const scoreInfo = [
     {
