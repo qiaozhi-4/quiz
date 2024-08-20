@@ -5,13 +5,16 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
-import lombok.experimental.Accessors;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -19,7 +22,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-22  1124:00:15
+ * @since 2024-08-20
  */
 @Getter
 @Setter
@@ -33,7 +36,7 @@ public class Question extends Model<Question> {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("唯一主键")
+    @ApiModelProperty("题目id,唯一主键")
     @TableId(value = "question_id", type = IdType.AUTO)
     private Integer questionId;
 
@@ -41,9 +44,13 @@ public class Question extends Model<Question> {
     @TableField("title")
     private String title;
 
-    @ApiModelProperty("选项")
+    @ApiModelProperty("选项,以@@分隔")
     @TableField("options_")
     private String options;
+
+    @ApiModelProperty("类别id")
+    @TableField("class_id")
+    private Integer classId;
 
     @ApiModelProperty("创建时间")
     @TableField("created_at")

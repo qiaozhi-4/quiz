@@ -4,11 +4,12 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.quiz.entity.Question">
-        <id column="question_id" property="questionId"/>
-        <result column="title" property="title"/>
-        <result column="options_" property="options"/>
-        <result column="created_at" property="createdAt"/>
-        <result column="updated_at" property="updatedAt"/>
+        <id column="question_id" property="questionId" />
+        <result column="title" property="title" />
+        <result column="options_" property="options" />
+        <result column="class_id" property="classId" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
     </resultMap>
 
     <select id="selectRandomQuestions" resultType="com.quiz.entity.Question" parameterType="java.lang.Integer">
