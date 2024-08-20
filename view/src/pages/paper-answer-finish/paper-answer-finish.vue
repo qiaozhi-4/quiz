@@ -96,7 +96,7 @@ function goSetTest() {
 /** 重新答题 */
 function goStartTest() {
     if (gemCount.value < 1) {
-        refAlert.value.show('宝石不足');
+        refAlert.value.show({ msg: '宝石不足' });
     } else {
         uni.redirectTo({
             url: `/pages/paper-start/paper-start` + objectToPathParams({ paperId: pageOption.value?.paperId, userId: pageOption.value?.userId })
