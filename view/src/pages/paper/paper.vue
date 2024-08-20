@@ -40,8 +40,9 @@
     </view>
 
     <!-- 弹窗 -->
-    <q-dialog ref="popupRef"  extraClass="popup-wrap" location="bottom" :safe-area="false" maskHideDialog @maskCallback="activityPopup = ''">
-        <view class="popup"  >
+    <q-dialog ref="popupRef" extraClass="popup-wrap" location="bottom" :safe-area="false" maskHideDialog
+        @maskCallback="activityPopup = ''">
+        <view class="popup">
             <view class="title">{{ userInfo?.nickname }} 的 {{ paper?.order }}号测试</view>
             <view class="questions flex-column" v-show="activityPopup == '总览'">
                 <view class="question flex-column" v-for="(question, index) in questions" :key="index"
@@ -51,7 +52,8 @@
                         <view class="title text-overflow">{{ question?.title }}</view>
                     </view>
                     <view class="question-info">
-                        <view class="option text-overflow">{{ options[index][selects[index]] }}</view>
+                        <view class="option text-overflow" v-if="selects[index] != -1">{{
+                            options[index][selects[index]] }}</view>
                         <view class="input-value text-overflow">{{ inputValues[index] }}</view>
                     </view>
                 </view>
