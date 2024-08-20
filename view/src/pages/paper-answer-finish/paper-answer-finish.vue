@@ -90,7 +90,7 @@ function goHome() {
 /** 跳转到出题页 */
 function goSetTest() {
     uni.redirectTo({
-        url: `/pages/start-test/start-test?isAnswer=false`
+        url: `/pages/paper-start/paper-start`
     });
 }
 /** 重新答题 */
