@@ -5,13 +5,16 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
-import lombok.experimental.Accessors;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -19,7 +22,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author XGeorge
- * @since 2024-08-10
+ * @since 2024-08-20
  */
 @Getter
 @Setter
@@ -33,7 +36,7 @@ public class Task extends Model<Task> {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("任务ID")
+    @ApiModelProperty("主键,任务ID")
     @TableId(value = "task_id", type = IdType.AUTO)
     private Integer taskId;
 
@@ -49,7 +52,7 @@ public class Task extends Model<Task> {
     @TableField("describe_")
     private String describe;
 
-    @ApiModelProperty("任务条件类型,1:答题;2:出题")
+    @ApiModelProperty("任务条件类型,1:做朋友的测试;2:朋友做我的测试")
     @TableField("condition_type")
     private Integer conditionType;
 

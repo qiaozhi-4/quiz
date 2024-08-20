@@ -5,12 +5,15 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
 
 /**
  * <p>
@@ -18,7 +21,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author XGeorge
- * @since 2024-04-22  1124:00:15
+ * @since 2024-08-20
  */
 @Getter
 @Setter
@@ -32,7 +35,7 @@ public class UserAuth extends Model<UserAuth> {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("主键，ID。")
+    @ApiModelProperty("id")
     @TableId(value = "auth_id", type = IdType.AUTO)
     private Integer authId;
 
@@ -40,13 +43,13 @@ public class UserAuth extends Model<UserAuth> {
     @TableField("user_id")
     private Integer userId;
 
-    @ApiModelProperty("第三方服务的名称（如Google、Facebook等）。")
-    @TableField("provider")
-    private String provider;
-
     @ApiModelProperty("第三方提供的唯一标识符。比如微信的openId")
     @TableField("provider_id")
     private String providerId;
+
+    @ApiModelProperty("第三方服务的名称（如Google、Facebook等）。")
+    @TableField("provider")
+    private String provider;
 
 
     @Override

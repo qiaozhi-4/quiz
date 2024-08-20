@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author XGeorge
- * @since 2024-08-08
+ * @since 2024-08-20
  */
 @Getter
 @Setter
@@ -35,15 +35,15 @@ public class UserProp extends Model<UserProp> {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("主键，权限ID。")
+    @ApiModelProperty("主键")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty("用户id。")
+    @ApiModelProperty("用户id")
     @TableField("user_id")
     private Integer userId;
 
-    @ApiModelProperty("道具id。")
+    @ApiModelProperty("道具id")
     @TableField("prop_id")
     private Integer propId;
 

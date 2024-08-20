@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author XGeorge
- * @since 2024-08-06
+ * @since 2024-08-20
  */
 @Getter
 @Setter
@@ -36,7 +36,7 @@ public class Paper extends Model<Paper> {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("唯一主键")
+    @ApiModelProperty("主键,试卷id")
     @TableId(value = "paper_id", type = IdType.AUTO)
     private Integer paperId;
 

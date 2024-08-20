@@ -5,12 +5,15 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
 
 /**
  * <p>
@@ -18,7 +21,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author XGeorge
- * @since 2024-08-05
+ * @since 2024-08-20
  */
 @Getter
 @Setter
@@ -32,7 +35,7 @@ public class Tag extends Model<Tag> {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("唯一主键")
+    @ApiModelProperty("主键,标签id")
     @TableId(value = "tag_id", type = IdType.AUTO)
     private Integer tagId;
 

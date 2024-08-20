@@ -36,7 +36,7 @@ public class Question extends Model<Question> {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("题目id,唯一主键")
+    @ApiModelProperty("主键,题目id")
     @TableId(value = "question_id", type = IdType.AUTO)
     private Integer questionId;
 

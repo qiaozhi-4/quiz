@@ -1,244 +1,316 @@
-create database quiz;
+create table if not exists quiz.q_answers
+(
+    answer_id         int auto_increment comment '主键,答卷id'
+        primary key,
+    paper_id          int                                null comment '关联试卷id',
+    responder_user_id int                                null comment '答题用户id',
+    selects           varchar(63)                        null comment '选择下标集合,以@@分隔',
+    score             int                                null comment '得分',
+    created_at        datetime default CURRENT_TIMESTAMP null comment '创建时间'
+)
+    comment '题目答卷';
+
+create index paper_id
+    on quiz.q_answers (paper_id);
+
+create index user_id
+    on quiz.q_answers (responder_user_id);
+
+create table if not exists quiz.q_classes
+(
+    class_id   int auto_increment comment '主键,类别id'
+        primary key,
+    class_name varchar(255)                       null comment '类别名称',
+    created_at datetime default CURRENT_TIMESTAMP null comment '创建时间',
+    updated_at datetime                           null comment '修改时间'
+)
+    comment '试卷分类';
+
+create table if not exists quiz.q_paper
+(
+    paper_id        int auto_increment comment '主键,试卷id'
+        primary key,
+    creator_user_id int                                null comment '出题用户id',
+    order_          int                                null comment '序号',
+    state           int      default 0                 null comment '状态',
+    cover_url       varchar(255)                       null comment '封面url',
+    title           varchar(255)                       null comment '标题',
+    describe_       varchar(511)                       null comment '描述',
+    answers         varchar(63)                        null comment '答案下标集合,以@@分隔',
+    created_at      datetime default CURRENT_TIMESTAMP null comment '创建时间'
+)
+    comment '题目试卷';
+
+create index user_id
+    on quiz.q_paper (creator_user_id);
+
+create table if not exists quiz.q_paper_classes
+(
+    id       int auto_increment comment '主键'
+        primary key,
+    paper_id int null comment '试卷ID',
+    class_id int null comment '分类ID'
+)
+    comment '试卷关联分类';
+
+create index paper_id
+    on quiz.q_paper_classes (paper_id);
+
+create index paper_id_question_id
+    on quiz.q_paper_classes (paper_id, class_id);
+
+create index question_id
+    on quiz.q_paper_classes (class_id);
+
+create table if not exists quiz.q_paper_questions
+(
+    id          int auto_increment comment '主键'
+        primary key,
+    paper_id    int null comment '试卷ID',
+    question_id int null comment '题目ID'
+)
+    comment '试卷关联题目';
+
+create index paper_id
+    on quiz.q_paper_questions (paper_id);
+
+create index paper_id_question_id
+    on quiz.q_paper_questions (paper_id, question_id);
+
+create index question_id
+    on quiz.q_paper_questions (question_id);
+
+create table if not exists quiz.q_prop
+(
+    prop_id       int auto_increment comment '主键,道具id'
+        primary key,
+    prop_name     varchar(127) null comment '道具名称',
+    prop_describe varchar(511) null comment '道具描述'
+)
+    comment '道具表';
+
+create table if not exists quiz.q_question
+(
+    question_id int auto_increment comment '主键,题目id'
+        primary key,
+    title       varchar(511)                       null comment '题目',
+    options_    varchar(1023)                      null comment '选项,以@@分隔',
+    class_id    int                                null comment '类别id',
+    created_at  datetime default CURRENT_TIMESTAMP null comment '创建时间',
+    updated_at  datetime                           null comment '修改时间'
+)
+    comment '题目表';
+
+create index class_id
+    on quiz.q_question (class_id);
+
+create table if not exists quiz.q_question_tags
+(
+    id          int auto_increment comment '主键'
+        primary key,
+    question_id int null comment '题目ID',
+    tag_id      int null comment '标签ID'
+)
+    comment '题目关联标签';
+
+create index paper_id_tag_id
+    on quiz.q_question_tags (question_id, tag_id);
+
+create index question_id
+    on quiz.q_question_tags (question_id);
+
+create index tag_id
+    on quiz.q_question_tags (tag_id);
+
+create table if not exists quiz.q_tag
+(
+    tag_id   int auto_increment comment '主键,标签id'
+        primary key,
+    tag_name varchar(127) null comment '标签名称'
+)
+    comment '题目标签';
+
+create table if not exists quiz.q_task
+(
+    task_id          int auto_increment comment '主键,任务ID'
+        primary key,
+    award_id         int                                null comment '奖励id',
+    award_number     int      default 1                 null comment '奖励数量',
+    describe_        varchar(511)                       null comment '任务描述',
+    condition_type   int                                null comment '任务条件类型,1:做朋友的测试;2:朋友做我的测试',
+    condition_number int      default 1                 null comment '任务条件计数',
+    created_at       datetime default CURRENT_TIMESTAMP null comment '创建时间',
+    updated_at       datetime                           null comment '更新时间'
+)
+    comment '任务数据';
+
+create index award_id
+    on quiz.q_task (award_id);
+
+create table if not exists quiz.q_task_record
+(
+    id               int auto_increment comment '主键'
+        primary key,
+    task_id          int                                  null comment '任务ID',
+    user_id          int                                  null comment '用户id',
+    finish_number    int        default 0                 null comment '任务完成计数',
+    is_receive_award tinyint(1) default 0                 null comment '任务奖励是否领取',
+    created_at       datetime   default CURRENT_TIMESTAMP null comment '创建时间',
+    updated_at       datetime                             null comment '更新时间'
+)
+    comment '任务记录';
+
+create index task_id
+    on quiz.q_task_record (task_id);
+
+create index user_id
+    on quiz.q_task_record (user_id);
+
+create table if not exists quiz.q_user_prop
+(
+    id      int auto_increment comment '主键'
+        primary key,
+    user_id int           null comment '用户id',
+    prop_id int           null comment '道具id',
+    number  int default 0 null comment '道具数量'
+)
+    comment '用户关联道具表';
+
+create index prop_id
+    on quiz.q_user_prop (prop_id);
+
+create index user_id
+    on quiz.q_user_prop (user_id);
+
+create table if not exists quiz.t_path
+(
+    path_id         int auto_increment comment '主键，路径ID。'
+        primary key,
+    pattern         varchar(255) null comment '路径模式，如/api/users/**，/device/list/{current:d+}/{size:d+}。',
+    http_method     varchar(255) null comment 'HTTP 方法,如 POST, GET',
+    describe_       varchar(255) null comment '路径描述。',
+    permission_name varchar(255) null comment '路径权限名称'
+)
+    comment '路径表';
+
+create table if not exists quiz.t_permission
+(
+    permission_id   int auto_increment comment '主键，权限ID。'
+        primary key,
+    permission_name varchar(255) null comment '权限名称，如read、write。',
+    describe_       varchar(511) null comment '描述'
+)
+    comment '权限表';
+
+create table if not exists quiz.t_role
+(
+    role_id   int auto_increment comment '主键，角色ID。'
+        primary key,
+    role_name varchar(255) null comment '角色名称，如ROLE_ADMIN、ROLE_USER。',
+    describe_ varchar(511) null comment '描述'
+)
+    comment '角色表';
+
+create table if not exists quiz.t_role_permissions
+(
+    id            int auto_increment comment '主键'
+        primary key,
+    role_id       int null comment '关联角色ID',
+    permission_id int null comment '关联权限ID'
+)
+    comment '角色权限关联表';
+
+create index permission_id
+    on quiz.t_role_permissions (permission_id);
+
+create index role_id
+    on quiz.t_role_permissions (role_id);
+
+create index role_id_permission_id
+    on quiz.t_role_permissions (role_id, permission_id);
 
 create table if not exists quiz.t_user
 (
-    user_id       int unsigned auto_increment comment '主键，用户ID',
+    user_id       int unsigned auto_increment comment '主键，用户ID。'
+        primary key,
     nickname      varchar(63)                        null comment '用户昵称',
     avatar_url    varchar(255)                       null comment '头像地址',
     username      varchar(63)                        null comment '用户账号',
     password      varchar(63)                        null comment '密码',
     phone         varchar(31)                        null comment '手机号',
     mail          varchar(63)                        null comment '邮箱',
-    created_at    datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    created_at    datetime default CURRENT_TIMESTAMP null comment '创建时间',
     updated_at    datetime                           null comment '更新时间',
     last_login_at datetime                           null comment '用户上次登录时间',
-    enabled       bigint   default 0                 not null comment '账号是否启用:0=正常,-1=禁用',
-    primary key (user_id),
-    INDEX username (username),
-    INDEX phone (phone),
-    INDEX mail (mail),
-    INDEX username_phone_mail (username, phone, mail)
-) comment '用户信息表';
+    enabled       bigint   default 0                 null comment '账号是否启用:0=正常,-1=禁用'
+)
+    comment '用户信息表';
+
+create index mail
+    on quiz.t_user (mail);
+
+create index phone
+    on quiz.t_user (phone);
+
+create index username
+    on quiz.t_user (username);
+
+create index username_phone_mail
+    on quiz.t_user (username, phone, mail);
 
 create table if not exists quiz.t_user_auth
 (
-    auth_id     int unsigned auto_increment comment '主键，ID',
-    user_id     int unsigned not null comment '用户ID',
-    provider    varchar(31)  not null comment '第三方服务的名称（如Google、Facebook等）',
-    provider_id varchar(63)  not null comment '第三方提供的唯一标识符比如微信的openId',
-    primary key (auth_id),
-    INDEX user_id (user_id),
-    INDEX provider_id (provider_id)
-) comment '第三方登录表';
+    auth_id     int unsigned auto_increment comment 'id'
+        primary key,
+    user_id     int unsigned null comment '用户ID。',
+    provider_id varchar(63)  null comment '第三方提供的唯一标识符。比如微信的openId',
+    provider    varchar(31)  null comment '第三方服务的名称（如Google、Facebook等）。'
+)
+    comment '第三方登录表';
 
-drop table quiz.t_role;# 删除
-create table if not exists quiz.t_role
-(
-    role_id   int auto_increment comment '主键，角色ID',
-    role_name varchar(255) not null comment '角色名称，如ROLE_ADMIN、ROLE_USER',
-    describe_ varchar(511) comment '描述',
-    primary key (role_id)
-) comment '角色表';
+create index provider_id
+    on quiz.t_user_auth (provider_id);
 
-drop table quiz.t_permission;# 删除
-create table if not exists quiz.t_permission
-(
-    permission_id   int auto_increment comment '主键，权限ID',
-    permission_name varchar(255) not null comment '权限名称，如read、write',
-    describe_       varchar(511) comment '描述',
-    primary key (permission_id)
-) comment '权限表';
-
-drop table quiz.t_path;# 删除
-create table if not exists quiz.t_path
-(
-    path_id         int auto_increment comment '主键，路径ID',
-    pattern         varchar(255) not null comment '路径模式，如/api/users/**，/device/list/{current:\d+}/{size:\d+}',
-    http_method     varchar(255) null comment 'HTTP 方法,如 POST, GET',
-    describe_       varchar(255) null comment '路径描述',
-    permission_name varchar(255) null comment '路径权限名称',
-    primary key (path_id)
-) comment '路径表';
+create index user_id
+    on quiz.t_user_auth (user_id);
 
 create table if not exists quiz.t_user_roles
 (
-    id      int auto_increment comment '主键',
-    user_id int not null comment '关联用户ID',
-    role_id int not null comment '关联角色ID',
-    primary key (id),
-    INDEX user_id (user_id),
-    INDEX role_id (role_id),
-    INDEX user_id_role_id (user_id, role_id)
-) comment '用户角色关联表';
+    id      int auto_increment comment '主键'
+        primary key,
+    user_id int null comment '关联用户ID',
+    role_id int null comment '关联角色ID'
+)
+    comment '用户角色关联表';
 
-create table if not exists quiz.t_role_permissions
+create index role_id
+    on quiz.t_user_roles (role_id);
+
+create index user_id
+    on quiz.t_user_roles (user_id);
+
+create index user_id_role_id
+    on quiz.t_user_roles (user_id, role_id);
+
+create table if not exists quiz.yz_device
 (
-    id            int auto_increment comment '主键',
-    role_id       int not null comment '关联角色ID',
-    permission_id int not null comment '关联权限ID',
-    primary key (id),
-    INDEX role_id (role_id),
-    INDEX permission_id (permission_id),
-    INDEX role_id_permission_id (role_id, permission_id)
-) comment '角色权限关联表';
-
-create table if not exists quiz.q_prop
-(
-    prop_id       int auto_increment comment '道具id',
-    prop_name     varchar(127) not null comment '道具名称',
-    prop_describe varchar(511) not null comment '道具描述',
-    primary key (prop_id)
-) comment '道具表';
-
-create table if not exists quiz.q_user_prop
-(
-    id      int auto_increment comment '主键',
-    user_id int not null comment '用户id',
-    prop_id int not null comment '道具id',
-    number  int default 0 comment '道具数量',
-    primary key (id),
-    INDEX user_id (user_id),
-    INDEX prop_id (prop_id)
-) comment '用户关联道具表';
-
-drop table quiz.q_paper;# 删除
-create table if not exists quiz.q_paper
-(
-    paper_id        int auto_increment comment '唯一主键',
-    creator_user_id int comment '出题用户id',
-    order_          int comment '序号',
-    state           int      default 0 comment '状态',
-    cover_url       varchar(255) comment '封面url',
-    title           varchar(255) comment '标题',
-    describe_       varchar(511) comment '描述',
-    answers         varchar(63) comment '答案下标集合,以@@分隔',
-    created_at      datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    primary key (paper_id),
-    INDEX user_id (creator_user_id)
-) comment '题目试卷';
-
-create table if not exists quiz.q_answers
-(
-    answer_id         int auto_increment comment '唯一主键',
-    paper_id          int comment '关联试卷id',
-    responder_user_id int comment '答题用户id',
-    selects           varchar(63) comment '选择下标集合,以@@分隔',
-    score             int comment '得分',
-    created_at        datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    primary key (answer_id),
-    INDEX paper_id (paper_id),
-    INDEX user_id (responder_user_id)
-) comment '题目答卷';
-
-create table if not exists quiz.q_paper_questions
-(
-    id          int auto_increment comment '主键',
-    paper_id    int not null comment '试卷ID',
-    question_id int not null comment '题目ID',
-    primary key (id),
-    INDEX paper_id (paper_id),
-    INDEX question_id (question_id),
-    INDEX paper_id_question_id (paper_id, question_id)
-) comment '试卷关联题目';
-
-create table if not exists quiz.q_question
-(
-    question_id int auto_increment comment '题目id',
-    title       varchar(511)                       not null comment '题目',
-    options_    varchar(1023)                      not null comment '选项,以@@分隔',
-    class_id     int                                not null comment '题目类别id',
-    created_at  datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    updated_at  datetime                           null comment '修改时间',
-    primary key (question_id),
-    INDEX class_id (class_id)
-) comment '题目表';
-
-create table if not exists quiz.q_question_tags
-(
-    id          int auto_increment comment '主键',
-    question_id int not null comment '题目ID',
-    tag_id      int not null comment '标签ID',
-    primary key (id),
-    INDEX question_id (question_id),
-    INDEX tag_id (tag_id),
-    INDEX paper_id_tag_id (question_id, tag_id)
-) comment '题目关联标签';
-
-create table if not exists quiz.q_tag
-(
-    tag_id   int auto_increment comment '唯一主键',
-    tag_name varchar(127) null comment '标签名称',
-    primary key (tag_id)
-) comment '标签';
-
-create table if not exists quiz.q_classes
-(
-    class_id   int auto_increment comment '唯一主键',
-    user_id    int comment '出题用户id(哪个用户的类别)',
-    class_name varchar(255)                       not null comment '类别名称',
-    sort       int                                not null comment '类别排序',
-    created_at datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    updated_at datetime comment '修改时间',
-    primary key (class_id),
-    INDEX user_id (user_id)
-) comment '试卷分类';
-
-create table if not exists quiz.q_paper_classes
-(
-    id       int auto_increment comment '主键',
-    paper_id int not null comment '试卷ID',
-    class_id int not null comment '分类ID',
-    primary key (id),
-    INDEX paper_id (paper_id),
-    INDEX question_id (class_id),
-    INDEX paper_id_question_id (paper_id, class_id)
-) comment '试卷关联分类';
-
-create table if not exists quiz.q_task
-(
-    task_id          int auto_increment comment '任务ID',
-    award_id         int not null comment '奖励id',
-    award_number     int      default 1 comment '奖励数量',
-    describe_        varchar(511) comment '任务描述',
-    condition_type   int not null comment '任务条件类型,1:答题;2:出题',
-    condition_number int      default 1 comment '任务条件计数',
-    created_at       datetime default CURRENT_TIMESTAMP comment '创建时间',
-    updated_at       datetime comment '更新时间',
-    primary key (task_id),
-    INDEX award_id (award_id)
-) comment '任务数据';
-
-create table if not exists quiz.q_task_record
-(
-    id               int auto_increment comment '主键',
-    task_id          int not null comment '任务ID',
-    user_id          int not null comment '用户id',
-    finish_number    int      default 0 comment '任务完成计数',
-    is_receive_award boolean  default false comment '任务奖励是否领取',
-    created_at       datetime default CURRENT_TIMESTAMP comment '创建时间',
-    updated_at       datetime comment '更新时间',
-    primary key (id),
-    INDEX task_id (task_id),
-    INDEX user_id (user_id)
-) comment '任务记录';
-
-
-# 勇者相关
-create table if not exists yz_device
-(
-    device_id varchar(18)    not null comment '安卓设备ID',
-    username  varchar(255)   not null comment '用户名',
+    device_id varchar(18)    not null comment '主键,安卓设备ID'
+        primary key,
+    username  varchar(255)   null comment '用户名',
     end_time  datetime       null comment '过期时间',
-    lv        int default -1 null comment '-1封禁,0试用,1vip,2svip,3max',
-    primary key (device_id),
-    INDEX username (username)
-) comment '设备卡密信息';
+    lv        int default -1 null comment '-1封禁,0试用,1vip,2svip,3max'
+)
+    comment '设备卡密信息';
 
-create table if not exists yz_use_info
+create index username
+    on quiz.yz_device (username);
+
+create table if not exists quiz.yz_use_info
 (
-    use_id        int auto_increment comment '唯一主键',
-    username      varchar(64)  not null comment '卡号',
-    account_      varchar(64)  not null comment '账号(游戏的)',
+    use_id        int auto_increment comment '主键,使用功能记录id'
+        primary key,
+    username      varchar(64)  null comment '卡号',
+    account_      varchar(64)  null comment '账号(游戏的)',
     password      varchar(64)  null comment '密码(游戏的)',
     function_name varchar(128) null comment '调用的方法名称',
     server_id     int          null comment '区服id',
@@ -248,8 +320,13 @@ create table if not exists yz_use_info
     player_name   varchar(64)  null comment '玩家昵称',
     role_id       int          null comment '玩家角色id',
     role_name     varchar(32)  null comment '玩家角色名称',
-    date_time     datetime     null comment '使用时间',
-    primary key (use_id),
-    INDEX username (username),
-    INDEX account_ (account_)
-) comment '脚本使用信息';
+    date_time     datetime     null comment '使用时间'
+)
+    comment '脚本使用信息';
+
+create index account_
+    on quiz.yz_use_info (account_);
+
+create index username
+    on quiz.yz_use_info (username);
+

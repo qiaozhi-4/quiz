@@ -36,7 +36,7 @@ public class Classes extends Model<Classes> {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("唯一主键")
+    @ApiModelProperty("主键,类别id")
     @TableId(value = "class_id", type = IdType.AUTO)
     private Integer classId;
 

@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author XGeorge
- * @since 2024-08-08
+ * @since 2024-08-20
  */
 @Getter
 @Setter
@@ -36,7 +36,7 @@ public class Answers extends Model<Answers> {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("唯一主键")
+    @ApiModelProperty("主键,答卷id")
     @TableId(value = "answer_id", type = IdType.AUTO)
     private Integer answerId;
 

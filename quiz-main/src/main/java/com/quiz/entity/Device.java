@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author XGeorge
- * @since 2024-07-14
+ * @since 2024-08-20
  */
 @Getter
 @Setter
@@ -35,7 +35,7 @@ public class Device extends Model<Device> {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("安卓设备ID")
+    @ApiModelProperty("主键,安卓设备ID")
     @TableId("device_id")
     private String deviceId;
 

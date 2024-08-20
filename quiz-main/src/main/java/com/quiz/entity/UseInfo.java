@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author XGeorge
- * @since 2024-07-14
+ * @since 2024-08-20
  */
 @Getter
 @Setter
@@ -36,7 +36,7 @@ public class UseInfo extends Model<UseInfo> {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("唯一主键")
+    @ApiModelProperty("主键,使用功能记录id")
     @TableId(value = "use_id", type = IdType.AUTO)
     private Integer useId;
 
