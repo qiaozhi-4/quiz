@@ -1,6 +1,5 @@
 package com.quiz.dto;
 
-import com.quiz.entity.Question;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -57,7 +56,7 @@ public class PaperDTO implements Serializable {
     private LocalDateTime createdAt;
 
     @ApiModelProperty("试卷题目集合")
-    private List<Question> questions;
+    private List<QuestionDTO> questions;
 
     @ApiModelProperty("用户答题总数,被多少人做过")
     private Long answersTotal;

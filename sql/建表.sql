@@ -143,12 +143,14 @@ create table if not exists quiz.q_paper_questions
 
 create table if not exists quiz.q_question
 (
-    question_id int auto_increment comment '唯一主键',
+    question_id int auto_increment comment '题目id',
     title       varchar(511)                       not null comment '题目',
     options_    varchar(1023)                      not null comment '选项,以@@分隔',
+    class_id     int                                not null comment '题目类别id',
     created_at  datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     updated_at  datetime                           null comment '修改时间',
-    primary key (question_id)
+    primary key (question_id),
+    INDEX class_id (class_id)
 ) comment '题目表';
 
 create table if not exists quiz.q_question_tags

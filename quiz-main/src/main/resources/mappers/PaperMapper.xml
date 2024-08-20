@@ -16,29 +16,34 @@
     </resultMap>
     <!-- Dto查询映射结果 -->
     <resultMap id="PaperDtoResultMap" extends="BaseResultMap" type="com.quiz.dto.PaperDTO">
-        <collection property="questions" autoMapping="true" ofType="com.quiz.entity.Question">
+        <collection property="questions" autoMapping="true" ofType="com.quiz.dto.QuestionDTO">
             <result column="question_title" property="title"/>
         </collection>
     </resultMap>
 
     <select id="selectPaperById" resultMap="PaperDtoResultMap" parameterType="java.lang.Integer">
-        select a.*, c.*, c.title as question_title
+        select a.*, c.*, c.title as question_title, qc.class_name
         from quiz.q_paper a
                  left join quiz.q_paper_questions b
                            on a.paper_id = b.paper_id
                  left join quiz.q_question c
                            on b.question_id = c.question_id
+                 left join quiz.q_classes qc
+                           on c.class_id = qc.class_id
         where a.paper_id = #{paperId}
           and a.state != -1
         order by b.id
     </select>
-    <select id="selectPaperListByUserId" resultType="com.quiz.dto.PaperDTO">
-        select a.*, count(b.responder_user_id) as answers_total
+    <select id="selectPaperListByUserId" resultMap="PaperDtoResultMap">
+        select a.*, count(b.responder_user_id) as answers_total, d.*, qc.class_name
         from quiz.q_paper a
                  left join quiz.q_answers b on a.paper_id = b.paper_id
+                 left join quiz.q_paper_questions c on a.paper_id = c.paper_id
+                 left join quiz.q_question d on c.question_id = d.question_id
+                 left join quiz.q_classes qc on d.class_id = qc.class_id
         where a.state != -1
           and a.creator_user_id = #{userId}
-        group by a.paper_id
+        group by a.paper_id, d.question_id, qc.class_id
     </select>
     <select id="selectPaperAndAnswerInfoListByUserId" resultType="com.quiz.dto.PaperDTO">
         select a.*, count(b.responder_user_id) as answers_total, c.answer_id, c.selects, c.score
@@ -49,14 +54,15 @@
           and a.creator_user_id = #{creatorUserId}
         group by a.paper_id, c.answer_id
     </select>
-    <select id="selectPaperAndAnswerInfoListByPaperIdAndUserId"  resultMap="PaperDtoResultMap">
-        select a.*, b.answer_id, b.selects, b.score,d.*,d.title as question_title
+    <select id="selectPaperAndAnswerInfoListByPaperIdAndUserId" resultMap="PaperDtoResultMap">
+        select a.*, b.answer_id, b.selects, b.score, d.*, d.title as question_title, qc.class_name
         from quiz.q_paper a
                  left join quiz.q_answers b on a.paper_id = b.paper_id and b.responder_user_id = #{responderUserId}
                  left join quiz.q_paper_questions c on a.paper_id = c.paper_id
                  left join quiz.q_question d on c.question_id = d.question_id
+                 left join quiz.q_classes qc on d.class_id = qc.class_id
         where a.paper_id = #{paperId}
-        group by a.paper_id, b.answer_id,d.question_id
+        group by a.paper_id, b.answer_id, d.question_id
     </select>
 
 </mapper>
