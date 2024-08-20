@@ -1,7 +1,9 @@
 package com.code.generator;
 
+import com.baomidou.mybatisplus.core.enums.SqlLike;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
+import com.baomidou.mybatisplus.generator.config.po.LikeTable;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
@@ -148,10 +150,11 @@ public class CodeGenerator {
 //                                .addInclude("q_classes")
 //                                .addInclude("q_paper_classes")
 //                                .addInclude("q_task")
-                                .addInclude("q_task_record")
+//                                .addInclude("q_task_record")
 //                                .addInclude("yz_device")
 //                                .addInclude("yz_use_info")
-                                //.likeTable(new LikeTable("", SqlLike.RIGHT))
+                                // 所有表
+                                .likeTable(new LikeTable("", SqlLike.RIGHT))
 
                                 /*配置 Entity*/
                                 .entityBuilder()
@@ -168,10 +171,10 @@ public class CodeGenerator {
 
                                 /*配置 Service*/
                                 .serviceBuilder()
-                                /*.disable()*/
+                                .disable()
                                 .serviceTemplate("\\templates\\ftl\\service.java")//设置模版路径
                                 .serviceImplTemplate("\\templates\\ftl\\serviceImpl.java")//设置模版路径
-                                .enableFileOverride()//开启文件覆盖
+//                                .enableFileOverride()//开启文件覆盖
                                 .convertServiceFileName(entityName ->
                                         "I" + entityName.replaceAll(REGEX, "") + "Service")
                                 .convertServiceImplFileName(entityName ->
@@ -179,10 +182,10 @@ public class CodeGenerator {
 
                                 /*配置 Mapper*/
                                 .mapperBuilder()
-                                .disable()
+//                                .disable()
                                 .mapperTemplate("\\templates\\ftl\\mapper.java")
                                 .mapperXmlTemplate("\\templates\\ftl\\mapper.xml")
-                                .enableFileOverride()//开启文件覆盖
+//                                .enableFileOverride()//开启文件覆盖
                                 .enableBaseResultMap()
                                 //.enableBaseColumnList()
                                 .convertMapperFileName(entityName ->
@@ -194,7 +197,7 @@ public class CodeGenerator {
                                 .controllerBuilder()
                                 .disable()//禁用生成
                                 .template("\\templates\\ftl\\controller.java")//设置模版路径
-                                .enableFileOverride()//开启文件覆盖
+//                                .enableFileOverride()//开启文件覆盖
                                 .enableRestStyle()//开启生成@RestController 控制器(等同于@Controller + @ResponseBody。)
                                 .convertFileName(entityName ->
                                         entityName.replaceAll(REGEX, "") + "Controller"))

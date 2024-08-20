@@ -14,6 +14,7 @@ export interface RequestOption<P extends SwaggerPath = SwaggerPath, Q extends Sw
     data?: B;
     header?: H;
     method?: "OPTIONS" | "GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "TRACE" | "CONNECT";
+    // method?: "OPTIONS" | "GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "TRACE" | "CONNECT" | "PATCH";
     timeout?: number;
 }
 /** 请求成功响应 */
@@ -94,7 +95,7 @@ export class Api implements IApi {
                     let data = res.data as Quiz.Result<T>;
                     // 请求成功，就将成功的数据返回出去
                     if (data.code == 200) {
-                        ajaxEnd();
+                        // ajaxEnd();
                         console.log(`请求路径:${options.url}`, data);
                         resolve(data);
                     }
@@ -116,7 +117,7 @@ export class Api implements IApi {
                         duration: 2000
                     });
                 },
-                // complete: () => { ajaxEnd(); }
+                complete: () => { ajaxEnd(); }
             });
         });
     }
