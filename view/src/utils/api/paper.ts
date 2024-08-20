@@ -2,7 +2,7 @@ import { api } from "../service"
 /** 题目试卷 前端控制器 */
 
 /** 查询用户a试卷列表,以及用户b的回答信息 */
-export function getPaperAndAnswerInfoList(creatorUserId : number, responderUserId : number) {
+export function getPaperAndAnswerInfoList(creatorUserId : number, responderUserId : number): Promise<Quiz.Result<Array<Quiz.PaperDto>>> {
 	return api.request({
 		url: `/paper/get-list/{creatorUserId}/{responderUserId}`,
 		method: 'GET',
@@ -13,7 +13,7 @@ export function getPaperAndAnswerInfoList(creatorUserId : number, responderUserI
 	})
 }
 /** 获取试卷列表 */
-export function getPaperList(userId : number) {
+export function getPaperList(userId : number): Promise<Quiz.Result<Array<Quiz.PaperDto>>> {
 	return api.request({
 		url: `/paper/get-list/{userId}`,
 		method: 'GET',
@@ -23,7 +23,7 @@ export function getPaperList(userId : number) {
 	})
 }
 /** 获取用户试卷总数(包括已删除),判断是否出过题 */
-export function getPaperTotal(userId : number) {
+export function getPaperTotal(userId : number): Promise<Quiz.Result<number>> {
 	return api.request({
 		url: `/paper/get-total/{userId}`,
 		method: 'GET',
@@ -33,7 +33,7 @@ export function getPaperTotal(userId : number) {
 	})
 }
 /** 通过试卷ID,获取试卷详情 */
-export function getPaper(paperId : number) {
+export function getPaper(paperId : number): Promise<Quiz.Result<Quiz.PaperDto>> {
 	return api.request({
 		url: `/paper/get/{paperId}`,
 		method: 'GET',
@@ -43,7 +43,7 @@ export function getPaper(paperId : number) {
 	})
 }
 /** 通过试卷ID,获取试卷详情,以及用户回答信息 */
-export function getPaperAndAnswerInfo(paperId : number, responderUserId : number) {
+export function getPaperAndAnswerInfo(paperId : number, responderUserId : number): Promise<Quiz.Result<Quiz.PaperDto>> {
 	return api.request({
 		url: `/paper/get/{paperId}/{responderUserId}`,
 		method: 'GET',
@@ -54,7 +54,7 @@ export function getPaperAndAnswerInfo(paperId : number, responderUserId : number
 	})
 }
 /** 删除试卷 */
-export function removePaper(paperId : number) {
+export function removePaper(paperId : number): Promise<Quiz.Result<any>> {
 	return api.request({
 		url: `/paper/remove/{paperId}`,
 		method: 'DELETE',
@@ -64,7 +64,7 @@ export function removePaper(paperId : number) {
 	})
 }
 /** 添加试卷 */
-export function savePaper(paperDto : Quiz.PaperDto) {
+export function savePaper(paperDto : Quiz.PaperDto): Promise<Quiz.Result<Quiz.PaperDto>> {
 	return api.request({
 		url: `/paper/save`,
 		method: 'POST',
@@ -72,7 +72,7 @@ export function savePaper(paperDto : Quiz.PaperDto) {
 	})
 }
 /** 更新试卷 */
-export function updatePaper(paper : Quiz.Paper) {
+export function updatePaper(paper : Quiz.Paper): Promise<Quiz.Result<any>> {
 	return api.request({
 		url: `/paper/update`,
 		method: 'PUT',

@@ -2,7 +2,7 @@ import { api } from "../service"
 /** 文件上传下载相关 */
 
 /** 获取头像 */
-export function downloadAvatar(filename : string) {
+export function downloadAvatar(filename : string): Promise<Quiz.Result<Quiz.Resource>> {
 	return api.request({
 		url: `/file/download-avatar/{filename}`,
 		method: 'GET',
@@ -12,7 +12,7 @@ export function downloadAvatar(filename : string) {
 	})
 }
 /** 文件上传 */
-export function handleFileUpload(file : any) {
+export function handleFileUpload(file : any): Promise<Quiz.Result<string>> {
 	return api.request({
 		url: `/file/upload`,
 		method: 'POST',
@@ -22,7 +22,7 @@ export function handleFileUpload(file : any) {
 	})
 }
 /** 用户上传头像 */
-export function uploadAvatar(file : any, userId : number) {
+export function uploadAvatar(file : any, userId : number): Promise<Quiz.Result<Quiz.User>> {
 	return api.request({
 		url: `/file/upload-avatar`,
 		method: 'POST',
