@@ -74,10 +74,13 @@ function onBadge(index: number) {
 }
 onLoad(() => {
     getBadgeList(store.user.userId).then(res => {
-        badgeData.value = scoreInfo;
+        /** 防止修改全局变量 */
+        badgeData.value = scoreInfo();
+        /** 把徽章信息添加的对应数组 */
         res.data.forEach((e: Quiz.AnswersDTO) => {
             badgeData.value[e.score / 10].badges.push(e);
         });
+        /** 过滤没用获取到的徽章 */
         badgeData.value = badgeData.value.filter(e => e.badges.length > 0);
     });
 });

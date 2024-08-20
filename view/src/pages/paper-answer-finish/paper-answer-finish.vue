@@ -13,10 +13,10 @@
                 <q-avatar :src="pageOption?.avatarUrl" size="97" borderWidth="4"></q-avatar>
             </view>
             <text class="t1">恭喜你,你和{{ pageOption?.nickname }}是：</text>
-            <text class="t1">{{ scoreInfo[pageOption?.score || 0 / 10]?.englishName }}</text>
-            <text class="t2">{{ scoreInfo[pageOption?.score || 0 / 10]?.name }}</text>
-            <q-image v-if="scoreInfo[pageOption?.score || 0 / 10]?.badgeName" width="115" height="115"
-                :src="`/static/img/${scoreInfo[pageOption?.score || 0 / 10]?.badgeName}.png`"></q-image>
+            <text class="t1">{{ scoreInfo_[pageOption?.score || 0 / 10]?.englishName }}</text>
+            <text class="t2">{{ scoreInfo_[pageOption?.score || 0 / 10]?.name }}</text>
+            <q-image v-if="scoreInfo_[pageOption?.score || 0 / 10]?.badgeName" width="115" height="115"
+                :src="`/static/img/${scoreInfo_[pageOption?.score || 0 / 10]?.badgeName}.png`"></q-image>
             <view v-else style="width: 115px; height: 115px;"></view>
             <q-image :src="`/static/img/加${pageOption?.score}分.png`" width="195" height="40"></q-image>
             <text>最新亲密值将更新入排行榜中......</text>
@@ -49,7 +49,7 @@ import { getUser } from '@/utils/api/user';
 import { scoreInfo } from '@/utils/constant';
 import { useStore } from "@/stores/store";
 import { objectToPathParams } from '@/utils/service';
-
+const scoreInfo_ = scoreInfo();
 const store = useStore();
 /** 提示消息ref */
 const refAlert = ref();

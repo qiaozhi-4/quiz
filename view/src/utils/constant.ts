@@ -1,12 +1,12 @@
 ///////////////////////////////////////这个文件是全局常量
-export type ScoreInfo ={
+export type ScoreInfo = {
     englishName: string,
     name: string,
     badgeName: string,
-    badges: Quiz.AnswersDTO[]
-}
+    badges: Quiz.AnswersDTO[];
+};
 /** 得分描述已经信息 */
-export const scoreInfo = [
+export const scoreInfo = () => JSON.parse(JSON.stringify([
     {
         englishName: 'Totally different',
         name: '截然不同',
@@ -73,7 +73,7 @@ export const scoreInfo = [
         badgeName: '金徽章',
         badges: [],
     },
-];
+]));
 
 
 
