@@ -15,9 +15,9 @@
     </resultMap>
 
     <select id="selectPropsByUserId" resultMap="PropDTOResultMap" parameterType="java.lang.Integer">
-        select a.prop_id, a.prop_name, a.prop_describe, COALESCE(b.number, 0) as number
-        from quiz.q_prop a
-                 left join quiz.q_user_prop b
-                           on a.prop_id = b.prop_id and b.user_id = #{userId}
+        select qp.prop_id, qp.prop_name, qp.prop_describe, COALESCE(qup.number, 0) as number
+        from quiz.q_prop qp
+                 left join quiz.q_user_prop qup
+                           on qp.prop_id = qup.prop_id and qup.user_id = #{userId}
     </select>
 </mapper>

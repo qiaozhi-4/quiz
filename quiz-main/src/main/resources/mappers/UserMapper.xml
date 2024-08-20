@@ -25,61 +25,61 @@
     </resultMap>
 
     <select id="selectUserDtoByAccount" resultMap="UserDtoResultMap">
-        SELECT u.*, p.permission_name
-        FROM quiz.t_user AS u
-                 left join quiz.t_user_roles AS ur
-                           ON u.user_id = ur.user_id
-                 left JOIN quiz.t_role AS r
-                           ON r.role_id = ur.role_id
-                 left JOIN quiz.t_role_permissions AS rp
-                           ON r.role_id = rp.role_id
-                 left JOIN quiz.t_permission AS p
-                           ON p.permission_id = rp.permission_id
-        WHERE u.username = #{account}
-           or u.mail = #{account}
-           or u.phone = #{account}
+        SELECT tu.*, tp.permission_name
+        FROM quiz.t_user AS tu
+                 left join quiz.t_user_roles AS tur
+                           ON tu.user_id = tur.user_id
+                 left JOIN quiz.t_role AS tr
+                           ON tr.role_id = tur.role_id
+                 left JOIN quiz.t_role_permissions AS trp
+                           ON tr.role_id = trp.role_id
+                 left JOIN quiz.t_permission AS tp
+                           ON tp.permission_id = trp.permission_id
+        WHERE tu.username = #{account}
+           or tu.mail = #{account}
+           or tu.phone = #{account}
     </select>
     <select id="selectUserByProviderId" resultMap="BaseResultMap">
-        select u.*
+        select tu.*
         from quiz.t_user_auth tua
-                 left join quiz.t_user u
-                           on tua.user_id = u.user_id
+                 left join quiz.t_user tu
+                           on tua.user_id = tu.user_id
         where tua.provider_id = #{providerId}
     </select>
     <select id="selectIntimateRanking" resultType="com.quiz.dto.UserDTO">
-        select c.*, sum(b.score) as total_score
-        from quiz.q_paper a
-                 left join quiz.q_answers b
-                           on a.paper_id = b.paper_id
-                 left join quiz.t_user c
-                           on b.responder_user_id = c.user_id
+        select tu.*, sum(qa.score) as total_score
+        from quiz.q_paper qp
+                 left join quiz.q_answers qa
+                           on qp.paper_id = qa.paper_id
+                 left join quiz.t_user tu
+                           on qa.responder_user_id = tu.user_id
 
-        where a.state != -1
-          and a.creator_user_id = #{userId}
-          and b.responder_user_id is not null
-        group by c.user_id
+        where qp.state != -1
+          and qp.creator_user_id = #{userId}
+          and qa.responder_user_id is not null
+        group by tu.user_id
         order by total_score desc;
     </select>
     <select id="selectIntimateFriends" resultType="com.quiz.entity.User">
-        select us.*
-        from quiz.q_paper a
-                 left join quiz.q_answers b on a.paper_id = b.paper_id
-                 left join quiz.t_user us on a.creator_user_id = us.user_id
-        where a.state != -1
-          and a.creator_user_id = #{userId}
-          and b.score = 100
-        group by us.user_id
+        select tu.*
+        from quiz.q_paper qp
+                 left join quiz.q_answers qa on qp.paper_id = qa.paper_id
+                 left join quiz.t_user tu on qp.creator_user_id = tu.user_id
+        where qp.state != -1
+          and qp.creator_user_id = #{userId}
+          and qa.score = 100
+        group by tu.user_id
     </select>
     <select id="selectUserDtoByUserId" resultType="com.quiz.dto.UserDTO">
-        select a.*,
-               count(distinct b.paper_id)          as paper_total,
-               count(distinct c.answer_id)         as answers_total,
-               count(distinct d.responder_user_id) as intimate_friend_total
-        from quiz.t_user a
-                 left join quiz.q_paper b on a.user_id = b.creator_user_id # 我的出题
-                 left join quiz.q_answers c on a.user_id = c.responder_user_id # 我的答题
-                 left join quiz.q_answers d on b.paper_id = d.paper_id and d.score = 100 # 做我的试卷,得分100分的
-        where a.user_id = #{userId}
-        group by a.user_id
+        select tu.*,
+               count(distinct qp.paper_id)          as paper_total,
+               count(distinct qa.answer_id)         as answers_total,
+               count(distinct qa2.responder_user_id) as intimate_friend_total
+        from quiz.t_user tu
+                 left join quiz.q_paper qp on tu.user_id = qp.creator_user_id # 我的出题
+                 left join quiz.q_answers qa on tu.user_id = qa.responder_user_id # 我的答题
+                 left join quiz.q_answers qa2 on qp.paper_id = qa2.paper_id and qa2.score = 100 # 做我的试卷,得分100分的
+        where tu.user_id = #{userId}
+        group by tu.user_id
     </select>
 </mapper>

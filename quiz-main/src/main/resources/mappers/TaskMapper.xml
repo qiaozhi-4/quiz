@@ -14,34 +14,34 @@
         <result column="updated_at" property="updatedAt" />
     </resultMap>
     <select id="selectTaskList" resultType="com.quiz.dto.TaskDTO">
-        select a.*,
-               case a.condition_type
+        select qt.*,
+               case qt.condition_type
                    when 1 then LEAST((select count(1)
                                       from quiz.q_answers qa
                                       where qa.responder_user_id = #{userId}
-                                        and qa.created_at &gt;= #{earliestDateTime}), a.condition_number)
+                                        and qa.created_at &gt;= #{earliestDateTime}), qt.condition_number)
                    when 2 then LEAST((select count(1)
                                       from quiz.q_answers qa
                                                left join quiz.q_paper qp on qp.paper_id = qa.paper_id
                                       where qp.creator_user_id = #{userId}
-                                        and qa.created_at &gt;= #{earliestDateTime}), a.condition_number)
+                                        and qa.created_at &gt;= #{earliestDateTime}), qt.condition_number)
                    end     as finish_number,
-               b.is_receive_award,
-               c.prop_name as award_name
-        from quiz.q_task a
-                 left join quiz.q_task_record b on a.task_id = b.task_id
-                 left join quiz.q_prop c on a.award_id = c.prop_id
-        where b.user_id = #{userId}
-          and b.created_at &gt;= #{earliestDateTime};
+               qtr.is_receive_award,
+               qp.prop_name as award_name
+        from quiz.q_task qt
+                 left join quiz.q_task_record qtr on qt.task_id = qtr.task_id
+                 left join quiz.q_prop qp on qt.award_id = qp.prop_id
+        where qtr.user_id = #{userId}
+          and qtr.created_at &gt;= #{earliestDateTime};
     </select>
     <select id="selectTask" resultType="com.quiz.dto.TaskDTO">
-        select a.*, b.finish_number, b.is_receive_award, c.prop_name as award_name
-        from quiz.q_task a
-                 left join quiz.q_task_record b on a.task_id = b.task_id
-                 left join quiz.q_prop c on a.award_id = c.prop_id
-        where b.user_id = #{userId}
-          and a.task_id = #{taskId}
-          and b.created_at &gt;= #{earliestDateTime}
+        select qt.*, qtr.finish_number, qtr.is_receive_award, qp.prop_name as award_name
+        from quiz.q_task qt
+                 left join quiz.q_task_record qtr on qt.task_id = qtr.task_id
+                 left join quiz.q_prop qp on qt.award_id = qp.prop_id
+        where qtr.user_id = #{userId}
+          and qt.task_id = #{taskId}
+          and qtr.created_at &gt;= #{earliestDateTime}
     </select>
 
 </mapper>

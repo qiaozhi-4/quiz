@@ -171,7 +171,7 @@ public class CodeGenerator {
 
                                 /*配置 Service*/
                                 .serviceBuilder()
-                                .disable()
+//                                .disable()
                                 .serviceTemplate("\\templates\\ftl\\service.java")//设置模版路径
                                 .serviceImplTemplate("\\templates\\ftl\\serviceImpl.java")//设置模版路径
 //                                .enableFileOverride()//开启文件覆盖
@@ -195,7 +195,7 @@ public class CodeGenerator {
 
                                 /*配置 Controller*/
                                 .controllerBuilder()
-                                .disable()//禁用生成
+//                                .disable()//禁用生成
                                 .template("\\templates\\ftl\\controller.java")//设置模版路径
 //                                .enableFileOverride()//开启文件覆盖
                                 .enableRestStyle()//开启生成@RestController 控制器(等同于@Controller + @ResponseBody。)
