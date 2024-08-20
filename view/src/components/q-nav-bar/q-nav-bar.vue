@@ -37,9 +37,7 @@
         <slot>
             <view class="q-nav-bar-left" :style="`width: ${menuButtonInfo.width}px`">
                 <slot name="left">
-                    <q-navigator mode="navigateBack">
-                        <q-svg icon="头部导航-返回" size="32" />
-                    </q-navigator>
+                    <q-svg icon="头部导航-返回" size="32" @click="back" />
                 </slot>
             </view>
             <view :style="`font-size: ${props.titleSize}px;`" class="q-nav-bar-middle text-overflow">
@@ -79,4 +77,15 @@ const style = computed(() => {
     let padding = systemInfo.screenWidth - menuButtonInfo.right;
     return `min-height: ${10 + menuButtonInfo.bottom}px; padding: 0 ${padding}px 10px ${padding}px; color: ${props.color}`;
 });
+/** 返回上一页 */
+function back() {
+    uni.navigateBack({
+        delta: 1,
+        complete: () => {
+            uni.reLaunch({
+                url: '/pages/home/home'
+            });
+        }
+    });
+}
 </script>
