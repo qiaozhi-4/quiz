@@ -11,7 +11,6 @@
 
 .center {
     width: 86vw;
-    height: 70vh;
     top: 50%;
     /* 距顶部50% */
     left: 50%;
@@ -68,14 +67,18 @@
             <slot></slot>
         </view>
         <!-- 点击遮罩层是否关闭提示框 -->
-        <view class="q-dialog-mask" @click="showDialog = !props.maskHideDialog" >
+        <view class="q-dialog-mask" @click="onMask">
         </view>
     </view>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-
+import { ref, useAttrs } from 'vue';
+/** 事件 */
+const emit = defineEmits([
+    /** 点击遮罩层的回调 */
+    'maskCallback'
+]);
 /** 传递的属性 */
 const props = defineProps({
     /** 点击遮罩层是否关闭提示框 */
@@ -85,9 +88,13 @@ const props = defineProps({
     /** 元素位置 */
     location: { type: String, default: 'center' },
 });
-
 /** 显示提示框 */
 const showDialog = ref<boolean>(false);
+/** 点击遮罩 */
+const onMask = () => {
+    emit('maskCallback');
+    showDialog.value = !props.maskHideDialog;
+};
 const show = () => {
     showDialog.value = true;
 };
