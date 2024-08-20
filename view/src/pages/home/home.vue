@@ -80,63 +80,18 @@
                             </template>
                         </view>
                         <view v-show="activeTag == 1" class="test-info flex-column">
-                            <template v-if="true">
-                                制作中
-                            </template>
-                            <!-- <template v-else>
-                                <view v-for="(e, index) in testInfo" :key="index" class="class flex-column">
-                                    <template v-if="index < 2">
-                                        <view class="name1">{{ e?.name }}</view>
-                                        <template v-for="(item, i) in e.items" :key="i">
-                                            <view v-if="item?.title && index == 0" class="item1 flex-column">
-                                                <view class="question-title">
-                                                    <q-svg icon="左双引号" size="10" />
-                                                    <view class="title text-overflow">{{ item?.title }}</view>
-                                                </view>
-                                                <view class="question-info">
-                                                    <view class="option text-overflow">{{ item?.select }}</view>
-                                                    <view class="input-value text-overflow">{{ item?.input }}</view>
-                                                </view>
-                                                <q-svg class="svg" icon="个人主页-测试信息-删除" size="22"
-                                                    @click="remove(index, i)"></q-svg>
-                                            </view>
-
-                                            <view v-if="item?.title && index == 1" class="item1-1">
-                                                <view class="user-info flex-column">
-                                                    <q-avatar :src="item?.avatarUrl" size="41"></q-avatar>
-                                                    <view class="nickname">{{ item?.nickname }}</view>
-                                                </view>
-                                                <view class="topic flex-column">
-                                                    <q-svg class="svg" icon="左双引号" size="10" />
-                                                    <text class="title text-overflow">{{ item?.title }}</text>
-                                                    <text class="answer text-overflow">{{ item?.select }}</text>
-                                                </view>
-                                                <q-svg class="svg" icon="个人主页-测试信息-删除" size="22"
-                                                    @click="remove(index, i)"></q-svg>
-                                            </view>
-                                        </template>
-                                        <view class="add flex-column" @click="add(index)">
-                                            <text class="t1">{{ e?.extra?.t1 }}</text>
-                                            <text class="t2">{{ e?.extra?.t2 }}</text>
-                                            <q-svg class="svg" icon="个人主页-测试信息-添加" size="22"></q-svg>
-                                        </view>
-                                    </template>
-                                    <template v-else>
-                                        <view class="name1">{{ e.name }}</view>
-                                        <view class="items flex-column">
-                                            <template v-for="(item, i) in e.items" :key="i">
-                                                <view v-if="i < 4 || e.spread" class="item2">
-                                                    <view class="title text-overflow">{{ item?.title }}</view>
-                                                    <view class="option text-overflow">{{ item?.select }}</view>
-                                                    <view class="input-value text-overflow">{{ item?.input }}</view>
-                                                </view>
-                                            </template>
-                                        </view>
-                                        <text v-if="e.spread" class="t1" @click="hidden(index)">收起</text>
-                                        <text v-else class="t1" @click="showAll(index)">查看全部</text>
-                                    </template>
-                                </view>
-                            </template> -->
+                            <view class="flex-column" v-for="(group, index) in questionGrouped" :key="index">
+                                <text class="  item-t1 text-overflow">{{ group.className }}</text>
+                                <template v-for="(question, i) in group.items" :key="i">
+                                    <view class="  item-list" v-show="fullShows[index] || i < 2">
+                                        <view class="  item-list-item-t1 text-overflow">{{ question.title }} </view>
+                                        <view class=" item-list-item-t2 text-overflow">{{ question.option }} </view>
+                                    </view>
+                                </template>
+                                <text class="item-t2" @click=" fullShows[index] = !fullShows[index]">
+                                    {{ fullShows[index] ? '收起' : '查看全部' }}
+                                </text>
+                            </view>
                         </view>
                         <view v-show="activeTag == 2" class="table-record flex-column">
                             <view class="input-wrap">
@@ -221,6 +176,7 @@ import { getIntimateRanking, getUser } from '@/utils/api/user';
 import { useStore } from "@/stores/store";
 import { homeTestInfo } from '@/utils/constant';
 import { objectToPathParams } from '@/utils/service';
+import Paper from '../paper/paper.vue';
 const store = useStore();
 /** 本页路径参数 */
 type Option = AnyObject & {
@@ -253,6 +209,51 @@ const myRanking = computed<number>(() => {
 const intimateRanking = ref<Quiz.UserDto[]>([]);
 /** 试卷记录 */
 const paperList = ref<Quiz.PaperDto[]>([]);
+/**  问答展示 */
+const fullShows = ref<boolean[]>([]);
+interface GroupedItem {
+    classId: number;
+    className: string;
+    items: (Quiz.QuestionDTO & { option?: string; })[];
+}
+const questionGrouped = computed<GroupedItem[]>(() => {
+    let list = paperList.value
+        /** 过滤,如果是朋友主页,我没做的试卷过滤掉 */
+        .filter(paper => isFriendHome.value ? paper.answerId : true)
+        /** 收集题目到一个数组,并且添加选择的选项 */
+        .flatMap(paper => {
+            let answers = paper.answers?.split('@@').map(Number) || new Array(10).fill(-1);
+            let selects = paper.selects?.split('@@').map(Number) || new Array(10).fill(-1);
+            return paper.questions.map((q, index) => {
+                let options = q.options?.split('@@') || new Array(10).fill(-1);
+                return {
+                    ...q,
+                    option: answers[index] == selects[index] || !isFriendHome.value ? options[answers[index]] : '??????'
+                };
+            });
+        })
+        /** 排序 */
+        .sort((a, b) => a.questionId - b.questionId)
+        .reduce((acc, curr) => {
+            // 查找当前类别是否已存在
+            const existingCategory = acc.find(category => category.classId === curr.classId);
+
+            if (existingCategory) {
+                // 如果类别已存在，将当前项添加到items数组中
+                existingCategory.items.push(curr);
+            } else {
+                // 如果类别不存在，创建新的类别并添加当前项
+                acc.push({
+                    classId: curr.classId,
+                    className: curr.className,
+                    items: [curr]
+                });
+                fullShows.value.push(false);
+            }
+            return acc;
+        }, [] as GroupedItem[]);
+    return list || [] as GroupedItem[];
+});
 
 
 /** 切换栏标签 */
@@ -306,10 +307,6 @@ onLoad((option: Option) => {
     }, 1000);
 });
 
-
-
-/** 是否时朋友主页 */
-// const isFriendHome = ref<boolean>(false);
 /** 点击朋友触发 */
 function goFriendHome(id: number) {
     if (id == own.value.userId) {
@@ -351,7 +348,7 @@ function onBlur(e: any) {
 /** 删除试卷 */
 function onRemorPafer(paperId: number, index: number) {
     removePaper(paperId).then(res => {
-            paperList.value.splice(index, 1);
+        paperList.value.splice(index, 1);
     });
 }
 /** 试卷详情 */
@@ -777,249 +774,62 @@ function goSetTest() {
                 .test-info {
                     background: #1F1146;
                     gap: 20px;
-                    padding: 0 20px;
 
-                    .class {
+                    .item-t1 {
+                        padding: 20px;
+                        padding-bottom: 10px;
+                        font-family: 'Inter';
+                        font-style: normal;
+                        font-weight: 800;
+                        font-size: 14px;
+                        line-height: 17px;
+
+                        color: #FFFFFF;
+                    }
+
+                    .item-t2 {
+                        padding: 2px 10px;
+                        font-family: 'Inter';
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 12px;
+                        line-height: 15px;
+
+                        color: #A729E2;
+                    }
+
+                    .item-list {
+                        padding: 10px 20px;
                         gap: 10px;
+                        justify-content: space-between;
+                        /* 将子元素推向容器的两边 */
+                        align-items: center;
+                        /* 垂直居中对齐 */
 
-                        .name1 {
+                        border-top: 1px solid lighten(#1F1146, 20%);
+                        /* 设置上边框：5px宽度，实线，绿色 */
+                        background: rgba(255, 255, 255, 0.07);
+
+                        .item-list-item-t1 {
                             font-family: 'Inter';
                             font-style: normal;
                             font-weight: 400;
                             font-size: 14px;
                             line-height: 17px;
-                            /* identical to box height */
 
                             color: #FFFFFF;
                         }
 
-                        .item1 {
-                            position: relative;
-
-                            padding: 11px 13px;
-                            gap: 3px;
-
-                            background: rgba(255, 255, 255, 0.1);
-                            border-radius: 15px;
-
-                            .question-title {
-                                gap: 3px;
-
-                                .svg {
-                                    width: 10px;
-                                    height: 10px;
-                                }
-
-                                .title {
-                                    font-family: 'Inter';
-                                    font-style: normal;
-                                    font-weight: 500;
-                                    font-size: 12px;
-                                    line-height: 15px;
-
-                                    color: #FFFFFF;
-
-                                    opacity: 0.7;
-                                }
-                            }
-
-                            .question-info {
-                                justify-content: space-between;
-                                align-items: center;
-                                gap: 3px;
-                                padding-left: 10px;
-
-                                .option {
-                                    font-family: 'Inter';
-                                    font-style: normal;
-                                    font-weight: 700;
-                                    font-size: 16px;
-                                    line-height: 19px;
-                                    letter-spacing: -0.04em;
-
-                                    color: #FFFFFF;
-                                }
-
-                                .input-value {
-                                    font-family: 'Inter';
-                                    font-style: normal;
-                                    font-weight: 500;
-                                    font-size: 12px;
-                                    line-height: 15px;
-                                    /* identical to box height */
-                                    letter-spacing: -0.04em;
-
-                                    color: rgba(255, 255, 255, 0.75);
-                                }
-                            }
-
-                            .svg {
-                                position: absolute;
-                                right: -11px;
-                                top: -11px;
-                            }
-                        }
-
-                        .item1-1 {
-                            position: relative;
-                            padding: 8px 11px;
-                            gap: 20px;
-
-                            background: rgba(255, 255, 255, 0.07);
-                            border-radius: 15px;
-
-                            .user-info {
-                                justify-content: center;
-                                align-items: center;
-                                gap: 2px;
-
-                                .nickname {
-                                    font-family: 'Inter';
-                                    font-style: normal;
-                                    font-weight: 600;
-                                    font-size: 12px;
-                                    line-height: 15px;
-                                    text-align: center;
-
-                                    color: #FFFFFF;
-                                }
-                            }
-
-                            .topic {
-                                position: relative;
-                                gap: 4px;
-                                justify-content: center;
-
-                                .svg {
-                                    position: absolute;
-                                    left: -10px;
-                                    top: 10px;
-                                }
-
-                                .title {
-                                    font-family: 'Inter';
-                                    font-style: normal;
-                                    font-weight: 300;
-                                    font-size: 12px;
-                                    line-height: 15px;
-
-                                    color: #FFFFFF;
-                                }
-
-                                .answer {
-                                    font-family: 'Inter';
-                                    font-style: normal;
-                                    font-weight: 900;
-                                    font-size: 16px;
-                                    line-height: 19px;
-
-                                    color: #FFFFFF;
-                                }
-                            }
-
-                            .svg {
-                                position: absolute;
-                                right: -11px;
-                                top: -11px;
-                            }
-                        }
-
-                        .add {
-                            justify-content: center;
-                            gap: 4px;
-                            position: relative;
-
-                            box-sizing: border-box;
-                            padding: 13px 30px;
-                            border: 1px dashed #FFFFFF;
-                            border-radius: 15px;
-
-                            background: #2F1969;
-
-                            .t1 {
-                                font-family: 'Inter';
-                                font-style: normal;
-                                font-weight: 900;
-                                font-size: 16px;
-                                line-height: 19px;
-
-                                color: #FFFFFF;
-                            }
-
-                            .t2 {
-                                font-family: 'Inter';
-                                font-style: normal;
-                                font-weight: 300;
-                                font-size: 12px;
-                                line-height: 15px;
-
-                                color: rgba(255, 255, 255, 0.3);
-                            }
-
-                            .svg {
-                                position: absolute;
-                                right: -11px;
-                                top: -11px;
-                            }
-                        }
-
-                        .items {
-                            position: relative;
-                            right: 20px;
-                            width: 100vw;
-                            background: rgba(255, 255, 255, 0.07);
-
-
-                            .item2 {
-                                display: grid;
-                                grid-template-columns: 1fr auto;
-                                gap: 10px;
-                                align-items: center;
-                                padding: 10px 20px;
-
-                                .title {
-                                    font-family: 'Inter';
-                                    font-style: normal;
-                                    font-weight: 400;
-                                    font-size: 14px;
-                                    line-height: 17px;
-                                    color: #FFFFFF;
-                                }
-
-                                .option {
-                                    font-family: 'Inter';
-                                    font-style: normal;
-                                    font-weight: 600;
-                                    font-size: 14px;
-                                    line-height: 17px;
-
-                                    color: #A143FF;
-                                }
-
-                                .input-value {
-                                    font-family: 'Inter';
-                                    font-style: normal;
-                                    font-weight: 500;
-                                    font-size: 12px;
-                                    line-height: 15px;
-
-                                    color: rgba(255, 255, 255, 0.4);
-                                }
-                            }
-                        }
-
-                        .t1 {
-                            /* 查看全部 */
+                        .item-list-item-t2 {
                             font-family: 'Inter';
                             font-style: normal;
                             font-weight: 600;
-                            font-size: 12px;
-                            line-height: 15px;
-
-                            color: #A729E2;
-
+                            font-size: 14px;
+                            line-height: 17px;
+                            color: #A143FF;
                         }
                     }
+
                 }
 
 
