@@ -73,6 +73,13 @@ button:active {
     flex-direction: column;
 }
 
+/** flex居中 */
+.flex-center {
+    display: flex; /* 激活 flexbox 布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+
 .text-overflow {
     /* 强制文本在同一行显示 */
     white-space: nowrap;
