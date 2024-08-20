@@ -14,7 +14,7 @@ declare namespace Quiz {
 		/** 关联试卷id */
 		paperId:number
 		/** 试卷题目集合 */
-		questions:Array<Quiz.Question>
+		questions:Array<Quiz.QuestionDTO>
 		/** 答题用户id */
 		responderUserId:number
 		/** 得分 */
@@ -120,7 +120,7 @@ declare namespace Quiz {
 		/** 唯一主键 */
 		paperId:number
 		/** 试卷题目集合 */
-		questions:Array<Quiz.Question>
+		questions:Array<Quiz.QuestionDTO>
 		/** 得分(自己回答这个试卷的信息) */
 		score:number
 		/** 选择下标集合,以@@分隔(自己回答这个试卷的信息) */
@@ -175,13 +175,32 @@ declare namespace Quiz {
 		/** 道具名称 */
 		propName:string
 	}
-	/** Question对象,题目表 */
-	interface Question {
+	/** QuestionDTO对象,题目表 */
+	interface QuestionDTO {
+		/** 类别id */
+		classId:number
+		/** 类别名称 */
+		className:string
 		/** 创建时间 */
 		createdAt:string
-		/** 选项 */
+		/** 选项,以@@分隔 */
 		options:string
-		/** 唯一主键 */
+		/** 题目id,唯一主键 */
+		questionId:number
+		/** 题目 */
+		title:string
+		/** 修改时间 */
+		updatedAt:string
+	}
+	/** Question对象,题目表 */
+	interface Question {
+		/** 类别id */
+		classId:number
+		/** 创建时间 */
+		createdAt:string
+		/** 选项,以@@分隔 */
+		options:string
+		/** 题目id,唯一主键 */
 		questionId:number
 		/** 题目 */
 		title:string
