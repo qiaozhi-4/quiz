@@ -29,10 +29,9 @@ public interface IPaperService extends IService<Paper> {
      * 试卷换题
      *
      * @param userId     用户id
-     * @param paperId    试卷id
-     * @param questionId 需要换掉的题目id
+     * @param pqId    试卷关联题目表id
      */
-    Question paperSwitchQuestion(Integer userId, Integer paperId, Integer questionId);
+    Question paperSwitchQuestion(Integer userId, Integer pqId);
 
     /**
      * 更新试卷

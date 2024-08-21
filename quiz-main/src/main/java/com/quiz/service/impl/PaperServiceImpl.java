@@ -62,16 +62,11 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     }
 
     @Override
-    public Question paperSwitchQuestion(Integer userId, Integer paperId, Integer questionId) {
+    public Question paperSwitchQuestion(Integer userId, Integer pqId ) {
         List<Question> questionList = questionMapper.selectRandomQuestionsByUserIdAndNumber(userId, 1);
-        paperQuestionsService.getOneOpt(new LambdaQueryWrapper<PaperQuestions>()
-                        .eq(PaperQuestions::getPaperId, paperId)
-                        .eq(PaperQuestions::getQuestionId, questionId))
-                .ifPresent(paperQuestions -> {
-                    Assert.isTrue(!questionList.isEmpty(), "没有更多题目了");
-                    paperQuestions.setQuestionId(questionList.get(0).getQuestionId());
-                    Assert.isTrue(paperQuestions.updateById(), "修改试卷题目失败");
-                });
+        Assert.isTrue(!questionList.isEmpty(), "没有更多题目了");
+        PaperQuestions paperQuestions = PaperQuestions.builder().pqId(pqId).questionId(questionList.get(0).getQuestionId()).build();
+        Assert.isTrue(paperQuestions.updateById(), "题目切换失败");
         return questionList.get(0);
     }
 

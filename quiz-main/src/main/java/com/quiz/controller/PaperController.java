@@ -39,9 +39,9 @@ public class PaperController {
 
     @PathPermission(PermissionEnum.USER_UPDATE)
     @ApiOperation("试卷换题")
-    @PutMapping("switch-question/{userId:\\d+}/{paperId:\\d+}/{questionId:\\d+}")
-    public Question paperSwitchQuestion(@PathVariable Integer userId, @PathVariable Integer paperId, @PathVariable Integer questionId) {
-        return paperService.paperSwitchQuestion(userId, paperId, questionId);
+    @PutMapping("switch-question/{userId:\\d+}/{pqId:\\d+}")
+    public Question paperSwitchQuestion(@PathVariable Integer userId, @PathVariable Integer pqId) {
+        return paperService.paperSwitchQuestion(userId, pqId);
     }
 
     @PathPermission(PermissionEnum.USER_UPDATE)

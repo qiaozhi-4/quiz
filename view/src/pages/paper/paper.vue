@@ -90,6 +90,7 @@ import { useStore } from "@/stores/store";
 import { getUser } from '@/utils/api/user';
 import { objectToPathParams } from '@/utils/service';
 import { gainProp, useProp } from '@/utils/api/prop';
+import { objCope } from '@/utils/utils';
 
 const store = useStore();
 /** 本页路径参数 */
@@ -101,7 +102,7 @@ type Option = AnyObject & {
 } | undefined;
 const refAlert = ref();
 /** 试卷信息 */
-const paper = ref<Quiz.Paper>({} as Quiz.Paper);
+const paper = ref<Quiz.PaperAndAnswerDTO>({} as Quiz.PaperAndAnswerDTO);
 /** 题目信息 */
 const questions = computed<Quiz.QuestionDTO[]>(() => paper.value?.questions);
 /** 当前题目下标 */
@@ -150,9 +151,9 @@ function useHintGem() {
 }
 /** 换一题 */
 function switchQuestion() {
-    paperSwitchQuestion(paper.value.paperId, questions.value[questionIndex.value].questionId, store.user.userId)
+    paperSwitchQuestion(paper.value.questions[questionIndex.value].pqId, store.user.userId)
         .then(res => {
-            paper.value.questions[questionIndex.value] = res.data as Quiz.QuestionDTO;
+            objCope(res.data, paper.value.questions[questionIndex.value]);
         });
 }
 
