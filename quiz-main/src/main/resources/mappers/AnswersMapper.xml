@@ -4,13 +4,14 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.quiz.entity.Answers">
-        <id column="answer_id" property="answerId"/>
-        <result column="paper_id" property="paperId"/>
-        <result column="responder_user_id" property="responderUserId"/>
-        <result column="selects" property="selects"/>
-        <result column="score" property="score"/>
-        <result column="created_at" property="createdAt"/>
+        <id column="answer_id" property="answerId" />
+        <result column="paper_id" property="paperId" />
+        <result column="responder_user_id" property="responderUserId" />
+        <result column="score" property="score" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
     </resultMap>
+
     <!-- Dto查询映射结果 -->
     <resultMap id="AnswersDtoResultMap" extends="BaseResultMap" type="com.quiz.dto.AnswersDTO">
         <collection property="questions" autoMapping="true" ofType="com.quiz.dto.QuestionDTO"/>

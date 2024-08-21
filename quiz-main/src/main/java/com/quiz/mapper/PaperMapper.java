@@ -13,7 +13,7 @@ import java.util.List;
  * </p>
  *
  * @author XGeorge
- * @since 2024-08-06
+ * @since 2024-08-21
  */
 public interface PaperMapper extends BaseMapper<Paper> {
     /**
