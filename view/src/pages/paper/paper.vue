@@ -7,7 +7,9 @@
             <view v-if="isAnswer" style="position: relative; margin-left: auto; margin-right: 25px;"
                 @click="useHintGem">
                 <template>
-                    <view class="corner-mark flex-center">{{ hintGem.number > 99 ? '99+' : hintGem.number }}</view>
+                    <q-svg v-if="hintGem.number < 1" class="corner-mark flex-center" icon="广告" size="11" />
+                    <view v-else class="corner-mark flex-center">{{ hintGem.number > 99 ? '99+' : hintGem.number }}
+                    </view>
                     <q-svg icon="提示宝石" size="45" />
                 </template v-else>
                 <template>
@@ -87,7 +89,7 @@ import { saveAnswers } from '@/utils/api/answers';
 import { useStore } from "@/stores/store";
 import { getUser } from '@/utils/api/user';
 import { objectToPathParams } from '@/utils/service';
-import { useProp } from '@/utils/api/prop';
+import { gainProp, useProp } from '@/utils/api/prop';
 
 const store = useStore();
 /** 本页路径参数 */
@@ -124,16 +126,27 @@ const hintGem = computed<Quiz.PropDTO>(() => store.getPropById(3) || {} as Quiz.
 const answerIndex = ref<number>(-1);
 /** 使用提示宝石 */
 function useHintGem() {
-    if (hintGem.value.number < 0) {
-        refAlert.value?.show({ msg: '宝石数量不足' });
-        return;
+    if (hintGem.value.number < 1) {
+        refAlert.value?.show({ msg: '假装你看完了视频' });
+        gainProp(1, hintGem.value.propId, store.user.userId).then(res => {
+            store.addPropNumberById(hintGem.value.propId, 1);
+            setTimeout(() => {
+                useProp(1, hintGem.value.propId, store.user.userId).then(res => {
+                    store.usePropNumberById(hintGem.value.propId);
+                    refAlert.value?.show({ msg: '已使用提示宝石', showTime: 1000 });
+                    answerIndex.value = answers.value[questionIndex.value];
+                    setTimeout(() => { answerIndex.value = -1; }, 2000);
+                }).catch(err => refAlert.value?.show({ msg: err.message }));
+            }, 2000);
+        });
+    } else {
+        useProp(1, hintGem.value.propId, store.user.userId).then(res => {
+            store.usePropNumberById(hintGem.value.propId);
+            refAlert.value?.show({ msg: '已使用提示宝石', showTime: 1000 });
+            answerIndex.value = answers.value[questionIndex.value];
+            setTimeout(() => { answerIndex.value = -1; }, 2000);
+        }).catch(err => refAlert.value?.show({ msg: err.message }));
     }
-    useProp(1, hintGem.value.propId, store.user.userId).then(res => {
-        store.usePropNumberById(hintGem.value.propId);
-        refAlert.value?.show({ msg: '已使用提示宝石', showTime: 1000 });
-        answerIndex.value = answers.value[questionIndex.value];
-        setTimeout(() => { answerIndex.value = -1; }, 2000);
-    });
 }
 /** 换一题 */
 function switchQuestion() {
