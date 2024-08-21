@@ -17,6 +17,13 @@
         <collection property="questions" autoMapping="true" ofType="com.quiz.dto.QuestionDTO"/>
     </resultMap>
 
+    <!-- Dto查询映射结果 -->
+    <resultMap id="PaperAndAnswerDTOResultMap" extends="BaseResultMap" type="com.quiz.dto.PaperAndAnswerDTO">
+        <collection property="questions" autoMapping="true" ofType="com.quiz.dto.QuestionDTO">
+            <result column="question_title" property="title"/>
+        </collection>
+    </resultMap>
+
     <select id="selectScoreByUserId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
         select sum(qa.score) as total_score
         from quiz.q_answer qa
