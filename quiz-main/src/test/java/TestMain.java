@@ -1,3 +1,6 @@
+import com.quiz.dto.PaperDTO;
+import com.quiz.entity.Paper;
+import com.quiz.utils.BeanUtils;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.AntPathMatcher;
@@ -41,5 +44,12 @@ public class TestMain {
         /* 格式化 */
         val format = localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         System.out.println("本周一的时间是：" + format);
+    }
+    @Test
+    public void beanUtils() {
+        Paper paper = Paper.builder().paperId(1).build();
+        PaperDTO paperDTO = BeanUtils.copyProperties(paper, PaperDTO.class);
+        Paper paper2 = BeanUtils.copyProperties(paperDTO, Paper.class);
+
     }
 }
