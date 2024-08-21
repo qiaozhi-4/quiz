@@ -58,7 +58,7 @@ export function uploadAvatar(avatarUrl: string) {
         success(res) {
             let data = JSON.parse(res.data) as Quiz.Result<Quiz.UserDto>;
             // console.log(222, "成功", data);
-            useStore().$patch(store=>{store.user.avatarUrl = data.data.avatarUrl});
+            useStore().$patch(store => { store.user.avatarUrl = data.data.avatarUrl; });
         },
         fail(e) {
             // console.log(222, "失败", e);
@@ -67,4 +67,18 @@ export function uploadAvatar(avatarUrl: string) {
             // console.log(333, e);
         },
     });
+}
+/**
+ * 拷贝对象
+ * @param source 源对象
+ * @param target 目标对象
+ */
+export function objCope(source: any, target: any) {
+    Object.keys(source).forEach(key => {
+        // 如果 target 对象也有相同的属性，则复制
+        if (target.hasOwnProperty(key)) {
+            target[key] = source[key];
+        }
+    });
+
 }
