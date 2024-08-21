@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author XGeorge
- * @since 2024-08-20
+ * @since 2024-08-21
  */
 @Getter
 @Setter
@@ -64,13 +64,13 @@ public class Paper extends Model<Paper> {
     @TableField("describe_")
     private String describe;
 
-    @ApiModelProperty("答案下标集合,以@@分隔")
-    @TableField("answers")
-    private String answers;
-
     @ApiModelProperty("创建时间")
     @TableField("created_at")
     private LocalDateTime createdAt;
+
+    @ApiModelProperty("修改时间")
+    @TableField("updated_at")
+    private LocalDateTime updatedAt;
 
 
     @Override

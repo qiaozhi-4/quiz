@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author XGeorge
- * @since 2024-08-20
+ * @since 2024-08-21
  */
 @Getter
 @Setter
@@ -43,9 +43,21 @@ public class PaperQuestions extends Model<PaperQuestions> {
     @TableField("paper_id")
     private Integer paperId;
 
+    @ApiModelProperty("答卷id")
+    @TableField("answers_id")
+    private Integer answersId;
+
     @ApiModelProperty("题目ID")
     @TableField("question_id")
     private Integer questionId;
+
+    @ApiModelProperty("出题人/答题人选择下标")
+    @TableField("select_index")
+    private Integer selectIndex;
+
+    @ApiModelProperty("出题人/答题人额外描述")
+    @TableField("extra_describe")
+    private String extraDescribe;
 
 
     @Override

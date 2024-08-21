@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author XGeorge
- * @since 2024-08-20
+ * @since 2024-08-21
  */
 @Getter
 @Setter
@@ -48,10 +48,6 @@ public class Answers extends Model<Answers> {
     @TableField("responder_user_id")
     private Integer responderUserId;
 
-    @ApiModelProperty("选择下标集合,以@@分隔")
-    @TableField("selects")
-    private String selects;
-
     @ApiModelProperty("得分")
     @TableField("score")
     private Integer score;
@@ -59,6 +55,10 @@ public class Answers extends Model<Answers> {
     @ApiModelProperty("创建时间")
     @TableField("created_at")
     private LocalDateTime createdAt;
+
+    @ApiModelProperty("修改时间")
+    @TableField("updated_at")
+    private LocalDateTime updatedAt;
 
 
     @Override
