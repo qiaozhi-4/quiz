@@ -54,7 +54,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
                 .map(question -> PaperQuestions.builder().paperId(paper.getPaperId()).questionId(question.getQuestionId()).build())
                 .collect(Collectors.toList());
         Assert.isTrue(paperQuestionsService.saveBatch(paperQuestionsList), "试卷与题目建立关联失败");
-        return this.baseMapper.selectPaperById(paper.getPaperId());
+        return this.baseMapper.selectPaperByPaperId(paper.getPaperId());
     }
 
     @Override
@@ -78,7 +78,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
 
     @Override
     public PaperDTO getPaper(Integer paperId) {
-        return this.baseMapper.selectPaperById(paperId);
+        return this.baseMapper.selectPaperByPaperId(paperId);
     }
 
     @Override

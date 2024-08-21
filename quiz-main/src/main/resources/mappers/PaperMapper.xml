@@ -21,7 +21,7 @@
         </collection>
     </resultMap>
 
-    <select id="selectPaperById" resultMap="PaperDtoResultMap" parameterType="java.lang.Integer">
+    <select id="selectPaperByPaperId" resultMap="PaperDtoResultMap" parameterType="java.lang.Integer">
         select qp.*, qq.*, qq.title as question_title, qc.class_name
         from quiz.q_paper qp
                  left join quiz.q_paper_questions qpq
@@ -46,10 +46,18 @@
         group by qp.paper_id, qq.question_id, qc.class_id
     </select>
     <select id="selectPaperAndAnswerInfoListByUserId" resultMap="PaperDtoResultMap">
-        select qp.*, count(qa.responder_user_id) as answers_total, qa2.answer_id, qa2.selects, qa2.score, qq.*, qq.title as question_title, qc.class_name
+        select qp.*,
+               count(qa.responder_user_id) as answers_total,
+               qa2.answer_id,
+               qa2.selects,
+               qa2.score,
+               qq.*,
+               qq.title                    as question_title,
+               qc.class_name
         from quiz.q_paper qp
                  left join quiz.q_answers qa on qp.paper_id = qa.paper_id
-                 left join quiz.q_answers qa2 on qp.paper_id = qa2.paper_id and qa2.responder_user_id = #{responderUserId}
+                 left join quiz.q_answers qa2
+                           on qp.paper_id = qa2.paper_id and qa2.responder_user_id = #{responderUserId}
                  left join quiz.q_paper_questions qpq on qpq.paper_id = qp.paper_id
                  left join quiz.q_question qq on qpq.question_id = qq.question_id
                  left join quiz.q_classes qc on qq.class_id = qc.class_id

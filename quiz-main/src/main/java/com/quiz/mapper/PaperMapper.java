@@ -21,7 +21,7 @@ public interface PaperMapper extends BaseMapper<Paper> {
      *
      * @param paperId 试卷id
      */
-    PaperDTO selectPaperById(Integer paperId);
+    PaperDTO selectPaperByPaperId(Integer paperId);
 
     /**
      * 根据用户id查询试卷列表

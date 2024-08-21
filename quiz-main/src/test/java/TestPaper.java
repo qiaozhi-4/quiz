@@ -29,7 +29,7 @@ public class TestPaper {
 
     @Test
     public void selectPaperById() {
-        final PaperDTO paperDto = paperMapper.selectPaperById(1);
+        final PaperDTO paperDto = paperMapper.selectPaperByPaperId(1);
         System.out.println(paperDto.toString());
     }
 
