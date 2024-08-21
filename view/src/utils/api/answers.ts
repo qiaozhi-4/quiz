@@ -32,7 +32,7 @@ export function getAnswers(answerId : number): Promise<Quiz.Result<Quiz.AnswersD
 	})
 }
 /** 保存答卷 */
-export function saveAnswers(answers : Quiz.Answers): Promise<Quiz.Result<Quiz.Answers>> {
+export function saveAnswers(answers : Quiz.PaperAndAnswersDTO): Promise<Quiz.Result<Quiz.PaperAndAnswersDTO>> {
 	return api.request({
 		url: `/answers/save`,
 		method: 'POST',

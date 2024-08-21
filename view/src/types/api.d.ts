@@ -22,21 +22,6 @@ declare namespace Quiz {
 		/** 选择下标集合,以@@分隔 */
 		selects:string
 	}
-	/** Answers对象,题目答卷 */
-	interface Answers {
-		/** 主键,答卷id */
-		answerId:number
-		/** 创建时间 */
-		createdAt:string
-		/** 关联试卷id */
-		paperId:number
-		/** 答题用户id */
-		responderUserId:number
-		/** 得分 */
-		score:number
-		/** 选择下标集合,以@@分隔 */
-		selects:string
-	}
 	/** DeviceDto对象,设备相关信息 */
 	interface DeviceDto {
 		/** 要添加到结果中的单位数量，可能是负数 */
@@ -99,6 +84,41 @@ declare namespace Quiz {
 	/** InputStream */
 	interface InputStream {
 	}
+	/** PaperAndAnswersDTO对象,包含试卷和答卷信息 */
+	interface PaperAndAnswersDTO {
+		/** 答卷id  */
+		answerId:number
+		/** 用户答题总数,被多少人做过 */
+		answersTotal:number
+		/** 封面url */
+		coverUrl:string
+		/** 出题用户头像 */
+		creatorUserAvatarUrl:string
+		/** 出题用户id */
+		creatorUserId:number
+		/** 出题用户昵称 */
+		creatorUserNickname:string
+		/** 描述 */
+		describe:string
+		/** 序号 */
+		order:number
+		/** 试卷id */
+		paperId:number
+		/** 试卷题目集合 */
+		questions:Array<Quiz.QuestionDTO>
+		/** 答题用户头像 */
+		responderUserAvatarUrl:string
+		/** 答题用户id */
+		responderUserId:number
+		/** 出答题用户昵称 */
+		responderUserNickname:string
+		/** 得分 */
+		score:number
+		/** 状态 */
+		state:number
+		/** 标题 */
+		title:string
+	}
 	/** PaperDto对象,试卷所有信息 */
 	interface PaperDto {
 		/** 答卷id(自己回答这个试卷的信息) */
@@ -132,8 +152,6 @@ declare namespace Quiz {
 	}
 	/** Paper对象,题目试卷 */
 	interface Paper {
-		/** 答案下标集合,以@@分隔 */
-		answers:string
 		/** 封面url */
 		coverUrl:string
 		/** 创建时间 */
@@ -150,6 +168,8 @@ declare namespace Quiz {
 		state:number
 		/** 标题 */
 		title:string
+		/** 修改时间 */
+		updatedAt:string
 	}
 	/** Path对象,路径表 */
 	interface Path {
@@ -177,16 +197,26 @@ declare namespace Quiz {
 	}
 	/** QuestionDTO对象,题目表 */
 	interface QuestionDTO {
+		/** 答案的描述 */
+		answersDescribe:string
+		/** 答案的下标 */
+		answersIndex:number
 		/** 类别id */
 		classId:number
 		/** 类别名称 */
 		className:string
 		/** 创建时间 */
 		createdAt:string
+		/** 试卷/答题和题目关联表主键 */
+		id:number
 		/** 选项,以@@分隔 */
 		options:string
-		/** 题目id,唯一主键 */
+		/** 主键,题目id */
 		questionId:number
+		/** 选择的描述 */
+		selectDescribe:string
+		/** 选择的下标 */
+		selectIndex:number
 		/** 题目 */
 		title:string
 		/** 修改时间 */
