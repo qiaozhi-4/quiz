@@ -70,7 +70,7 @@
                  left join quiz.q_classes qc on qq.class_id = qc.sub_class_id and qc.class_id = 1
         where qp.state != -1
           and qp.creator_user_id = #{userId}
-        group by qp.paper_id, qq.question_id, qc.id
+        group by qp.paper_id, qq.question_id, qc.id, qpq.pq_id
     </select>
     <select id="selectPaperAndAnswerInfoListByUserId" resultMap="PaperAndAnswerDTOResultMap">
         select qp.*,
