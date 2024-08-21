@@ -2,84 +2,82 @@ declare namespace Quiz {
 	/** AnswerDTO对象,题目答卷 */
 	interface AnswerDTO {
 		/** 唯一主键 */
-		answerId:number
+		answerId?: number
 		/** 创建时间 */
-		createdAt:string
+		createdAt?: string
 		/** 出题用户头像 */
-		creatorUserAvatarUrl:string
+		creatorUserAvatarUrl?: string
 		/** 出题用户id */
-		creatorUserId:number
+		creatorUserId?: number
 		/** 出题用户昵称 */
-		creatorUserNickname:string
+		creatorUserNickname?: string
 		/** 关联试卷id */
-		paperId:number
+		paperId?: number
 		/** 试卷题目集合 */
-		questions:Array<Quiz.QuestionDTO>
+		questions?: Array<Quiz.QuestionDTO>
 		/** 答题用户id */
-		responderUserId:number
+		responderUserId?: number
 		/** 得分 */
-		score:number
-		/** 选择下标集合,以@@分隔 */
-		selects:string
+		score?: number
 	}
 	/** DeviceDto对象,设备相关信息 */
 	interface DeviceDto {
 		/** 要添加到结果中的单位数量，可能是负数 */
-		amountToAdd:number
+		amountToAdd?: number
 		/** 要添加的时间单位，不为空 */
-		amountUnit:string
+		amountUnit?: string
 		/** 主键,安卓设备ID */
-		deviceId:string
+		deviceId?: string
 		/** 过期时间 */
-		endTime:string
+		endTime?: string
 		/** -1封禁,0试用,1vip,2svip,3max */
-		lv:number
+		lv?: number
 		/** 用户名 */
-		username:string
+		username?: string
 	}
 	/** Device对象,设备卡密信息 */
 	interface Device {
 		/** 主键,安卓设备ID */
-		deviceId:string
+		deviceId?: string
 		/** 过期时间 */
-		endTime:string
+		endTime?: string
 		/** -1封禁,0试用,1vip,2svip,3max */
-		lv:number
+		lv?: number
 		/** 用户名 */
-		username:string
+		username?: string
 	}
 	/** File */
 	interface File {
 		/**  */
-		absolute:any
+		absolute?: any
 		/**  */
-		absoluteFile:Quiz.File
+		absoluteFile?: Quiz.File
 		/**  */
-		absolutePath:string
+		absolutePath?: string
 		/**  */
-		canonicalFile:Quiz.File
+		canonicalFile?: Quiz.File
 		/**  */
-		canonicalPath:string
+		canonicalPath?: string
 		/**  */
-		directory:any
+		directory?: any
 		/**  */
-		file:any
+		file?: any
 		/**  */
-		freeSpace:number
+		freeSpace?: number
 		/**  */
-		hidden:any
+		hidden?: any
 		/**  */
-		name:string
+		name?: string
 		/**  */
-		parent:string
+		parent?: string
 		/**  */
-		parentFile:Quiz.File
+		parentFile?: Quiz.File
 		/**  */
-		path:string
+		path?: string
 		/**  */
-		totalSpace:number
+		totalSpace?: number
 		/**  */
-		usableSpace:number
+		usableSpace?: number
 	}
 	/** InputStream */
 	interface InputStream {
@@ -87,369 +85,348 @@ declare namespace Quiz {
 	/** PaperAndAnswerDTO对象,包含试卷和答卷信息 */
 	interface PaperAndAnswerDTO {
 		/** 答卷id  */
-		answerId:number
+		answerId?: number
 		/** 用户答题总数,被多少人做过 */
-		answerTotal:number
+		answerTotal?: number
 		/** 封面url */
-		coverUrl:string
-		/** 出题用户头像 */
-		creatorUserAvatarUrl:string
-		/** 出题用户id */
-		creatorUserId:number
-		/** 出题用户昵称 */
-		creatorUserNickname:string
-		/** 描述 */
-		describe:string
-		/** 序号 */
-		order:number
-		/** 试卷id */
-		paperId:number
-		/** 试卷题目集合 */
-		questions:Array<Quiz.QuestionDTO>
-		/** 答题用户头像 */
-		responderUserAvatarUrl:string
-		/** 答题用户id */
-		responderUserId:number
-		/** 出答题用户昵称 */
-		responderUserNickname:string
-		/** 得分 */
-		score:number
-		/** 状态 */
-		state:number
-		/** 标题 */
-		title:string
-	}
-	/** PaperDto对象,试卷所有信息 */
-	interface PaperDto {
-		/** 答案下标集合,以@@分隔 */
-		answer:string
-		/** 答卷id(自己回答这个试卷的信息) */
-		answerId:number
-		/** 用户答题总数,被多少人做过 */
-		answerTotal:number
-		/** 封面url */
-		coverUrl:string
+		coverUrl?: string
 		/** 创建时间 */
-		createdAt:string
+		createdAt?: string
+		/** 出题用户头像 */
+		creatorUserAvatarUrl?: string
 		/** 出题用户id */
-		creatorUserId:number
+		creatorUserId?: number
+		/** 出题用户昵称 */
+		creatorUserNickname?: string
 		/** 描述 */
-		describe:string
+		describe?: string
 		/** 序号 */
-		order:number
-		/** 唯一主键 */
-		paperId:number
+		order?: number
+		/** 试卷id */
+		paperId?: number
 		/** 试卷题目集合 */
-		questions:Array<Quiz.QuestionDTO>
-		/** 得分(自己回答这个试卷的信息) */
-		score:number
-		/** 选择下标集合,以@@分隔(自己回答这个试卷的信息) */
-		selects:string
+		questions?: Array<Quiz.QuestionDTO>
+		/** 答题用户头像 */
+		responderUserAvatarUrl?: string
+		/** 答题用户id */
+		responderUserId?: number
+		/** 出答题用户昵称 */
+		responderUserNickname?: string
+		/** 得分 */
+		score?: number
 		/** 状态 */
-		state:number
+		state?: number
 		/** 标题 */
-		title:string
+		title?: string
+		/** 修改时间 */
+		updatedAt?: string
 	}
 	/** Paper对象,题目试卷 */
 	interface Paper {
 		/** 封面url */
-		coverUrl:string
+		coverUrl?: string
 		/** 创建时间 */
-		createdAt:string
+		createdAt?: string
 		/** 出题用户id */
-		creatorUserId:number
+		creatorUserId?: number
 		/** 描述 */
-		describe:string
+		describe?: string
 		/** 序号 */
-		order:number
+		order?: number
 		/** 主键,试卷id */
-		paperId:number
+		paperId?: number
 		/** 状态 */
-		state:number
+		state?: number
 		/** 标题 */
-		title:string
+		title?: string
 		/** 修改时间 */
-		updatedAt:string
+		updatedAt?: string
 	}
 	/** Path对象,路径表 */
 	interface Path {
 		/** 路径描述。 */
-		describe:string
+		describe?: string
 		/** HTTP 方法,如 POST, GET */
-		httpMethod:string
+		httpMethod?: string
 		/** 主键，路径ID。 */
-		pathId:number
+		pathId?: number
 		/** 路径模式，如/api/users/**，/device/list/{current:d+}/{size:d+}。 */
-		pattern:string
+		pattern?: string
 		/** 路径权限名称 */
-		permissionName:string
+		permissionName?: string
 	}
 	/** PropDTO对象,道具表 */
 	interface PropDTO {
 		/** 道具数量 */
-		number:number
+		number?: number
 		/** 道具描述 */
-		propDescribe:string
+		propDescribe?: string
 		/** 道具id。 */
-		propId:number
+		propId?: number
 		/** 道具名称 */
-		propName:string
+		propName?: string
 	}
 	/** QuestionDTO对象,题目表 */
 	interface QuestionDTO {
-		/** 答案的描述 */
-		answerDescribe:string
-		/** 答案的下标 */
-		answerIndex:number
+		/** 答卷id */
+		answerId?: number
+		/** 答题人额外描述 */
+		aqExtraDescribe?: string
+		/** 主键 */
+		aqId?: number
+		/** 答题人选择下标 */
+		aqSelectIndex?: number
 		/** 类别id */
-		classId:number
+		classId?: number
 		/** 类别名称 */
-		className:string
+		className?: string
 		/** 创建时间 */
-		createdAt:string
-		/** 试卷/答题和题目关联表主键 */
-		id:number
+		createdAt?: string
 		/** 选项,以@@分隔 */
-		options:string
+		options?: string
+		/** 试卷ID */
+		paperId?: number
+		/** 出题人额外描述 */
+		pqExtraDescribe?: string
+		/** 主键 */
+		pqId?: number
+		/** 出题人选择下标 */
+		pqSelectIndex?: number
 		/** 主键,题目id */
-		questionId:number
-		/** 选择的描述 */
-		selectDescribe:string
-		/** 选择的下标 */
-		selectIndex:number
+		questionId?: number
 		/** 题目 */
-		title:string
+		title?: string
 		/** 修改时间 */
-		updatedAt:string
+		updatedAt?: string
 	}
 	/** Question对象,题目表 */
 	interface Question {
 		/** 类别id */
-		classId:number
+		classId?: number
 		/** 创建时间 */
-		createdAt:string
+		createdAt?: string
 		/** 选项,以@@分隔 */
-		options:string
+		options?: string
 		/** 主键,题目id */
-		questionId:number
+		questionId?: number
 		/** 题目 */
-		title:string
+		title?: string
 		/** 修改时间 */
-		updatedAt:string
+		updatedAt?: string
 	}
 	/** Resource */
 	interface Resource {
 		/**  */
-		description:string
+		description?: string
 		/**  */
-		file:Quiz.File
+		file?: Quiz.File
 		/**  */
-		filename:string
+		filename?: string
 		/**  */
-		inputStream:Quiz.InputStream
+		inputStream?: Quiz.InputStream
 		/**  */
-		open:any
+		open?: any
 		/**  */
-		readable:any
+		readable?: any
 		/**  */
-		uri:Quiz.URI
+		uri?: Quiz.URI
 		/**  */
-		url:Quiz.URL
+		url?: Quiz.URL
 	}
 	/** Result«object»,统一的响应体 */
 	interface Resultobject {
 		/** 状态码 */
-		code:number
+		code?: number
 		/** 数据 */
-		data:any
+		data?: any
 		/** 描述 */
-		message:string
+		message?: string
 	}
 	/** TaskDTO对象,任务数据 */
 	interface TaskDTO {
 		/** 奖励id */
-		awardId:number
+		awardId?: number
 		/** 奖励名称 */
-		awardName:string
+		awardName?: string
 		/** 奖励数量 */
-		awardNumber:number
+		awardNumber?: number
 		/** 任务条件名称描述 */
-		classDescribe:string
+		classDescribe?: string
 		/** 任务条件类别id */
-		classId:number
+		classId?: number
 		/** 任务条件类别名称 */
-		className:string
+		className?: string
 		/** 任务条件计数 */
-		conditionNumber:number
+		conditionNumber?: number
 		/** 创建时间 */
-		createdAt:string
+		createdAt?: string
 		/** 任务描述 */
-		describe:string
+		describe?: string
 		/** 任务完成计数 */
-		finishNumber:number
+		finishNumber?: number
 		/** 是否领取奖励 */
-		isReceiveAward:any
+		isReceiveAward?: any
 		/** 任务ID */
-		taskId:number
+		taskId?: number
 		/** 更新时间 */
-		updatedAt:string
+		updatedAt?: string
 	}
 	/** URI */
 	interface URI {
 		/**  */
-		absolute:any
+		absolute?: any
 		/**  */
-		authority:string
+		authority?: string
 		/**  */
-		fragment:string
+		fragment?: string
 		/**  */
-		host:string
+		host?: string
 		/**  */
-		opaque:any
+		opaque?: any
 		/**  */
-		path:string
+		path?: string
 		/**  */
-		port:number
+		port?: number
 		/**  */
-		query:string
+		query?: string
 		/**  */
-		rawAuthority:string
+		rawAuthority?: string
 		/**  */
-		rawFragment:string
+		rawFragment?: string
 		/**  */
-		rawPath:string
+		rawPath?: string
 		/**  */
-		rawQuery:string
+		rawQuery?: string
 		/**  */
-		rawSchemeSpecificPart:string
+		rawSchemeSpecificPart?: string
 		/**  */
-		rawUserInfo:string
+		rawUserInfo?: string
 		/**  */
-		scheme:string
+		scheme?: string
 		/**  */
-		schemeSpecificPart:string
+		schemeSpecificPart?: string
 		/**  */
-		userInfo:string
+		userInfo?: string
 	}
 	/** URL */
 	interface URL {
 		/**  */
-		authority:string
+		authority?: string
 		/**  */
-		content:any
+		content?: any
 		/**  */
-		defaultPort:number
+		defaultPort?: number
 		/**  */
-		file:string
+		file?: string
 		/**  */
-		host:string
+		host?: string
 		/**  */
-		path:string
+		path?: string
 		/**  */
-		port:number
+		port?: number
 		/**  */
-		protocol:string
+		protocol?: string
 		/**  */
-		query:string
+		query?: string
 		/**  */
-		ref:string
+		ref?: string
 		/**  */
-		userInfo:string
+		userInfo?: string
 	}
 	/** UseInfo对象,脚本使用信息 */
 	interface UseInfo {
 		/** 账号(游戏的) */
-		account:string
+		account?: string
 		/** 勇者id */
-		braveId:number
+		braveId?: number
 		/** 使用时间 */
-		dateTime:string
+		dateTime?: string
 		/** 调用的方法名称 */
-		functionName:string
+		functionName?: string
 		/** 密码(游戏的) */
-		password:string
+		password?: string
 		/** 玩家key */
-		playerKey:string
+		playerKey?: string
 		/** 玩家昵称 */
-		playerName:string
+		playerName?: string
 		/** 玩家角色id */
-		roleId:number
+		roleId?: number
 		/** 玩家角色名称 */
-		roleName:string
+		roleName?: string
 		/** 区服id */
-		serverId:number
+		serverId?: number
 		/** 区服名称 */
-		serverName:string
+		serverName?: string
 		/** 主键,使用功能记录id */
-		useId:number
+		useId?: number
 		/** 卡号 */
-		username:string
+		username?: string
 	}
 	/** UserDto对象,用户基本信息,添加权限列表 */
 	interface UserDto {
 		/** 答题计数(回答试卷数量,包括已删除) */
-		answerTotal:number
+		answerTotal?: number
 		/** 头像地址 */
-		avatarUrl:string
+		avatarUrl?: string
 		/** 创建时间 */
-		createdAt:string
+		createdAt?: string
 		/** 账号是否启用:0=正常,-1=禁用 */
-		enabled:number
+		enabled?: number
 		/** 密友计数(满分回答朋友一张试卷为密友,一个朋友只算一个) */
-		intimateFriendTotal:number
+		intimateFriendTotal?: number
 		/** 用户上次登录时间 */
-		lastLoginAt:string
+		lastLoginAt?: string
 		/** 邮箱 */
-		mail:string
+		mail?: string
 		/** 用户昵称 */
-		nickname:string
+		nickname?: string
 		/** 出题计数(生成试卷数量,包括已删除) */
-		paperTotal:number
+		paperTotal?: number
 		/** 用户权限集合 */
-		permissions:Array<string>
+		permissions?: Array<string>
 		/** 手机号 */
-		phone:string
+		phone?: string
 		/** 排行榜分数(这是相对与好友的,也就是回答好友全部试卷的总分,包括已删除) */
-		totalScore:number
+		totalScore?: number
 		/** 更新时间 */
-		updatedAt:string
+		updatedAt?: string
 		/** 主键，用户ID。 */
-		userId:number
+		userId?: number
 		/** 用户账号 */
-		username:string
+		username?: string
 	}
 	/** UserProp对象,用户关联道具表 */
 	interface UserProp {
 		/** 主键 */
-		id:number
+		id?: number
 		/** 道具数量 */
-		number:number
+		number?: number
 		/** 道具id */
-		propId:number
+		propId?: number
 		/** 用户id */
-		userId:number
+		userId?: number
 	}
 	/** User对象,用户信息表 */
 	interface User {
 		/** 头像地址 */
-		avatarUrl:string
+		avatarUrl?: string
 		/** 创建时间 */
-		createdAt:string
+		createdAt?: string
 		/** 账号是否启用:0=正常,-1=禁用 */
-		enabled:number
+		enabled?: number
 		/** 用户上次登录时间 */
-		lastLoginAt:string
+		lastLoginAt?: string
 		/** 邮箱 */
-		mail:string
+		mail?: string
 		/** 用户昵称 */
-		nickname:string
+		nickname?: string
 		/** 手机号 */
-		phone:string
+		phone?: string
 		/** 更新时间 */
-		updatedAt:string
+		updatedAt?: string
 		/** 主键，用户ID。 */
-		userId:number
+		userId?: number
 		/** 用户账号 */
-		username:string
+		username?: string
 	}
 }
