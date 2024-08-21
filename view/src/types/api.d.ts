@@ -1,6 +1,6 @@
 declare namespace Quiz {
-	/** AnswersDTO对象,题目答卷 */
-	interface AnswersDTO {
+	/** AnswerDTO对象,题目答卷 */
+	interface AnswerDTO {
 		/** 唯一主键 */
 		answerId:number
 		/** 创建时间 */
@@ -84,12 +84,12 @@ declare namespace Quiz {
 	/** InputStream */
 	interface InputStream {
 	}
-	/** PaperAndAnswersDTO对象,包含试卷和答卷信息 */
-	interface PaperAndAnswersDTO {
+	/** PaperAndAnswerDTO对象,包含试卷和答卷信息 */
+	interface PaperAndAnswerDTO {
 		/** 答卷id  */
 		answerId:number
 		/** 用户答题总数,被多少人做过 */
-		answersTotal:number
+		answerTotal:number
 		/** 封面url */
 		coverUrl:string
 		/** 出题用户头像 */
@@ -121,12 +121,12 @@ declare namespace Quiz {
 	}
 	/** PaperDto对象,试卷所有信息 */
 	interface PaperDto {
+		/** 答案下标集合,以@@分隔 */
+		answer:string
 		/** 答卷id(自己回答这个试卷的信息) */
 		answerId:number
-		/** 答案下标集合,以@@分隔 */
-		answers:string
 		/** 用户答题总数,被多少人做过 */
-		answersTotal:number
+		answerTotal:number
 		/** 封面url */
 		coverUrl:string
 		/** 创建时间 */
@@ -198,9 +198,9 @@ declare namespace Quiz {
 	/** QuestionDTO对象,题目表 */
 	interface QuestionDTO {
 		/** 答案的描述 */
-		answersDescribe:string
+		answerDescribe:string
 		/** 答案的下标 */
-		answersIndex:number
+		answerIndex:number
 		/** 类别id */
 		classId:number
 		/** 类别名称 */
@@ -388,7 +388,7 @@ declare namespace Quiz {
 	/** UserDto对象,用户基本信息,添加权限列表 */
 	interface UserDto {
 		/** 答题计数(回答试卷数量,包括已删除) */
-		answersTotal:number
+		answerTotal:number
 		/** 头像地址 */
 		avatarUrl:string
 		/** 创建时间 */
