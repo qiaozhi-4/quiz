@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -40,6 +41,10 @@ public class PaperAndAnswerDTO implements Serializable {
     private String title;
     @ApiModelProperty("描述")
     private String describe;
+    @ApiModelProperty("创建时间")
+    private LocalDateTime createdAt;
+    @ApiModelProperty("修改时间")
+    private LocalDateTime updatedAt;
 
 
     @ApiModelProperty("答卷id ")
