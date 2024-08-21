@@ -4,9 +4,9 @@ create table if not exists quiz.q_answers
         primary key,
     paper_id          int                                null comment '关联试卷id',
     responder_user_id int                                null comment '答题用户id',
-    selects           varchar(63)                        null comment '选择下标集合,以@@分隔',
     score             int                                null comment '得分',
-    created_at        datetime default CURRENT_TIMESTAMP null comment '创建时间'
+    created_at        datetime default CURRENT_TIMESTAMP null comment '创建时间',
+    updated_at        datetime                           null on update CURRENT_TIMESTAMP comment '修改时间'
 )
     comment '题目答卷';
 
@@ -50,8 +50,8 @@ create table if not exists quiz.q_paper
     cover_url       varchar(255)                       null comment '封面url',
     title           varchar(255)                       null comment '标题',
     describe_       varchar(511)                       null comment '描述',
-    answers         varchar(63)                        null comment '答案下标集合,以@@分隔',
-    created_at      datetime default CURRENT_TIMESTAMP null comment '创建时间'
+    created_at      datetime default CURRENT_TIMESTAMP null comment '创建时间',
+    updated_at      datetime                           null on update CURRENT_TIMESTAMP comment '修改时间'
 )
     comment '题目试卷';
 
@@ -78,18 +78,21 @@ create index question_id
 
 create table if not exists quiz.q_paper_questions
 (
-    id          int auto_increment comment '主键'
+    id             int auto_increment comment '主键'
         primary key,
-    paper_id    int null comment '试卷ID',
-    question_id int null comment '题目ID'
+    paper_id       int          null comment '试卷ID',
+    answers_id     int          null comment '答卷id',
+    question_id    int          null comment '题目ID',
+    select_index   int          null comment '出题人/答题人选择下标',
+    extra_describe varchar(255) null comment '出题人/答题人额外描述'
 )
-    comment '试卷关联题目';
+    comment '试卷/答题关联题目';
 
 create index paper_id
     on quiz.q_paper_questions (paper_id);
 
-create index paper_id_question_id
-    on quiz.q_paper_questions (paper_id, question_id);
+create index q_paper_questions_answers_id_index
+    on quiz.q_paper_questions (answers_id);
 
 create index question_id
     on quiz.q_paper_questions (question_id);
@@ -151,7 +154,7 @@ create table if not exists quiz.q_task
     award_id         int                                null comment '奖励id',
     award_number     int      default 1                 null comment '奖励数量',
     describe_        varchar(511)                       null comment '任务描述',
-    condition_type   int                                null comment '任务条件类型,1:做朋友的测试;2:朋友做我的测试',
+    class_id         int                                null comment '任务条件类别',
     condition_number int      default 1                 null comment '任务条件计数',
     created_at       datetime default CURRENT_TIMESTAMP null comment '创建时间',
     updated_at       datetime                           null comment '更新时间'
@@ -160,6 +163,9 @@ create table if not exists quiz.q_task
 
 create index award_id
     on quiz.q_task (award_id);
+
+create index q_task_class_id_index
+    on quiz.q_task (class_id);
 
 create table if not exists quiz.q_task_record
 (
