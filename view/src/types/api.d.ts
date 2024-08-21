@@ -24,7 +24,7 @@ declare namespace Quiz {
 	}
 	/** Answers对象,题目答卷 */
 	interface Answers {
-		/** 唯一主键 */
+		/** 主键,答卷id */
 		answerId:number
 		/** 创建时间 */
 		createdAt:string
@@ -43,7 +43,7 @@ declare namespace Quiz {
 		amountToAdd:number
 		/** 要添加的时间单位，不为空 */
 		amountUnit:string
-		/** 安卓设备ID */
+		/** 主键,安卓设备ID */
 		deviceId:string
 		/** 过期时间 */
 		endTime:string
@@ -54,7 +54,7 @@ declare namespace Quiz {
 	}
 	/** Device对象,设备卡密信息 */
 	interface Device {
-		/** 安卓设备ID */
+		/** 主键,安卓设备ID */
 		deviceId:string
 		/** 过期时间 */
 		endTime:string
@@ -144,7 +144,7 @@ declare namespace Quiz {
 		describe:string
 		/** 序号 */
 		order:number
-		/** 唯一主键 */
+		/** 主键,试卷id */
 		paperId:number
 		/** 状态 */
 		state:number
@@ -200,7 +200,7 @@ declare namespace Quiz {
 		createdAt:string
 		/** 选项,以@@分隔 */
 		options:string
-		/** 题目id,唯一主键 */
+		/** 主键,题目id */
 		questionId:number
 		/** 题目 */
 		title:string
@@ -346,7 +346,7 @@ declare namespace Quiz {
 		serverId:number
 		/** 区服名称 */
 		serverName:string
-		/** 唯一主键 */
+		/** 主键,使用功能记录id */
 		useId:number
 		/** 卡号 */
 		username:string
@@ -386,13 +386,13 @@ declare namespace Quiz {
 	}
 	/** UserProp对象,用户关联道具表 */
 	interface UserProp {
-		/** 主键，权限ID。 */
+		/** 主键 */
 		id:number
 		/** 道具数量 */
 		number:number
-		/** 道具id。 */
+		/** 道具id */
 		propId:number
-		/** 用户id。 */
+		/** 用户id */
 		userId:number
 	}
 	/** User对象,用户信息表 */
