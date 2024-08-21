@@ -50,7 +50,7 @@ public class PaperDTO implements Serializable {
     private String describe;
 
     @ApiModelProperty("答案下标集合,以@@分隔")
-    private String answers;
+    private String answer;
 
     @ApiModelProperty("创建时间")
     private LocalDateTime createdAt;
@@ -59,7 +59,7 @@ public class PaperDTO implements Serializable {
     private List<QuestionDTO> questions;
 
     @ApiModelProperty("用户答题总数,被多少人做过")
-    private Long answersTotal;
+    private Long answerTotal;
 
     @ApiModelProperty("答卷id(自己回答这个试卷的信息)")
     private Integer answerId;

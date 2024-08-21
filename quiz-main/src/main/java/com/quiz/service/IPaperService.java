@@ -1,7 +1,7 @@
 package com.quiz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.quiz.dto.PaperAndAnswersDTO;
+import com.quiz.dto.PaperAndAnswerDTO;
 import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Paper;
 import com.quiz.entity.Question;
@@ -89,5 +89,5 @@ public interface IPaperService extends IService<Paper> {
      * @param paperId         试卷 id
      * @param responderUserId 用户 id
      */
-    PaperAndAnswersDTO getPaperAndAnswerDTOByPaperIdAndUserId(Integer paperId, Integer responderUserId);
+    PaperAndAnswerDTO getPaperAndAnswerDTOByPaperIdAndUserId(Integer paperId, Integer responderUserId);
 }

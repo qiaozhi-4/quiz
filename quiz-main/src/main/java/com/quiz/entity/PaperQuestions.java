@@ -44,8 +44,8 @@ public class PaperQuestions extends Model<PaperQuestions> {
     private Integer paperId;
 
     @ApiModelProperty("答卷id")
-    @TableField("answers_id")
-    private Integer answersId;
+    @TableField("answer_id")
+    private Integer answerId;
 
     @ApiModelProperty("题目ID")
     @TableField("question_id")

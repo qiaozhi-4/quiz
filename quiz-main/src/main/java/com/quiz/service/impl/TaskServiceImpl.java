@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.quiz.dto.TaskDTO;
 import com.quiz.entity.Task;
 import com.quiz.entity.TaskRecord;
-import com.quiz.mapper.AnswersMapper;
+import com.quiz.mapper.AnswerMapper;
 import com.quiz.mapper.PaperMapper;
 import com.quiz.mapper.PropMapper;
 import com.quiz.mapper.TaskMapper;
@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class TaskServiceImpl extends ServiceImpl<TaskMapper, Task> implements ITaskService {
     private final PaperMapper paperMapper;
-    private final AnswersMapper answersMapper;
+    private final AnswerMapper answerMapper;
     private final PropMapper propMapper;
     private final ITaskRecordService taskRecordService;
     private final IUserPropService userPropService;

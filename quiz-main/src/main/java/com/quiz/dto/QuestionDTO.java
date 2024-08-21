@@ -46,11 +46,11 @@ public class QuestionDTO implements Serializable {
     @ApiModelProperty("类别名称")
     private String className;
     @ApiModelProperty("答案的下标")
-    private Integer answersIndex;
+    private Integer answerIndex;
     @ApiModelProperty("选择的下标")
     private Integer selectIndex;
     @ApiModelProperty("答案的描述")
-    private String answersDescribe;
+    private String answerDescribe;
     @ApiModelProperty("选择的描述")
     private String selectDescribe;
 }

@@ -2,7 +2,7 @@ package com.quiz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.quiz.dto.PaperAndAnswersDTO;
+import com.quiz.dto.PaperAndAnswerDTO;
 import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Paper;
 import com.quiz.entity.PaperQuestions;
@@ -38,7 +38,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     @Override
     public PaperDTO createPaper(Integer userId, Integer questionNumber) {
         List<PaperDTO> paperDTOs = this.baseMapper.selectPaperListByUserId(userId).stream()
-                .filter(paperDTO -> StringUtils.isBlank(paperDTO.getAnswers())).collect(Collectors.toList());
+                .filter(paperDTO -> StringUtils.isBlank(paperDTO.getAnswer())).collect(Collectors.toList());
         if (!paperDTOs.isEmpty()) {
             return paperDTOs.get(0);
         }
@@ -109,7 +109,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     }
 
     @Override
-    public PaperAndAnswersDTO getPaperAndAnswerDTOByPaperIdAndUserId(Integer paperId, Integer responderUserId) {
+    public PaperAndAnswerDTO getPaperAndAnswerDTOByPaperIdAndUserId(Integer paperId, Integer responderUserId) {
         return this.baseMapper.selectPaperAndAnswerDTOListByPaperIdAndUserId(paperId, responderUserId);
     }
 }

@@ -1,7 +1,7 @@
 package com.quiz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.quiz.dto.PaperAndAnswersDTO;
+import com.quiz.dto.PaperAndAnswerDTO;
 import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Paper;
 import org.apache.ibatis.annotations.Param;
@@ -45,5 +45,5 @@ public interface PaperMapper extends BaseMapper<Paper> {
      * @param paperId   试卷 id
      * @param responderUserId 用户 id
      */
-    PaperAndAnswersDTO selectPaperAndAnswerDTOListByPaperIdAndUserId(@Param("paperId") Integer paperId, @Param("responderUserId") Integer responderUserId);
+    PaperAndAnswerDTO selectPaperAndAnswerDTOListByPaperIdAndUserId(@Param("paperId") Integer paperId, @Param("responderUserId") Integer responderUserId);
 }

@@ -1,8 +1,8 @@
 package com.quiz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.quiz.dto.AnswersDTO;
-import com.quiz.entity.Answers;
+import com.quiz.dto.AnswerDTO;
+import com.quiz.entity.Answer;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @author XGeorge
  * @since 2024-08-21
  */
-public interface AnswersMapper extends BaseMapper<Answers> {
+public interface AnswerMapper extends BaseMapper<Answer> {
     /**
      * 获取用户总得分
      *
@@ -27,19 +27,19 @@ public interface AnswersMapper extends BaseMapper<Answers> {
      *
      * @param answerId 答卷id
      */
-    AnswersDTO selectAnswersById(Integer answerId);
+    AnswerDTO selectAnswerById(Integer answerId);
 
     /**
      * 根据用户id查询答卷列表
      *
      * @param userId 用户id
      */
-    List<AnswersDTO> selectAnswersListByUserId(Integer userId);
+    List<AnswerDTO> selectAnswerListByUserId(Integer userId);
 
     /**
      * 根据用户id查询徽章列表
      *
      * @param userId 用户id
      */
-    List<AnswersDTO> selectBadgeListByUserId(Integer userId);
+    List<AnswerDTO> selectBadgeListByUserId(Integer userId);
 }

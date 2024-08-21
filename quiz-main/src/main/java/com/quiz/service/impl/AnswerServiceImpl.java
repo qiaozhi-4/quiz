@@ -1,14 +1,14 @@
 package com.quiz.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.quiz.dto.AnswersDTO;
-import com.quiz.dto.PaperAndAnswersDTO;
+import com.quiz.dto.AnswerDTO;
+import com.quiz.dto.PaperAndAnswerDTO;
 import com.quiz.dto.QuestionDTO;
-import com.quiz.entity.Answers;
+import com.quiz.entity.Answer;
 import com.quiz.entity.PaperQuestions;
-import com.quiz.mapper.AnswersMapper;
+import com.quiz.mapper.AnswerMapper;
 import com.quiz.mapper.PaperMapper;
-import com.quiz.service.IAnswersService;
+import com.quiz.service.IAnswerService;
 import com.quiz.service.IPaperQuestionsService;
 import com.quiz.service.IUserPropService;
 import com.quiz.utils.Assert;
@@ -29,32 +29,32 @@ import java.util.stream.Collectors;
  */
 @Service
 @AllArgsConstructor
-public class AnswersServiceImpl extends ServiceImpl<AnswersMapper, Answers> implements IAnswersService {
+public class AnswerServiceImpl extends ServiceImpl<AnswerMapper, Answer> implements IAnswerService {
     private final IUserPropService userPropService;
     private final PaperMapper paperMapper;
     private final IPaperQuestionsService paperQuestionsService;
 
     @Override
-    public PaperAndAnswersDTO saveAnswers(PaperAndAnswersDTO paperAndAnswersDTO) {
-        Answers answers = BeanUtils.copyProperties(paperAndAnswersDTO, Answers.class);
+    public PaperAndAnswerDTO saveAnswer(PaperAndAnswerDTO paperAndAnswerDTO) {
+        Answer answer = BeanUtils.copyProperties(paperAndAnswerDTO, Answer.class);
         /* 计算分数 */
-        List<QuestionDTO> collect = paperAndAnswersDTO.getQuestions().stream()
-                .filter(e -> e.getAnswersIndex().equals(e.getSelectIndex())).collect(Collectors.toList());
-        answers.setScore(collect.size() / paperAndAnswersDTO.getQuestions().size() * 100);
-        Assert.isTrue(answers.insertOrUpdate(), "保存/更新答卷失败");
-        List<PaperQuestions> paperQuestionsList = paperAndAnswersDTO.getQuestions().stream().map(e ->
+        List<QuestionDTO> collect = paperAndAnswerDTO.getQuestions().stream()
+                .filter(e -> e.getAnswerIndex().equals(e.getSelectIndex())).collect(Collectors.toList());
+        answer.setScore(collect.size() / paperAndAnswerDTO.getQuestions().size() * 100);
+        Assert.isTrue(answer.insertOrUpdate(), "保存/更新答卷失败");
+        List<PaperQuestions> paperQuestionsList = paperAndAnswerDTO.getQuestions().stream().map(e ->
                 PaperQuestions.builder()
                         .id(e.getId())
-                        .answersId(answers.getAnswerId())
+                        .answerId(answer.getAnswerId())
                         .questionId(e.getQuestionId())
                         .selectIndex(e.getSelectIndex())
                         .extraDescribe(e.getSelectDescribe()).build()
         ).collect(Collectors.toList());
         Assert.isTrue(paperQuestionsService.saveOrUpdateBatch(paperQuestionsList), "保存/更新答卷作答信息失败");
         /* 更新成就总分 */
-        userPropService.gainProp(paperAndAnswersDTO.getResponderUserId(), 1, answers.getScore() - paperAndAnswersDTO.getScore());
-        paperAndAnswersDTO.setScore(answers.getScore());
-        return paperAndAnswersDTO;
+        userPropService.gainProp(paperAndAnswerDTO.getResponderUserId(), 1, answer.getScore() - paperAndAnswerDTO.getScore());
+        paperAndAnswerDTO.setScore(answer.getScore());
+        return paperAndAnswerDTO;
     }
 
     @Override
@@ -63,17 +63,17 @@ public class AnswersServiceImpl extends ServiceImpl<AnswersMapper, Answers> impl
     }
 
     @Override
-    public AnswersDTO getAnswersById(Integer answerId) {
-        return this.baseMapper.selectAnswersById(answerId);
+    public AnswerDTO getAnswerById(Integer answerId) {
+        return this.baseMapper.selectAnswerById(answerId);
     }
 
     @Override
-    public List<AnswersDTO> getAnswersListByUserId(Integer userId) {
-        return this.baseMapper.selectAnswersListByUserId(userId);
+    public List<AnswerDTO> getAnswerListByUserId(Integer userId) {
+        return this.baseMapper.selectAnswerListByUserId(userId);
     }
 
     @Override
-    public List<AnswersDTO> getBadgeListByUserId(Integer userId) {
+    public List<AnswerDTO> getBadgeListByUserId(Integer userId) {
         return this.baseMapper.selectBadgeListByUserId(userId);
     }
 }

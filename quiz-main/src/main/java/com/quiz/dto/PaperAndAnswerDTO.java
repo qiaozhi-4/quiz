@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * <p>
- * PaperAndAnswersDTO
+ * PaperAndAnswerDTO
  * </p>
  *
  * @author XGeorge
@@ -22,8 +22,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-@ApiModel(value = "PaperAndAnswersDTO对象", description = "包含试卷和答卷信息")
-public class PaperAndAnswersDTO implements Serializable {
+@ApiModel(value = "PaperAndAnswerDTO对象", description = "包含试卷和答卷信息")
+public class PaperAndAnswerDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("试卷id")
@@ -61,5 +61,5 @@ public class PaperAndAnswersDTO implements Serializable {
     @ApiModelProperty("试卷题目集合")
     private List<QuestionDTO> questions;
     @ApiModelProperty("用户答题总数,被多少人做过")
-    private Long answersTotal;
+    private Long answerTotal;
 }

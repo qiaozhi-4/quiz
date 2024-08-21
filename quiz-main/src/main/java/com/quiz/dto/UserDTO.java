@@ -78,7 +78,7 @@ public class UserDTO implements Serializable {
     private Long paperTotal;
 
     @ApiModelProperty("答题计数(回答试卷数量,包括已删除)")
-    private Long answersTotal;
+    private Long answerTotal;
 
     @ApiModelProperty("密友计数(满分回答朋友一张试卷为密友,一个朋友只算一个)")
     private Long intimateFriendTotal;

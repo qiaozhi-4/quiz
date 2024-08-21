@@ -1,4 +1,4 @@
-create table if not exists quiz.q_answers
+create table if not exists quiz.q_answer
 (
     answer_id         int auto_increment comment '主键,答卷id'
         primary key,
@@ -11,10 +11,29 @@ create table if not exists quiz.q_answers
     comment '题目答卷';
 
 create index paper_id
-    on quiz.q_answers (paper_id);
+    on quiz.q_answer (paper_id);
 
 create index user_id
-    on quiz.q_answers (responder_user_id);
+    on quiz.q_answer (responder_user_id);
+
+create table if not exists quiz.q_answer_questions
+(
+    aq_id             int auto_increment comment '主键'
+        primary key,
+    answers_id        int                                null comment '答卷id',
+    question_id       int                                null comment '题目ID',
+    aq_select_index   int                                null comment '答题人选择下标',
+    aq_extra_describe varchar(255)                       null comment '答题人额外描述',
+    created_at        datetime default CURRENT_TIMESTAMP null comment '创建时间',
+    updated_at        datetime                           null on update CURRENT_TIMESTAMP comment '修改时间'
+)
+    comment '答题关联题目';
+
+create index paper_id
+    on quiz.q_answer_questions (answers_id);
+
+create index question_id
+    on quiz.q_answer_questions (question_id);
 
 create table if not exists quiz.q_classes
 (
@@ -78,21 +97,19 @@ create index question_id
 
 create table if not exists quiz.q_paper_questions
 (
-    id             int auto_increment comment '主键'
+    pq_id             int auto_increment comment '试卷id'
         primary key,
-    paper_id       int          null comment '试卷ID',
-    answers_id     int          null comment '答卷id',
-    question_id    int          null comment '题目ID',
-    select_index   int          null comment '出题人/答题人选择下标',
-    extra_describe varchar(255) null comment '出题人/答题人额外描述'
+    paper_id          int                                null comment '试卷ID',
+    question_id       int                                null comment '题目ID',
+    pq_select_index   int                                null comment '出题人选择下标',
+    pq_extra_describe varchar(255)                       null comment '出题人额外描述',
+    created_at        datetime default CURRENT_TIMESTAMP null comment '创建时间',
+    updated_at        datetime                           null on update CURRENT_TIMESTAMP comment '修改时间'
 )
     comment '试卷/答题关联题目';
 
 create index paper_id
     on quiz.q_paper_questions (paper_id);
-
-create index q_paper_questions_answers_id_index
-    on quiz.q_paper_questions (answers_id);
 
 create index question_id
     on quiz.q_paper_questions (question_id);

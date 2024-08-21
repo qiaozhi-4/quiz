@@ -4,11 +4,11 @@ package com.quiz.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.quiz.annotation.PathPermission;
 import com.quiz.dto.UserDTO;
-import com.quiz.entity.Answers;
+import com.quiz.entity.Answer;
 import com.quiz.entity.Paper;
 import com.quiz.entity.User;
 import com.quiz.enumerate.PermissionEnum;
-import com.quiz.service.IAnswersService;
+import com.quiz.service.IAnswerService;
 import com.quiz.service.IPaperService;
 import com.quiz.service.IUserService;
 import io.swagger.annotations.Api;
@@ -38,7 +38,7 @@ import java.util.Map;
 public class UserController {
 
     private final IUserService userService;
-    private final IAnswersService answersService;
+    private final IAnswerService answerService;
     private final IPaperService paperService;
 
     @PathPermission(PermissionEnum.READ)
@@ -71,8 +71,8 @@ public class UserController {
         map.put("isMyPaper", paperService.getOneOpt(new LambdaQueryWrapper<Paper>()
                         .eq(Paper::getPaperId, paperId).eq(Paper::getCreatorUserId, userId))
                 .isPresent());
-        map.put("isRepeatAnswers", answersService.getOneOpt(new LambdaQueryWrapper<Answers>()
-                        .eq(Answers::getPaperId, paperId).eq(Answers::getResponderUserId, userId))
+        map.put("isRepeatAnswer", answerService.getOneOpt(new LambdaQueryWrapper<Answer>()
+                        .eq(Answer::getPaperId, paperId).eq(Answer::getResponderUserId, userId))
                 .isPresent());
         return map;
     }

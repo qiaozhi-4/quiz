@@ -1,9 +1,9 @@
 package com.quiz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.quiz.dto.AnswersDTO;
-import com.quiz.dto.PaperAndAnswersDTO;
-import com.quiz.entity.Answers;
+import com.quiz.dto.AnswerDTO;
+import com.quiz.dto.PaperAndAnswerDTO;
+import com.quiz.entity.Answer;
 
 import java.util.List;
 
@@ -15,13 +15,13 @@ import java.util.List;
  * @author XGeorge
  * @since 2024-08-08
  */
-public interface IAnswersService extends IService<Answers> {
+public interface IAnswerService extends IService<Answer> {
     /**
      * 保存答题记录
      *
-     * @param answers 答题记录
+     * @param answer 答题记录
      */
-    PaperAndAnswersDTO saveAnswers(PaperAndAnswersDTO answers);
+    PaperAndAnswerDTO saveAnswer(PaperAndAnswerDTO answer);
 
     /**
      * 获取用户总得分
@@ -35,19 +35,19 @@ public interface IAnswersService extends IService<Answers> {
      *
      * @param answerId 答卷id
      */
-    AnswersDTO getAnswersById(Integer answerId);
+    AnswerDTO getAnswerById(Integer answerId);
 
     /**
      * 根据用户id查询答卷列表
      *
      * @param userId 用户id
      */
-    List<AnswersDTO> getAnswersListByUserId(Integer userId);
+    List<AnswerDTO> getAnswerListByUserId(Integer userId);
 
     /**
      * 根据用户id查询徽章列表
      *
      * @param userId 用户id
      */
-    List<AnswersDTO> getBadgeListByUserId(Integer userId);
+    List<AnswerDTO> getBadgeListByUserId(Integer userId);
 }

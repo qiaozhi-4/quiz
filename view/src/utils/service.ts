@@ -141,7 +141,7 @@ const ajaxEnd = () => {
         uni.hideLoading();
 };
 /** 封装请求 */
-export const api = new Api("https://qzwdyz.top", "quiz");
-// export const api = new Api("http://localhost:1888", "");
+// export const api = new Api("https://qzwdyz.top", "quiz");
+export const api = new Api("http://localhost:1888", "");
 /** 服务器基础url */
 export const baseUrl = api.baseURL;

@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * <p>
- * AnswersDTO
+ * AnswerDTO
  * </p>
  *
  * @author XGeorge
@@ -23,8 +23,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-@ApiModel(value = "AnswersDTO对象", description = "题目答卷")
-public class AnswersDTO implements Serializable {
+@ApiModel(value = "AnswerDTO对象", description = "题目答卷")
+public class AnswerDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

@@ -2,7 +2,7 @@ package com.quiz.controller;
 
 
 import com.quiz.annotation.PathPermission;
-import com.quiz.dto.PaperAndAnswersDTO;
+import com.quiz.dto.PaperAndAnswerDTO;
 import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Paper;
 import com.quiz.entity.Question;
@@ -91,7 +91,7 @@ public class PaperController {
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("通过试卷ID,获取试卷详情,以及用户回答信息")
     @GetMapping("get/{paperId:\\d+}/{responderUserId:\\d+}")
-    public PaperAndAnswersDTO getPaperAndAnswerDTO(@PathVariable Integer paperId, @PathVariable Integer responderUserId) {
+    public PaperAndAnswerDTO getPaperAndAnswerDTO(@PathVariable Integer paperId, @PathVariable Integer responderUserId) {
         return paperService.getPaperAndAnswerDTOByPaperIdAndUserId(paperId, responderUserId);
     }
 
