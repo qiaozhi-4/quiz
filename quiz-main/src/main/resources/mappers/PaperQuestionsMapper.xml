@@ -6,7 +6,10 @@
     <resultMap id="BaseResultMap" type="com.quiz.entity.PaperQuestions">
         <id column="id" property="id" />
         <result column="paper_id" property="paperId" />
+        <result column="answers_id" property="answersId" />
         <result column="question_id" property="questionId" />
+        <result column="select_index" property="selectIndex" />
+        <result column="extra_describe" property="extraDescribe" />
     </resultMap>
 
 </mapper>
