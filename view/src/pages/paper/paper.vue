@@ -94,7 +94,7 @@ const store = useStore();
 type Option = AnyObject & {
     /** 出题人id(答题才有) */
     userId?: number;
-    /** 试卷id(答题才有) */
+    /** 试卷id(答题才有,继续出题也可能有) */
     paperId?: number;
 } | undefined;
 const refAlert = ref();
@@ -175,10 +175,10 @@ function onButtonClick(index: number) {
 onLoad((option: Option) => {
     if (option?.userId && option?.paperId) {
         isAnswer.value = true;
-        getPaperAndAnswerInfo(option.paperId, store.user.userId).then(res => {
-            paper.value = res.data;
-        });
+        getPaperAndAnswerInfo(option.paperId, store.user.userId).then(res => paper.value = res.data);
         getUser(option.userId).then(res => friend.value = res.data);
+    } else if (option?.paperId) {
+        getPaperAndAnswerInfo(option.paperId, store.user.userId).then(res => paper.value = res.data);
     } else {
         createPaper(10, store.user.userId).then((res => paper.value = res.data));
     }

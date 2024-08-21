@@ -145,10 +145,15 @@
                                                 </reference>
                                             </q-bubble>
                                         </view>
-                                        <button class="button"
-                                            @click="onParticulars(paper?.paperId, userInfo.nickname)">查看详情</button>
-                                        <button :data-paperId="paper?.paperId" class="button"
-                                            open-type="share">分享给朋友</button>
+                                        <template v-if="paper.answers">
+                                            <button class="button"
+                                                @click="onParticulars(paper?.paperId, userInfo.nickname)">查看详情</button>
+                                            <button :data-paperId="paper?.paperId" class="button"
+                                                open-type="share">分享给朋友</button>
+                                        </template>
+                                        <template v-else>
+                                            <button class="button" @click="goOnQuestion(paper?.paperId)">继续出题</button>
+                                        </template>
                                     </view>
                                 </view>
                             </template>
@@ -350,6 +355,12 @@ function onRemorPafer(paperId: number, index: number) {
 function onParticulars(paperId: number, nickname: string) {
     uni.navigateTo({
         url: `/pages/paper-generalize/paper-generalize` + objectToPathParams({ paperId: paperId, nickname: nickname })
+    });
+}
+/** 继续出题 */
+function goOnQuestion(paperId: number) {
+    uni.reLaunch({
+        url: `/pages/paper/paper` + objectToPathParams({ paperId: paperId })
     });
 }
 /** 从朋友题库开始答题 */
