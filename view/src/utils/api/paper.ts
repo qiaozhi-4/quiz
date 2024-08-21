@@ -74,14 +74,6 @@ export function removePaper(paperId : number): Promise<Quiz.Result<any>> {
 		},
 	})
 }
-/** 添加试卷 */
-export function savePaper(paperDto : Quiz.PaperDto): Promise<Quiz.Result<Quiz.PaperDto>> {
-	return api.request({
-		url: `/paper/save`,
-		method: 'POST',
-		data: paperDto,
-	})
-}
 /** 试卷换题 */
 export function paperSwitchQuestion(paperId : number, questionId : number, userId : number): Promise<Quiz.Result<Quiz.Question>> {
 	return api.request({

@@ -18,13 +18,6 @@ import java.util.List;
 public interface IPaperService extends IService<Paper> {
 
     /**
-     * 添加试卷
-     *
-     * @param paperDto 试卷信息
-     */
-    PaperDTO savePaper(PaperDTO paperDto);
-
-    /**
      * 创建试卷
      *
      * @param userId         用户id

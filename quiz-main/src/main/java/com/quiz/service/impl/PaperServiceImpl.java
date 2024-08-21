@@ -11,7 +11,6 @@ import com.quiz.mapper.QuestionMapper;
 import com.quiz.service.IPaperQuestionsService;
 import com.quiz.service.IPaperService;
 import com.quiz.utils.Assert;
-import com.quiz.utils.BeanUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.stereotype.Service;
@@ -33,30 +32,6 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
 
     private final IPaperQuestionsService paperQuestionsService;
     private final QuestionMapper questionMapper;
-
-    @Override
-    public PaperDTO savePaper(PaperDTO paperDto) {
-        // 创建试卷
-        Paper paper = BeanUtils.copyProperties(paperDto, Paper.class);
-
-        // 如果id已经存在,说明是更新
-        if (paperDto.getPaperId() == null) {
-            // 获取当前用户的试卷列表的最大序号
-            val lastPaper = this.getOneOpt(new LambdaQueryWrapper<Paper>().eq(Paper::getCreatorUserId, paperDto.getCreatorUserId())
-                    .orderByDesc(Paper::getOrder).last("LIMIT 1"));
-            // 设置试卷的序号
-            paper.setOrder(lastPaper.map(value -> value.getOrder() + 1).orElse(1));
-            Assert.isTrue(paper.insert(), "试卷插入失败");
-            paperDto.setPaperId(paper.getPaperId());
-            val paperQuestionsList = paperDto.getQuestions().stream()
-                    .map(question -> PaperQuestions.builder().paperId(paper.getPaperId()).questionId(question.getQuestionId()).build())
-                    .collect(Collectors.toList());
-            Assert.isTrue(paperQuestionsService.saveBatch(paperQuestionsList), "试卷插入失败");
-        } else {
-            Assert.isTrue(paper.updateById(), "试卷更新失败");
-        }
-        return paperDto;
-    }
 
     @Override
     public PaperDTO createPaper(Integer userId, Integer questionNumber) {

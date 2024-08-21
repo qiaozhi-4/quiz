@@ -82,7 +82,7 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
-import { createPaper, getPaperAndAnswerInfo, paperSwitchQuestion, savePaper, updatePaper } from '@/utils/api/paper';
+import { createPaper, getPaperAndAnswerInfo, paperSwitchQuestion, updatePaper } from '@/utils/api/paper';
 import { saveAnswers } from '@/utils/api/answers';
 import { useStore } from "@/stores/store";
 import { getUser } from '@/utils/api/user';

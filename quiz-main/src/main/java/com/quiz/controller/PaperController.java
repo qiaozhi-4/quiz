@@ -31,13 +31,6 @@ public class PaperController {
     private final IPaperService paperService;
 
     @PathPermission(PermissionEnum.USER_CREATE)
-    @ApiOperation("添加试卷")
-    @PostMapping("save")
-    public PaperDTO savePaper(@RequestBody PaperDTO paperDto) {
-        return paperService.savePaper(paperDto);
-    }
-
-    @PathPermission(PermissionEnum.USER_CREATE)
     @ApiOperation("创建试卷")
     @GetMapping("createt/{userId:\\d+}/{questionNumber:\\d+}")
     public PaperDTO createPaper(@PathVariable Integer userId, @PathVariable Integer questionNumber) {
