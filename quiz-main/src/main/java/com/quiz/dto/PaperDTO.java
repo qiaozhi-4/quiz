@@ -49,9 +49,6 @@ public class PaperDTO implements Serializable {
     @ApiModelProperty("描述")
     private String describe;
 
-    @ApiModelProperty("答案下标集合,以@@分隔")
-    private String answer;
-
     @ApiModelProperty("创建时间")
     private LocalDateTime createdAt;
 
@@ -63,9 +60,6 @@ public class PaperDTO implements Serializable {
 
     @ApiModelProperty("答卷id(自己回答这个试卷的信息)")
     private Integer answerId;
-
-    @ApiModelProperty("选择下标集合,以@@分隔(自己回答这个试卷的信息)")
-    private String selects;
 
     @ApiModelProperty("得分(自己回答这个试卷的信息)")
     private Integer score;

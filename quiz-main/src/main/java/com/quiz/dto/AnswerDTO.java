@@ -37,9 +37,6 @@ public class AnswerDTO implements Serializable {
     @ApiModelProperty("答题用户id")
     private Integer responderUserId;
 
-    @ApiModelProperty("选择下标集合,以@@分隔")
-    private String selects;
-
     @ApiModelProperty("得分")
     private Integer score;
 
