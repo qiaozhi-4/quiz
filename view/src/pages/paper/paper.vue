@@ -1,7 +1,13 @@
 <template>
+    <!-- 提示消息 -->
+    <q-alert ref="refAlert"></q-alert>
     <view class="page">
         <q-nav-bar title="Quiz" fixed />
         <view class="main flex-column">
+            <view v-if="isAnswer" style="position: relative; margin-left: auto; margin-right: 25px;" @click="useHintGem">
+                <view class="corner-mark flex-center">{{ hintGem.number > 99 ? '99+' : hintGem.number }}</view>
+                <q-svg icon="提示宝石" size="45" />
+            </view>
             <q-avatar class="avatar" :src="userInfo.avatarUrl" size="62" borderWidth="3"></q-avatar>
             <view class="statistics-text">
                 {{ `Question ${questionIndex + 1}/${questions?.length}` }}
@@ -14,8 +20,9 @@
                     <swiper-item class="swiper-item flex-column" v-for="(question, index) in questions" :key="index">
                         <view class="title">{{ question?.title }}</view>
                         <view class="options flex-column">
-                            <button class="option-button" v-for="(option, index) in question?.options.split('@@')"
-                                :key="index" @click="onButtonClick(index)">{{ option }}</button>
+                            <button class="option-button" :class="{ hint: i == answerIndex }"
+                                v-for="(option, i) in options[index]" :key="i" @click="onButtonClick(i)">{{
+                                    option }}</button>
                         </view>
                     </swiper-item>
                 </swiper>
@@ -74,6 +81,7 @@ import { useStore } from "@/stores/store";
 import { getRandomQuestions } from '@/utils/api/question';
 import { getUser } from '@/utils/api/user';
 import { objectToPathParams } from '@/utils/service';
+import { useProp } from '@/utils/api/prop';
 
 const store = useStore();
 /** 本页路径参数 */
@@ -83,10 +91,13 @@ type Option = AnyObject & {
     /** 试卷id(答题才有) */
     paperId?: number;
 } | undefined;
+const refAlert = ref();
 /** 试卷信息 */
 const paper = ref<Quiz.PaperDto>({} as Quiz.PaperDto);
 /** 题目信息 */
 const questions = ref<Quiz.Question[]>(new Array(10));
+/** 当前题目下标 */
+const questionIndex = ref<number>(0);
 /** 答案下标数组 */
 const answers = computed<number[]>(() => paper.value?.answers.split('@@').map(Number) || []);
 /** 题目选项 */
@@ -101,6 +112,23 @@ const userInfo = computed<Quiz.UserDto>(() => isAnswer.value ? friend.value : st
 const selects = ref<number[]>(new Array(10).fill(-1));
 /** 输入框的值 */
 const inputValues = ref<string[]>(new Array(10));
+/** 提示宝石 */
+const hintGem = computed<Quiz.PropDTO>(() => store.getPropById(3) || {} as Quiz.PropDTO);
+/** 正确答案下表 */
+const answerIndex = ref<number>(-1);
+/** 使用提示宝石 */
+function useHintGem() {
+    if (hintGem.value.number < 0) {
+        refAlert.value?.show({ msg: '宝石数量不足' });
+        return;
+    }
+    useProp(1, hintGem.value.propId, store.user.userId).then(res => {
+        store.usePropNumberById(hintGem.value.propId);
+        refAlert.value?.show({ msg: '已使用提示宝石', showTime: 1000 });
+        answerIndex.value = answers.value[questionIndex.value];
+        setTimeout(() => { answerIndex.value = -1; }, 2000);
+    });
+}
 
 /** 点击选项 */
 function onButtonClick(index: number) {
@@ -148,8 +176,6 @@ onLoad((option: Option) => {
 
 /** 输入框高度 */
 const style = ref();
-/** 当前题目下标 */
-const questionIndex = ref<number>(0);
 /** 当前活动弹框 */
 const activityPopup = ref<string>("");
 /** 弹出层ref */
@@ -201,6 +227,32 @@ function onClickPopupQuestion(index: number) {
         align-items: center;
         // padding: 0 15px;
         height: 100%;
+
+        .corner-mark {
+            padding: 0, 6px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            // transform: translate(30%, -30%);
+            height: 20px;
+            min-width: 20px;
+
+            // left: 34.88px;
+            // top: -7px;
+
+            border-radius: 50%;
+
+            font-family: 'Manrope';
+            font-style: normal;
+            font-weight: 800;
+            font-size: 16px;
+            line-height: 22px;
+
+            background-color: #FFFFFF;
+
+            color: #A143FF;
+
+        }
 
         .avatar {
             margin-top: 40px;
@@ -268,6 +320,15 @@ function onClickPopupQuestion(index: number) {
                         padding: 20px 0;
                         overflow: auto;
                         gap: 10px;
+
+                        // 提示
+                        .hint {
+                            box-sizing: border-box;
+                            background: linear-gradient(90deg, #BE53FF 0%, #7756EC 100%);
+                            border: 3px solid #FFFFFF;
+                            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.25);
+                            border-radius: 30px;
+                        }
 
                         .option-button {
                             background: rgba(255, 255, 255, 0.3);
