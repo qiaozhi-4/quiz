@@ -23,17 +23,17 @@
                         </swiper-item>
                     </template>
                 </swiper>
-                <view style="position: relative;">
-                    <q-indicator-position :current="currentIndex" :amount="item?.badges.length" />
-                </view>
             </template>
+            <view style="position: relative;" v-if="activateBadge in badgeData">
+                <q-indicator-position :current="currentIndex" :amount="badgeData[activateBadge].badges.length" />
+            </view>
             <text class="t1">更多奖章🎖️</text>
             <view class="list">
                 <template v-for="(item, index) in badgeData" :key="index">
                     <view class="item flex-column" v-if="item?.badges.length > 0" @click="onBadge(index)">
                         <q-image :src="'/static/img/' + item?.badgeName + '.png'" width="90" height="90"></q-image>
                         <text class="text">{{ item?.badges.length }}枚</text>
-                        <text class="text">{{ item?.badges[0].creatorUserNickname }}徽章</text>
+                        <text class="text">{{ item?.badgeName }}徽章</text>
                     </view>
                     <view class="item flex-column" v-else @click="onBadge(index)">
                         <text class="unknown">?</text>
