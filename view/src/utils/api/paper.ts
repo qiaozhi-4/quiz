@@ -2,7 +2,7 @@ import { api } from "../service"
 /** 题目试卷 前端控制器 */
 
 /** 创建试卷 */
-export function createPaper(questionNumber : number, userId : number): Promise<Quiz.Result<Quiz.PaperDto>> {
+export function createPaper(questionNumber : number, userId : number): Promise<Quiz.Result<Quiz.PaperAndAnswerDTO>> {
 	return api.request({
 		url: `/paper/createt/{userId}/{questionNumber}`,
 		method: 'GET',
@@ -13,7 +13,7 @@ export function createPaper(questionNumber : number, userId : number): Promise<Q
 	})
 }
 /** 查询用户a试卷列表,以及用户b的回答信息 */
-export function getPaperAndAnswerInfoList(creatorUserId : number, responderUserId : number): Promise<Quiz.Result<Array<Quiz.PaperDto>>> {
+export function getPaperAndAnswerInfoList(creatorUserId : number, responderUserId : number): Promise<Quiz.Result<Array<Quiz.PaperAndAnswerDTO>>> {
 	return api.request({
 		url: `/paper/get-list/{creatorUserId}/{responderUserId}`,
 		method: 'GET',
@@ -24,7 +24,7 @@ export function getPaperAndAnswerInfoList(creatorUserId : number, responderUserI
 	})
 }
 /** 获取试卷列表 */
-export function getPaperList(userId : number): Promise<Quiz.Result<Array<Quiz.PaperDto>>> {
+export function getPaperList(userId : number): Promise<Quiz.Result<Array<Quiz.PaperAndAnswerDTO>>> {
 	return api.request({
 		url: `/paper/get-list/{userId}`,
 		method: 'GET',
@@ -44,7 +44,7 @@ export function getPaperTotal(userId : number): Promise<Quiz.Result<number>> {
 	})
 }
 /** 通过试卷ID,获取试卷详情 */
-export function getPaper(paperId : number): Promise<Quiz.Result<Quiz.PaperDto>> {
+export function getPaper(paperId : number): Promise<Quiz.Result<Quiz.PaperAndAnswerDTO>> {
 	return api.request({
 		url: `/paper/get/{paperId}`,
 		method: 'GET',
@@ -75,13 +75,12 @@ export function removePaper(paperId : number): Promise<Quiz.Result<any>> {
 	})
 }
 /** 试卷换题 */
-export function paperSwitchQuestion(paperId : number, questionId : number, userId : number): Promise<Quiz.Result<Quiz.Question>> {
+export function paperSwitchQuestion(pqId : number, userId : number): Promise<Quiz.Result<Quiz.Question>> {
 	return api.request({
-		url: `/paper/switch-question/{userId}/{paperId}/{questionId}`,
+		url: `/paper/switch-question/{userId}/{pqId}`,
 		method: 'PUT',
 		path: {
-			paperId: paperId,
-			questionId: questionId,
+			pqId: pqId,
 			userId: userId,
 		},
 	})
