@@ -14,7 +14,9 @@
 
     <!-- Dto查询映射结果 -->
     <resultMap id="AnswerDtoResultMap" extends="BaseResultMap" type="com.quiz.dto.AnswerDTO">
-        <collection property="questions" autoMapping="true" ofType="com.quiz.dto.QuestionDTO"/>
+        <collection property="questions" autoMapping="true" ofType="com.quiz.dto.QuestionDTO">
+            <result column="question_title" property="title"/>
+        </collection>
     </resultMap>
 
     <!-- Dto查询映射结果 -->
