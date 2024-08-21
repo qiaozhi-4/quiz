@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
- * 试卷关联题目 Mapper 接口
+ * 试卷/答题关联题目 Mapper 接口
  * </p>
  *
  * @author XGeorge
