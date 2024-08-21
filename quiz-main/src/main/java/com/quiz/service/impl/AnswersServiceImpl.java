@@ -1,21 +1,23 @@
 package com.quiz.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.quiz.constant.Constants;
 import com.quiz.dto.AnswersDTO;
+import com.quiz.dto.PaperAndAnswersDTO;
+import com.quiz.dto.QuestionDTO;
 import com.quiz.entity.Answers;
-import com.quiz.entity.Paper;
+import com.quiz.entity.PaperQuestions;
 import com.quiz.mapper.AnswersMapper;
 import com.quiz.mapper.PaperMapper;
 import com.quiz.service.IAnswersService;
+import com.quiz.service.IPaperQuestionsService;
 import com.quiz.service.IUserPropService;
 import com.quiz.utils.Assert;
+import com.quiz.utils.BeanUtils;
 import lombok.AllArgsConstructor;
-import lombok.val;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -30,34 +32,29 @@ import java.util.List;
 public class AnswersServiceImpl extends ServiceImpl<AnswersMapper, Answers> implements IAnswersService {
     private final IUserPropService userPropService;
     private final PaperMapper paperMapper;
+    private final IPaperQuestionsService paperQuestionsService;
 
     @Override
-    public Answers saveAnswers(Answers answers) {
-        Paper paper = paperMapper.selectById(answers.getPaperId());
-        Assert.isTrue(!paper.getCreatorUserId().equals(answers.getResponderUserId()), "不能回答自己出的问题");
+    public PaperAndAnswersDTO saveAnswers(PaperAndAnswersDTO paperAndAnswersDTO) {
+        Answers answers = BeanUtils.copyProperties(paperAndAnswersDTO, Answers.class);
         /* 计算分数 */
-        val ans = paper.getAnswers().split(Constants.SPACE_MARK);
-        val sel = answers.getSelects().split(Constants.SPACE_MARK);
-        Assert.isTrue(ans.length == sel.length, "答案数量不匹配");
-        answers.setScore(0);
-        for (int i = 0; i < ans.length; i++) {
-            if (ans[i].equals(sel[i])) {
-                answers.setScore(answers.getScore() + 10);
-            }
-        }
-        /* 先查询该用户是否做过这个试卷 */
-        this.getOneOpt(new LambdaQueryWrapper<Answers>()
-                        .eq(Answers::getResponderUserId, answers.getResponderUserId())
-                        .eq(Answers::getPaperId, answers.getPaperId()))
-                .ifPresent(value -> {
-                    answers.setAnswerId(value.getAnswerId());
-                    /* 这里扣除复活宝石 */
-                    userPropService.useProp(answers.getResponderUserId(), 2, 1);
-                });
-        Assert.isTrue(answers.insertOrUpdate(), "保存答卷失败");
-        /* 统计成就分数 */
-        userPropService.setProp(answers.getResponderUserId(), 1, this.baseMapper.selectScoreByUserId(answers.getResponderUserId()));
-        return answers;
+        List<QuestionDTO> collect = paperAndAnswersDTO.getQuestions().stream()
+                .filter(e -> e.getAnswersIndex().equals(e.getSelectIndex())).collect(Collectors.toList());
+        answers.setScore(collect.size() / paperAndAnswersDTO.getQuestions().size() * 100);
+        Assert.isTrue(answers.insertOrUpdate(), "保存/更新答卷失败");
+        List<PaperQuestions> paperQuestionsList = paperAndAnswersDTO.getQuestions().stream().map(e ->
+                PaperQuestions.builder()
+                        .id(e.getId())
+                        .answersId(answers.getAnswerId())
+                        .questionId(e.getQuestionId())
+                        .selectIndex(e.getSelectIndex())
+                        .extraDescribe(e.getSelectDescribe()).build()
+        ).collect(Collectors.toList());
+        Assert.isTrue(paperQuestionsService.saveOrUpdateBatch(paperQuestionsList), "保存/更新答卷作答信息失败");
+        /* 更新成就总分 */
+        userPropService.gainProp(paperAndAnswersDTO.getResponderUserId(), 1, answers.getScore() - paperAndAnswersDTO.getScore());
+        paperAndAnswersDTO.setScore(answers.getScore());
+        return paperAndAnswersDTO;
     }
 
     @Override

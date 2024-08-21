@@ -3,7 +3,7 @@ package com.quiz.controller;
 
 import com.quiz.annotation.PathPermission;
 import com.quiz.dto.AnswersDTO;
-import com.quiz.entity.Answers;
+import com.quiz.dto.PaperAndAnswersDTO;
 import com.quiz.enumerate.PermissionEnum;
 import com.quiz.service.IAnswersService;
 import io.swagger.annotations.Api;
@@ -32,7 +32,7 @@ public class AnswersController {
     @PathPermission(PermissionEnum.USER_CREATE)
     @ApiOperation("保存答卷")
     @PostMapping("save")
-    public Answers saveAnswers(@RequestBody Answers answers) {
+    public PaperAndAnswersDTO saveAnswers(@RequestBody PaperAndAnswersDTO answers) {
         return answersService.saveAnswers(answers);
     }
 

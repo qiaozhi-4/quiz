@@ -1,8 +1,9 @@
 package com.quiz.service;
 
-import com.quiz.dto.AnswersDTO;
-import com.quiz.entity.Answers;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.quiz.dto.AnswersDTO;
+import com.quiz.dto.PaperAndAnswersDTO;
+import com.quiz.entity.Answers;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface IAnswersService extends IService<Answers> {
      *
      * @param answers 答题记录
      */
-    Answers saveAnswers(Answers answers);
+    PaperAndAnswersDTO saveAnswers(PaperAndAnswersDTO answers);
 
     /**
      * 获取用户总得分
