@@ -56,8 +56,8 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
-import { getBadgeList } from '../../utils/api/answers';
-import { finishTask, getAllTask } from '../../utils/api/task';
+import { getBadgeList } from '@/utils/api/answer';
+import { finishTask, getAllTask } from '@/utils/api/task';
 import { onLoad } from '@dcloudio/uni-app';
 import { useStore } from "@/stores/store";
 
@@ -66,7 +66,7 @@ const store = useStore();
 /** 道具信息 */
 const props = computed<Quiz.PropDTO[]>(() => store.props);
 /** 徽章信息 */
-const badgeList = ref<Quiz.AnswersDTO[]>([]);
+const badgeList = ref<Quiz.AnswerDTODTO[]>([]);
 /** 任务数据 */
 type TaskInfo = {
     title: string,
@@ -95,7 +95,7 @@ onLoad((option) => {
     getAllTask(store.user.userId).then(res => {
         tasks.value.forEach(e => {
             e.list = res.data.filter((task: Quiz.TaskDTO) => task.classId == e.classId);
-            e.title = e.list[0].classDescribe
+            e.title = e.list[0].classDescribe;
         });
     });
 });

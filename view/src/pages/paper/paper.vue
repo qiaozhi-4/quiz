@@ -84,8 +84,8 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
-import { createPaper, getPaperAndAnswerInfo, paperSwitchQuestion, updatePaper } from '@/utils/api/paper';
-import { saveAnswers } from '@/utils/api/answers';
+import { createPaper, getPaperAndAnswerDTO, paperSwitchQuestion, updatePaper } from '@/utils/api/paper';
+import { saveAnswer } from '@/utils/api/answer';
 import { useStore } from "@/stores/store";
 import { getUser } from '@/utils/api/user';
 import { objectToPathParams } from '@/utils/service';
@@ -101,7 +101,7 @@ type Option = AnyObject & {
 } | undefined;
 const refAlert = ref();
 /** 试卷信息 */
-const paper = ref<Quiz.PaperDto>({} as Quiz.PaperDto);
+const paper = ref<Quiz.Paper>({} as Quiz.Paper);
 /** 题目信息 */
 const questions = computed<Quiz.QuestionDTO[]>(() => paper.value?.questions);
 /** 当前题目下标 */
@@ -169,7 +169,7 @@ function onButtonClick(index: number) {
             }
         }
         if (isAnswer.value) {
-            saveAnswers({ paperId: paper.value.paperId, selects: selects.value.join('@@'), responderUserId: store.user.userId, } as Quiz.Answers).then((res) => {
+            saveAnswer({ paperId: paper.value.paperId, selects: selects.value.join('@@'), responderUserId: store.user.userId, } as Quiz.AnswerDTODTO).then((res) => {
                 store.addPropNumberById(1, res.data.score - paper.value.score);
                 uni.reLaunch({
                     url: `/pages/paper-answer-finish/paper-answer-finish` + objectToPathParams({ paperId: res.data.paperId, userId: userInfo.value.userId, avatarUrl: userInfo.value.avatarUrl, nickname: userInfo.value.nickname, score: res.data.score })
@@ -188,10 +188,10 @@ function onButtonClick(index: number) {
 onLoad((option: Option) => {
     if (option?.userId && option?.paperId) {
         isAnswer.value = true;
-        getPaperAndAnswerInfo(option.paperId, store.user.userId).then(res => paper.value = res.data);
+        getPaperAndAnswerDTO(option.paperId, store.user.userId).then(res => paper.value = res.data);
         getUser(option.userId).then(res => friend.value = res.data);
     } else if (option?.paperId) {
-        getPaperAndAnswerInfo(option.paperId, store.user.userId).then(res => paper.value = res.data);
+        getPaperAndAnswerDTO(option.paperId, store.user.userId).then(res => paper.value = res.data);
     } else {
         createPaper(10, store.user.userId).then((res => paper.value = res.data));
     }

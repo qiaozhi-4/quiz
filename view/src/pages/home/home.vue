@@ -190,7 +190,7 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
 import { onLoad, onShareAppMessage } from '@dcloudio/uni-app';
-import { getPaperAndAnswerInfoList, getPaperList, removePaper } from '@/utils/api/paper';
+import { getPaperAndAnswerDTOList, getPaperList, removePaper } from '@/utils/api/paper';
 import { getIntimateRanking, getUser } from '@/utils/api/user';
 import { useStore } from "@/stores/store";
 import { homeTestInfo } from '@/utils/constant';
@@ -230,7 +230,7 @@ const myRanking = computed<number>(() => {
 /** 亲密排行榜数据 */
 const intimateRanking = ref<Quiz.UserDto[]>([]);
 /** 试卷记录 */
-const paperList = ref<Quiz.PaperDto[]>([]);
+const paperList = ref<Quiz.Paper[]>([]);
 /**  问答展示 */
 const fullShows = ref<boolean[]>([]);
 interface GroupedItem {
@@ -313,7 +313,7 @@ onLoad((option: Option) => {
                 getUser(option.userId).then(res => {
                     friend.value = res.data;
                     getIntimateRanking(friend.value.userId).then(res => intimateRanking.value = res.data);
-                    getPaperAndAnswerInfoList(friend.value.userId, own.value.userId).then(res => paperList.value = res.data);
+                    getPaperAndAnswerDTOList(friend.value.userId, own.value.userId).then(res => paperList.value = res.data);
                 });
             } else {
                 getIntimateRanking(own.value.userId).then(res => intimateRanking.value = res.data);

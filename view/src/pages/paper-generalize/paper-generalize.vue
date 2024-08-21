@@ -30,7 +30,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
-import { getPaperAndAnswerInfo } from '../../utils/api/paper';
+import { getPaperAndAnswerDTO  } from '@/utils/api/paper';
 import { useStore } from "@/stores/store";
 import { objectToPathParams } from '@/utils/service';
 const store = useStore();
@@ -46,7 +46,7 @@ type Option = AnyObject & {
 /** 页面跳转过来的参数 */
 const pageOption = ref<Option>({});
 /** 获取测试信息 */
-type PaperInfo = Quiz.PaperDto & { selectArray: number[], answerArray: number[]; };
+type PaperInfo = Quiz.Paper & { selectArray: number[], answerArray: number[]; };
 const paper = ref<PaperInfo>({} as PaperInfo);
 /** 是否是朋友试卷 */
 const isFriendPaper = ref<boolean>(false);
@@ -61,7 +61,7 @@ function anewTast() {
 onLoad((option: Option) => {
     pageOption.value = option;
     if (option?.paperId) {
-        getPaperAndAnswerInfo(option.paperId, store.user.userId).then((res) => {
+        getPaperAndAnswerDTO(option.paperId, store.user.userId).then((res) => {
             paper.value = res.data;
             paper.value.selectArray = paper.value.selects?.split('@@').map(Number);
             paper.value.answerArray = paper.value.answers.split('@@').map(Number);
