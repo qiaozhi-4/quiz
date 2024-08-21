@@ -147,7 +147,7 @@ public class CodeGenerator {
 //                                .addInclude("q_paper_questions")
 //                                .addInclude("q_paper_tags")
 //                                .addInclude("q_question_tags")
-//                                .addInclude("q_classes")
+                                .addInclude("q_classes")
 //                                .addInclude("q_paper_classes")
 //                                .addInclude("q_task")
 //                                .addInclude("q_task_record")
@@ -185,7 +185,7 @@ public class CodeGenerator {
 //                                .disable()
                                 .mapperTemplate("\\templates\\ftl\\mapper.java")
                                 .mapperXmlTemplate("\\templates\\ftl\\mapper.xml")
-//                                .enableFileOverride()//开启文件覆盖
+                                .enableFileOverride()//开启文件覆盖
                                 .enableBaseResultMap()
                                 //.enableBaseColumnList()
                                 .convertMapperFileName(entityName ->

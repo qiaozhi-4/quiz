@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author XGeorge
- * @since 2024-08-20
+ * @since 2024-08-21
  */
 @Getter
 @Setter
@@ -36,13 +36,33 @@ public class Classes extends Model<Classes> {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("主键,类别id")
-    @TableId(value = "class_id", type = IdType.AUTO)
+    @ApiModelProperty("唯一id")
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
+
+    @ApiModelProperty("类别id")
+    @TableField("class_id")
     private Integer classId;
 
     @ApiModelProperty("类别名称")
     @TableField("class_name")
     private String className;
+
+    @ApiModelProperty("类别描述")
+    @TableField("class_describe")
+    private String classDescribe;
+
+    @ApiModelProperty("子类别id")
+    @TableField("sub_class_id")
+    private Integer subClassId;
+
+    @ApiModelProperty("子类别名称")
+    @TableField("sub_class_name")
+    private String subClassName;
+
+    @ApiModelProperty("子类别描述")
+    @TableField("sub_class_describe")
+    private String subClassDescribe;
 
     @ApiModelProperty("创建时间")
     @TableField("created_at")
@@ -55,7 +75,7 @@ public class Classes extends Model<Classes> {
 
     @Override
     public Serializable pkVal() {
-        return this.classId;
+        return this.id;
     }
 
 }

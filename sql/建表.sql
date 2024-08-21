@@ -18,13 +18,27 @@ create index user_id
 
 create table if not exists quiz.q_classes
 (
-    class_id   int auto_increment comment '主键,类别id'
+    id                 int auto_increment comment '唯一id'
         primary key,
-    class_name varchar(255)                       null comment '类别名称',
-    created_at datetime default CURRENT_TIMESTAMP null comment '创建时间',
-    updated_at datetime                           null comment '修改时间'
+    class_id           int                                null comment '类别id',
+    class_name         varchar(255)                       null comment '类别名称',
+    class_describe     varchar(255)                       null comment '类别描述',
+    sub_class_id       int                                null comment '子类别id',
+    sub_class_name     varchar(255)                       null comment '子类别名称',
+    sub_class_describe varchar(255)                       null comment '子类别描述',
+    created_at         datetime default CURRENT_TIMESTAMP null comment '创建时间',
+    updated_at         datetime                           null comment '修改时间'
 )
     comment '试卷分类';
+
+create index q_classes_class_id_index
+    on quiz.q_classes (class_id);
+
+create index q_classes_class_id_sub_class_id_index
+    on quiz.q_classes (class_id, sub_class_id);
+
+create index q_classes_sub_class_id_index
+    on quiz.q_classes (sub_class_id);
 
 create table if not exists quiz.q_paper
 (

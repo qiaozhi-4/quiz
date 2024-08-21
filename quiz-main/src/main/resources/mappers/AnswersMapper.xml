@@ -24,7 +24,7 @@
         where qa.responder_user_id = #{userId}; # 不要过滤掉已删除的试卷,因为只要获得过就行了
     </select>
     <select id="selectAnswersById" resultMap="AnswersDtoResultMap">
-        select qa.*, qq.*, qc.class_name
+        select qa.*, qq.*, qc.sub_class_name as class_name
         from quiz.q_answers qa
                  left join quiz.q_paper qp
                            on qa.paper_id = qp.paper_id
@@ -33,13 +33,13 @@
                  left join quiz.q_question qq
                            on qpq.question_id = qq.question_id
                  left join quiz.q_classes qc
-                           on qq.class_id = qc.class_id
+                           on qq.class_id = qc.sub_class_id and qc.class_id = 1
         where qa.answer_id = #{answerId}
           and qp.state != -1
         order by qpq.id;
     </select>
     <select id="selectAnswersListByUserId" resultMap="AnswersDtoResultMap">
-        select qa.*, qq.*, qc.class_name
+        select qa.*, qq.*, qc.sub_class_name as class_name
         from quiz.q_answers qa
                  left join quiz.q_paper qp
                            on qa.paper_id = qp.paper_id
@@ -48,7 +48,7 @@
                  left join quiz.q_question qq
                            on qpq.question_id = qq.question_id
                  left join quiz.q_classes qc
-                           on qq.class_id = qc.class_id
+                           on qq.class_id = qc.sub_class_id and qc.class_id = 1
         where qa.responder_user_id = #{userId}
           and qp.state != -1
         order by qa.answer_id, qpq.id;

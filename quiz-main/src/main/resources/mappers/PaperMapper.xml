@@ -22,28 +22,28 @@
     </resultMap>
 
     <select id="selectPaperByPaperId" resultMap="PaperDtoResultMap" parameterType="java.lang.Integer">
-        select qp.*, qq.*, qq.title as question_title, qc.class_name
+        select qp.*, qq.*, qq.title as question_title, qc.sub_class_name as class_name
         from quiz.q_paper qp
                  left join quiz.q_paper_questions qpq
                            on qp.paper_id = qpq.paper_id
                  left join quiz.q_question qq
                            on qpq.question_id = qq.question_id
                  left join quiz.q_classes qc
-                           on qq.class_id = qc.class_id
+                           on qq.class_id = qc.sub_class_id and qc.class_id = 1
         where qp.paper_id = #{paperId}
           and qp.state != -1
         order by qpq.id
     </select>
     <select id="selectPaperListByUserId" resultMap="PaperDtoResultMap">
-        select qp.*, count(qa.responder_user_id) as answers_total, qq.*, qq.title as question_title, qc.class_name
+        select qp.*, count(qa.responder_user_id) as answers_total, qq.*, qq.title as question_title, qc.sub_class_name as class_name
         from quiz.q_paper qp
                  left join quiz.q_answers qa on qp.paper_id = qa.paper_id
                  left join quiz.q_paper_questions qpq on qp.paper_id = qpq.paper_id
                  left join quiz.q_question qq on qpq.question_id = qq.question_id
-                 left join quiz.q_classes qc on qq.class_id = qc.class_id
+                 left join quiz.q_classes qc on qq.class_id = qc.sub_class_id and qc.class_id = 1
         where qp.state != -1
           and qp.creator_user_id = #{userId}
-        group by qp.paper_id, qq.question_id, qc.class_id
+        group by qp.paper_id, qq.question_id, qc.id
     </select>
     <select id="selectPaperAndAnswerInfoListByUserId" resultMap="PaperDtoResultMap">
         select qp.*,
@@ -53,25 +53,31 @@
                qa2.score,
                qq.*,
                qq.title                    as question_title,
-               qc.class_name
+               qc.sub_class_name          as class_name
         from quiz.q_paper qp
                  left join quiz.q_answers qa on qp.paper_id = qa.paper_id
                  left join quiz.q_answers qa2
                            on qp.paper_id = qa2.paper_id and qa2.responder_user_id = #{responderUserId}
                  left join quiz.q_paper_questions qpq on qpq.paper_id = qp.paper_id
                  left join quiz.q_question qq on qpq.question_id = qq.question_id
-                 left join quiz.q_classes qc on qq.class_id = qc.class_id
+                 left join quiz.q_classes qc on qq.class_id = qc.sub_class_id and qc.class_id = 1
         where qp.state != -1
           and qp.creator_user_id = #{creatorUserId}
-        group by qp.paper_id, qa2.answer_id, qq.question_id, qc.class_id
+        group by qp.paper_id, qa2.answer_id, qq.question_id, qc.id
     </select>
     <select id="selectPaperAndAnswerInfoListByPaperIdAndUserId" resultMap="PaperDtoResultMap">
-        select qp.*, qa.answer_id, qa.selects, qa.score, qq.*, qq.title as question_title, qc.class_name
+        select qp.*,
+               qa.answer_id,
+               qa.selects,
+               qa.score,
+               qq.*,
+               qq.title          as question_title,
+               qc.sub_class_name as class_name
         from quiz.q_paper qp
                  left join quiz.q_answers qa on qp.paper_id = qa.paper_id and qa.responder_user_id = #{responderUserId}
                  left join quiz.q_paper_questions qpq on qp.paper_id = qpq.paper_id
                  left join quiz.q_question qq on qpq.question_id = qq.question_id
-                 left join quiz.q_classes qc on qq.class_id = qc.class_id
+                 left join quiz.q_classes qc on qq.class_id = qc.sub_class_id and qc.class_id = 1
         where qp.paper_id = #{paperId}
         group by qp.paper_id, qa.answer_id, qq.question_id
     </select>
