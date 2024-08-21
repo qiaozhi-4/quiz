@@ -31,10 +31,10 @@ public class QuestionController {
     private final IQuestionService questionService;
 
     @PathPermission(PermissionEnum.READ)
-    @ApiOperation(value = "随机获取10个题目")
-    @GetMapping("get-random/{userId:\\d+}")
-    public List<Question> getRandomQuestions(@PathVariable Integer userId) {
-        return questionService.getRandomQuestions(userId, 10);
+    @ApiOperation(value = "随机获取 num 个该用户没有出过的题目")
+    @GetMapping("get-random/{userId:\\d+}/{num:\\d+}")
+    public List<Question> getRandomQuestions(@PathVariable Integer userId, @PathVariable Integer num) {
+        return questionService.getRandomQuestions(userId, num);
     }
 
     @ApiOperation(value = "随机获取10个题目(不要权限)")

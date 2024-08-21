@@ -21,6 +21,6 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 
     @Override
     public List<Question> getRandomQuestions(Integer userId, Integer num) {
-        return this.baseMapper.selectRandomQuestions(userId, num);
+        return this.baseMapper.selectRandomQuestionsByUserIdAndNumber(userId, num);
     }
 }

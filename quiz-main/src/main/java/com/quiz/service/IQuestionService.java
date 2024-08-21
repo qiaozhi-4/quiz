@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface IQuestionService extends IService<Question> {
     /**
-     * 随机返回 num 个题目
+     * 随机获取 num 个该用户没有出过的题目
      *
      * @param userId 用户id
      * @param num    题目数量
