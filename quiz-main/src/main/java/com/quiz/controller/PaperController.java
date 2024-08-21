@@ -4,6 +4,7 @@ package com.quiz.controller;
 import com.quiz.annotation.PathPermission;
 import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Paper;
+import com.quiz.entity.Question;
 import com.quiz.enumerate.PermissionEnum;
 import com.quiz.service.IPaperService;
 import io.swagger.annotations.Api;
@@ -34,6 +35,20 @@ public class PaperController {
     @PostMapping("save")
     public PaperDTO savePaper(@RequestBody PaperDTO paperDto) {
         return paperService.savePaper(paperDto);
+    }
+
+    @PathPermission(PermissionEnum.USER_CREATE)
+    @ApiOperation("创建试卷")
+    @GetMapping("createt/{userId:\\d+}/{questionNumber:\\d+}")
+    public PaperDTO createPaper(@PathVariable Integer userId, @PathVariable Integer questionNumber) {
+        return paperService.createPaper(userId, questionNumber);
+    }
+
+    @PathPermission(PermissionEnum.USER_UPDATE)
+    @ApiOperation("试卷换题")
+    @PutMapping("switch-question/{userId:\\d+}/{paperId:\\d+}/{questionId:\\d+}")
+    public Question paperSwitchQuestion(@PathVariable Integer userId, @PathVariable Integer paperId, @PathVariable Integer questionId) {
+        return paperService.paperSwitchQuestion(userId, paperId, questionId);
     }
 
     @PathPermission(PermissionEnum.USER_UPDATE)
@@ -83,7 +98,7 @@ public class PaperController {
     @ApiOperation("通过试卷ID,获取试卷详情,以及用户回答信息")
     @GetMapping("get/{paperId:\\d+}/{responderUserId:\\d+}")
     public PaperDTO getPaperAndAnswerInfo(@PathVariable Integer paperId, @PathVariable Integer responderUserId) {
-        return paperService.getPaperAndAnswerInfoByPaperIdAndUserId(paperId,responderUserId);
+        return paperService.getPaperAndAnswerInfoByPaperIdAndUserId(paperId, responderUserId);
     }
 
 }

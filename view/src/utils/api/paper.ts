@@ -1,6 +1,17 @@
 import { api } from "../service"
 /** 题目试卷 前端控制器 */
 
+/** 创建试卷 */
+export function createPaper(questionNumber : number, userId : number): Promise<Quiz.Result<Quiz.PaperDto>> {
+	return api.request({
+		url: `/paper/createt/{userId}/{questionNumber}`,
+		method: 'GET',
+		path: {
+			questionNumber: questionNumber,
+			userId: userId,
+		},
+	})
+}
 /** 查询用户a试卷列表,以及用户b的回答信息 */
 export function getPaperAndAnswerInfoList(creatorUserId : number, responderUserId : number): Promise<Quiz.Result<Array<Quiz.PaperDto>>> {
 	return api.request({
@@ -69,6 +80,18 @@ export function savePaper(paperDto : Quiz.PaperDto): Promise<Quiz.Result<Quiz.Pa
 		url: `/paper/save`,
 		method: 'POST',
 		data: paperDto,
+	})
+}
+/** 试卷换题 */
+export function paperSwitchQuestion(paperId : number, questionId : number, userId : number): Promise<Quiz.Result<Quiz.Question>> {
+	return api.request({
+		url: `/paper/switch-question/{userId}/{paperId}/{questionId}`,
+		method: 'PUT',
+		path: {
+			paperId: paperId,
+			questionId: questionId,
+			userId: userId,
+		},
 	})
 }
 /** 更新试卷 */

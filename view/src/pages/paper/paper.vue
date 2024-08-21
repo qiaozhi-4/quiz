@@ -4,10 +4,17 @@
     <view class="page">
         <q-nav-bar title="Quiz" fixed />
         <view class="main flex-column">
-            <view v-if="isAnswer" style="position: relative; margin-left: auto; margin-right: 25px;" @click="useHintGem">
-                <view class="corner-mark flex-center">{{ hintGem.number > 99 ? '99+' : hintGem.number }}</view>
-                <q-svg icon="提示宝石" size="45" />
+            <view v-if="isAnswer" style="position: relative; margin-left: auto; margin-right: 25px;"
+                @click="useHintGem">
+                <template>
+                    <view class="corner-mark flex-center">{{ hintGem.number > 99 ? '99+' : hintGem.number }}</view>
+                    <q-svg icon="提示宝石" size="45" />
+                </template v-else>
+                <template>
+
+                </template>
             </view>
+            <view v-else @click="switchQuestion">换一题</view>
             <q-avatar class="avatar" :src="userInfo.avatarUrl" size="62" borderWidth="3"></q-avatar>
             <view class="statistics-text">
                 {{ `Question ${questionIndex + 1}/${questions?.length}` }}
@@ -75,10 +82,9 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
-import { getPaperAndAnswerInfo, savePaper } from '@/utils/api/paper';
+import { createPaper, getPaperAndAnswerInfo, paperSwitchQuestion, savePaper, updatePaper } from '@/utils/api/paper';
 import { saveAnswers } from '@/utils/api/answers';
 import { useStore } from "@/stores/store";
-import { getRandomQuestions } from '@/utils/api/question';
 import { getUser } from '@/utils/api/user';
 import { objectToPathParams } from '@/utils/service';
 import { useProp } from '@/utils/api/prop';
@@ -95,7 +101,7 @@ const refAlert = ref();
 /** 试卷信息 */
 const paper = ref<Quiz.PaperDto>({} as Quiz.PaperDto);
 /** 题目信息 */
-const questions = ref<Quiz.Question[]>(new Array(10));
+const questions = computed<Quiz.QuestionDTO[]>(() => paper.value?.questions);
 /** 当前题目下标 */
 const questionIndex = ref<number>(0);
 /** 答案下标数组 */
@@ -129,6 +135,13 @@ function useHintGem() {
         setTimeout(() => { answerIndex.value = -1; }, 2000);
     });
 }
+/** 换一题 */
+function switchQuestion() {
+    paperSwitchQuestion(paper.value.paperId, questions.value[questionIndex.value].questionId, store.user.userId)
+        .then(res => {
+            paper.value.questions[questionIndex.value] = res.data as Quiz.QuestionDTO;
+        });
+}
 
 /** 点击选项 */
 function onButtonClick(index: number) {
@@ -150,7 +163,7 @@ function onButtonClick(index: number) {
                 });
             });
         } else {
-            savePaper({ creatorUserId: store.user.userId, questions: questions.value, answers: selects.value.join('@@') } as Quiz.PaperDto).then(res => {
+            updatePaper({ paperId: paper.value.paperId, answers: selects.value.join('@@') } as Quiz.PaperDto).then(res => {
                 uni.reLaunch({
                     url: `/pages/paper-set-finish/paper-set-finish` + objectToPathParams({ paperId: res.data.paperId, userId: userInfo.value.userId })
                 });
@@ -164,11 +177,10 @@ onLoad((option: Option) => {
         isAnswer.value = true;
         getPaperAndAnswerInfo(option.paperId, store.user.userId).then(res => {
             paper.value = res.data;
-            questions.value = paper.value?.questions || [];
         });
         getUser(option.userId).then(res => friend.value = res.data);
     } else {
-        getRandomQuestions(store.user.userId).then((res => questions.value = res.data));
+        createPaper(10, store.user.userId).then((res => paper.value = res.data));
     }
 });
 

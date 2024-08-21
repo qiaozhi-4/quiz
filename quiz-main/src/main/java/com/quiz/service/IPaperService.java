@@ -3,6 +3,7 @@ package com.quiz.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Paper;
+import com.quiz.entity.Question;
 
 import java.util.List;
 
@@ -22,6 +23,23 @@ public interface IPaperService extends IService<Paper> {
      * @param paperDto 试卷信息
      */
     PaperDTO savePaper(PaperDTO paperDto);
+
+    /**
+     * 创建试卷
+     *
+     * @param userId         用户id
+     * @param questionNumber 试卷包含的题目个数
+     */
+    PaperDTO createPaper(Integer userId, Integer questionNumber);
+
+    /**
+     * 试卷换题
+     *
+     * @param userId     用户id
+     * @param paperId    试卷id
+     * @param questionId 需要换掉的题目id
+     */
+    Question paperSwitchQuestion(Integer userId, Integer paperId, Integer questionId);
 
     /**
      * 更新试卷
@@ -74,7 +92,7 @@ public interface IPaperService extends IService<Paper> {
     /**
      * 通过试卷ID,获取试卷详情,以及用户回答信息
      *
-     * @param paperId   试卷 id
+     * @param paperId         试卷 id
      * @param responderUserId 用户 id
      */
     PaperDTO getPaperAndAnswerInfoByPaperIdAndUserId(Integer paperId, Integer responderUserId);
