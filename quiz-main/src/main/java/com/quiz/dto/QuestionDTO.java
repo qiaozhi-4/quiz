@@ -55,7 +55,7 @@ public class QuestionDTO implements Serializable {
     private String aqExtraDescribe;
 
 
-    @ApiModelProperty("试卷id")
+    @ApiModelProperty("主键")
     private Integer pqId;
     @ApiModelProperty("试卷ID")
     private Integer paperId;

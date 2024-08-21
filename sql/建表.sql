@@ -97,7 +97,7 @@ create index question_id
 
 create table if not exists quiz.q_paper_questions
 (
-    pq_id             int auto_increment comment '试卷id'
+    pq_id             int auto_increment comment '主键'
         primary key,
     paper_id          int                                null comment '试卷ID',
     question_id       int                                null comment '题目ID',
