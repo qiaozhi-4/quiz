@@ -24,7 +24,7 @@
             <text class="class">本周限时奖励</text>
             <view class="v-global tasks flex-column" v-for="(item, index) in tasks" :key="index">
                 <text class="title">{{ item.title }}</text>
-                <view class="task-global" :class="`task${item.type}`" v-for="(task, i) in item.list" :key="i">
+                <view class="task-global" :class="`task${item.classId}`" v-for="(task, i) in item.list" :key="i">
                     <view class="progress" :style="{ width: `${task.finishNumber / task.conditionNumber * 100}%` }">
                     </view>
                     <view class="svg-grap">
@@ -70,17 +70,19 @@ const badgeList = ref<Quiz.AnswersDTO[]>([]);
 /** 任务数据 */
 type TaskInfo = {
     title: string,
-    type: number,
+    classId: number,
     list: Quiz.TaskDTO[];
 };
 const tasks = ref<TaskInfo[]>([
     {
-        title: '测测对朋友的了解😊',
-        type: 1,
+        title: '',
+        // title: '测测对朋友的了解😊',
+        classId: 1,
         list: []
     }, {
-        title: '出题给朋友们～ 😆',
-        type: 2,
+        title: '',
+        // title: '出题给朋友们～ 😆',
+        classId: 2,
         list: []
     }
 ]);
@@ -92,8 +94,8 @@ onLoad((option) => {
 
     getAllTask(store.user.userId).then(res => {
         tasks.value.forEach(e => {
-            e.list = res.data.filter((task: Quiz.TaskDTO) => task.conditionType == e.type
-            );
+            e.list = res.data.filter((task: Quiz.TaskDTO) => task.classId == e.classId);
+            e.title = e.list[0].classDescribe
         });
     });
 });

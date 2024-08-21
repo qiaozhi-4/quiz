@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author XGeorge
- * @since 2024-08-20
+ * @since 2024-08-21
  */
 @Getter
 @Setter
@@ -52,9 +52,9 @@ public class Task extends Model<Task> {
     @TableField("describe_")
     private String describe;
 
-    @ApiModelProperty("任务条件类型,1:做朋友的测试;2:朋友做我的测试")
-    @TableField("condition_type")
-    private Integer conditionType;
+    @ApiModelProperty("任务条件类别")
+    @TableField("class_id")
+    private Integer classId;
 
     @ApiModelProperty("任务条件计数")
     @TableField("condition_number")

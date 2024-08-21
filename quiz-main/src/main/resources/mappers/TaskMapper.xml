@@ -8,14 +8,14 @@
         <result column="award_id" property="awardId" />
         <result column="award_number" property="awardNumber" />
         <result column="describe_" property="describe" />
-        <result column="condition_type" property="conditionType" />
+        <result column="class_id" property="classId" />
         <result column="condition_number" property="conditionNumber" />
         <result column="created_at" property="createdAt" />
         <result column="updated_at" property="updatedAt" />
     </resultMap>
     <select id="selectTaskList" resultType="com.quiz.dto.TaskDTO">
         select qt.*,
-               case qt.condition_type
+               case qt.class_id
                    when 1 then LEAST((select count(1)
                                       from quiz.q_answers qa
                                       where qa.responder_user_id = #{userId}
@@ -25,20 +25,29 @@
                                                left join quiz.q_paper qp on qp.paper_id = qa.paper_id
                                       where qp.creator_user_id = #{userId}
                                         and qa.created_at &gt;= #{earliestDateTime}), qt.condition_number)
-                   end     as finish_number,
+                   end               as finish_number,
                qtr.is_receive_award,
-               qp.prop_name as award_name
+               qp.prop_name          as award_name,
+               qc.sub_class_name     as class_name,
+               qc.sub_class_describe as class_describe
         from quiz.q_task qt
                  left join quiz.q_task_record qtr on qt.task_id = qtr.task_id
                  left join quiz.q_prop qp on qt.award_id = qp.prop_id
+                 left join quiz.q_classes qc on qc.sub_class_id = qt.class_id and qc.class_id = 2
         where qtr.user_id = #{userId}
           and qtr.created_at &gt;= #{earliestDateTime};
     </select>
     <select id="selectTask" resultType="com.quiz.dto.TaskDTO">
-        select qt.*, qtr.finish_number, qtr.is_receive_award, qp.prop_name as award_name
+        select qt.*,
+               qtr.finish_number,
+               qtr.is_receive_award,
+               qp.prop_name          as award_name,
+               qc.sub_class_name     as class_name,
+               qc.sub_class_describe as class_describe
         from quiz.q_task qt
                  left join quiz.q_task_record qtr on qt.task_id = qtr.task_id
                  left join quiz.q_prop qp on qt.award_id = qp.prop_id
+                 left join quiz.q_classes qc on qc.sub_class_id = qt.class_id and qc.class_id = 2
         where qtr.user_id = #{userId}
           and qt.task_id = #{taskId}
           and qtr.created_at &gt;= #{earliestDateTime}

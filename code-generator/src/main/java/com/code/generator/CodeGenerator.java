@@ -1,9 +1,7 @@
 package com.code.generator;
 
-import com.baomidou.mybatisplus.core.enums.SqlLike;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
-import com.baomidou.mybatisplus.generator.config.po.LikeTable;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
@@ -147,14 +145,14 @@ public class CodeGenerator {
 //                                .addInclude("q_paper_questions")
 //                                .addInclude("q_paper_tags")
 //                                .addInclude("q_question_tags")
-                                .addInclude("q_classes")
+//                                .addInclude("q_classes")
 //                                .addInclude("q_paper_classes")
-//                                .addInclude("q_task")
+                                .addInclude("q_task")
 //                                .addInclude("q_task_record")
 //                                .addInclude("yz_device")
 //                                .addInclude("yz_use_info")
                                 // 所有表
-                                .likeTable(new LikeTable("", SqlLike.RIGHT))
+//                                .likeTable(new LikeTable("", SqlLike.RIGHT))
 
                                 /*配置 Entity*/
                                 .entityBuilder()

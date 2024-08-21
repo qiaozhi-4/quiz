@@ -243,10 +243,14 @@ declare namespace Quiz {
 		awardName:string
 		/** 奖励数量 */
 		awardNumber:number
+		/** 任务条件名称描述 */
+		classDescribe:string
+		/** 任务条件类别id */
+		classId:number
+		/** 任务条件类别名称 */
+		className:string
 		/** 任务条件计数 */
 		conditionNumber:number
-		/** 任务条件类型,1:答题;2:出题 */
-		conditionType:number
 		/** 创建时间 */
 		createdAt:string
 		/** 任务描述 */

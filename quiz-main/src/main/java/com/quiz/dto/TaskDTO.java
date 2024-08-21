@@ -39,8 +39,14 @@ public class TaskDTO implements Serializable {
     @ApiModelProperty("任务描述")
     private String describe;
 
-    @ApiModelProperty("任务条件类型,1:答题;2:出题")
-    private Integer conditionType;
+    @ApiModelProperty("任务条件类别id")
+    private Integer classId;
+
+    @ApiModelProperty("任务条件类别名称")
+    private String className;
+
+    @ApiModelProperty("任务条件名称描述")
+    private String classDescribe;
 
     @ApiModelProperty("任务条件计数")
     private Integer conditionNumber;
