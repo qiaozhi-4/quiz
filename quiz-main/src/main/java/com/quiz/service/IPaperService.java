@@ -2,7 +2,6 @@ package com.quiz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.quiz.dto.PaperAndAnswerDTO;
-import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Paper;
 import com.quiz.entity.Question;
 
@@ -24,7 +23,7 @@ public interface IPaperService extends IService<Paper> {
      * @param userId         用户id
      * @param questionNumber 试卷包含的题目个数
      */
-    PaperDTO createPaper(Integer userId, Integer questionNumber);
+    PaperAndAnswerDTO createPaper(Integer userId, Integer questionNumber);
 
     /**
      * 试卷换题
@@ -49,7 +48,7 @@ public interface IPaperService extends IService<Paper> {
      * @param paperId 试卷id
      * @return 试卷信息
      */
-    PaperDTO getPaper(Integer paperId);
+    PaperAndAnswerDTO getPaper(Integer paperId);
 
     /**
      * 获取用户试卷列表
@@ -57,7 +56,7 @@ public interface IPaperService extends IService<Paper> {
      * @param userId 用户id
      * @return 试卷列表
      */
-    List<PaperDTO> getPaperListByUserId(Integer userId);
+    List<PaperAndAnswerDTO> getPaperListByUserId(Integer userId);
 
     /**
      * 获取用户试卷总数
@@ -81,7 +80,7 @@ public interface IPaperService extends IService<Paper> {
      * @param creatorUserId   用户a id
      * @param responderUserId 用户b id
      */
-    List<PaperDTO> getPaperAndAnswerInfoListByUserId(Integer creatorUserId, Integer responderUserId);
+    List<PaperAndAnswerDTO> getPaperAndAnswerInfoListByUserId(Integer creatorUserId, Integer responderUserId);
 
     /**
      * 通过试卷ID,获取试卷详情,以及用户回答信息

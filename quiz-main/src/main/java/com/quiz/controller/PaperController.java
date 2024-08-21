@@ -3,7 +3,6 @@ package com.quiz.controller;
 
 import com.quiz.annotation.PathPermission;
 import com.quiz.dto.PaperAndAnswerDTO;
-import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Paper;
 import com.quiz.entity.Question;
 import com.quiz.enumerate.PermissionEnum;
@@ -34,7 +33,7 @@ public class PaperController {
     @PathPermission(PermissionEnum.USER_CREATE)
     @ApiOperation("创建试卷")
     @GetMapping("createt/{userId:\\d+}/{questionNumber:\\d+}")
-    public PaperDTO createPaper(@PathVariable Integer userId, @PathVariable Integer questionNumber) {
+    public PaperAndAnswerDTO createPaper(@PathVariable Integer userId, @PathVariable Integer questionNumber) {
         return paperService.createPaper(userId, questionNumber);
     }
 
@@ -55,14 +54,14 @@ public class PaperController {
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("通过试卷ID,获取试卷详情")
     @GetMapping("get/{paperId:\\d+}")
-    public PaperDTO getPaper(@PathVariable Integer paperId) {
+    public PaperAndAnswerDTO getPaper(@PathVariable Integer paperId) {
         return paperService.getPaper(paperId);
     }
 
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("获取试卷列表")
     @GetMapping("get-list/{userId:\\d+}")
-    public List<PaperDTO> getPaperList(@PathVariable Integer userId) {
+    public List<PaperAndAnswerDTO> getPaperList(@PathVariable Integer userId) {
         return paperService.getPaperListByUserId(userId);
     }
 
@@ -84,7 +83,7 @@ public class PaperController {
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("查询用户a试卷列表,以及用户b的回答信息")
     @GetMapping("get-list/{creatorUserId:\\d+}/{responderUserId:\\d+}")
-    public List<PaperDTO> getPaperAndAnswerInfoList(@PathVariable Integer creatorUserId, @PathVariable Integer responderUserId) {
+    public List<PaperAndAnswerDTO> getPaperAndAnswerInfoList(@PathVariable Integer creatorUserId, @PathVariable Integer responderUserId) {
         return paperService.getPaperAndAnswerInfoListByUserId(creatorUserId, responderUserId);
     }
 

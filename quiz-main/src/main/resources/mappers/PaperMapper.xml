@@ -29,8 +29,8 @@
         </collection>
     </resultMap>
 
-    <select id="selectPaperByPaperId" resultMap="PaperDtoResultMap" parameterType="java.lang.Integer">
-        select qp.*, qq.*, qq.title as question_title, qc.sub_class_name as class_name
+    <select id="selectPaperByPaperId" resultMap="PaperAndAnswerDTOResultMap" parameterType="java.lang.Integer">
+        select qp.*, qq.*, qq.title as question_title, qc.sub_class_name as class_name, qpq.*
         from quiz.q_paper qp
                  left join quiz.q_paper_questions qpq
                            on qp.paper_id = qpq.paper_id
@@ -40,9 +40,9 @@
                            on qq.class_id = qc.sub_class_id and qc.class_id = 1
         where qp.paper_id = #{paperId}
           and qp.state != -1
-        order by qpq.id
+        order by qpq.pq_id
     </select>
-    <select id="selectPaperListByUserId" resultMap="PaperDtoResultMap">
+    <select id="selectPaperListByUserId" resultMap="PaperAndAnswerDTOResultMap">
         select qp.*,
                count(qa.responder_user_id) as answer_total,
                qq.*,
@@ -57,7 +57,7 @@
           and qp.creator_user_id = #{userId}
         group by qp.paper_id, qq.question_id, qc.id
     </select>
-    <select id="selectPaperAndAnswerInfoListByUserId" resultMap="PaperDtoResultMap">
+    <select id="selectPaperAndAnswerInfoListByUserId" resultMap="PaperAndAnswerDTOResultMap">
         select qp.*,
                count(qa.responder_user_id) as answer_total,
                qa2.answer_id,

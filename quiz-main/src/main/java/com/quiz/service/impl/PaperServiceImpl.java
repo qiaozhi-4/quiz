@@ -3,7 +3,6 @@ package com.quiz.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.quiz.dto.PaperAndAnswerDTO;
-import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Paper;
 import com.quiz.entity.PaperQuestions;
 import com.quiz.entity.Question;
@@ -14,10 +13,11 @@ import com.quiz.service.IPaperService;
 import com.quiz.utils.Assert;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -36,17 +36,20 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     private final QuestionMapper questionMapper;
 
     @Override
-    public PaperDTO createPaper(Integer userId, Integer questionNumber) {
-        List<PaperDTO> paperDTOs = this.baseMapper.selectPaperListByUserId(userId).stream()
-                .filter(paperDTO -> StringUtils.isBlank(paperDTO.getAnswer())).collect(Collectors.toList());
-        if (!paperDTOs.isEmpty()) {
-            return paperDTOs.get(0);
+    @Transactional
+    public PaperAndAnswerDTO createPaper(Integer userId, Integer questionNumber) {
+        List<PaperAndAnswerDTO> paperAndAnswerDTOList = this.baseMapper.selectPaperListByUserId(userId).stream()
+                .filter(paperAndAnswerDTO -> paperAndAnswerDTO.getQuestions().stream()
+                        .anyMatch(questionDTO -> Optional.ofNullable(questionDTO.getPqSelectIndex()).isPresent()))
+                .collect(Collectors.toList());
+        if (!paperAndAnswerDTOList.isEmpty()) {
+            return paperAndAnswerDTOList.get(0);
         }
         Paper paper = Paper.builder().creatorUserId(userId).build();
         // 获取当前用户的试卷列表的最大序号
         val lastPaper = this.getOneOpt(new LambdaQueryWrapper<Paper>().eq(Paper::getCreatorUserId, userId)
                 .orderByDesc(Paper::getOrder).last("LIMIT 1"));
-        // 设置试卷的序号,如果没有出过则
+        // 设置试卷的序号,如果没有出过则给默认1
         paper.setOrder(lastPaper.map(value -> value.getOrder() + 1).orElse(1));
         Assert.isTrue(paper.insert(), "试卷生成失败");
         List<Question> questionList = questionMapper.selectRandomQuestionsByUserIdAndNumber(userId, questionNumber);
@@ -78,12 +81,12 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     }
 
     @Override
-    public PaperDTO getPaper(Integer paperId) {
+    public PaperAndAnswerDTO getPaper(Integer paperId) {
         return this.baseMapper.selectPaperByPaperId(paperId);
     }
 
     @Override
-    public List<PaperDTO> getPaperListByUserId(Integer userId) {
+    public List<PaperAndAnswerDTO> getPaperListByUserId(Integer userId) {
         return this.baseMapper.selectPaperListByUserId(userId);
     }
 
@@ -104,7 +107,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     }
 
     @Override
-    public List<PaperDTO> getPaperAndAnswerInfoListByUserId(Integer creatorUserId, Integer responderUserId) {
+    public List<PaperAndAnswerDTO> getPaperAndAnswerInfoListByUserId(Integer creatorUserId, Integer responderUserId) {
         return this.baseMapper.selectPaperAndAnswerInfoListByUserId(creatorUserId, responderUserId);
     }
 

@@ -2,7 +2,6 @@ package com.quiz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.quiz.dto.PaperAndAnswerDTO;
-import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Paper;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,14 +21,14 @@ public interface PaperMapper extends BaseMapper<Paper> {
      *
      * @param paperId 试卷id
      */
-    PaperDTO selectPaperByPaperId(Integer paperId);
+    PaperAndAnswerDTO selectPaperByPaperId(Integer paperId);
 
     /**
      * 根据用户id查询试卷列表
      *
      * @param userId 用户id
      */
-    List<PaperDTO> selectPaperListByUserId(Integer userId);
+    List<PaperAndAnswerDTO> selectPaperListByUserId(Integer userId);
 
     /**
      * 查询用户a试卷列表,以及用户b的回答信息
@@ -37,7 +36,7 @@ public interface PaperMapper extends BaseMapper<Paper> {
      * @param creatorUserId   用户a id
      * @param responderUserId 用户b id
      */
-    List<PaperDTO> selectPaperAndAnswerInfoListByUserId(@Param("creatorUserId") Integer creatorUserId, @Param("responderUserId") Integer responderUserId);
+    List<PaperAndAnswerDTO> selectPaperAndAnswerInfoListByUserId(@Param("creatorUserId") Integer creatorUserId, @Param("responderUserId") Integer responderUserId);
 
     /**
      * 通过试卷ID,获取试卷详情,以及用户回答信息
