@@ -55,6 +55,8 @@ public class PaperAndAnswerDTO implements Serializable {
     private Integer score;
 
 
+    @ApiModelProperty("用户答题总数,被多少人做过")
+    private Long answerTotal;
     @ApiModelProperty("出题用户昵称")
     private String creatorUserNickname;
     @ApiModelProperty("出题用户头像")
@@ -65,6 +67,4 @@ public class PaperAndAnswerDTO implements Serializable {
     private String responderUserAvatarUrl;
     @ApiModelProperty("试卷题目集合")
     private List<QuestionDTO> questions;
-    @ApiModelProperty("用户答题总数,被多少人做过")
-    private Long answerTotal;
 }
