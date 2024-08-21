@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quiz.mapper.AnswerQuestionsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.quiz.entity.AnswerQuestions">
+        <id column="aq_id" property="aqId" />
+        <result column="answer_id" property="answerId" />
+        <result column="question_id" property="questionId" />
+        <result column="aq_select_index" property="aqSelectIndex" />
+        <result column="aq_extra_describe" property="aqExtraDescribe" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+    </resultMap>
+
+</mapper>
