@@ -37,16 +37,16 @@ public class AnswerServiceImpl extends ServiceImpl<AnswerMapper, Answer> impleme
         Answer answer = BeanUtils.copyProperties(paperAndAnswerDTO, Answer.class);
         /* 计算分数 */
         List<QuestionDTO> collect = paperAndAnswerDTO.getQuestions().stream()
-                .filter(e -> e.getAnswerIndex().equals(e.getSelectIndex())).collect(Collectors.toList());
+                .filter(e -> e.getAqSelectIndex().equals(e.getPqSelectIndex())).collect(Collectors.toList());
         answer.setScore(collect.size() / paperAndAnswerDTO.getQuestions().size() * 100);
         Assert.isTrue(answer.insertOrUpdate(), "保存/更新答卷失败");
         List<AnswerQuestions> paperQuestionsList = paperAndAnswerDTO.getQuestions().stream().map(e ->
                 AnswerQuestions.builder()
-                        .aqId(e.getId())
+                        .aqId(e.getAqId())
                         .answerId(answer.getAnswerId())
                         .questionId(e.getQuestionId())
-                        .aqSelectIndex(e.getSelectIndex())
-                        .aqExtraDescribe(e.getSelectDescribe()).build()
+                        .aqSelectIndex(e.getAqSelectIndex())
+                        .aqExtraDescribe(e.getAqExtraDescribe()).build()
         ).collect(Collectors.toList());
         Assert.isTrue(answerQuestionsService.saveOrUpdateBatch(paperQuestionsList), "保存/更新答卷作答信息失败");
         /* 更新成就总分 */

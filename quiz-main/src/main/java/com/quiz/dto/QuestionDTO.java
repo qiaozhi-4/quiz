@@ -41,16 +41,26 @@ public class QuestionDTO implements Serializable {
     private LocalDateTime updatedAt;
 
 
-    @ApiModelProperty("试卷/答题和题目关联表主键")
-    private Integer id;
     @ApiModelProperty("类别名称")
     private String className;
-    @ApiModelProperty("答案的下标")
-    private Integer answerIndex;
-    @ApiModelProperty("选择的下标")
-    private Integer selectIndex;
-    @ApiModelProperty("答案的描述")
-    private String answerDescribe;
-    @ApiModelProperty("选择的描述")
-    private String selectDescribe;
+
+
+    @ApiModelProperty("主键")
+    private Integer aqId;
+    @ApiModelProperty("答卷id")
+    private Integer answerId;
+    @ApiModelProperty("答题人选择下标")
+    private Integer aqSelectIndex;
+    @ApiModelProperty("答题人额外描述")
+    private String aqExtraDescribe;
+
+
+    @ApiModelProperty("试卷id")
+    private Integer pqId;
+    @ApiModelProperty("试卷ID")
+    private Integer paperId;
+    @ApiModelProperty("出题人选择下标")
+    private Integer pqSelectIndex;
+    @ApiModelProperty("出题人额外描述")
+    private String pqExtraDescribe;
 }
