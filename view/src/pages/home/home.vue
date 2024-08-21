@@ -158,6 +158,20 @@
                                 </view>
                             </template>
                         </view>
+                        <!-- 调试指示点 -->
+                        <!-- <view style="position: relative;">
+                            <q-indicator-position :current="index" :amount="sum" />
+                        </view>
+                        <view>
+                            <button @click="index--">-</button>
+                            <text>下标{{ index }}</text>
+                            <button @click="index++">+</button>
+                        </view>
+                        <view>
+                            <button @click="sum--">-</button>
+                            <text>总数{{ sum }}</text>
+                            <button @click="sum++">+</button>
+                        </view> -->
                         <view style="min-height: 160px; background-color: #1F1146;"></view>
                     </view>
 
@@ -182,6 +196,9 @@ import { useStore } from "@/stores/store";
 import { homeTestInfo } from '@/utils/constant';
 import { objectToPathParams } from '@/utils/service';
 import Paper from '../paper/paper.vue';
+
+const sum = ref(10);
+const index = ref(0);
 const store = useStore();
 /** 本页路径参数 */
 type Option = AnyObject & {
