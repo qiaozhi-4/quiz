@@ -20,7 +20,7 @@ create table if not exists quiz.q_answer_questions
 (
     aq_id             int auto_increment comment '主键'
         primary key,
-    answers_id        int                                null comment '答卷id',
+    answer_id         int                                null comment '答卷id',
     question_id       int                                null comment '题目ID',
     aq_select_index   int                                null comment '答题人选择下标',
     aq_extra_describe varchar(255)                       null comment '答题人额外描述',
@@ -30,7 +30,7 @@ create table if not exists quiz.q_answer_questions
     comment '答题关联题目';
 
 create index paper_id
-    on quiz.q_answer_questions (answers_id);
+    on quiz.q_answer_questions (answer_id);
 
 create index question_id
     on quiz.q_answer_questions (question_id);

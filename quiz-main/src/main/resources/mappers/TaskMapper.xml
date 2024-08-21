@@ -17,11 +17,11 @@
         select qt.*,
                case qt.class_id
                    when 1 then LEAST((select count(1)
-                                      from quiz.q_answers qa
+                                      from quiz.q_answer qa
                                       where qa.responder_user_id = #{userId}
                                         and qa.created_at &gt;= #{earliestDateTime}), qt.condition_number)
                    when 2 then LEAST((select count(1)
-                                      from quiz.q_answers qa
+                                      from quiz.q_answer qa
                                                left join quiz.q_paper qp on qp.paper_id = qa.paper_id
                                       where qp.creator_user_id = #{userId}
                                         and qa.created_at &gt;= #{earliestDateTime}), qt.condition_number)

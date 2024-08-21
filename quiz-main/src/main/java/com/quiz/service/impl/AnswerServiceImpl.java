@@ -5,11 +5,10 @@ import com.quiz.dto.AnswerDTO;
 import com.quiz.dto.PaperAndAnswerDTO;
 import com.quiz.dto.QuestionDTO;
 import com.quiz.entity.Answer;
-import com.quiz.entity.PaperQuestions;
+import com.quiz.entity.AnswerQuestions;
 import com.quiz.mapper.AnswerMapper;
-import com.quiz.mapper.PaperMapper;
+import com.quiz.service.IAnswerQuestionsService;
 import com.quiz.service.IAnswerService;
-import com.quiz.service.IPaperQuestionsService;
 import com.quiz.service.IUserPropService;
 import com.quiz.utils.Assert;
 import com.quiz.utils.BeanUtils;
@@ -31,8 +30,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class AnswerServiceImpl extends ServiceImpl<AnswerMapper, Answer> implements IAnswerService {
     private final IUserPropService userPropService;
-    private final PaperMapper paperMapper;
-    private final IPaperQuestionsService paperQuestionsService;
+    private final IAnswerQuestionsService answerQuestionsService;
 
     @Override
     public PaperAndAnswerDTO saveAnswer(PaperAndAnswerDTO paperAndAnswerDTO) {
@@ -42,15 +40,15 @@ public class AnswerServiceImpl extends ServiceImpl<AnswerMapper, Answer> impleme
                 .filter(e -> e.getAnswerIndex().equals(e.getSelectIndex())).collect(Collectors.toList());
         answer.setScore(collect.size() / paperAndAnswerDTO.getQuestions().size() * 100);
         Assert.isTrue(answer.insertOrUpdate(), "保存/更新答卷失败");
-        List<PaperQuestions> paperQuestionsList = paperAndAnswerDTO.getQuestions().stream().map(e ->
-                PaperQuestions.builder()
-                        .id(e.getId())
+        List<AnswerQuestions> paperQuestionsList = paperAndAnswerDTO.getQuestions().stream().map(e ->
+                AnswerQuestions.builder()
+                        .aqId(e.getId())
                         .answerId(answer.getAnswerId())
                         .questionId(e.getQuestionId())
-                        .selectIndex(e.getSelectIndex())
-                        .extraDescribe(e.getSelectDescribe()).build()
+                        .aqSelectIndex(e.getSelectIndex())
+                        .aqExtraDescribe(e.getSelectDescribe()).build()
         ).collect(Collectors.toList());
-        Assert.isTrue(paperQuestionsService.saveOrUpdateBatch(paperQuestionsList), "保存/更新答卷作答信息失败");
+        Assert.isTrue(answerQuestionsService.saveOrUpdateBatch(paperQuestionsList), "保存/更新答卷作答信息失败");
         /* 更新成就总分 */
         userPropService.gainProp(paperAndAnswerDTO.getResponderUserId(), 1, answer.getScore() - paperAndAnswerDTO.getScore());
         paperAndAnswerDTO.setScore(answer.getScore());

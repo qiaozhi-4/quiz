@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.quiz.mapper.AnswersMapper">
+<mapper namespace="com.quiz.mapper.AnswerMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.quiz.entity.Answers">
+    <resultMap id="BaseResultMap" type="com.quiz.entity.Answer">
         <id column="answer_id" property="answerId" />
         <result column="paper_id" property="paperId" />
         <result column="responder_user_id" property="responderUserId" />
@@ -13,20 +13,20 @@
     </resultMap>
 
     <!-- Dto查询映射结果 -->
-    <resultMap id="AnswersDtoResultMap" extends="BaseResultMap" type="com.quiz.dto.AnswersDTO">
+    <resultMap id="AnswerDtoResultMap" extends="BaseResultMap" type="com.quiz.dto.AnswerDTO">
         <collection property="questions" autoMapping="true" ofType="com.quiz.dto.QuestionDTO"/>
     </resultMap>
 
     <select id="selectScoreByUserId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
         select sum(qa.score) as total_score
-        from quiz.q_answers qa
+        from quiz.q_answer qa
                  left join quiz.q_paper qp
                            on qa.paper_id = qp.paper_id
         where qa.responder_user_id = #{userId}; # 不要过滤掉已删除的试卷,因为只要获得过就行了
     </select>
-    <select id="selectAnswersById" resultMap="AnswersDtoResultMap">
+    <select id="selectAnswerById" resultMap="AnswerDtoResultMap">
         select qa.*, qq.*, qc.sub_class_name as class_name
-        from quiz.q_answers qa
+        from quiz.q_answer qa
                  left join quiz.q_paper qp
                            on qa.paper_id = qp.paper_id
                  left join quiz.q_paper_questions qpq
@@ -39,9 +39,9 @@
           and qp.state != -1
         order by qpq.id;
     </select>
-    <select id="selectAnswersListByUserId" resultMap="AnswersDtoResultMap">
+    <select id="selectAnswerListByUserId" resultMap="AnswerDtoResultMap">
         select qa.*, qq.*, qc.sub_class_name as class_name
-        from quiz.q_answers qa
+        from quiz.q_answer qa
                  left join quiz.q_paper qp
                            on qa.paper_id = qp.paper_id
                  left join quiz.q_paper_questions qpq
@@ -54,12 +54,12 @@
           and qp.state != -1
         order by qa.answer_id, qpq.id;
     </select>
-    <select id="selectBadgeListByUserId" resultType="com.quiz.dto.AnswersDTO">
+    <select id="selectBadgeListByUserId" resultType="com.quiz.dto.AnswerDTO">
         select qa.*,
                tu.user_id    as creator_user_id,
                tu.nickname   as creator_user_nickname,
                tu.avatar_url as creator_user_avatar_url
-        from quiz.q_answers qa
+        from quiz.q_answer qa
                  left join quiz.q_paper qp on qa.paper_id = qp.paper_id
                  left join quiz.t_user tu on qp.creator_user_id = tu.user_id
         where qa.responder_user_id = #{userId} # 不要过滤掉已删除的试卷,因为只要获得过就行了

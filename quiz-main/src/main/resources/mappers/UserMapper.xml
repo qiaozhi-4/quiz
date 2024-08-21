@@ -49,7 +49,7 @@
     <select id="selectIntimateRanking" resultType="com.quiz.dto.UserDTO">
         select tu.*, sum(qa.score) as total_score
         from quiz.q_paper qp
-                 left join quiz.q_answers qa
+                 left join quiz.q_answer qa
                            on qp.paper_id = qa.paper_id
                  left join quiz.t_user tu
                            on qa.responder_user_id = tu.user_id
@@ -63,7 +63,7 @@
     <select id="selectIntimateFriends" resultType="com.quiz.entity.User">
         select tu.*
         from quiz.q_paper qp
-                 left join quiz.q_answers qa on qp.paper_id = qa.paper_id
+                 left join quiz.q_answer qa on qp.paper_id = qa.paper_id
                  left join quiz.t_user tu on qp.creator_user_id = tu.user_id
         where qp.state != -1
           and qp.creator_user_id = #{userId}
@@ -73,12 +73,12 @@
     <select id="selectUserDtoByUserId" resultType="com.quiz.dto.UserDTO">
         select tu.*,
                count(distinct qp.paper_id)          as paper_total,
-               count(distinct qa.answer_id)         as answers_total,
+               count(distinct qa.answer_id)         as answer_total,
                count(distinct qa2.responder_user_id) as intimate_friend_total
         from quiz.t_user tu
                  left join quiz.q_paper qp on tu.user_id = qp.creator_user_id # 我的出题
-                 left join quiz.q_answers qa on tu.user_id = qa.responder_user_id # 我的答题
-                 left join quiz.q_answers qa2 on qp.paper_id = qa2.paper_id and qa2.score = 100 # 做我的试卷,得分100分的
+                 left join quiz.q_answer qa on tu.user_id = qa.responder_user_id # 我的答题
+                 left join quiz.q_answer qa2 on qp.paper_id = qa2.paper_id and qa2.score = 100 # 做我的试卷,得分100分的
         where tu.user_id = #{userId}
         group by tu.user_id
     </select>
