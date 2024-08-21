@@ -22,6 +22,13 @@
         </collection>
     </resultMap>
 
+    <!-- Dto查询映射结果 -->
+    <resultMap id="PaperAndAnswersDTOResultMap" extends="BaseResultMap" type="com.quiz.dto.PaperAndAnswersDTO">
+        <collection property="questions" autoMapping="true" ofType="com.quiz.dto.QuestionDTO">
+            <result column="question_title" property="title"/>
+        </collection>
+    </resultMap>
+
     <select id="selectPaperByPaperId" resultMap="PaperDtoResultMap" parameterType="java.lang.Integer">
         select qp.*, qq.*, qq.title as question_title, qc.sub_class_name as class_name
         from quiz.q_paper qp
@@ -36,7 +43,11 @@
         order by qpq.id
     </select>
     <select id="selectPaperListByUserId" resultMap="PaperDtoResultMap">
-        select qp.*, count(qa.responder_user_id) as answers_total, qq.*, qq.title as question_title, qc.sub_class_name as class_name
+        select qp.*,
+               count(qa.responder_user_id) as answers_total,
+               qq.*,
+               qq.title                    as question_title,
+               qc.sub_class_name           as class_name
         from quiz.q_paper qp
                  left join quiz.q_answers qa on qp.paper_id = qa.paper_id
                  left join quiz.q_paper_questions qpq on qp.paper_id = qpq.paper_id
@@ -66,7 +77,7 @@
           and qp.creator_user_id = #{creatorUserId}
         group by qp.paper_id, qa2.answer_id, qq.question_id, qc.id
     </select>
-    <select id="selectPaperAndAnswerInfoListByPaperIdAndUserId" resultMap="PaperDtoResultMap">
+    <select id="selectPaperAndAnswerDTOListByPaperIdAndUserId" resultMap="PaperAndAnswersDTOResultMap">
         select qp.*,
                qa.answer_id,
                qa.selects,

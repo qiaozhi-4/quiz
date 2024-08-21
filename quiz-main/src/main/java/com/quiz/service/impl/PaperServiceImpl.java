@@ -2,6 +2,7 @@ package com.quiz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.quiz.dto.PaperAndAnswersDTO;
 import com.quiz.dto.PaperDTO;
 import com.quiz.entity.Paper;
 import com.quiz.entity.PaperQuestions;
@@ -108,7 +109,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     }
 
     @Override
-    public PaperDTO getPaperAndAnswerInfoByPaperIdAndUserId(Integer paperId, Integer responderUserId) {
-        return this.baseMapper.selectPaperAndAnswerInfoListByPaperIdAndUserId(paperId, responderUserId);
+    public PaperAndAnswersDTO getPaperAndAnswerDTOByPaperIdAndUserId(Integer paperId, Integer responderUserId) {
+        return this.baseMapper.selectPaperAndAnswerDTOListByPaperIdAndUserId(paperId, responderUserId);
     }
 }

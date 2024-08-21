@@ -54,7 +54,7 @@ export function getPaper(paperId : number): Promise<Quiz.Result<Quiz.PaperDto>> 
 	})
 }
 /** 通过试卷ID,获取试卷详情,以及用户回答信息 */
-export function getPaperAndAnswerInfo(paperId : number, responderUserId : number): Promise<Quiz.Result<Quiz.PaperDto>> {
+export function getPaperAndAnswerDTO(paperId : number, responderUserId : number): Promise<Quiz.Result<Quiz.PaperAndAnswersDTO>> {
 	return api.request({
 		url: `/paper/get/{paperId}/{responderUserId}`,
 		method: 'GET',
