@@ -13,7 +13,7 @@ export function createPaper(questionNumber : number, userId : number): Promise<Q
 	})
 }
 /** 查询用户a试卷列表,以及用户b的回答信息 */
-export function getPaperAndAnswerInfoList(creatorUserId : number, responderUserId : number): Promise<Quiz.Result<Array<Quiz.PaperAndAnswerDTO>>> {
+export function getPaperAndAnswerDTOList(creatorUserId : number, responderUserId : number): Promise<Quiz.Result<Array<Quiz.PaperAndAnswerDTO>>> {
 	return api.request({
 		url: `/paper/get-list/{creatorUserId}/{responderUserId}`,
 		method: 'GET',

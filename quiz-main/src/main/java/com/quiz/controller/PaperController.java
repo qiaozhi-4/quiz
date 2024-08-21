@@ -83,7 +83,7 @@ public class PaperController {
     @PathPermission(PermissionEnum.READ)
     @ApiOperation("查询用户a试卷列表,以及用户b的回答信息")
     @GetMapping("get-list/{creatorUserId:\\d+}/{responderUserId:\\d+}")
-    public List<PaperAndAnswerDTO> getPaperAndAnswerInfoList(@PathVariable Integer creatorUserId, @PathVariable Integer responderUserId) {
+    public List<PaperAndAnswerDTO> getPaperAndAnswerDTOList(@PathVariable Integer creatorUserId, @PathVariable Integer responderUserId) {
         return paperService.getPaperAndAnswerInfoListByUserId(creatorUserId, responderUserId);
     }
 
