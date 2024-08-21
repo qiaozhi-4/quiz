@@ -13,6 +13,7 @@ import com.quiz.service.IPaperService;
 import com.quiz.utils.Assert;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +36,11 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
 
     @Override
     public PaperDTO createPaper(Integer userId, Integer questionNumber) {
+        List<PaperDTO> paperDTOs = this.baseMapper.selectPaperListByUserId(userId).stream()
+                .filter(paperDTO -> StringUtils.isBlank(paperDTO.getAnswers())).collect(Collectors.toList());
+        if (!paperDTOs.isEmpty()) {
+            return paperDTOs.get(0);
+        }
         Paper paper = Paper.builder().creatorUserId(userId).build();
         // 获取当前用户的试卷列表的最大序号
         val lastPaper = this.getOneOpt(new LambdaQueryWrapper<Paper>().eq(Paper::getCreatorUserId, userId)
