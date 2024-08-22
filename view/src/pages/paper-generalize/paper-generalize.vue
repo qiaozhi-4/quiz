@@ -34,17 +34,18 @@ import { onLoad } from '@dcloudio/uni-app';
 import { getPaper, getPaperAndAnswerDTO } from '@/utils/api/paper';
 import { useStore } from "@/stores/store";
 import { objectToPathParams } from '@/utils/service';
+const store = useStore();
 /** 本页路径参数 */
 type Option = AnyObject & {
-    /** 答题人id */
-    userId?: number;
+    /** 是否是朋友试卷 */
+    isFriendPaper?: string;
     /** 试卷id */
     paperId?: number;
 } | undefined;
 onLoad((option: Option) => {
-    if (option?.paperId && option?.userId) {
-        isFriendPaper.value = true;
-        getPaperAndAnswerDTO(option.paperId, option.userId).then((res) => paper.value = res.data);
+    isFriendPaper.value = option?.isFriendPaper == 'true';
+    if (option?.paperId && isFriendPaper.value) {
+        getPaperAndAnswerDTO(option.paperId, store.user.userId).then((res) => paper.value = res.data);
     } else if (option?.paperId) {
         getPaper(option?.paperId).then((res) => paper.value = res.data);
     }

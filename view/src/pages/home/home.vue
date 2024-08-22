@@ -364,7 +364,7 @@ function onRemorPafer(paperId: number, index: number) {
 /** 试卷详情 */
 function onParticulars(paperId: number, nickname: string) {
     uni.navigateTo({
-        url: `/pages/paper-generalize/paper-generalize` + objectToPathParams({ paperId: paperId, nickname: nickname })
+        url: `/pages/paper-generalize/paper-generalize` + objectToPathParams({ paperId: paperId, isFriendPaper: isFriendHome.value })
     });
 }
 /** 继续出题 */
