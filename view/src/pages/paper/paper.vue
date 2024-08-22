@@ -179,18 +179,20 @@ const currentExtraDescribe = computed({
 /** 使用提示宝石 */
 function useHintGem() {
     if (hintGem.value.number < 1) {
-        refAlert.value?.show({ msg: '假装你看完了视频' });
-        gainProp(1, hintGem.value.propId, store.user.userId).then(res => {
-            store.addPropNumberById(hintGem.value.propId, 1);
-            setTimeout(() => {
-                useProp(1, hintGem.value.propId, store.user.userId).then(res => {
-                    store.usePropNumberById(hintGem.value.propId);
-                    refAlert.value?.show({ msg: '已使用提示宝石', showTime: 1000 });
-                    answerIndex.value = paper.value.questions[currentQuestionIndex.value].pqSelectIndex;
-                    setTimeout(() => { answerIndex.value = -1; }, 2000);
-                }).catch(err => refAlert.value?.show({ msg: err.message }));
-            }, 2000);
-        });
+        refAlert.value?.show({ msg: '宝石不足,可以去完成任务获取' });
+        // 测试专用
+        // refAlert.value?.show({ msg: '假装你看完了视频' });
+        // gainProp(1, hintGem.value.propId, store.user.userId).then(res => {
+        //     store.addPropNumberById(hintGem.value.propId, 1);
+        //     setTimeout(() => {
+        //         useProp(1, hintGem.value.propId, store.user.userId).then(res => {
+        //             store.usePropNumberById(hintGem.value.propId);
+        //             refAlert.value?.show({ msg: '已使用提示宝石', showTime: 1000 });
+        //             answerIndex.value = paper.value.questions[currentQuestionIndex.value].pqSelectIndex;
+        //             setTimeout(() => { answerIndex.value = -1; }, 2000);
+        //         }).catch(err => refAlert.value?.show({ msg: err.message }));
+        //     }, 2000);
+        // });
     } else {
         useProp(1, hintGem.value.propId, store.user.userId).then(res => {
             store.usePropNumberById(hintGem.value.propId);

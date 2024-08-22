@@ -116,13 +116,15 @@ const now = formatDate(new Date, 'YYYY/MM/DD');
 /** 使用复活宝石 */
 const onResurrection = () => {
     if (gemCount.value < 1) {
-        gainProp(1, 2, store.user.userId).then(res => {
-            store.addPropNumberById(2, 1);
-            refAlert.value.show({ msg: '假装你看完了视频,然后获取了宝石,并开始答题' });
-            setTimeout(() => {
-                goPaper();
-            }, 2000);
-        });
+        // 测试专用
+        // gainProp(1, 2, store.user.userId).then(res => {
+        //     store.addPropNumberById(2, 1);
+        //     refAlert.value.show({ msg: '假装你看完了视频,然后获取了宝石,并开始答题' });
+        //     setTimeout(() => {
+        //         goPaper();
+        //     }, 2000);
+        // });
+        refAlert.value.show({ msg: '宝石不足,可以去完成任务获取' });
     } else {
         goPaper();
     }

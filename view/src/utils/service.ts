@@ -96,11 +96,13 @@ export class Api implements IApi {
                     // 请求成功，就将成功的数据返回出去
                     if (data.code == 200) {
                         // ajaxEnd();
-                        console.log(`请求路径:${options.url}`, data);
+                        // 测试专用
+                        // console.log(`请求路径:${options.url}`, data);
                         resolve(data);
                     }
                     else {
-                        console.error(`错误的请求路径:${options.url}`);
+                        // 测试专用
+                        // console.error(`错误的请求路径:${options.url}`);
                         uni.showToast({
                             title: data.message,
                             icon: 'error',
@@ -110,7 +112,8 @@ export class Api implements IApi {
                     }
                 },
                 fail: (err: any) => {
-                    console.error(err);
+                    // 测试专用
+                    // console.error(err);
                     uni.showToast({
                         title: '请求失败!',
                         icon: 'error',
