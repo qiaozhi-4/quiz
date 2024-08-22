@@ -29,8 +29,6 @@
                     size="34" />使用复活宝石再测一次！</button>
         </view>
     </view>
-    <!-- 提示消息 -->
-    <q-alert ref="refAlert"></q-alert>
 </template>
 
 <script lang="ts" setup>
@@ -39,8 +37,6 @@ import { onLoad } from '@dcloudio/uni-app';
 import { getPaper, getPaperAndAnswerDTO } from '@/utils/api/paper';
 import { useStore } from "@/stores/store";
 import { objectToPathParams } from '@/utils/service';
-/** 提示消息ref */
-const refAlert = ref();
 const store = useStore();
 /** 本页路径参数 */
 type Option = AnyObject & {
@@ -64,10 +60,6 @@ const isFriendPaper = ref<boolean>(false);
 
 /** 重新答题 */
 function anewTast() {
-    if ((store.getPropById(2)?.number || 0) < 1) {
-        refAlert.value.show({ msg: '宝石不足' });
-        return;
-    }
     uni.navigateTo({
         url: `/pages/paper-start/paper-start${objectToPathParams({ paperId: paper.value?.paperId })}`
     });

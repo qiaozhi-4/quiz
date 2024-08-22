@@ -38,8 +38,6 @@
             </button>
         </view>
     </view>
-    <!-- 提示消息 -->
-    <q-alert ref="refAlert"></q-alert>
 </template>
 
 <script lang="ts" setup>
@@ -51,8 +49,6 @@ import { useStore } from "@/stores/store";
 import { objectToPathParams } from '@/utils/service';
 const scoreInfo_ = scoreInfo();
 const store = useStore();
-/** 提示消息ref */
-const refAlert = ref();
 /** 路径参数 */
 type Option = AnyObject & {
     /** 分数 */
@@ -91,13 +87,9 @@ function goSetTest() {
 }
 /** 重新答题 */
 function goStartTest() {
-    if (gemCount.value < 1) {
-        refAlert.value.show({ msg: '宝石不足' });
-    } else {
-        uni.redirectTo({
-            url: `/pages/paper-start/paper-start` + objectToPathParams({ paperId: pageOption.value?.paperId })
-        });
-    }
+    uni.redirectTo({
+        url: `/pages/paper-start/paper-start` + objectToPathParams({ paperId: pageOption.value?.paperId })
+    });
 }
 </script>
 
