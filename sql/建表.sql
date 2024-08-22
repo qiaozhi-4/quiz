@@ -46,7 +46,7 @@ create table if not exists quiz.q_classes
     sub_class_name     varchar(255)                       null comment '子类别名称',
     sub_class_describe varchar(255)                       null comment '子类别描述',
     created_at         datetime default CURRENT_TIMESTAMP null comment '创建时间',
-    updated_at         datetime                           null comment '修改时间'
+    updated_at         datetime                           null on update CURRENT_TIMESTAMP comment '修改时间'
 )
     comment '试卷分类';
 
@@ -131,7 +131,7 @@ create table if not exists quiz.q_question
     options_    varchar(1023)                      null comment '选项,以@@分隔',
     class_id    int                                null comment '类别id',
     created_at  datetime default CURRENT_TIMESTAMP null comment '创建时间',
-    updated_at  datetime                           null comment '修改时间'
+    updated_at  datetime                           null on update CURRENT_TIMESTAMP comment '修改时间'
 )
     comment '题目表';
 
@@ -174,7 +174,7 @@ create table if not exists quiz.q_task
     class_id         int                                null comment '任务条件类别',
     condition_number int      default 1                 null comment '任务条件计数',
     created_at       datetime default CURRENT_TIMESTAMP null comment '创建时间',
-    updated_at       datetime                           null comment '更新时间'
+    updated_at       datetime                           null on update CURRENT_TIMESTAMP comment '更新时间'
 )
     comment '任务数据';
 
@@ -193,7 +193,7 @@ create table if not exists quiz.q_task_record
     finish_number    int        default 0                 null comment '任务完成计数',
     is_receive_award tinyint(1) default 0                 null comment '任务奖励是否领取',
     created_at       datetime   default CURRENT_TIMESTAMP null comment '创建时间',
-    updated_at       datetime                             null comment '更新时间'
+    updated_at       datetime                             null on update CURRENT_TIMESTAMP comment '更新时间'
 )
     comment '任务记录';
 
@@ -277,7 +277,7 @@ create table if not exists quiz.t_user
     phone         varchar(31)                        null comment '手机号',
     mail          varchar(63)                        null comment '邮箱',
     created_at    datetime default CURRENT_TIMESTAMP null comment '创建时间',
-    updated_at    datetime                           null comment '更新时间',
+    updated_at    datetime                           null on update CURRENT_TIMESTAMP comment '更新时间',
     last_login_at datetime                           null comment '用户上次登录时间',
     enabled       bigint   default 0                 null comment '账号是否启用:0=正常,-1=禁用'
 )
