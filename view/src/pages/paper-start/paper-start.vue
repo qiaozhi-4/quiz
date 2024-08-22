@@ -99,7 +99,7 @@ onLoad((option: Option) => {
                 });
             }
         }
-    });
+    },1000);
 });
 /** 获取复活宝石数量 */
 const gemCount = computed<number>(() => store.getPropById(2)?.number || 0);
