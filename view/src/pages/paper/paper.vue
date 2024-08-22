@@ -57,7 +57,7 @@
                     @click="onChangeActivityPopup('总览')" />
                 <q-svg class="svg" :icon="`答题测试-底部-电脑${activityPopup == '电脑' ? '-激活' : ''}`" size="19"
                     @click="onChangeActivityPopup('电脑')" />
-                <button v-show="isFinish" class="submit-but" @click="submit"> 提交 </button>
+                <!-- <button v-show="isFinish" class="submit-but" @click="submit"> 提交 </button> -->
             </view>
         </view>
     </view>
@@ -208,6 +208,10 @@ function onBlur(e: any) {
 function onButtonClick(index: number) {
     /** 同步到试卷的信息 */
     currentSelect.value = index;
+    if (!infos.value[infos.value.length - 1].select) {
+        currentQuestionIndex.value++;
+        return;
+    }
     infos.value.some((e, i) => {
         if (e.select == null) {
             currentQuestionIndex.value = i;
@@ -215,9 +219,11 @@ function onButtonClick(index: number) {
         }
         return false;
     });
+    submit()
 }
 /** 提交 */
 function submit() {
+    if (infos.value.find(e => e.select == null)) return;
     if (isAnswer.value) {
         paper.value.responderUserId = store.user.userId;
         saveAnswer(paper.value).then((res) => {
@@ -416,8 +422,7 @@ function onClickPopupQuestion(index: number) {
                             background: linear-gradient(90deg, #BE53FF 0%, #7756EC 100%);
                         }
 
-                        .option-button:checked {
-
+                        .option-button:hover {
                             /* 粉紫渐变 选项 */
                             background: linear-gradient(90deg, #BE53FF 0%, #7756EC 100%) !important;
                         }
