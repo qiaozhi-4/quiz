@@ -39,7 +39,7 @@ public interface IPaperService extends IService<Paper> {
      * @param paper 试卷信息
      * @return 更新结果
      */
-    Boolean updatePaper(Paper paper);
+    Boolean updatePaper(PaperAndAnswerDTO paper);
 
     /**
      * 获取试卷

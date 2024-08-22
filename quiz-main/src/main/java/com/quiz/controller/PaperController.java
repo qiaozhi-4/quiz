@@ -3,7 +3,6 @@ package com.quiz.controller;
 
 import com.quiz.annotation.PathPermission;
 import com.quiz.dto.PaperAndAnswerDTO;
-import com.quiz.entity.Paper;
 import com.quiz.entity.Question;
 import com.quiz.enumerate.PermissionEnum;
 import com.quiz.service.IPaperService;
@@ -47,7 +46,7 @@ public class PaperController {
     @PathPermission(PermissionEnum.USER_UPDATE)
     @ApiOperation("更新试卷")
     @PutMapping("update")
-    public Boolean updatePaper(@RequestBody Paper paper) {
+    public Boolean updatePaper(@RequestBody PaperAndAnswerDTO paper) {
         return paperService.updatePaper(paper);
     }
 

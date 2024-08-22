@@ -86,7 +86,7 @@ export function paperSwitchQuestion(pqId : number, userId : number): Promise<Qui
 	})
 }
 /** 更新试卷 */
-export function updatePaper(paper : Quiz.Paper): Promise<Quiz.Result<any>> {
+export function updatePaper(paper : Quiz.PaperAndAnswerDTO): Promise<Quiz.Result<any>> {
 	return api.request({
 		url: `/paper/update`,
 		method: 'PUT',

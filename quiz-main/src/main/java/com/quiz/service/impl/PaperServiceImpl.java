@@ -40,7 +40,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     public PaperAndAnswerDTO createPaper(Integer userId, Integer questionNumber) {
         List<PaperAndAnswerDTO> paperAndAnswerDTOList = this.baseMapper.selectPaperListByUserId(userId).stream()
                 .filter(paperAndAnswerDTO -> paperAndAnswerDTO.getQuestions().stream()
-                        .anyMatch(questionDTO -> Optional.ofNullable(questionDTO.getPqSelectIndex()).isPresent()))
+                        .anyMatch(questionDTO -> !Optional.ofNullable(questionDTO.getPqSelectIndex()).isPresent()))
                 .collect(Collectors.toList());
         if (!paperAndAnswerDTOList.isEmpty()) {
             return paperAndAnswerDTOList.get(0);
@@ -71,8 +71,8 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     }
 
     @Override
-    public Boolean updatePaper(Paper paper) {
-        return this.updateById(paper);
+    public Boolean updatePaper(PaperAndAnswerDTO paper) {
+        return true;
     }
 
     @Override

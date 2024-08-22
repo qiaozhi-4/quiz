@@ -121,27 +121,6 @@ declare namespace Quiz {
 		/** 修改时间 */
 		updatedAt: string
 	}
-	/** Paper对象,题目试卷 */
-	interface Paper {
-		/** 封面url */
-		coverUrl: string
-		/** 创建时间 */
-		createdAt: string
-		/** 出题用户id */
-		creatorUserId: number
-		/** 描述 */
-		describe: string
-		/** 序号 */
-		order: number
-		/** 主键,试卷id */
-		paperId: number
-		/** 状态 */
-		state: number
-		/** 标题 */
-		title: string
-		/** 修改时间 */
-		updatedAt: string
-	}
 	/** Path对象,路径表 */
 	interface Path {
 		/** 路径描述。 */
