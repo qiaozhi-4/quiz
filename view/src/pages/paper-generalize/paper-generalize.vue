@@ -13,8 +13,11 @@
                     <view class="question-info">
                         <view v-if="isFriendPaper && question.pqSelectIndex != question.aqSelectIndex"
                             class="option text-overflow">???????</view>
-                        <view v-else class="option text-overflow">{{
-                            question?.options.split('@@')[question.pqSelectIndex] }}</view>
+                        <template v-else>
+                            <view class="option text-overflow">{{
+                                question?.options.split('@@')[question.pqSelectIndex] }}</view>
+                            <view class="input-value text-overflow">{{ question.pqExtraDescribe }}</view>
+                        </template>
                     </view>
                 </view>
             </view>
