@@ -91,7 +91,7 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
-import { createPaper, getPaperAndAnswerDTO, paperSwitchQuestion, updatePaper } from '@/utils/api/paper';
+import { createPaper, getPaper, getPaperAndAnswerDTO, paperSwitchQuestion, updatePaper } from '@/utils/api/paper';
 import { saveAnswer } from '@/utils/api/answer';
 import { useStore } from "@/stores/store";
 import { getUser } from '@/utils/api/user';
@@ -100,12 +100,11 @@ import { gainProp, useProp } from '@/utils/api/prop';
 import { objCope } from '@/utils/utils';
 
 onLoad((option: Option) => {
-    if (option?.userId && option?.paperId) {
-        isAnswer.value = true;
+    isAnswer.value = option?.isAnswer == 'true';
+    if (isAnswer.value && option?.paperId) {
         getPaperAndAnswerDTO(option.paperId, store.user.userId).then(res => paper.value = res.data);
-        // getUser(option.userId).then(res => friend.value = res.data);
     } else if (option?.paperId) {
-        getPaperAndAnswerDTO(option.paperId, store.user.userId).then(res => paper.value = res.data);
+        getPaper(option.paperId).then(res => paper.value = res.data);
     } else {
         createPaper(10, store.user.userId).then((res => paper.value = res.data));
     }
@@ -114,7 +113,7 @@ const store = useStore();
 /** 本页路径参数 */
 type Option = AnyObject & {
     /** 出题人id(答题才有) */
-    userId?: number;
+    isAnswer?: string;
     /** 试卷id(答题才有,继续出题也可能有) */
     paperId?: number;
 } | undefined;

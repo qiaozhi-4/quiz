@@ -133,8 +133,10 @@
                                 <view v-for="(paper, index) in paperList" :key="index"
                                     class="test-paper-my flex-column">
                                     <view class="v1">
-                                        <text class="title">{{ own?.nickname }}的{{ paper?.order }}号测试</text>
-                                        <text class="count">{{ paper?.answersTotal }}个朋友测过</text>
+                                        <text class="title">
+                                            {{ paper?.creatorUserNickname }}的{{ paper?.order }}号测试
+                                        </text>
+                                        <text class="count">{{ paper?.answerTotal }}个朋友测过</text>
                                     </view>
                                     <view class="v2">
                                         <view class="extra">
@@ -145,14 +147,14 @@
                                                 </reference>
                                             </q-bubble>
                                         </view>
-                                        <template v-if="paper.answers">
+                                        <template v-if="paper?.questions?.some(e => e.pqSelectIndex == null)">
+                                            <button class="button" @click="goOnQuestion(paper?.paperId)">继续出题</button>
+                                        </template>
+                                        <template v-else>
                                             <button class="button"
                                                 @click="onParticulars(paper?.paperId, userInfo.nickname)">查看详情</button>
                                             <button :data-paperId="paper?.paperId" class="button"
                                                 open-type="share">分享给朋友</button>
-                                        </template>
-                                        <template v-else>
-                                            <button class="button" @click="goOnQuestion(paper?.paperId)">继续出题</button>
                                         </template>
                                     </view>
                                 </view>
@@ -205,6 +207,28 @@ type Option = AnyObject & {
     /** 好友id */
     userId?: number;
 } | undefined;
+onLoad((option: Option) => {
+    /** 等待用户登录完成 */
+    let tempId = setInterval(() => {
+        if (own.value.userId) {
+            clearInterval(tempId);
+            /* 如果是朋友主页 */
+            if (option?.userId) {
+                isFriendHome.value = true;
+                //获取朋友信息
+                getUser(option.userId).then(res => {
+                    friend.value = res.data;
+                    getIntimateRanking(friend.value.userId).then(res => intimateRanking.value = res.data);
+                    getPaperAndAnswerDTOList(friend.value.userId, own.value.userId).then(res => paperList.value = res.data);
+                });
+            } else {
+                getIntimateRanking(own.value.userId).then(res => intimateRanking.value = res.data);
+                getPaperList(own.value.userId).then(res => paperList.value = res.data);
+            }
+
+        }
+    }, 1000);
+});
 /** 提示消息ref */
 const refAlert = ref();
 /** 设置 */
@@ -230,7 +254,7 @@ const myRanking = computed<number>(() => {
 /** 亲密排行榜数据 */
 const intimateRanking = ref<Quiz.UserDto[]>([]);
 /** 试卷记录 */
-const paperList = ref<Quiz.Paper[]>([]);
+const paperList = ref<Quiz.PaperAndAnswerDTO[]>([]);
 /**  问答展示 */
 const fullShows = ref<boolean[]>([]);
 interface GroupedItem {
@@ -295,34 +319,12 @@ onShareAppMessage((res) => {
     // if (res.from === 'button') {// 来自页面内分享按钮
     return {
         title: '我们之间有多亲密？',
-        path: `/pages/paper-start/paper-start` + objectToPathParams({ paperId: res.target.dataset.paperid, userId: own.value.userId }),
+        path: `/pages/paper-start/paper-start` + objectToPathParams({ paperId: res.target.dataset.paperid }),
         imageUrl: '/static/img/分享图.png'
     };
     // }
 });
 
-onLoad((option: Option) => {
-    /** 等待用户登录完成 */
-    let tempId = setInterval(() => {
-        if (own.value.userId) {
-            clearInterval(tempId);
-            /* 如果是朋友主页 */
-            if (option?.userId) {
-                isFriendHome.value = true;
-                //获取朋友信息
-                getUser(option.userId).then(res => {
-                    friend.value = res.data;
-                    getIntimateRanking(friend.value.userId).then(res => intimateRanking.value = res.data);
-                    getPaperAndAnswerDTOList(friend.value.userId, own.value.userId).then(res => paperList.value = res.data);
-                });
-            } else {
-                getIntimateRanking(own.value.userId).then(res => intimateRanking.value = res.data);
-                getPaperList(own.value.userId).then(res => paperList.value = res.data);
-            }
-
-        }
-    }, 1000);
-});
 
 /** 点击朋友触发 */
 function goFriendHome(id: number) {
@@ -383,7 +385,7 @@ function goOnQuestion(paperId: number) {
 /** 从朋友题库开始答题 */
 function goTest(paperId: number) {
     uni.navigateTo({
-        url: `/pages/paper-start/paper-start` + objectToPathParams({ paperId: paperId, userId: userInfo.value.userId })
+        url: `/pages/paper-start/paper-start` + objectToPathParams({ paperId: paperId })
     });
 }
 /** 跳转到出题页 */

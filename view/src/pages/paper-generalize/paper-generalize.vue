@@ -57,7 +57,7 @@ const isFriendPaper = ref<boolean>(false);
 /** 重新答题 */
 function anewTast() {
     uni.navigateTo({
-        url: `/pages/paper-start/paper-start${objectToPathParams({ paperId: paper.value?.paperId, userId: paper.value.creatorUserId })}`
+        url: `/pages/paper-start/paper-start${objectToPathParams({ paperId: paper.value?.paperId })}`
     });
 }
 

@@ -24,17 +24,17 @@
         <q-nav-bar fixed></q-nav-bar>
         <view class="main">
             <view class="avatar-group">
-                <q-avatar :src="own?.avatarUrl" size="97" borderWidth="4"></q-avatar>
-                <q-avatar class="friend-avatar" v-if="isAnswer" :src="questionSetterUser?.avatarUrl" size="97"
+                <q-avatar :src="store.user.avatarUrl" size="97" borderWidth="4"></q-avatar>
+                <q-avatar class="friend-avatar" v-if="isAnswer" :src="paper.creatorUserAvatarUrl" size="97"
                     borderWidth="4"></q-avatar>
             </view>
             <view class="nickname-group" v-if="isAnswer">
                 <text class="polite">您的朋友</text>
-                <text class="nickname">{{ questionSetterUser?.nickname }}</text>
+                <text class="nickname">{{ paper.creatorUserNickname }}</text>
                 <text class="polite">邀请您：</text>
             </view>
             <view class="nickname-group" v-else>
-                <text class="nickname">{{ own?.nickname }}</text>
+                <text class="nickname">{{ store.user?.nickname }}</text>
                 <text class="polite">您好：</text>
             </view>
             <template v-if="isAnswer">
@@ -65,36 +65,55 @@ import { getUser, verifyPaper } from '@/utils/api/user';
 import { gainProp } from '@/utils/api/prop';
 import { useStore } from "@/stores/store";
 import { objectToPathParams } from '@/utils/service';
-const store = useStore();
-/** 本页路径参数 */
-type Option = AnyObject & {
-    /** 出题人id(答题才有) */
-    userId?: number;
-    /** 试卷id(答题才有) */
-    paperId?: number;
-} | undefined;
-
+import { getPaper } from '@/utils/api/paper';
 /** 对话框ref */
 const refDialog = ref();
 /** 提示消息ref */
 const refAlert = ref();
-/** 自己的信息 */
-const own = computed<Quiz.UserDto>(() => store.user);
+const store = useStore();
+/** 本页路径参数 */
+type Option = AnyObject & {
+    /** 试卷id */
+    paperId?: number;
+} | undefined;
+
+onLoad((option: Option) => {
+    /** 等待用户登录完成 */
+    let tempId = setInterval(() => {
+        if (store.user.userId) {
+            clearInterval(tempId);
+            /** 如果是答题 */
+            if (option?.paperId) {
+                getPaper(option.paperId).then(res => {
+                    paper.value = res.data;
+                    /** 如果全部都有下标就是答题 */
+                    isAnswer.value = res.data.questions.every(e => e.pqSelectIndex != null);
+                });
+                verifyPaper(option?.paperId, store.user.userId).then(res => {
+                    if (res.data.isMyPaper) {
+                        refAlert.value.show({ msg: '不能回答自己的出题,2秒后返回主页' });
+                        setTimeout(() => uni.redirectTo({ url: `/pages/home/home` }), 2000);
+                    } else if (res.data.isRepeatAnswers) {
+                        refDialog.value.show();
+                    }
+                });
+            }
+        }
+    });
+});
 /** 获取复活宝石数量 */
 const gemCount = computed<number>(() => store.getPropById(2)?.number || 0);
-/** 出题人信息(只有答题才有值) */
-const questionSetterUser = ref<Quiz.UserDto>({} as Quiz.UserDto);
+/** 试卷id */
+const paper = ref<Quiz.PaperAndAnswerDTO>({} as Quiz.PaperAndAnswerDTO);
 /** 是不是答题 */
 const isAnswer = ref<boolean>(false);
-/** 试卷id */
-const paperId = ref<number>(-1);
 /** 当前时间 */
 const now = formatDate(new Date, 'YYYY/MM/DD');
 
 /** 使用复活宝石 */
 const onResurrection = () => {
     if (gemCount.value < 1) {
-        gainProp(1, 2, own.value.userId).then(res => {
+        gainProp(1, 2, store.user.userId).then(res => {
             refAlert.value.show({ msg: '假装你看完了视频,然后获取了宝石,并开始答题' });
             setTimeout(() => {
                 goPaper();
@@ -118,35 +137,16 @@ function backtrack() {
 }
 /** 跳转试卷详情 */
 function goPaper() {
-    let path = isAnswer.value ? objectToPathParams({ paperId: paperId.value, userId: questionSetterUser.value.userId }) : '';
+    let path: { [key: string]: any; } = { isAnswer: isAnswer.value };
+    if (paper.value.paperId) {
+    console.log(paper.value.paperId);
+    
+        path.paperId = paper.value.paperId;
+    }
     uni.reLaunch({
-        url: `/pages/paper/paper` + path
+        url: `/pages/paper/paper` + objectToPathParams(path)
     });
 }
-onLoad((option: Option) => {
-    /** 等待用户登录完成 */
-    let tempId = setInterval(() => {
-        if (own.value.userId) {
-            clearInterval(tempId);
-            /** 如果是答题 */
-            if (option?.paperId && option?.userId) {
-                paperId.value = option.paperId;
-                isAnswer.value = true;
-                getUser(option?.userId).then(res => {
-                    questionSetterUser.value = res.data;
-                });
-                verifyPaper(option?.paperId, own.value?.userId).then(res => {
-                    if (res.data.isMyPaper) {
-                        refAlert.value.show({ msg: '不能回答自己的出题,2秒后返回主页' });
-                        setTimeout(() => uni.redirectTo({ url: `/pages/home/home` }), 2000);
-                    } else if (res.data.isRepeatAnswers) {
-                        refDialog.value.show();
-                    }
-                });
-            }
-        }
-    });
-});
 </script>
 
 <style lang="scss" scoped>

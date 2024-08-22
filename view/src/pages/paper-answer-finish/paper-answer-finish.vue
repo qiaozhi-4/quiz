@@ -99,7 +99,7 @@ function goStartTest() {
         refAlert.value.show({ msg: '宝石不足' });
     } else {
         uni.redirectTo({
-            url: `/pages/paper-start/paper-start` + objectToPathParams({ paperId: pageOption.value?.paperId, userId: pageOption.value?.userId })
+            url: `/pages/paper-start/paper-start` + objectToPathParams({ paperId: pageOption.value?.paperId })
         });
     }
 }
