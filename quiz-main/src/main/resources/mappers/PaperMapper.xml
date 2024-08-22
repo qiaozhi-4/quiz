@@ -136,7 +136,7 @@
                  left join quiz.q_answer_questions qaq
                            on qa.answer_id = qaq.answer_id and qaq.question_id = qq.question_id
         where qp.state != -1
-          and qp.creator_user_id = #{userId}
+          and qp.creator_user_id = #{creatorUserId}
         group by qp.paper_id, qa.answer_id, qq.question_id, qc.id, qpq.pq_id, qaq.aq_id
     </select>
 
