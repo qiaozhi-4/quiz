@@ -138,11 +138,7 @@ function backtrack() {
 /** 跳转试卷详情 */
 function goPaper() {
     let path: { [key: string]: any; } = { isAnswer: isAnswer.value };
-    if (paper.value.paperId) {
-    console.log(paper.value.paperId);
-    
-        path.paperId = paper.value.paperId;
-    }
+    if (paper.value.paperId) { path.paperId = paper.value.paperId; }
     uni.reLaunch({
         url: `/pages/paper/paper` + objectToPathParams(path)
     });
