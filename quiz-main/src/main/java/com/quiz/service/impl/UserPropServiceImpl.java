@@ -55,7 +55,7 @@ public class UserPropServiceImpl extends ServiceImpl<UserPropMapper, UserProp> i
     @Override
     public UserProp gainProp(Integer userId, Integer propId, Integer num) {
         UserProp userProp = this.getUserPropByUserIdAndPropId(userId, propId);
-        Assert.isTrue(num > 0, "获取道具数量必须大于0");
+//        Assert.isTrue(num > 0, "获取道具数量必须大于0");
         userProp.setNumber(userProp.getNumber() + num).updateById();
         return userProp;
     }

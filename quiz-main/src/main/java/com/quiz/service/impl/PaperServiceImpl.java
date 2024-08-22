@@ -35,8 +35,8 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     private final IPaperQuestionsService paperQuestionsService;
     private final QuestionMapper questionMapper;
 
-    @Override
     @Transactional
+    @Override
     public PaperAndAnswerDTO createPaper(Integer userId, Integer questionNumber) {
         List<PaperAndAnswerDTO> paperAndAnswerDTOList = this.baseMapper.selectPaperListByUserId(userId).stream()
                 .filter(paperAndAnswerDTO -> paperAndAnswerDTO.getQuestions().stream()
