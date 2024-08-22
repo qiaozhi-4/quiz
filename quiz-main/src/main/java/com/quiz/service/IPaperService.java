@@ -28,8 +28,8 @@ public interface IPaperService extends IService<Paper> {
     /**
      * 试卷换题
      *
-     * @param userId     用户id
-     * @param pqId    试卷关联题目表id
+     * @param userId 用户id
+     * @param pqId   试卷关联题目表id
      */
     Question paperSwitchQuestion(Integer userId, Integer pqId);
 
@@ -74,18 +74,18 @@ public interface IPaperService extends IService<Paper> {
     Boolean removePaperByPaperId(Integer paperId);
 
     /**
-     * 查询用户a试卷列表,以及用户b的回答信息
-     *
-     * @param creatorUserId   用户a id
-     * @param responderUserId 用户b id
-     */
-    List<PaperAndAnswerDTO> getPaperAndAnswerInfoListByUserId(Integer creatorUserId, Integer responderUserId);
-
-    /**
-     * 通过试卷ID,获取试卷详情,以及用户回答信息
+     * 获取试卷详情,以及用户回答信息
      *
      * @param paperId         试卷 id
-     * @param responderUserId 用户 id
+     * @param responderUserId 答题用户 id,可以为空
      */
-    PaperAndAnswerDTO getPaperAndAnswerDTOByPaperIdAndUserId(Integer paperId, Integer responderUserId);
+    PaperAndAnswerDTO getPaperAndAnswerDTO(Integer paperId, Integer responderUserId);
+
+    /**
+     * 获取试卷详情,以及用户回答信息列表
+     *
+     * @param creatorUserId   出题用户 id
+     * @param responderUserId 答题用户 id,可以为空
+     */
+    List<PaperAndAnswerDTO> getPaperAndAnswerDTOList(Integer creatorUserId, Integer responderUserId);
 }

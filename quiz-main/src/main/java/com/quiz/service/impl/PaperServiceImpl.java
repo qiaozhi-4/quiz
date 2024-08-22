@@ -110,12 +110,12 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     }
 
     @Override
-    public List<PaperAndAnswerDTO> getPaperAndAnswerInfoListByUserId(Integer creatorUserId, Integer responderUserId) {
-        return this.baseMapper.selectPaperAndAnswerInfoListByUserId(creatorUserId, responderUserId);
+    public PaperAndAnswerDTO getPaperAndAnswerDTO(Integer paperId, Integer responderUserId) {
+        return this.baseMapper.selectPaperAndAnswerDTO(paperId, responderUserId);
     }
 
     @Override
-    public PaperAndAnswerDTO getPaperAndAnswerDTOByPaperIdAndUserId(Integer paperId, Integer responderUserId) {
-        return this.baseMapper.selectPaperAndAnswerDTOListByPaperIdAndUserId(paperId, responderUserId);
+    public List<PaperAndAnswerDTO> getPaperAndAnswerDTOList(Integer creatorUserId, Integer responderUserId) {
+        return this.baseMapper.selectPaperAndAnswerDTOList(creatorUserId, responderUserId);
     }
 }

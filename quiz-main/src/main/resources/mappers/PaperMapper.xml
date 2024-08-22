@@ -31,6 +31,7 @@
 
     <select id="selectPaperByPaperId" resultMap="PaperAndAnswerDTOResultMap" parameterType="java.lang.Integer">
         select qp.*,
+
                tu.nickname       as creator_user_nickname,
                tu.avatar_url     as creator_user_avatar_url,
 
@@ -52,9 +53,9 @@
     <select id="selectPaperListByUserId" resultMap="PaperAndAnswerDTOResultMap">
         select qp.*,
                count(distinct qa.responder_user_id) as answer_total,
+
                tu.nickname                          as creator_user_nickname,
                tu.avatar_url                        as creator_user_avatar_url,
-
 
                qq.*,
                qq.title                             as question_title,
@@ -62,8 +63,9 @@
 
                qpq.*
         from quiz.q_paper qp
-                 left join quiz.q_answer qa on qp.paper_id = qa.paper_id
                  left join quiz.t_user tu on tu.user_id = qp.creator_user_id
+
+                 left join quiz.q_answer qa on qp.paper_id = qa.paper_id
 
                  left join quiz.q_paper_questions qpq on qp.paper_id = qpq.paper_id
                  left join quiz.q_question qq on qpq.question_id = qq.question_id
@@ -72,22 +74,55 @@
           and qp.creator_user_id = #{userId}
         group by qp.paper_id, qq.question_id, qc.id, qpq.pq_id
     </select>
-    <select id="selectPaperAndAnswerInfoListByUserId" resultMap="PaperAndAnswerDTOResultMap">
+    <select id="selectPaperAndAnswerDTO" resultMap="PaperAndAnswerDTOResultMap">
         select qp.*,
-               count(distinct qa.responder_user_id) as answer_total,
-               tu.nickname                          as creator_user_nickname,
-               tu.avatar_url                        as creator_user_avatar_url,
 
+               tu_qp.nickname    as creator_user_nickname,
+               tu_qp.avatar_url  as creator_user_avatar_url,
+
+               tu_qa.nickname    as responder_user_nickname,
+               tu_qa.avatar_url  as responder_user_avatar_url,
 
                qq.*,
-               qq.title                             as question_title,
-               qc.sub_class_name                    as class_name,
+               qq.title          as question_title,
+               qc.sub_class_name as class_name,
 
                qpq.*,
                qaq.*
         from quiz.q_paper qp
+                 left join quiz.t_user tu_qp on tu_qp.user_id = qp.creator_user_id
+
                  left join quiz.q_answer qa on qp.paper_id = qa.paper_id and qa.responder_user_id = #{responderUserId}
-                 left join quiz.t_user tu on tu.user_id = qp.creator_user_id
+                 left join quiz.t_user tu_qa on tu_qa.user_id = qa.responder_user_id
+
+                 left join quiz.q_paper_questions qpq on qp.paper_id = qpq.paper_id
+                 left join quiz.q_question qq on qpq.question_id = qq.question_id
+                 left join quiz.q_classes qc on qq.class_id = qc.sub_class_id and qc.class_id = 1
+
+                 left join quiz.q_answer_questions qaq on qa.answer_id = qaq.answer_id
+        where qp.paper_id = #{paperId}
+        group by qp.paper_id, qq.question_id, qc.id, qpq.pq_id, qaq.aq_id
+    </select>
+    <select id="selectPaperAndAnswerDTOList" resultMap="PaperAndAnswerDTOResultMap">
+        select qp.*,
+
+               tu_qp.nickname    as creator_user_nickname,
+               tu_qp.avatar_url  as creator_user_avatar_url,
+
+               tu_qa.nickname    as responder_user_nickname,
+               tu_qa.avatar_url  as responder_user_avatar_url,
+
+               qq.*,
+               qq.title          as question_title,
+               qc.sub_class_name as class_name,
+
+               qpq.*,
+               qaq.*
+        from quiz.q_paper qp
+                 left join quiz.t_user tu_qp on tu_qp.user_id = qp.creator_user_id
+
+                 left join quiz.q_answer qa on qp.paper_id = qa.paper_id and qa.responder_user_id = #{responderUserId}
+                 left join quiz.t_user tu_qa on tu_qa.user_id = qa.responder_user_id
 
                  left join quiz.q_paper_questions qpq on qp.paper_id = qpq.paper_id
                  left join quiz.q_question qq on qpq.question_id = qq.question_id
@@ -96,31 +131,6 @@
                  left join quiz.q_answer_questions qaq on qa.answer_id = qaq.answer_id
         where qp.state != -1
           and qp.creator_user_id = #{userId}
-        group by qp.paper_id, qq.question_id, qc.id, qpq.pq_id, qaq.aq_id
-    </select>
-    <select id="selectPaperAndAnswerDTOListByPaperIdAndUserId" resultMap="PaperAndAnswerDTOResultMap">
-        select qp.*,
-               count(distinct qa.responder_user_id) as answer_total,
-               tu.nickname                          as creator_user_nickname,
-               tu.avatar_url                        as creator_user_avatar_url,
-
-
-               qq.*,
-               qq.title                             as question_title,
-               qc.sub_class_name                    as class_name,
-
-               qpq.*,
-               qaq.*
-        from quiz.q_paper qp
-                 left join quiz.q_answer qa on qp.paper_id = qa.paper_id and qa.responder_user_id = #{responderUserId}
-                 left join quiz.t_user tu on tu.user_id = qp.creator_user_id
-
-                 left join quiz.q_paper_questions qpq on qp.paper_id = qpq.paper_id
-                 left join quiz.q_question qq on qpq.question_id = qq.question_id
-                 left join quiz.q_classes qc on qq.class_id = qc.sub_class_id and qc.class_id = 1
-
-                 left join quiz.q_answer_questions qaq on qa.answer_id = qaq.answer_id
-        where qp.paper_id = #{paperId}
         group by qp.paper_id, qq.question_id, qc.id, qpq.pq_id, qaq.aq_id
     </select>
 

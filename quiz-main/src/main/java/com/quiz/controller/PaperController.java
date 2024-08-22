@@ -51,20 +51,6 @@ public class PaperController {
     }
 
     @PathPermission(PermissionEnum.READ)
-    @ApiOperation("通过试卷ID,获取试卷详情")
-    @GetMapping("get/{paperId:\\d+}")
-    public PaperAndAnswerDTO getPaper(@PathVariable Integer paperId) {
-        return paperService.getPaper(paperId);
-    }
-
-    @PathPermission(PermissionEnum.READ)
-    @ApiOperation("获取试卷列表")
-    @GetMapping("get-list/{userId:\\d+}")
-    public List<PaperAndAnswerDTO> getPaperList(@PathVariable Integer userId) {
-        return paperService.getPaperListByUserId(userId);
-    }
-
-    @PathPermission(PermissionEnum.READ)
     @ApiOperation("获取用户试卷总数(包括已删除),判断是否出过题")
     @GetMapping("get-total/{userId:\\d+}")
     public Long getPaperTotal(@PathVariable Integer userId) {
@@ -79,18 +65,33 @@ public class PaperController {
         return paperService.removePaperByPaperId(paperId);
     }
 
+
     @PathPermission(PermissionEnum.READ)
-    @ApiOperation("查询用户a试卷列表,以及用户b的回答信息")
-    @GetMapping("get-list/{creatorUserId:\\d+}/{responderUserId:\\d+}")
-    public List<PaperAndAnswerDTO> getPaperAndAnswerDTOList(@PathVariable Integer creatorUserId, @PathVariable Integer responderUserId) {
-        return paperService.getPaperAndAnswerInfoListByUserId(creatorUserId, responderUserId);
+    @ApiOperation("通过试卷ID,获取试卷详情")
+    @GetMapping("get/{paperId:\\d+}")
+    public PaperAndAnswerDTO getPaper(@PathVariable Integer paperId) {
+        return paperService.getPaper(paperId);
     }
 
     @PathPermission(PermissionEnum.READ)
-    @ApiOperation("通过试卷ID,获取试卷详情,以及用户回答信息")
+    @ApiOperation("获取试卷列表")
+    @GetMapping("get-list/{userId:\\d+}")
+    public List<PaperAndAnswerDTO> getPaperList(@PathVariable Integer userId) {
+        return paperService.getPaperListByUserId(userId);
+    }
+
+    @PathPermission(PermissionEnum.READ)
+    @ApiOperation("获取试卷详情,以及用户回答信息")
     @GetMapping("get/{paperId:\\d+}/{responderUserId:\\d+}")
     public PaperAndAnswerDTO getPaperAndAnswerDTO(@PathVariable Integer paperId, @PathVariable Integer responderUserId) {
-        return paperService.getPaperAndAnswerDTOByPaperIdAndUserId(paperId, responderUserId);
+        return paperService.getPaperAndAnswerDTO(paperId, responderUserId);
+    }
+
+    @PathPermission(PermissionEnum.READ)
+    @ApiOperation("获取试卷详情,以及用户回答信息列表")
+    @GetMapping("get-list/{creatorUserId:\\d+}/{responderUserId:\\d+}")
+    public List<PaperAndAnswerDTO> getPaperAndAnswerDTOList(@PathVariable Integer creatorUserId, @PathVariable Integer responderUserId) {
+        return paperService.getPaperAndAnswerDTOList(creatorUserId, responderUserId);
     }
 
 }
