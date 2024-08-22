@@ -28,7 +28,7 @@
                         <text class="text2">出题</text>
                     </view>
                     <view class="statistics">
-                        <text class="text1">{{ userInfo.answersTotal }}</text>
+                        <text class="text1">{{ userInfo.answerTotal }}</text>
                         <text class="text2">答题</text>
                     </view>
                     <view class="statistics">
@@ -53,10 +53,10 @@
                         </view>
                         <view v-show="activeTag == 0" class="table-content flex-column">
                             <template v-if="intimateRanking?.length != 0">
-                                <view v-if="isFriendHome" class="my-ranking">
-                                    <view class="nickname">{{ own?.nickname }}</view>
+                                <view v-if="isFriendHome && myRanking != -1" class="my-ranking">
+                                    <view class="nickname">{{ intimateRanking[myRanking].nickname }}</view>
                                     <view class="score-grou">
-                                        <text class="score">{{ own?.totalScore }}</text>
+                                        <text class="score">{{ intimateRanking[myRanking].totalScore }}</text>
                                         <text class="t1">分</text>
                                     </view>
                                     <view class="ranking">位于第{{ myRanking + 1 }}名</view>
@@ -197,7 +197,6 @@ import { getIntimateRanking, getUser } from '@/utils/api/user';
 import { useStore } from "@/stores/store";
 import { homeTestInfo } from '@/utils/constant';
 import { objectToPathParams } from '@/utils/service';
-import Paper from '../paper/paper.vue';
 
 const sum = ref(10);
 const index = ref(0);
@@ -210,7 +209,7 @@ type Option = AnyObject & {
 onLoad((option: Option) => {
     /** 等待用户登录完成 */
     let tempId = setInterval(() => {
-        if (own.value.userId) {
+        if (store.user.userId) {
             clearInterval(tempId);
             /* 如果是朋友主页 */
             if (option?.userId) {
@@ -219,11 +218,11 @@ onLoad((option: Option) => {
                 getUser(option.userId).then(res => {
                     friend.value = res.data;
                     getIntimateRanking(friend.value.userId).then(res => intimateRanking.value = res.data);
-                    getPaperAndAnswerDTOList(friend.value.userId, own.value.userId).then(res => paperList.value = res.data);
+                    getPaperAndAnswerDTOList(friend.value.userId, store.user.userId).then(res => paperList.value = res.data);
                 });
             } else {
-                getIntimateRanking(own.value.userId).then(res => intimateRanking.value = res.data);
-                getPaperList(own.value.userId).then(res => paperList.value = res.data);
+                getIntimateRanking(store.user.userId).then(res => intimateRanking.value = res.data);
+                getPaperList(store.user.userId).then(res => paperList.value = res.data);
             }
 
         }
@@ -233,8 +232,6 @@ onLoad((option: Option) => {
 const refAlert = ref();
 /** 设置 */
 const refDialog = ref();
-/** 自己的信息 */
-const own = computed<Quiz.UserDto>(() => store.user);
 /** 获取道具信息 */
 const props = computed<Quiz.PropDTO[]>(() => store.props);
 /** 好友的信息(只有进入好友主页才有值) */
@@ -242,15 +239,9 @@ const friend = ref<Quiz.UserDto>({} as Quiz.UserDto);
 /** 是不是好友主页 */
 const isFriendHome = ref<boolean>(false);
 /** 当前主页的个人信息 */
-const userInfo = computed<Quiz.UserDto>(() => isFriendHome.value ? friend.value : own.value);
+const userInfo = computed<Quiz.UserDto>(() => isFriendHome.value ? friend.value : store.user);
 /** 我在排行榜的排名 */
-const myRanking = computed<number>(() => {
-    let ranking = intimateRanking.value.findIndex(item => own.value.userId == item.userId);
-    if (ranking != -1) {
-        own.value.totalScore = intimateRanking.value[ranking].totalScore;
-    }
-    return ranking;
-});
+const myRanking = computed<number>(() => intimateRanking.value.findIndex(item => store.user.userId == item.userId));
 /** 亲密排行榜数据 */
 const intimateRanking = ref<Quiz.UserDto[]>([]);
 /** 试卷记录 */
@@ -268,18 +259,18 @@ const questionGrouped = computed<GroupedItem[]>(() => {
         .filter(paper => isFriendHome.value ? paper.answerId : true)
         /** 收集题目到一个数组,并且添加选择的选项 */
         .flatMap(paper => {
-            let answers = paper.answers?.split('@@').map(Number) || new Array(10).fill(-1);
-            let selects = paper.selects?.split('@@').map(Number) || new Array(10).fill(-1);
+            // let answers = paper.answers?.split('@@').map(Number) || new Array(10).fill(-1);
+            // let selects = paper.selects?.split('@@').map(Number) || new Array(10).fill(-1);
             return paper.questions.map((q, index) => {
                 let options = q.options?.split('@@') || new Array(10).fill(-1);
                 return {
                     ...q,
-                    option: answers[index] == selects[index] || !isFriendHome.value ? options[answers[index]] : '??????'
+                    option: q.aqSelectIndex == q.pqSelectIndex || !isFriendHome.value ? options[q.pqSelectIndex] : '??????'
                 };
             });
         })
         /** 排序 */
-        .sort((a, b) => a.questionId - b.questionId)
+        // .sort((a, b) => a.questionId - b.questionId)
         .reduce((acc, curr) => {
             // 查找当前类别是否已存在
             const existingCategory = acc.find(category => category.classId === curr.classId);
@@ -328,7 +319,7 @@ onShareAppMessage((res) => {
 
 /** 点击朋友触发 */
 function goFriendHome(id: number) {
-    if (id == own.value.userId) {
+    if (id == store.user.userId) {
         refAlert.value.show({ msg: '自己都不认识了吗?' });
         return;
     }
