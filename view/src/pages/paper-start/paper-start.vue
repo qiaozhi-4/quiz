@@ -54,6 +54,7 @@
             </button>
         </view>
     </view>
+    <q-loading ref="refLoading" />
 </template>
 
 
@@ -66,6 +67,8 @@ import { gainProp } from '@/utils/api/prop';
 import { useStore } from "@/stores/store";
 import { objectToPathParams } from '@/utils/service';
 import { getPaper } from '@/utils/api/paper';
+/** 加载框ref */
+const refLoading = ref();
 /** 对话框ref */
 const refDialog = ref();
 /** 提示消息ref */
@@ -76,22 +79,20 @@ type Option = AnyObject & {
     /** 试卷id */
     paperId?: number;
 } | undefined;
-
 onLoad((option: Option) => {
     /** 等待用户登录完成 */
     let tempId = setInterval(() => {
         if (store.user.userId) {
             clearInterval(tempId);
             /** 如果是答题 */
-            if (option?.paperId) {
+            if (option?.paperId != null) {
                 getPaper(option.paperId).then(res => {
                     paper.value = res.data;
                     /** 如果全部都有下标就是答题 */
                     isAnswer.value = res.data.questions.every(e => e.pqSelectIndex != null);
+                    refLoading.value.hide();
                 });
                 verifyPaper(option?.paperId, store.user.userId).then(res => {
-                    console.log(res.data);
-
                     if (res.data.isMyPaper) {
                         refAlert.value.show({ msg: '不能回答自己的出题,2秒后返回主页' });
                         setTimeout(() => uni.redirectTo({ url: `/pages/home/home` }), 2000);
@@ -99,7 +100,7 @@ onLoad((option: Option) => {
                         refDialog.value.show();
                     }
                 });
-            }
+            } else { refLoading.value.hide(); }
         }
     }, 1000);
 });
