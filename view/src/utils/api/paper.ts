@@ -12,7 +12,7 @@ export function createPaper(questionNumber : number, userId : number): Promise<Q
 		},
 	})
 }
-/** 查询用户a试卷列表,以及用户b的回答信息 */
+/** 获取试卷详情,以及用户回答信息列表 */
 export function getPaperAndAnswerDTOList(creatorUserId : number, responderUserId : number): Promise<Quiz.Result<Array<Quiz.PaperAndAnswerDTO>>> {
 	return api.request({
 		url: `/paper/get-list/{creatorUserId}/{responderUserId}`,
@@ -53,7 +53,7 @@ export function getPaper(paperId : number): Promise<Quiz.Result<Quiz.PaperAndAns
 		},
 	})
 }
-/** 通过试卷ID,获取试卷详情,以及用户回答信息 */
+/** 获取试卷详情,以及用户回答信息 */
 export function getPaperAndAnswerDTO(paperId : number, responderUserId : number): Promise<Quiz.Result<Quiz.PaperAndAnswerDTO>> {
 	return api.request({
 		url: `/paper/get/{paperId}/{responderUserId}`,
