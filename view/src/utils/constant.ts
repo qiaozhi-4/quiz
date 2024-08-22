@@ -3,7 +3,7 @@ export type ScoreInfo = {
     englishName: string,
     name: string,
     badgeName: string,
-    badges: Quiz.AnswerDTODTO[];
+    badges: Quiz.AnswerDTO[];
 };
 /** 得分描述已经信息 */
 export const scoreInfo = () => JSON.parse(JSON.stringify([

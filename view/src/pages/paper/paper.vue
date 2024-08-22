@@ -32,7 +32,8 @@
                         :key="index">
                         <view class="title">{{ question?.title }}</view>
                         <view class="options flex-column">
-                            <button class="option-button" :class="{ hint: i == answerIndex }"
+                            <button class="option-button"
+                                :class="{ hint: i == answerIndex, activity: i == infos[index].select }"
                                 v-for="(option, i) in question.options.split('@@')" :key="i"
                                 @click="onButtonClick(i)">{{
                                     option }}</button>
@@ -218,10 +219,21 @@ function onButtonClick(index: number) {
 /** 提交 */
 function submit() {
     if (isAnswer.value) {
-        saveAnswer({ paperId: paper.value.paperId, selects: selects.value.join('@@'), responderUserId: store.user.userId, } as Quiz.AnswerDTODTO).then((res) => {
+        paper.value.responderUserId = store.user.userId;
+        saveAnswer(paper.value).then((res) => {
+            if (paper.value.answerId) {
+                store.usePropNumberById(2);
+            }
+            paper.value = res.data;
             store.addPropNumberById(1, res.data.score - paper.value.score);
             uni.reLaunch({
-                url: `/pages/paper-answer-finish/paper-answer-finish` + objectToPathParams({ paperId: res.data.paperId, userId: userInfo.value.userId, avatarUrl: userInfo.value.avatarUrl, nickname: userInfo.value.nickname, score: res.data.score })
+                url: `/pages/paper-answer-finish/paper-answer-finish` + objectToPathParams({
+                    paperId: paper.value.paperId,
+                    userId: paper.value.creatorUserId,
+                    avatarUrl: paper.value.creatorUserAvatarUrl,
+                    nickname: paper.value.creatorUserNickname,
+                    score: paper.value.score
+                })
             });
         });
     } else {
@@ -400,7 +412,11 @@ function onClickPopupQuestion(index: number) {
                             color: #FFFFFF;
                         }
 
-                        .option-button:hover {
+                        .activity {
+                            background: linear-gradient(90deg, #BE53FF 0%, #7756EC 100%);
+                        }
+
+                        .option-button:checked {
 
                             /* 粉紫渐变 选项 */
                             background: linear-gradient(90deg, #BE53FF 0%, #7756EC 100%) !important;

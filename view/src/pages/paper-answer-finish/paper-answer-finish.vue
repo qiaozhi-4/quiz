@@ -75,10 +75,6 @@ onLoad((option: Option) => {
     pageOption.value = option;
 });
 
-
-
-
-
 /** 显示底部 */
 const showFooter = ref(false);
 /** 查看排行榜 */
