@@ -90,16 +90,18 @@ onLoad((option: Option) => {
                     isAnswer.value = res.data.questions.every(e => e.pqSelectIndex != null);
                 });
                 verifyPaper(option?.paperId, store.user.userId).then(res => {
+                    console.log(res.data);
+
                     if (res.data.isMyPaper) {
                         refAlert.value.show({ msg: '不能回答自己的出题,2秒后返回主页' });
                         setTimeout(() => uni.redirectTo({ url: `/pages/home/home` }), 2000);
-                    } else if (res.data.isRepeatAnswers) {
+                    } else if (res.data.isRepeatAnswer) {
                         refDialog.value.show();
                     }
                 });
             }
         }
-    },1000);
+    }, 1000);
 });
 /** 获取复活宝石数量 */
 const gemCount = computed<number>(() => store.getPropById(2)?.number || 0);
@@ -114,13 +116,13 @@ const now = formatDate(new Date, 'YYYY/MM/DD');
 const onResurrection = () => {
     if (gemCount.value < 1) {
         gainProp(1, 2, store.user.userId).then(res => {
+            store.addPropNumberById(2, 1);
             refAlert.value.show({ msg: '假装你看完了视频,然后获取了宝石,并开始答题' });
             setTimeout(() => {
                 goPaper();
             }, 2000);
         });
     } else {
-        store.addPropNumberById(2, -1);
         goPaper();
     }
 };

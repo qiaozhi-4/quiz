@@ -375,6 +375,10 @@ function goOnQuestion(paperId: number) {
 }
 /** 从朋友题库开始答题 */
 function goTest(paperId: number) {
+    if ((store.getPropById(2)?.number || 0) < 1) {
+        refAlert.value.show({ msg: '宝石不足' });
+        return;
+    }
     uni.navigateTo({
         url: `/pages/paper-start/paper-start` + objectToPathParams({ paperId: paperId })
     });
