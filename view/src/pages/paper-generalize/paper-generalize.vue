@@ -1,7 +1,8 @@
 <template>
 
     <view class="page">
-        <q-nav-bar fixed class="head-sticky" titleSize="20" needBack :title="`${pageOption?.nickname}的${paper?.order}号测试`" />
+        <q-nav-bar fixed class="head-sticky" titleSize="20" needBack
+            :title="`${paper?.creatorUserNickname}的${paper?.order}号测试`" />
         <view class="main">
             <view class="questions flex-column">
                 <view class="question flex-column" v-for="(question, index) in paper.questions" :key="index">
@@ -10,10 +11,10 @@
                         <view class="title text-overflow">{{ question?.title }}</view>
                     </view>
                     <view class="question-info">
-                        <view v-if="isFriendPaper && paper.answerArray[index] != paper?.selectArray[index]"
+                        <view v-if="isFriendPaper && question.pqSelectIndex != question.aqSelectIndex"
                             class="option text-overflow">???????</view>
                         <view v-else class="option text-overflow">{{
-                            question?.options.split('@@')[paper.answerArray[index]] }}</view>
+                            question?.options.split('@@')[question.pqSelectIndex] }}</view>
                     </view>
                 </view>
             </view>
@@ -30,24 +31,26 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
-import { getPaperAndAnswerDTO  } from '@/utils/api/paper';
+import { getPaper, getPaperAndAnswerDTO } from '@/utils/api/paper';
 import { useStore } from "@/stores/store";
 import { objectToPathParams } from '@/utils/service';
-const store = useStore();
 /** 本页路径参数 */
 type Option = AnyObject & {
     /** 答题人id */
     userId?: number;
     /** 试卷id */
     paperId?: number;
-    /** 出题人昵称 */
-    nickname?: string;
 } | undefined;
-/** 页面跳转过来的参数 */
-const pageOption = ref<Option>({});
+onLoad((option: Option) => {
+    if (option?.paperId && option?.userId) {
+        isFriendPaper.value = true;
+        getPaperAndAnswerDTO(option.paperId, option.userId).then((res) => paper.value = res.data);
+    } else if (option?.paperId) {
+        getPaper(option?.paperId).then((res) => paper.value = res.data);
+    }
+});
 /** 获取测试信息 */
-type PaperInfo = Quiz.Paper & { selectArray: number[], answerArray: number[]; };
-const paper = ref<PaperInfo>({} as PaperInfo);
+const paper = ref<Quiz.PaperAndAnswerDTO>({} as Quiz.PaperAndAnswerDTO);
 /** 是否是朋友试卷 */
 const isFriendPaper = ref<boolean>(false);
 
@@ -58,17 +61,6 @@ function anewTast() {
     });
 }
 
-onLoad((option: Option) => {
-    pageOption.value = option;
-    if (option?.paperId) {
-        getPaperAndAnswerDTO(option.paperId, store.user.userId).then((res) => {
-            paper.value = res.data;
-            paper.value.selectArray = paper.value.selects?.split('@@').map(Number);
-            paper.value.answerArray = paper.value.answers.split('@@').map(Number);
-            isFriendPaper.value = paper.value.creatorUserId != store.user.userId;
-        });
-    }
-});
 </script>
 
 <style lang="scss" scoped>
