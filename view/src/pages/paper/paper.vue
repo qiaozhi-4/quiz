@@ -207,15 +207,6 @@ function switchQuestion() {
             objCope(res.data, paper.value.questions[currentQuestionIndex.value]);
         });
 }
-
-/** 键盘输入触发 */
-function onInput(e: any) {
-    currentExtraDescribe.value = e.detail.value;
-}
-/** 键盘失去焦点触发 */
-function onBlur(e: any) {
-    currentExtraDescribe.value = e.detail.value;
-}
 /** 点击选项 */
 function onButtonClick(index: number) {
     /** 同步到试卷的信息 */
@@ -272,17 +263,25 @@ const style = ref();
 const activityPopup = ref<string>("");
 /** 弹出层ref */
 const popupRef = ref();
-/** 弹出层高度 */
-const popupStyle = ref({ height: `${uni.getMenuButtonBoundingClientRect().bottom + 10}px` });
 /** 切换题目 */
 function onChange(e: any) {
-
     currentQuestionIndex.value = e.detail.current;
 }
 /** 键盘高度发生变化 */
 function keyboardheightchange(e: any) {
     style.value = {
         top: `-${e.detail.height - 83}px`,
+    };
+}
+/** 键盘输入触发 */
+function onInput(e: any) {
+    currentExtraDescribe.value = e.detail.value;
+}
+/** 键盘失去焦点触发 */
+function onBlur(e: any) {
+    currentExtraDescribe.value = e.detail.value;
+    style.value = {
+        top: `0`,
     };
 }
 /** 点击底部svg切换活动弹窗 */
@@ -460,7 +459,7 @@ function onClickPopupQuestion(index: number) {
             padding: 12px 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 
-            transition: top 0.3s linear;
+            transition: top 0.1s linear;
 
             .input {
                 width: 100%;
