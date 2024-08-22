@@ -140,6 +140,7 @@ const isAnswer = ref<boolean>(false);
 const isFinish = computed<boolean>(() => infos.value?.every(e => e.select != null));
 /** 提示宝石 */
 const hintGem = computed<Quiz.PropDTO>(() => store.getPropById(3) || {} as Quiz.PropDTO);
+/** 当前用户的选择和输入 */
 const infos = computed<{ select: number, extraDescribe: string; }[]>(() => {
     return paper.value.questions?.map(e => {
         return {
@@ -148,6 +149,7 @@ const infos = computed<{ select: number, extraDescribe: string; }[]>(() => {
         };
     });
 });
+/** 当前用户的当前题目的选择 */
 const currentSelect = computed({
     get() {
         return isAnswer.value ? paper.value?.questions[currentQuestionIndex.value].aqSelectIndex : paper.value?.questions[currentQuestionIndex.value].pqSelectIndex;
@@ -160,6 +162,7 @@ const currentSelect = computed({
         }
     }
 });
+/** 当前用户的当前题目的输入 */
 const currentExtraDescribe = computed({
     get() {
         return isAnswer.value ? paper.value?.questions[currentQuestionIndex.value].aqExtraDescribe : paper.value?.questions[currentQuestionIndex.value].pqExtraDescribe;
@@ -217,7 +220,7 @@ function onBlur(e: any) {
 function onButtonClick(index: number) {
     /** 同步到试卷的信息 */
     currentSelect.value = index;
-    if (!infos.value[infos.value.length - 1].select) {
+    if (infos.value[infos.value.length - 1].select == null) {
         currentQuestionIndex.value++;
         return;
     }
@@ -273,6 +276,7 @@ const popupRef = ref();
 const popupStyle = ref({ height: `${uni.getMenuButtonBoundingClientRect().bottom + 10}px` });
 /** 切换题目 */
 function onChange(e: any) {
+
     currentQuestionIndex.value = e.detail.current;
 }
 /** 键盘高度发生变化 */
