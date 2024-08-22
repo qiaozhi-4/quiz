@@ -26,6 +26,11 @@ button {
         box-shadow 0.2s;
 }
 
+button::after,
+button::before {
+    content: none;
+}
+
 button:active {
     /* 缩小按钮 */
     transform: scale(0.92);
