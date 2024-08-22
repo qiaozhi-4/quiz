@@ -62,7 +62,7 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
     }
 
     @Override
-    public Question paperSwitchQuestion(Integer userId, Integer pqId ) {
+    public Question paperSwitchQuestion(Integer userId, Integer pqId) {
         List<Question> questionList = questionMapper.selectRandomQuestionsByUserIdAndNumber(userId, 1);
         Assert.isTrue(!questionList.isEmpty(), "没有更多题目了");
         PaperQuestions paperQuestions = PaperQuestions.builder().pqId(pqId).questionId(questionList.get(0).getQuestionId()).build();
@@ -72,6 +72,14 @@ public class PaperServiceImpl extends ServiceImpl<PaperMapper, Paper> implements
 
     @Override
     public Boolean updatePaper(PaperAndAnswerDTO paper) {
+        List<PaperQuestions> paperQuestionsList = paper.getQuestions().stream()
+                .map(questionDTO -> PaperQuestions.builder()
+                        .pqId(questionDTO.getPqId())
+                        .pqSelectIndex(questionDTO.getPqSelectIndex())
+                        .pqExtraDescribe(questionDTO.getPqExtraDescribe())
+                        .build())
+                .collect(Collectors.toList());
+        Assert.isTrue(paperQuestionsService.updateBatchById(paperQuestionsList), "试卷更新失败");
         return true;
     }
 

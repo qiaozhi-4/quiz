@@ -17,40 +17,46 @@
                 </template>
             </view>
             <view v-else @click="switchQuestion">换一题</view>
-            <q-avatar class="avatar" :src="userInfo.avatarUrl" size="62" borderWidth="3"></q-avatar>
+            <q-avatar class="avatar" :src="paper.creatorUserAvatarUrl" size="62" borderWidth="3"></q-avatar>
             <view class="statistics-text">
-                {{ `Question ${questionIndex + 1}/${questions?.length}` }}
+                {{ `Question ${currentQuestionIndex + 1}/${paper.questions?.length}` }}
             </view>
             <view class="progress-wrap">
-                <view class="progress" :style="{ width: `${((questionIndex + 1) / questions?.length * 100)}%` }"></view>
+                <view class="progress"
+                    :style="{ width: `${((currentQuestionIndex + 1) / paper.questions?.length * 100)}%` }">
+                </view>
             </view>
             <view class="question-wrap">
-                <swiper class="swiper" :current="questionIndex" @change="onChange">
-                    <swiper-item class="swiper-item flex-column" v-for="(question, index) in questions" :key="index">
+                <swiper class="swiper" :current="currentQuestionIndex" @change="onChange">
+                    <swiper-item class="swiper-item flex-column" v-for="(question, index) in paper.questions"
+                        :key="index">
                         <view class="title">{{ question?.title }}</view>
                         <view class="options flex-column">
                             <button class="option-button" :class="{ hint: i == answerIndex }"
-                                v-for="(option, i) in options[index]" :key="i" @click="onButtonClick(i)">{{
+                                v-for="(option, i) in question.options.split('@@')" :key="i"
+                                @click="onButtonClick(i)">{{
                                     option }}</button>
                         </view>
                     </swiper-item>
                 </swiper>
                 <!-- 指示点 -->
-                <q-indicator-position :current="questionIndex" :amount="questions?.length"></q-indicator-position>
+                <q-indicator-position :current="currentQuestionIndex"
+                    :amount="paper.questions?.length"></q-indicator-position>
             </view>
         </view>
         <view class="footer flex-column">
-            <view class="input-wrap" :style="style">
-                <q-svg class="svg" :icon="`答题测试-底部-泡泡${inputValues[questionIndex] ? '-激活' : ''}`" size="19" />
+            <view class="input-wrap" :style="style" v-if="paper.questions">
+                <q-svg class="svg" :icon="`答题测试-底部-泡泡${currentExtraDescribe ? '-激活' : ''}`" size="19" />
                 <input class="input" placeholder-class="input-placeholder" placeholder="说说具体的想法"
                     :adjust-position="false" @input="onInput" @blur="onBlur"
-                    @keyboardheightchange="keyboardheightchange" :value="inputValues[questionIndex]" />
+                    @keyboardheightchange="keyboardheightchange" :value="currentExtraDescribe" />
             </view>
             <view class="footer-svg">
                 <q-svg class="svg" :icon="`答题测试-底部-总览${activityPopup == '总览' ? '-激活' : ''}`" size="19"
                     @click="onChangeActivityPopup('总览')" />
                 <q-svg class="svg" :icon="`答题测试-底部-电脑${activityPopup == '电脑' ? '-激活' : ''}`" size="19"
                     @click="onChangeActivityPopup('电脑')" />
+                <button v-show="isFinish" class="submit-but" @click="submit"> 提交 </button>
             </view>
         </view>
     </view>
@@ -59,18 +65,19 @@
     <q-dialog ref="popupRef" extraClass="popup-wrap" location="bottom" :safe-area="false" maskHideDialog
         @maskCallback="activityPopup = ''">
         <view class="popup">
-            <view class="title">{{ userInfo?.nickname }} 的 {{ paper?.order }}号测试</view>
+            <view class="title">{{ paper.creatorUserNickname }} 的 {{ paper?.order }}号测试</view>
             <view class="questions flex-column" v-show="activityPopup == '总览'">
-                <view class="question flex-column" v-for="(question, index) in questions" :key="index"
+                <view class="question flex-column" v-for="(question, index) in paper.questions" :key="index"
                     @click="onClickPopupQuestion(index)">
                     <view class="question-title">
                         <q-svg icon="左双引号" size="10" />
                         <view class="title text-overflow">{{ question?.title }}</view>
                     </view>
                     <view class="question-info">
-                        <view class="option text-overflow" v-if="selects[index] != -1">{{
-                            options[index][selects[index]] }}</view>
-                        <view class="input-value text-overflow">{{ inputValues[index] }}</view>
+                        <view class="option text-overflow">{{
+                            question.options.split('@@')[infos[index].select] }}
+                        </view>
+                        <view class="input-value text-overflow">{{ infos[index].extraDescribe }}</view>
                     </view>
                 </view>
             </view>
@@ -92,6 +99,17 @@ import { objectToPathParams } from '@/utils/service';
 import { gainProp, useProp } from '@/utils/api/prop';
 import { objCope } from '@/utils/utils';
 
+onLoad((option: Option) => {
+    if (option?.userId && option?.paperId) {
+        isAnswer.value = true;
+        getPaperAndAnswerDTO(option.paperId, store.user.userId).then(res => paper.value = res.data);
+        // getUser(option.userId).then(res => friend.value = res.data);
+    } else if (option?.paperId) {
+        getPaperAndAnswerDTO(option.paperId, store.user.userId).then(res => paper.value = res.data);
+    } else {
+        createPaper(10, store.user.userId).then((res => paper.value = res.data));
+    }
+});
 const store = useStore();
 /** 本页路径参数 */
 type Option = AnyObject & {
@@ -103,28 +121,49 @@ type Option = AnyObject & {
 const refAlert = ref();
 /** 试卷信息 */
 const paper = ref<Quiz.PaperAndAnswerDTO>({} as Quiz.PaperAndAnswerDTO);
-/** 题目信息 */
-const questions = computed<Quiz.QuestionDTO[]>(() => paper.value?.questions);
 /** 当前题目下标 */
-const questionIndex = ref<number>(0);
-/** 答案下标数组 */
-const answers = computed<number[]>(() => paper.value?.answers.split('@@').map(Number) || []);
-/** 题目选项 */
-const options = computed<string[][]>(() => questions.value?.map(e => e.options.split('@@') || []) || []);
-/** 是不是答题 */
-const isAnswer = ref<boolean>(false);
-/** 朋友信息 */
-const friend = ref<Quiz.UserDto>({} as Quiz.UserDto);
-/** 当前试卷主人信息 */
-const userInfo = computed<Quiz.UserDto>(() => isAnswer.value ? friend.value : store.user);
-/** 选择的答案下标 */
-const selects = ref<number[]>(new Array(10).fill(-1));
-/** 输入框的值 */
-const inputValues = ref<string[]>(new Array(10));
-/** 提示宝石 */
-const hintGem = computed<Quiz.PropDTO>(() => store.getPropById(3) || {} as Quiz.PropDTO);
+const currentQuestionIndex = ref<number>(0);
 /** 正确答案下表 */
 const answerIndex = ref<number>(-1);
+/** 是不是答题 */
+const isAnswer = ref<boolean>(false);
+/** 是否全部选择完 */
+const isFinish = computed<boolean>(() => infos.value?.every(e => e.select != null));
+/** 提示宝石 */
+const hintGem = computed<Quiz.PropDTO>(() => store.getPropById(3) || {} as Quiz.PropDTO);
+const infos = computed<{ select: number, extraDescribe: string; }[]>(() => {
+    return paper.value.questions?.map(e => {
+        return {
+            select: isAnswer.value ? e.aqSelectIndex : e.pqSelectIndex,
+            extraDescribe: isAnswer.value ? e.aqExtraDescribe : e.pqExtraDescribe
+        };
+    });
+});
+const currentSelect = computed({
+    get() {
+        return isAnswer.value ? paper.value?.questions[currentQuestionIndex.value].aqSelectIndex : paper.value?.questions[currentQuestionIndex.value].pqSelectIndex;
+    },
+    set(newValue) {
+        if (isAnswer.value) {
+            paper.value.questions[currentQuestionIndex.value].aqSelectIndex = newValue;
+        } else {
+            paper.value.questions[currentQuestionIndex.value].pqSelectIndex = newValue;
+        }
+    }
+});
+const currentExtraDescribe = computed({
+    get() {
+        return isAnswer.value ? paper.value?.questions[currentQuestionIndex.value].aqExtraDescribe : paper.value?.questions[currentQuestionIndex.value].pqExtraDescribe;
+    },
+    set(newValue) {
+        if (isAnswer.value) {
+            paper.value.questions[currentQuestionIndex.value].aqExtraDescribe = newValue;
+        } else {
+            paper.value.questions[currentQuestionIndex.value].pqExtraDescribe = newValue;
+        }
+    }
+});
+
 /** 使用提示宝石 */
 function useHintGem() {
     if (hintGem.value.number < 1) {
@@ -135,7 +174,7 @@ function useHintGem() {
                 useProp(1, hintGem.value.propId, store.user.userId).then(res => {
                     store.usePropNumberById(hintGem.value.propId);
                     refAlert.value?.show({ msg: '已使用提示宝石', showTime: 1000 });
-                    answerIndex.value = answers.value[questionIndex.value];
+                    answerIndex.value = paper.value.questions[currentQuestionIndex.value].pqSelectIndex;
                     setTimeout(() => { answerIndex.value = -1; }, 2000);
                 }).catch(err => refAlert.value?.show({ msg: err.message }));
             }, 2000);
@@ -144,59 +183,57 @@ function useHintGem() {
         useProp(1, hintGem.value.propId, store.user.userId).then(res => {
             store.usePropNumberById(hintGem.value.propId);
             refAlert.value?.show({ msg: '已使用提示宝石', showTime: 1000 });
-            answerIndex.value = answers.value[questionIndex.value];
+            answerIndex.value = paper.value.questions[currentQuestionIndex.value].pqSelectIndex;
             setTimeout(() => { answerIndex.value = -1; }, 2000);
         }).catch(err => refAlert.value?.show({ msg: err.message }));
     }
 }
 /** 换一题 */
 function switchQuestion() {
-    paperSwitchQuestion(paper.value.questions[questionIndex.value].pqId, store.user.userId)
+    paperSwitchQuestion(paper.value.questions[currentQuestionIndex.value].pqId, store.user.userId)
         .then(res => {
-            objCope(res.data, paper.value.questions[questionIndex.value]);
+            objCope(res.data, paper.value.questions[currentQuestionIndex.value]);
         });
 }
 
+/** 键盘输入触发 */
+function onInput(e: any) {
+    currentExtraDescribe.value = e.detail.value;
+}
+/** 键盘失去焦点触发 */
+function onBlur(e: any) {
+    currentExtraDescribe.value = e.detail.value;
+}
 /** 点击选项 */
 function onButtonClick(index: number) {
-    selects.value[questionIndex.value] = index;
-    if (questionIndex.value < questions.value.length - 1) {
-        questionIndex.value++;
+    /** 同步到试卷的信息 */
+    currentSelect.value = index;
+    infos.value.some((e, i) => {
+        if (e.select == null) {
+            currentQuestionIndex.value = i;
+            return true;
+        }
+        return false;
+    });
+}
+/** 提交 */
+function submit() {
+    if (isAnswer.value) {
+        saveAnswer({ paperId: paper.value.paperId, selects: selects.value.join('@@'), responderUserId: store.user.userId, } as Quiz.AnswerDTODTO).then((res) => {
+            store.addPropNumberById(1, res.data.score - paper.value.score);
+            uni.reLaunch({
+                url: `/pages/paper-answer-finish/paper-answer-finish` + objectToPathParams({ paperId: res.data.paperId, userId: userInfo.value.userId, avatarUrl: userInfo.value.avatarUrl, nickname: userInfo.value.nickname, score: res.data.score })
+            });
+        });
     } else {
-        for (var i = 0; i < options.value.length; i++) {
-            if (selects.value[i] == -1) {
-                questionIndex.value = i;
-                return;
-            }
-        }
-        if (isAnswer.value) {
-            saveAnswer({ paperId: paper.value.paperId, selects: selects.value.join('@@'), responderUserId: store.user.userId, } as Quiz.AnswerDTODTO).then((res) => {
-                store.addPropNumberById(1, res.data.score - paper.value.score);
-                uni.reLaunch({
-                    url: `/pages/paper-answer-finish/paper-answer-finish` + objectToPathParams({ paperId: res.data.paperId, userId: userInfo.value.userId, avatarUrl: userInfo.value.avatarUrl, nickname: userInfo.value.nickname, score: res.data.score })
-                });
+        updatePaper(paper.value).then(res => {
+            uni.reLaunch({
+                url: `/pages/paper-set-finish/paper-set-finish` + objectToPathParams({ paperId: paper.value.paperId, userId: paper.value.creatorUserId })
             });
-        } else {
-            updatePaper({ paperId: paper.value.paperId, answers: selects.value.join('@@') } as Quiz.PaperDto).then(res => {
-                uni.reLaunch({
-                    url: `/pages/paper-set-finish/paper-set-finish` + objectToPathParams({ paperId: res.data.paperId, userId: userInfo.value.userId })
-                });
-            });
-        }
+        });
     }
 }
 
-onLoad((option: Option) => {
-    if (option?.userId && option?.paperId) {
-        isAnswer.value = true;
-        getPaperAndAnswerDTO(option.paperId, store.user.userId).then(res => paper.value = res.data);
-        getUser(option.userId).then(res => friend.value = res.data);
-    } else if (option?.paperId) {
-        getPaperAndAnswerDTO(option.paperId, store.user.userId).then(res => paper.value = res.data);
-    } else {
-        createPaper(10, store.user.userId).then((res => paper.value = res.data));
-    }
-});
 
 
 
@@ -210,15 +247,7 @@ const popupRef = ref();
 const popupStyle = ref({ height: `${uni.getMenuButtonBoundingClientRect().bottom + 10}px` });
 /** 切换题目 */
 function onChange(e: any) {
-    questionIndex.value = e.detail.current;
-}
-/** 键盘输入触发 */
-function onInput(e: any) {
-    inputValues.value[questionIndex.value] = e.detail.value;
-}
-/** 键盘失去焦点触发 */
-function onBlur(e: any) {
-    inputValues.value[questionIndex.value] = e.detail.value;
+    currentQuestionIndex.value = e.detail.current;
 }
 /** 键盘高度发生变化 */
 function keyboardheightchange(e: any) {
@@ -238,7 +267,7 @@ function onChangeActivityPopup(v: string) {
 }
 /** 点击弹出框题目触发,跳转到点击题目并且关闭弹出框 */
 function onClickPopupQuestion(index: number) {
-    questionIndex.value = index;
+    currentQuestionIndex.value = index;
     activityPopup.value = '';
     popupRef.value.hide();
 }
@@ -438,6 +467,28 @@ function onClickPopupQuestion(index: number) {
             .svg {
                 width: 19px;
                 height: 19px;
+            }
+
+            .submit-but {
+                margin-left: auto;
+                padding: 5px 15px;
+                gap: 10px;
+
+                min-width: 78.15px;
+                height: 25.48px;
+
+                background: rgba(255, 255, 255, 0.3);
+                backdrop-filter: blur(25px);
+                border-radius: 30px;
+
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 12px;
+                line-height: 15px;
+                color: #FFFFFF;
+
+                transform: rotate(0.58deg);
             }
         }
     }
