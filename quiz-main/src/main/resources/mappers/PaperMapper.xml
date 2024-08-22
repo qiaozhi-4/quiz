@@ -80,6 +80,8 @@
                tu_qp.nickname    as creator_user_nickname,
                tu_qp.avatar_url  as creator_user_avatar_url,
 
+               qa.score,
+
                tu_qa.nickname    as responder_user_nickname,
                tu_qa.avatar_url  as responder_user_avatar_url,
 
@@ -99,9 +101,10 @@
                  left join quiz.q_question qq on qpq.question_id = qq.question_id
                  left join quiz.q_classes qc on qq.class_id = qc.sub_class_id and qc.class_id = 1
 
-                 left join quiz.q_answer_questions qaq on qa.answer_id = qaq.answer_id
+                 left join quiz.q_answer_questions qaq
+                           on qa.answer_id = qaq.answer_id and qaq.question_id = qq.question_id
         where qp.paper_id = #{paperId}
-        group by qp.paper_id, qq.question_id, qc.id, qpq.pq_id, qaq.aq_id
+        group by qp.paper_id, qa.answer_id, qq.question_id, qc.id, qpq.pq_id, qaq.aq_id
     </select>
     <select id="selectPaperAndAnswerDTOList" resultMap="PaperAndAnswerDTOResultMap">
         select qp.*,
@@ -109,6 +112,8 @@
                tu_qp.nickname    as creator_user_nickname,
                tu_qp.avatar_url  as creator_user_avatar_url,
 
+               qa.score,
+
                tu_qa.nickname    as responder_user_nickname,
                tu_qa.avatar_url  as responder_user_avatar_url,
 
@@ -128,10 +133,11 @@
                  left join quiz.q_question qq on qpq.question_id = qq.question_id
                  left join quiz.q_classes qc on qq.class_id = qc.sub_class_id and qc.class_id = 1
 
-                 left join quiz.q_answer_questions qaq on qa.answer_id = qaq.answer_id
+                 left join quiz.q_answer_questions qaq
+                           on qa.answer_id = qaq.answer_id and qaq.question_id = qq.question_id
         where qp.state != -1
           and qp.creator_user_id = #{userId}
-        group by qp.paper_id, qq.question_id, qc.id, qpq.pq_id, qaq.aq_id
+        group by qp.paper_id, qa.answer_id, qq.question_id, qc.id, qpq.pq_id, qaq.aq_id
     </select>
 
 </mapper>
