@@ -103,7 +103,16 @@ import { objCope } from '@/utils/utils';
 onLoad((option: Option) => {
     isAnswer.value = option?.isAnswer == 'true';
     if (isAnswer.value && option?.paperId) {
-        getPaperAndAnswerDTO(option.paperId, store.user.userId).then(res => paper.value = res.data);
+        getPaperAndAnswerDTO(option.paperId, store.user.userId).then(res => {
+            paper.value = res.data;
+            /** 清除上一次的记录 */
+            res.data.questions.forEach(q => {
+                // @ts-expect-error
+                q.aqSelectIndex = null;
+                // @ts-expect-error
+                q.aqExtraDescribe = null;
+            });
+        });
     } else if (option?.paperId) {
         getPaper(option.paperId).then(res => paper.value = res.data);
     } else {
@@ -219,7 +228,7 @@ function onButtonClick(index: number) {
         }
         return false;
     });
-    submit()
+    submit();
 }
 /** 提交 */
 function submit() {
