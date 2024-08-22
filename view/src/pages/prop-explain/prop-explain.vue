@@ -11,9 +11,9 @@
             </view>
         </view>
         <view class="footer flex-column">
-            <button class="b1">免费领取1颗</button>
+            <!-- <button class="b1">免费领取1颗</button>
             <button class="b2">做任务领宝石！</button>
-            <text class="t1">宝石领取后30天后将失去光泽，请及时使用。</text>
+            <text class="t1">宝石领取后30天后将失去光泽，请及时使用。</text> -->
         </view>
     </view>
 </template>
