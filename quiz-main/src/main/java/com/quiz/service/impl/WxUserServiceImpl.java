@@ -16,7 +16,6 @@ import lombok.extern.log4j.Log4j2;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -40,7 +39,6 @@ public class WxUserServiceImpl implements IWxUserService {
 
     private final WxMaService wxMaService;
     private final UserMapper userMapper;
-    private final RedisTemplate<String, Object> redisTemplate;
     private final IUserService userService;
     private final IPropService propService;
 
