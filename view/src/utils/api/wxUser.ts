@@ -20,3 +20,14 @@ export function updateUser(user : Quiz.User): Promise<Quiz.Result<Quiz.User>> {
 		data: user,
 	})
 }
+/** 修改微信小程序用户信息 */
+export function verifyText(body : any, miniappId : string): Promise<Quiz.Result<string>> {
+	return api.request({
+		url: `/wx-user/verify-text`,
+		method: 'POST',
+		query: {
+			miniappId: miniappId,
+		},
+		data: body,
+	})
+}
