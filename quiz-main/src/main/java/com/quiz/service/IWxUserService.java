@@ -1,5 +1,6 @@
 package com.quiz.service;
 
+import cn.binarywang.wx.miniapp.bean.security.WxMaMsgSecCheckCheckRequest;
 import com.quiz.entity.User;
 import com.quiz.utils.Result;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -27,4 +28,13 @@ public interface IWxUserService {
      * @param user 用户id
      */
     User updateUserInfo(User user);
+
+    /**
+     * 验证用户输入文本信息
+     *
+     * @param userId     用户id
+     * @param miniappId  小程序id
+     * @param msgRequest 请求体
+     */
+    Boolean verifyText(Integer userId, String miniappId, WxMaMsgSecCheckCheckRequest msgRequest) throws WxErrorException;
 }

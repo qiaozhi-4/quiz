@@ -2,10 +2,15 @@ package com.quiz.service.impl;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
+import cn.binarywang.wx.miniapp.bean.security.WxMaMsgSecCheckCheckRequest;
+import cn.binarywang.wx.miniapp.bean.security.WxMaMsgSecCheckCheckResponse;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.quiz.constant.Constants;
 import com.quiz.entity.User;
+import com.quiz.entity.UserAuth;
 import com.quiz.mapper.UserMapper;
 import com.quiz.service.IPropService;
+import com.quiz.service.IUserAuthService;
 import com.quiz.service.IUserService;
 import com.quiz.service.IWxUserService;
 import com.quiz.utils.Assert;
@@ -40,6 +45,7 @@ public class WxUserServiceImpl implements IWxUserService {
     private final WxMaService wxMaService;
     private final UserMapper userMapper;
     private final IUserService userService;
+    private final IUserAuthService userAuthService;
     private final IPropService propService;
 
     @Override
@@ -68,5 +74,15 @@ public class WxUserServiceImpl implements IWxUserService {
     public User updateUserInfo(User user) {
         user.updateById();
         return user;
+    }
+
+    @Override
+    public Boolean verifyText(Integer userId, String miniappId, WxMaMsgSecCheckCheckRequest msgRequest) throws WxErrorException {
+        Assert.isTrue(wxMaService.switchover(miniappId), "AppID错误");
+        UserAuth userAuth = userAuthService.getOne(new LambdaQueryWrapper<UserAuth>().eq(UserAuth::getUserId, userId));
+        msgRequest.setOpenid(userAuth.getProviderId());
+        WxMaMsgSecCheckCheckResponse checkedMessage = wxMaService.getSecCheckService().checkMessage(msgRequest);
+        Assert.isTrue(checkedMessage.getResult().getLabel().equals("100"), "内容违规");
+        return true;
     }
 }

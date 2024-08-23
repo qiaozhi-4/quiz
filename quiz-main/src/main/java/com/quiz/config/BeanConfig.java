@@ -1,11 +1,13 @@
 package com.quiz.config;
 
+import cn.binarywang.wx.miniapp.bean.security.WxMaMsgSecCheckCheckRequest;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.quiz.config.wx.WxMaMsgSecCheckCheckRequestDeserializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.AntPathMatcher;
@@ -40,6 +42,8 @@ public class BeanConfig {
         module.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(dateTimeFormatter));
         // 如果需要，也可以添加反序列化器
         module.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(dateTimeFormatter));
+
+        module.addDeserializer(WxMaMsgSecCheckCheckRequest.class, new WxMaMsgSecCheckCheckRequestDeserializer());
 
         // 注册自定义的序列化程序和反序列化程序
         mapper.registerModule(module);

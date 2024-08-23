@@ -20,14 +20,15 @@ export function updateUser(user : Quiz.User): Promise<Quiz.Result<Quiz.User>> {
 		data: user,
 	})
 }
-/** 修改微信小程序用户信息 */
-export function verifyText(body : any, miniappId : string): Promise<Quiz.Result<string>> {
+/** 验证输入文本是否合规 */
+export function verifyText(miniappId : string, msgRequest : Quiz.WxMaMsgSecCheckCheckRequest, userId : number): Promise<Quiz.Result<any>> {
 	return api.request({
 		url: `/wx-user/verify-text`,
 		method: 'POST',
 		query: {
 			miniappId: miniappId,
+			userId: userId,
 		},
-		data: body,
+		data: msgRequest,
 	})
 }

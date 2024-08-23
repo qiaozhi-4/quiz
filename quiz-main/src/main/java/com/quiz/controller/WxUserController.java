@@ -1,5 +1,7 @@
 package com.quiz.controller;
 
+import cn.binarywang.wx.miniapp.bean.security.WxMaMsgSecCheckCheckRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quiz.annotation.PathPermission;
 import com.quiz.entity.User;
 import com.quiz.enumerate.PermissionEnum;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class WxUserController {
     private final IWxUserService wxUserService;
+    private final ObjectMapper objectMapper;
 
     @ApiOperation(value = "微信小程序登录")
     @PostMapping("login")
@@ -37,6 +40,15 @@ public class WxUserController {
     @PostMapping("update")
     public User updateUser(@RequestBody User user) {
         return wxUserService.updateUserInfo(user);
+    }
+
+    @PathPermission(PermissionEnum.USER_UPDATE)
+    @ApiOperation(value = "验证输入文本是否合规")
+    @PostMapping("verify-text")
+    public Boolean verifyText(@RequestParam Integer userId,
+                              @RequestParam String miniappId,
+                              @RequestBody WxMaMsgSecCheckCheckRequest msgRequest) throws WxErrorException {
+        return wxUserService.verifyText(userId, miniappId, msgRequest);
     }
 
 }

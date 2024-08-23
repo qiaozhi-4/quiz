@@ -408,4 +408,21 @@ declare namespace Quiz {
 		/** 用户账号 */
 		username: string
 	}
+	/** WxMaMsgSecCheckCheckRequest */
+	interface WxMaMsgSecCheckCheckRequest {
+		/**  */
+		content: string
+		/**  */
+		nickname: string
+		/**  */
+		openid: string
+		/**  */
+		scene: number
+		/**  */
+		signature: string
+		/**  */
+		title: string
+		/**  */
+		version: string
+	}
 }
