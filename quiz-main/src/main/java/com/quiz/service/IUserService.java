@@ -49,13 +49,6 @@ public interface IUserService extends IService<User> {
      */
     List<UserDTO> getIntimateRanking(Integer userId);
 
-    /**
-     * 根据用户id获取亲密好友列表
-     *
-     * @param userId 用户id
-     */
-    List<User> getIntimateFriends(Integer userId);
-
       /**
      * 根据用户id获取用户信息
      *

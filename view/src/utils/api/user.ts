@@ -1,16 +1,6 @@
 import { api } from "../service"
 /** 用户信息表 前端控制器 */
 
-/** 通过用户ID,获取用户密友信息 */
-export function getIntimateFriends(userId : number): Promise<Quiz.Result<Array<Quiz.User>>> {
-	return api.request({
-		url: `/user/get-intimate-friends/{userId}`,
-		method: 'GET',
-		path: {
-			userId: userId,
-		},
-	})
-}
 /** 通过用户ID,获取用户排行榜信息 */
 export function getIntimateRanking(userId : number): Promise<Quiz.Result<Array<Quiz.UserDto>>> {
 	return api.request({

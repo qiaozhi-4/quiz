@@ -75,11 +75,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public List<User> getIntimateFriends(Integer userId) {
-        return this.baseMapper.selectIntimateFriends(userId);
-    }
-
-    @Override
     public UserDTO getUserDtoByUserId(Integer userId) {
         return this.baseMapper.selectUserDtoByUserId(userId);
     }

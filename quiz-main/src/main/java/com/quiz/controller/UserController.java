@@ -6,7 +6,6 @@ import com.quiz.annotation.PathPermission;
 import com.quiz.dto.UserDTO;
 import com.quiz.entity.Answer;
 import com.quiz.entity.Paper;
-import com.quiz.entity.User;
 import com.quiz.enumerate.PermissionEnum;
 import com.quiz.service.IAnswerService;
 import com.quiz.service.IPaperService;
@@ -53,14 +52,6 @@ public class UserController {
     @GetMapping("get-intimate-ranking/{userId:\\d+}")
     public List<UserDTO> getIntimateRanking(@PathVariable Integer userId) {
         return userService.getIntimateRanking(userId);
-    }
-
-    //准备删除
-    @PathPermission(PermissionEnum.READ)
-    @ApiOperation("通过用户ID,获取用户密友信息")
-    @GetMapping("get-intimate-friends/{userId:\\d+}")
-    public List<User> getIntimateFriends(@PathVariable Integer userId) {
-        return userService.getIntimateFriends(userId);
     }
 
     @PathPermission(PermissionEnum.READ)

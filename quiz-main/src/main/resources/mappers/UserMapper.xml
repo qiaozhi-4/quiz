@@ -60,16 +60,6 @@
         group by tu.user_id
         order by total_score desc;
     </select>
-    <select id="selectIntimateFriends" resultType="com.quiz.entity.User">
-        select tu.*
-        from quiz.q_paper qp
-                 left join quiz.q_answer qa on qp.paper_id = qa.paper_id
-                 left join quiz.t_user tu on qp.creator_user_id = tu.user_id
-        where qp.state != -1
-          and qp.creator_user_id = #{userId}
-          and qa.score = 100
-        group by tu.user_id
-    </select>
     <select id="selectUserDtoByUserId" resultType="com.quiz.dto.UserDTO">
         select tu.*,
                count(distinct qp.paper_id)          as paper_total,

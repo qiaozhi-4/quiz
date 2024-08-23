@@ -37,12 +37,6 @@ public interface UserMapper extends BaseMapper<User> {
     List<UserDTO> selectIntimateRanking(Integer userId);
 
     /**
-     * 根据用户id获取亲密好友列表
-     * @param userId 用户id
-     */
-    List<User> selectIntimateFriends(Integer userId);
-
-    /**
      * 根据用户id获取用户信息
      *
      * @param userId 用户id
