@@ -96,9 +96,10 @@ import { createPaper, getPaper, getPaperAndAnswerDTO, paperSwitchQuestion, updat
 import { saveAnswer } from '@/utils/api/answer';
 import { useStore } from "@/stores/store";
 import { getUser } from '@/utils/api/user';
-import { objectToPathParams } from '@/utils/service';
+import { miniappId, objectToPathParams } from '@/utils/service';
 import { gainProp, useProp } from '@/utils/api/prop';
 import { objCope } from '@/utils/utils';
+import { verifyText } from '@/utils/api/wxUser';
 
 onLoad((option: Option) => {
     isAnswer.value = option?.isAnswer == 'true';
@@ -229,31 +230,37 @@ function onButtonClick(index: number) {
 /** 提交 */
 function submit() {
     if (infos.value.find(e => e.select == null)) return;
-    if (isAnswer.value) {
-        paper.value.responderUserId = store.user.userId;
-        saveAnswer(paper.value).then((res) => {
-            if (paper.value.answerId) {
-                store.usePropNumberById(2);
-            }
-            paper.value = res.data;
-            store.addPropNumberById(1, res.data.score - paper.value.score);
-            uni.reLaunch({
-                url: `/pages/paper-answer-finish/paper-answer-finish` + objectToPathParams({
-                    paperId: paper.value.paperId,
-                    userId: paper.value.creatorUserId,
-                    avatarUrl: paper.value.creatorUserAvatarUrl,
-                    nickname: paper.value.creatorUserNickname,
-                    score: paper.value.score
-                })
+    let msgRequest = {} as Quiz.WxMaMsgSecCheckCheckRequest;
+    msgRequest.content = infos.value.map(e => e.extraDescribe).join('@@');
+    msgRequest.version = '2';
+    msgRequest.scene = 2;
+    verifyText(miniappId, msgRequest, store.user.userId).then(res => {
+        if (isAnswer.value) {
+            paper.value.responderUserId = store.user.userId;
+            saveAnswer(paper.value).then((res) => {
+                if (paper.value.answerId) {
+                    store.usePropNumberById(2);
+                }
+                paper.value = res.data;
+                store.addPropNumberById(1, res.data.score - paper.value.score);
+                uni.reLaunch({
+                    url: `/pages/paper-answer-finish/paper-answer-finish` + objectToPathParams({
+                        paperId: paper.value.paperId,
+                        userId: paper.value.creatorUserId,
+                        avatarUrl: paper.value.creatorUserAvatarUrl,
+                        nickname: paper.value.creatorUserNickname,
+                        score: paper.value.score
+                    })
+                });
             });
-        });
-    } else {
-        updatePaper(paper.value).then(res => {
-            uni.reLaunch({
-                url: `/pages/paper-set-finish/paper-set-finish` + objectToPathParams({ paperId: paper.value.paperId, userId: paper.value.creatorUserId })
+        } else {
+            updatePaper(paper.value).then(res => {
+                uni.reLaunch({
+                    url: `/pages/paper-set-finish/paper-set-finish` + objectToPathParams({ paperId: paper.value.paperId, userId: paper.value.creatorUserId })
+                });
             });
-        });
-    }
+        }
+    });
 }
 
 

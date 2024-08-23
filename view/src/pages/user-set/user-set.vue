@@ -17,10 +17,11 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { updateUser } from '@/utils/api/wxUser';
+import { updateUser, verifyText } from '@/utils/api/wxUser';
 import { getPaperTotal } from '@/utils/api/paper';
 import { onLoad } from '@dcloudio/uni-app';
 import { useStore } from "@/stores/store";
+import { miniappId } from '@/utils/service';
 const store = useStore();
 /** 是否需要动画 */
 const avatarShake = ref<boolean>(false);
@@ -52,22 +53,29 @@ function onSubmit() {
         }, 500); // 动画持续时间应与CSS中定义的相同
     }
     if (store.user.avatarUrl && store.user.nickname) {
-        updateUser(store.user).then(e => {
-            // 判断是不是通过分享进来的
-            let route = getCurrentPages()[0].route;
-            if ("pages/paper-start/paper-start" == route) {/** 不是分享进来的 */
-                uni.navigateBack({ delta: 1 });
-            } else {/**分享进来的 */
-                if (store.user.paperTotal == 0) {/** 没有出过题 */
-                    uni.reLaunch({
-                        url: `/pages/paper-start/paper-start`
-                    });
-                } else {
-                    uni.reLaunch({
-                        url: `/pages/home/home`
-                    });
+        let msgRequest = {} as Quiz.WxMaMsgSecCheckCheckRequest;
+        msgRequest.content = store.user.nickname;
+        msgRequest.version = '2';
+        msgRequest.scene = 1;
+        msgRequest.nickname = store.user.nickname;
+        verifyText(miniappId, msgRequest, store.user.userId).then(res => {
+            updateUser(store.user).then(e => {
+                // 判断是不是通过分享进来的
+                let route = getCurrentPages()[0].route;
+                if ("pages/paper-start/paper-start" == route) {/** 不是分享进来的 */
+                    uni.navigateBack({ delta: 1 });
+                } else {/**分享进来的 */
+                    if (store.user.paperTotal == 0) {/** 没有出过题 */
+                        uni.reLaunch({
+                            url: `/pages/paper-start/paper-start`
+                        });
+                    } else {
+                        uni.reLaunch({
+                            url: `/pages/home/home`
+                        });
+                    }
                 }
-            }
+            });
         });
     }
 }
