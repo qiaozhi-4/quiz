@@ -13,6 +13,8 @@
             </button>
         </view>
     </view>
+    <!-- 提示消息 -->
+    <q-alert ref="refAlert"></q-alert>
 </template>
 
 <script lang="ts" setup>
@@ -22,6 +24,7 @@ import { getPaperTotal } from '@/utils/api/paper';
 import { onLoad } from '@dcloudio/uni-app';
 import { useStore } from "@/stores/store";
 import { miniappId } from '@/utils/service';
+const refAlert = ref();
 const store = useStore();
 /** 是否需要动画 */
 const avatarShake = ref<boolean>(false);
@@ -76,7 +79,7 @@ function onSubmit() {
                     }
                 }
             });
-        });
+        }).catch(err => refAlert.value.show({ msg: err.message }));
     }
 }
 </script>

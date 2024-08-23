@@ -260,7 +260,7 @@ function submit() {
                 });
             });
         }
-    });
+    }).catch(err => refAlert.value.show({ msg: err.message }));
 }
 
 
