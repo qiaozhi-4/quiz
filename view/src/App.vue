@@ -3,15 +3,14 @@ import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
 import { getPaperTotal } from "@/utils/api/paper";
 import { login } from "@/utils/api/wxUser";
 import { useStore } from "@/stores/store";
-import { objectToPathParams } from "@/utils/service";
+import { miniappId, objectToPathParams } from "@/utils/service";
 const store = useStore();
 onLaunch(() => {
     console.log("App Launch");
     uni.login({
         provider: "weixin", //使用微信登录
         success: (loginRes) => {
-            login(loginRes.code, "wxf2f9d21291120320").then((res) => {
-                // login('wx0f4e873ad758a586', loginRes.code).then((res) => {
+            login(loginRes.code, miniappId).then((res) => {
                 store.$patch(partialState => {
                     partialState.user = res.data.userInfo;
                     partialState.token = res.data.token;
