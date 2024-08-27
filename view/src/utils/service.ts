@@ -97,12 +97,12 @@ export class Api implements IApi {
                     if (data.code == 200) {
                         // ajaxEnd();
                         // 测试专用
-                        console.log(`请求路径:${options.url}`, data);
+                        // console.log(`请求路径:${options.url}`, data);
                         resolve(data);
                     }
                     else {
                         // 测试专用
-                        console.error(`错误的请求路径:${options.url}`);
+                        // console.error(`错误的请求路径:${options.url}`);
                         uni.showToast({
                             title: data.message,
                             icon: 'error',
@@ -113,7 +113,7 @@ export class Api implements IApi {
                 },
                 fail: (err: any) => {
                     // 测试专用
-                    console.error(err);
+                    // console.error(err);
                     uni.showToast({
                         title: '请求失败!',
                         icon: 'error',
@@ -144,9 +144,9 @@ const ajaxEnd = () => {
         uni.hideLoading();
 };
 /** 封装请求 */
-// export const api = new Api("https://qzwdyz.top", "quiz");
-export const api = new Api("http://localhost:1888", "");
-export const miniappId = "wxf2f9d21291120320";
+export const api = new Api("https://qzwdyz.top", "quiz");
+// export const api = new Api("http://localhost:1888", "");
+export const miniappId = "wxf2f9d21291120320";//quiz
 // export const miniappId = "wx0f4e873ad758a586";
 /** 服务器基础url */
 export const baseUrl = api.baseURL;
