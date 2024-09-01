@@ -37,20 +37,6 @@ public class AnswerController {
     }
 
     @PathPermission(PermissionEnum.READ)
-    @ApiOperation("查询答卷详情")
-    @GetMapping("get/{answerId:\\d+}")
-    public AnswerDTO getAnswer(@PathVariable Integer answerId) {
-        return answerService.getAnswerById(answerId);
-    }
-
-    @PathPermission(PermissionEnum.READ)
-    @ApiOperation("查询答卷列表")
-    @GetMapping("get-list/{userId:\\d+}")
-    public List<AnswerDTO> getAnswerList(@PathVariable Integer userId) {
-        return answerService.getAnswerListByUserId(userId);
-    }
-
-    @PathPermission(PermissionEnum.READ)
     @ApiOperation("查询徽章列表")
     @GetMapping("get-badge-list/{userId:\\d+}")
     public List<AnswerDTO> getBadgeList(@PathVariable Integer userId) {

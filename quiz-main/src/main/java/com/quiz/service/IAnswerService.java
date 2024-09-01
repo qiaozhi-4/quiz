@@ -31,20 +31,6 @@ public interface IAnswerService extends IService<Answer> {
     Integer getScoreByUserId(Integer userId);
 
     /**
-     * 根据id查询答卷详情
-     *
-     * @param answerId 答卷id
-     */
-    AnswerDTO getAnswerById(Integer answerId);
-
-    /**
-     * 根据用户id查询答卷列表
-     *
-     * @param userId 用户id
-     */
-    List<AnswerDTO> getAnswerListByUserId(Integer userId);
-
-    /**
      * 根据用户id查询徽章列表
      *
      * @param userId 用户id

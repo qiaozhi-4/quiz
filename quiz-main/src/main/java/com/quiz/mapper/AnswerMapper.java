@@ -23,20 +23,6 @@ public interface AnswerMapper extends BaseMapper<Answer> {
     Integer selectScoreByUserId(Integer userId);
 
     /**
-     * 根据id查询答卷详情
-     *
-     * @param answerId 答卷id
-     */
-    AnswerDTO selectAnswerById(Integer answerId);
-
-    /**
-     * 根据用户id查询答卷列表
-     *
-     * @param userId 用户id
-     */
-    List<AnswerDTO> selectAnswerListByUserId(Integer userId);
-
-    /**
      * 根据用户id查询徽章列表
      *
      * @param userId 用户id
