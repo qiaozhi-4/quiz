@@ -54,8 +54,7 @@
                  left join quiz.t_user tu
                            on qa.responder_user_id = tu.user_id
 
-        where qp.state != -1
-          and qp.creator_user_id = #{userId}
+        where qp.creator_user_id = #{userId}
           and qa.responder_user_id is not null
         group by tu.user_id
         order by total_score desc;
