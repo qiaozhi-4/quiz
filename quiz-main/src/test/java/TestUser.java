@@ -5,7 +5,6 @@ import com.quiz.entity.UserAuth;
 import com.quiz.mapper.UserMapper;
 import com.quiz.service.IUserService;
 import lombok.extern.log4j.Log4j2;
-import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,7 +29,7 @@ public class TestUser {
 
     @Test
     public void getUserDtoByAccount() {
-        val userDto = userService.getUserDtoByAccount("user_d02c3a68");
+        UserDTO userDto = userService.getUserDtoByAccount("user_d02c3a68");
         System.out.println(userDto);
     }
 
