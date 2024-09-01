@@ -17,14 +17,14 @@ import java.util.List;
  */
 public interface PaperMapper extends BaseMapper<Paper> {
     /**
-     * 根据试卷id查询试卷信息(删除)
+     * 根据试卷id查询试卷信息
      *
      * @param paperId 试卷id
      */
     PaperAndAnswerDTO selectPaperByPaperId(Integer paperId);
 
     /**
-     * 根据用户id查询试卷列表(删除)
+     * 根据用户id查询试卷列表
      *
      * @param userId 用户id
      */
