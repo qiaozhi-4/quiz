@@ -141,10 +141,8 @@
                                     <view class="v2">
                                         <view class="extra">
                                             <q-bubble>
-                                                <reference>
                                                     <button class="button"
                                                         @click="onRemorPafer(paper?.paperId, index)">删除</button>
-                                                </reference>
                                             </q-bubble>
                                         </view>
                                         <template v-if="paper?.questions?.some(e => e.pqSelectIndex == null)">
