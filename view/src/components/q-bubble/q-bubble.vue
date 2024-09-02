@@ -57,7 +57,7 @@
         <!-- 触发气泡显示元素内容 -->
         <view @click="toggleBubble">
             <slot name="reference">
-                <text>...</text>
+                <text style="font-size: 24px;">...</text>
             </slot>
         </view>
         <view class="bubble" v-if="isBubbleVisible">
