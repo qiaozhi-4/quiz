@@ -68,6 +68,18 @@
 			"style": {
 				"navigationBarTitleText": "paper-set-finish"
 			}
+		},
+		{
+			"path": "pages/home/chum-list/chum-list",
+			"style": {
+				"navigationBarTitleText": "chum-list"
+			}
+		},
+		{
+			"path": "pages/home/answer-history/answer-history",
+			"style": {
+				"navigationBarTitleText": "answer-history"
+			}
 		}
 	],
 	"globalStyle": {

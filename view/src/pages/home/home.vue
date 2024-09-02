@@ -27,11 +27,11 @@
                         <text class="text1">{{ userInfo.paperTotal }}</text>
                         <text class="text2">出题</text>
                     </view>
-                    <view class="statistics">
+                    <view class="statistics" @click="goAnswerHistory">
                         <text class="text1">{{ userInfo.answerTotal }}</text>
                         <text class="text2">答题</text>
                     </view>
-                    <view class="statistics">
+                    <view class="statistics" @click="goChumList">
                         <text class="text1">{{ userInfo.intimateFriendTotal }}</text>
                         <text class="text2">密友</text>
                     </view>
@@ -100,34 +100,7 @@
                                     :adjust-position="false" @input="onInput" @blur="onBlur" :value="input" />
                             </view>
                             <template v-if="isFriendHome">
-                                <template v-for="(paper, index) in paperList" :key="index">
-                                    <view :style="paper?.answerId ? '' : 'background-color: #352858;'"
-                                        class="test-paper-friend flex-column">
-                                        <view class="v1">
-                                            <text class="title">{{ friend?.nickname }}的{{ paper?.order }}号测试</text>
-                                            <text class="correct"></text>
-                                            <text class="num">{{ paper?.answerId ? paper?.score / 10 : 0 }}</text>
-                                            <text class="error"></text>
-                                            <text class="num">{{ paper?.answerId ? 10 - paper?.score / 10 : 0
-                                                }}</text>
-                                        </view>
-                                        <view class="progress-warp">
-                                            <view :style="`width: ${paper?.score}%;`" class="progress">
-                                            </view>
-                                        </view>
-                                        <view class="v2">
-                                            <template v-if="paper?.answerId">
-                                                <button class="button"
-                                                    @click="onParticulars(paper?.paperId, userInfo.nickname)">查看详情</button>
-                                                <button v-show="paper?.score != 100" class="button flex-row"
-                                                    @click="goTest(paper?.paperId)">
-                                                    <q-svg icon="复活宝石" size="16" />使用复活宝石再测一次！
-                                                </button>
-                                            </template>
-                                            <button v-else class="button" @click="goTest(paper?.paperId)">开始测试</button>
-                                        </view>
-                                    </view>
-                                </template>
+                                <p-answers :papers="paperList"></p-answers>
                             </template>
                             <template v-else>
                                 <view v-for="(paper, index) in paperList" :key="index"
@@ -141,16 +114,15 @@
                                     <view class="v2">
                                         <view class="extra">
                                             <q-bubble>
-                                                    <button class="button"
-                                                        @click="onRemorPafer(paper?.paperId, index)">删除</button>
+                                                <button class="button"
+                                                    @click="onRemorPafer(paper?.paperId, index)">删除</button>
                                             </q-bubble>
                                         </view>
                                         <template v-if="paper?.questions?.some(e => e.pqSelectIndex == null)">
                                             <button class="button" @click="goOnQuestion(paper?.paperId)">继续出题</button>
                                         </template>
                                         <template v-else>
-                                            <button class="button"
-                                                @click="onParticulars(paper?.paperId, userInfo.nickname)">查看详情</button>
+                                            <button class="button" @click="onParticulars(paper?.paperId)">查看详情</button>
                                             <button :data-paperId="paper?.paperId" class="button"
                                                 open-type="share">分享给朋友</button>
                                         </template>
@@ -313,8 +285,24 @@ onShareAppMessage((res) => {
     };
     // }
 });
-
-
+/** 跳转密友列表 */
+function goChumList() {
+    if (isFriendHome.value) {
+        return;
+    }
+    uni.navigateTo({
+        url: `/pages/home/chum-list/chum-list`
+    });
+}
+/** 跳转答题历史 */
+function goAnswerHistory() {
+    if (isFriendHome.value) {
+        return;
+    }
+    uni.navigateTo({
+        url: `/pages/home/answer-history/answer-history`
+    });
+}
 /** 点击朋友触发 */
 function goFriendHome(id: number) {
     if (id == store.user.userId) {
@@ -360,7 +348,7 @@ function onRemorPafer(paperId: number, index: number) {
     });
 }
 /** 试卷详情 */
-function onParticulars(paperId: number, nickname: string) {
+function onParticulars(paperId: number) {
     uni.navigateTo({
         url: `/pages/paper-generalize/paper-generalize` + objectToPathParams({ paperId: paperId, isFriendPaper: isFriendHome.value })
     });
@@ -369,12 +357,6 @@ function onParticulars(paperId: number, nickname: string) {
 function goOnQuestion(paperId: number) {
     uni.reLaunch({
         url: `/pages/paper/paper` + objectToPathParams({ paperId: paperId })
-    });
-}
-/** 从朋友题库开始答题 */
-function goTest(paperId: number) {
-    uni.navigateTo({
-        url: `/pages/paper-start/paper-start` + objectToPathParams({ paperId: paperId })
     });
 }
 /** 跳转到出题页 */
@@ -953,104 +935,6 @@ function goSetTest() {
                         }
                     }
                 }
-            }
-        }
-    }
-
-    .test-paper-friend {
-        margin: 0 12.5px;
-        padding: 11px 13px;
-        gap: 12px;
-
-        background: #5830C7;
-        border-radius: 15px;
-
-        .v1 {
-            padding: 0;
-            align-items: center;
-            justify-content: space-between;
-
-            .title {
-                flex-grow: 1;
-                font-family: 'Inter';
-                font-style: normal;
-                font-weight: 700;
-                font-size: 16px;
-                line-height: 19px;
-                letter-spacing: -0.04em;
-
-                color: #FFFFFF;
-            }
-
-            .error,
-            .correct {
-                width: 15px;
-                height: 15px;
-                border-radius: 50%;
-            }
-
-            .correct {
-                background: linear-gradient(180deg, #A4FF48 0%, #CFF33C 100%);
-                box-shadow: 4px 0px 4px rgba(112, 184, 39, 0.25);
-            }
-
-            .error {
-                background: linear-gradient(180deg, #FF4848 0%, #F3733C 100%);
-                box-shadow: 4px 0px 4px rgba(231, 40, 28, 0.25);
-            }
-
-            .count {
-                font-family: 'Inter';
-                font-style: normal;
-                font-weight: 600;
-                font-size: 16px;
-                line-height: 19px;
-
-                color: #FFFFFF;
-            }
-        }
-
-        .progress-warp {
-            width: 100%;
-            height: 9px;
-
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-
-            .progress {
-
-                height: 9px;
-                background: #FFFFFF;
-                border-radius: 15px;
-
-            }
-        }
-
-        .v2 {
-            padding: 0;
-            gap: 10px;
-            align-items: center;
-            justify-content: flex-end;
-
-            .button {
-                justify-content: center;
-                align-items: center;
-                padding: 5px 15px;
-                gap: 10px;
-
-                background: rgba(255, 255, 255, 0.3);
-                backdrop-filter: blur(25px);
-                border-radius: 30px;
-
-                font-family: 'Inter';
-                font-style: normal;
-                font-weight: 700;
-                font-size: 12px;
-                line-height: 15px;
-                /* identical to box height */
-
-                color: #FFFFFF;
-
             }
         }
     }
