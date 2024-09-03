@@ -2,7 +2,8 @@
     <!-- 提示消息 -->
     <q-alert ref="refAlert"></q-alert>
     <view class="page">
-        <q-nav-bar title="Quiz" fixed />
+        <q-nav-bar v-if="isAnswer" title="默契大考验" titleSize="20" fixed />
+        <q-nav-bar v-else title="出题中" titleSize="24" fixed />
         <view class="main flex-column">
             <view v-if="isAnswer" style="position: relative; margin-left: auto; margin-right: 25px;"
                 @click="useHintGem">
@@ -16,10 +17,22 @@
 
                 </template>
             </view>
-            <view v-else @click="switchQuestion">换一题</view>
-            <q-avatar class="avatar" :src="paper.creatorUserAvatarUrl" size="62" borderWidth="3"></q-avatar>
+            <button class="switch-question" v-else @click="switchQuestion">换一题</button>
+            <view class="user-info flex-column">
+                <view class="avatar-group">
+                    <q-avatar :src="paper.creatorUserAvatarUrl" size="62" borderWidth="3"></q-avatar>
+                    <q-avatar v-if="isAnswer" :src="store.user.avatarUrl" size="62" borderWidth="3"></q-avatar>
+                </view>
+                <view class="nickname-group" v-if="isAnswer">
+                    <text>{{ paper.creatorUserNickname }}</text>
+                    <text class="text">与</text>
+                    <text>{{ store.user.nickname }}</text>
+                </view>
+            </view>
             <view class="statistics-text">
-                {{ `Question ${currentQuestionIndex + 1}/${paper.questions?.length}` }}
+                <text class="text1 text-overflow">{{ `${isAnswer ? '答' : '出'}题${currentQuestionIndex + 1}` }}</text>
+                <text class="text2 text-overflow">{{ `/${paper.questions?.length}` }}</text>
+                <text class="text3 text-overflow">选择答案进入下一题</text>
             </view>
             <view class="progress-wrap">
                 <view class="progress"
@@ -55,9 +68,9 @@
             <view class="footer-svg">
                 <q-svg class="svg" :icon="`答题测试-底部-总览${activityPopup == '总览' ? '-激活' : ''}`" size="19"
                     @click="onChangeActivityPopup('总览')" />
-                <q-svg class="svg" :icon="`答题测试-底部-电脑${activityPopup == '电脑' ? '-激活' : ''}`" size="19"
-                    @click="onChangeActivityPopup('电脑')" />
-                <!-- <button v-show="isFinish" class="submit-but" @click="submit"> 提交 </button> -->
+                <!-- <q-svg class="svg" :icon="`答题测试-底部-电脑${activityPopup == '电脑' ? '-激活' : ''}`" size="19"
+                    @click="onChangeActivityPopup('电脑')" /> -->
+                <text class="text">预览</text>
             </view>
         </view>
     </view>
@@ -66,7 +79,7 @@
     <q-dialog ref="popupRef" extraClass="popup-wrap" location="bottom" :safe-area="false" maskHideDialog
         @maskCallback="activityPopup = ''">
         <view class="popup">
-            <view class="title">{{ paper.creatorUserNickname }} 的 {{ paper?.order }}号测试</view>
+            <view class="title">{{ isAnswer ? '答' : '出' }}题预览</view>
             <view class="questions flex-column" v-show="activityPopup == '总览'">
                 <view class="question flex-column" v-for="(question, index) in paper.questions" :key="index"
                     @click="onClickPopupQuestion(index)">
@@ -123,9 +136,9 @@ onLoad((option: Option) => {
 const store = useStore();
 /** 本页路径参数 */
 type Option = AnyObject & {
-    /** 出题人id(答题才有) */
+    /** 是否答题 */
     isAnswer?: string;
-    /** 试卷id(答题才有,继续出题也可能有) */
+    /** 试卷id */
     paperId?: number;
 } | undefined;
 const refAlert = ref();
@@ -321,6 +334,22 @@ function onClickPopupQuestion(index: number) {
         // padding: 0 15px;
         height: 100%;
 
+        .switch-question {
+            /* 换一题 */
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 2px 30px;
+            gap: 10px;
+
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+
+            font-weight: 700;
+            font-size: 16px;
+        }
+
         .corner-mark {
             padding: 0, 6px;
             position: absolute;
@@ -347,19 +376,55 @@ function onClickPopupQuestion(index: number) {
 
         }
 
-        .avatar {
-            margin-top: 40px;
+        .user-info {
+            gap: 6px;
+
+            .avatar-group {
+                gap: 8px;
+                margin-top: 40px;
+            }
+
+            .nickname-group {
+                gap: 6px;
+
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 20px;
+                line-height: 24px;
+                color: #FFFFFF;
+
+                .text {
+                    color: rgba($color: #fff, $alpha: 0.5);
+                }
+            }
         }
 
-
         .statistics-text {
-            font-family: 'Inter';
-            font-style: normal;
-            font-weight: 500;
-            font-size: 12px;
-            line-height: 15px;
+            width: 92%;
 
-            color: #FFFFFF;
+            .text1 {
+                font-weight: 700;
+                font-size: 24px;
+
+                color: rgba(255, 255, 255, 1);
+            }
+
+            .text2,
+            .text3 {
+                display: flex;
+                // justify-content: flex-end;
+                align-items: flex-end;
+
+                font-weight: 700;
+                font-size: 16px;
+
+                color: rgba(255, 255, 255, 0.5);
+            }
+
+            .text2 {
+                flex-grow: 1;
+            }
         }
 
         .progress-wrap {
@@ -502,6 +567,7 @@ function onClickPopupQuestion(index: number) {
             align-items: flex-start;
             padding: 17px 20px;
             gap: 41px;
+            gap: 10px;
 
             background: #2F1969;
 
@@ -510,26 +576,12 @@ function onClickPopupQuestion(index: number) {
                 height: 19px;
             }
 
-            .submit-but {
-                margin-left: auto;
-                padding: 5px 15px;
-                gap: 10px;
-
-                min-width: 78.15px;
-                height: 25.48px;
-
-                background: rgba(255, 255, 255, 0.3);
-                backdrop-filter: blur(25px);
-                border-radius: 30px;
-
-                font-family: 'Inter';
-                font-style: normal;
+            .text {
                 font-weight: 700;
-                font-size: 12px;
-                line-height: 15px;
-                color: #FFFFFF;
+                font-size: 16px;
 
-                transform: rotate(0.58deg);
+                color: #6d5e96;
+
             }
         }
     }

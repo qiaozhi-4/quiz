@@ -97,12 +97,12 @@ export class Api implements IApi {
                     if (data.code == 200) {
                         // ajaxEnd();
                         // 测试专用
-                        // console.log(`请求路径:${options.url}`, data);
+                        console.log(`请求路径:${options.url}`, data);
                         resolve(data);
                     }
                     else {
                         // 测试专用
-                        // console.error(`错误的请求路径:${options.url}`);
+                        console.error(`错误的请求路径:${options.url}`);
                         uni.showToast({
                             title: data.message,
                             icon: 'error',
