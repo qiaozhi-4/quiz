@@ -55,3 +55,6 @@ wx:
       - appid: wxf2f9d21291120320
         secret: fd6a2a284d6fe7a520bec312d0408d0d
         msg-data-format: JSON
+      - appid: wx2cd4c921a304526f
+        secret: 2ffad3dce10946c9135a257b52ae5962
+        msg-data-format: JSON

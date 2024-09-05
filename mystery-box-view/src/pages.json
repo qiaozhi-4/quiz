@@ -5,6 +5,12 @@
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}
+		},
+		{
+			"path": "pages/exhibition-list/exhibition-list",
+			"style": {
+				"navigationBarTitleText": "exhibition-list"
+			}
 		}
 	],
 	"globalStyle": {
