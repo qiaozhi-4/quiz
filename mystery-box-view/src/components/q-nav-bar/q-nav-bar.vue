@@ -83,7 +83,7 @@ function back() {
         delta: 1,
         fail: () => {
             uni.reLaunch({
-                url: '/pages/home/home'
+                url: '/pages/index/index'
             });
         }
     });
