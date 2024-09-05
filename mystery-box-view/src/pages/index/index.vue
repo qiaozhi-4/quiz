@@ -1,7 +1,7 @@
 <template>
     <view class="page">
         <image class="bg" src="/static/img/主页背景.png"></image>
-        <q-nav-bar needBack fixed></q-nav-bar>
+        <q-nav-bar fixed></q-nav-bar>
         <view class="content">
             <view class="card row explain flex-column">
                 <image src="/static/img/装饰.png"></image>
@@ -26,6 +26,7 @@
 </template>
 
 <script setup lang="ts">
+import { objectToPathParams } from '@/utils/service';
 import { ref } from 'vue';
 const classs = ref([{
     name: 'Les',
@@ -36,13 +37,19 @@ const classs = ref([{
 }, {
     name: 'Girl'
 }]);
+/** 点类别跳转页面 */
+function onClass(index: number) {
+    uni.navigateTo({
+        url: `/pages/exhibition-list/exhibition-list` + objectToPathParams({ name: classs.value[index].name })
+    });
+}
 </script>
 
 <style lang="scss" scoped>
 .page {
     background: linear-gradient(180deg, #FFFFFF 0%, #FFCCF1 100%);
 
-    .bg{
+    .bg {
         position: absolute;
         width: 100vw;
         height: 14.6vh;
