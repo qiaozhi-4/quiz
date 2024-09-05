@@ -1,0 +1,10 @@
+$mb-text-color: rgba(255, 110, 214, 1);
+$mb-bg-color: rgba(241, 241, 241, 1);
+$mb-gradient-ramp: linear-gradient(90deg, #ee85ff 0%, #f35dce 30.35%, #f73ca6 54.73%, #ff005c 100%);
+.text-gradual-change {
+    background: $mb-gradient-ramp;
+    -webkit-background-clip: text;
+    /* 将背景裁剪到文本 */
+    -webkit-text-fill-color: transparent;
+    /* 将文本填充设置为透明 */
+}

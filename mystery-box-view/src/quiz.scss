@@ -1,10 +1,8 @@
-$mb-text-color: rgba(255, 110, 214, 1);
-
 // 设置整个项目的背景色
 page {
     display: flex;
     flex-direction: column;
-    background-color: #5830c7;
+    background-color: $mb-bg-color;
     height: 100vh;
     width: 100vw;
     overflow-y: scroll;
