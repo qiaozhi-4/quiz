@@ -1,3 +1,5 @@
+$mb-text-color: rgba(255, 110, 214, 1);
+
 // 设置整个项目的背景色
 page {
     display: flex;
@@ -13,14 +15,14 @@ view {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    color: #ffffff;
+    color: $mb-text-color;
 }
 
 button {
     display: grid;
     place-items: center;
     margin: 0;
-    color: #ffffff;
+    color: $mb-text-color;
     transition:
         transform 0.5s,
         box-shadow 0.2s;
