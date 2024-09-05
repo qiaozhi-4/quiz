@@ -5,13 +5,13 @@
         <view class="content">
             <view class="card row explain flex-column">
                 <image src="/static/img/装饰.png"></image>
-                <text class="t1">爱情盲盒</text>
+                <text class="t1 text-gradual-change">爱情盲盒</text>
                 <text class="t2">选一个盒子 </text>
                 <text class="t2">留下你的微信 or 拿一个微信！</text>
                 <text class="t3"> 1元留一个🌟 2元拿一个💎 </text>
             </view>
             <view class="card item" v-for="(item, index) in classs" :key="index" @click="onClass(index)">
-                <text :class="'t' + index">{{ item.name }}</text>
+                <text :style="{ color: item.color }">{{ item.name }}</text>
             </view>
             <view class="card row record">
                 <image src="/static/img/我留下的.png"></image>
@@ -30,17 +30,21 @@ import { objectToPathParams } from '@/utils/service';
 import { ref } from 'vue';
 const classs = ref([{
     name: 'Les',
+    color: 'rgba(101, 156, 255, 1)'
 }, {
     name: 'Gay',
+    color: 'rgba(231, 63, 36, 1)'
 }, {
     name: 'Boy',
+    color: 'rgba(58, 215, 177, 1)'
 }, {
-    name: 'Girl'
+    name: 'Girl',
+    color: 'rgba(255, 110, 214, 1)'
 }]);
 /** 点类别跳转页面 */
 function onClass(index: number) {
     uni.navigateTo({
-        url: `/pages/exhibition-list/exhibition-list` + objectToPathParams({ name: classs.value[index].name })
+        url: `/pages/exhibition-list/exhibition-list` + objectToPathParams(classs.value[index])
     });
 }
 </script>
@@ -90,11 +94,6 @@ function onClass(index: number) {
             }
 
             .t1 {
-                background: linear-gradient(90deg, #EE85FF 0%, #FF005C 100%);
-                -webkit-background-clip: text;
-                /* 将背景裁剪到文本 */
-                -webkit-text-fill-color: transparent;
-                /* 将文本填充设置为透明 */
                 font-size: 48px;
                 font-weight: 700;
             }
@@ -110,11 +109,7 @@ function onClass(index: number) {
             }
 
             .t3 {
-                background: linear-gradient(90deg, #EE85FF 0%, #F35DCE 30.35%, #F73CA6 54.73%, #FF005C 100%);
-                -webkit-background-clip: text;
-                /* 将背景裁剪到文本 */
-                -webkit-text-fill-color: transparent;
-                /* 将文本填充设置为透明 */
+                color: rgba(250, 43, 144, 1);
             }
         }
 
@@ -125,22 +120,6 @@ function onClass(index: number) {
             text {
                 font-size: 48px;
                 font-weight: 900;
-            }
-
-            .t1 {
-                color: rgba(101, 156, 255, 1);
-            }
-
-            .t2 {
-                color: rgba(231, 63, 36, 1);
-            }
-
-            .t3 {
-                color: rgba(58, 215, 177, 1);
-            }
-
-            .t4 {
-                color: rgba(255, 110, 214, 1);
             }
         }
 
