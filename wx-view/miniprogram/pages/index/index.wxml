@@ -1,7 +1,0 @@
-<!-- index.wxml -->
-<quiz-navigation-bar title="主页" back="{{false}}"></quiz-navigation-bar>
-<view class="container">
-  <block wx:for="{{urls}}" wx:key="index" wx:for-item="item">
-      <quiz-button data-url="{{item}}" bind:tap="clickButton">{{item}}</quiz-button>
-  </block>
-</view>

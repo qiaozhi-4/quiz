@@ -1,5 +1,0 @@
-<view class="progress-bar" style="width: {{strokeWidth}};height: {{strokeHeight}};">
-	<view class="progress-bar-inner" style="width: {{percentage}}%;" />
-</view>
-<!-- <view class="progress-text">{{percent}}%</view> -->
-

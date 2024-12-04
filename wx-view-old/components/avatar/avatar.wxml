@@ -1,3 +1,0 @@
-<view class="avatar-wrapper {{shape}}" hover-class="none" hover-stop-propagation="false" style="padding: {{wrapperSize}}; height: {{size}}; width: {{size}}; background: {{wrapperColor}};">
-    <image class="avatar {{shape}}" src="{{src ? src : '/images/avatar.svg'}}" mode="heightFix" style="height: {{size}};  " />
-</view>

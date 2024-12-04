@@ -1,3 +1,0 @@
-<view class="quiz-progress-wrapper" style="width: {{strokeWidth}};height: {{strokeHeight}};">
-  <view class="quiz-progress" style="width: {{percentage}}%;" />
-</view>

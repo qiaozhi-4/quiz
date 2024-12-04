@@ -1,6 +1,0 @@
-<!-- components/quiz-button/quiz-button.wxml -->
-<view class="quiz-button-wrapper">
-  <view class="quiz-button text-color-gradient">
-    <slot></slot>
-  </view>
-</view>

@@ -1,3 +1,0 @@
-<view class="quiz-avatar-wrapper {{shape}}" style="padding: {{wrapperSize}}; height: {{size}}; width: {{size}}; background: {{wrapperColor}};">
-  <image class="quiz-avatar {{shape}}" src="{{src ? src : '/images/avatar.svg'}}" mode="heightFix" style="height: calc({{size}} - {{wrapperSize}});" />
-</view>

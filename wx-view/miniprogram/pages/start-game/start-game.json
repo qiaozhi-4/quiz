@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "quiz-navigation-bar": "/components/quiz-navigation-bar/quiz-navigation-bar",
-    "quiz-button": "/components/quiz-button/quiz-button",
-    "quiz-avatar": "/components/quiz-avatar/quiz-avatar"
-  }
-}
