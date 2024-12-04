@@ -66,7 +66,7 @@ const store = useStore();
 /** 道具信息 */
 const props = computed<Quiz.PropDTO[]>(() => store.props);
 /** 徽章信息 */
-const badgeList = ref<Quiz.AnswerDTODTO[]>([]);
+const badgeList = ref<Quiz.AnswerDTO[]>([]);
 /** 任务数据 */
 type TaskInfo = {
     title: string,
